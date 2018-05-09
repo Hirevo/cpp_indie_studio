@@ -27,7 +27,7 @@ int main(void) {
 
 	irr::scene::IAnimatedMeshSceneNode* sydney =        // cree un scene node nomme sydney
 		sceneManager->addAnimatedMeshSceneNode (          // via le scene manager
-			sceneManager->getMesh ("sydney.md2"));          // en chargeant le mesh "sydney.md2"
+			sceneManager->getMesh ("/opt/irrlicht-1.8.4/media/sydney.md2"));          // en chargeant le mesh "sydney.md2"
 
 
 	/* OVERRIDE MATERIAL */

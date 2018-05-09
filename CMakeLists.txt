@@ -7,7 +7,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 find_package(Irrlicht)
 
-
+message(${IRRLICHT_INCLUDE_DIR})
 link_libraries(Irrlicht)
 
 include_directories(${IRRLICHT_INCLUDE_DIR})
