@@ -27,12 +27,10 @@ int main(void) {
 		sceneManager->addAnimatedMeshSceneNode (          // via le scene manager
 			sceneManager->getMesh ("sydney.md2"));          // en chargeant le mesh "sydney.md2"
 
-	sydney->setMaterialFlag(
-		irr::video::EMF_LIGHTING, false);
-	sydney->setMaterialTexture(
-		0, driver->getTexture("sydney.bmp"));
-
 	sydney->setMD2Animation(irr::scene::EMAT_STAND);    // joue l'animation STAND en boucle
+
+	sydney->setMaterialFlag(                            // modifie un material flag
+		irr::video::EMF_FOG_ENABLE, true);                // active le brouillard
 
 
 	/* CAMERA */
