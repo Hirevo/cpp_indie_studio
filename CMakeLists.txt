@@ -10,7 +10,10 @@ find_package(Irrlicht)
 
 link_libraries(Irrlicht)
 
-include_directories(${IRRLICHT_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(
+        "/usr/include/irrlicht"
+        ${PROJECT_SOURCE_DIR}/include
+)
 include_directories(inc)
 
 add_executable(bomberman

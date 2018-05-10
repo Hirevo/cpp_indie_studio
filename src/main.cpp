@@ -42,11 +42,11 @@ int main() {
 
 	irr::SKeyMap keyMap[5];                    // re-assigne les commandes
 	keyMap[0].Action = irr::EKA_MOVE_FORWARD;  // avancer
-	keyMap[0].KeyCode = irr::KEY_KEY_W;        // w
+	keyMap[0].KeyCode = irr::KEY_KEY_Z;        // w
 	keyMap[1].Action = irr::EKA_MOVE_BACKWARD; // reculer
 	keyMap[1].KeyCode = irr::KEY_KEY_S;        // s
 	keyMap[2].Action = irr::EKA_STRAFE_LEFT;   // a gauche
-	keyMap[2].KeyCode = irr::KEY_KEY_A;        // a
+	keyMap[2].KeyCode = irr::KEY_KEY_Q;        // a
 	keyMap[3].Action = irr::EKA_STRAFE_RIGHT;  // a droite
 	keyMap[3].KeyCode = irr::KEY_KEY_D;        // d
 	keyMap[4].Action = irr::EKA_JUMP_UP;       // saut
