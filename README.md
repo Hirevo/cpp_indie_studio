@@ -28,10 +28,19 @@ On Windows, you need to make sure to have installed:
 Irrlicht is to be compiled manually, here are the steps:
 - Download [Irrlicht 1.8.4](http://downloads.sourceforge.net/irrlicht/irrlicht-1.8.4.zip) or higher
 - Extract it and go to the resulting directory
-- Go to source/Irrlicht and open Irrlicht12.0.vcxproj in Visual Studio
-- In Visual Studio, in the top bar, replace Debug by Release and 32-bit by 64-bit
-- Right-click on the bold Irrlicht in the Explorer and select Properties
-- 
+- Go to "source/Irrlicht/" and open "Irrlicht12.0.vcxproj" in Visual Studio
+- In Visual Studio, in the top bar, replace "Debug" by "Release" and "x86" by "x64"
+- Right-click on the bold "Irrlicht" in the Explorer and select "Properties"
+- Go to "Configuration Properties" > "General" and pick:
+    - your installed SDK in the SDK category
+    - "Visual Studio 2017" for the platform toolchain category
+- Click "Apply" then "OK"
+- Right-click on the bold Irrlicht in the explorer and click on "Generate"
+
+Irrlicht shall be compiling and if everything succeeds, you can continue to follow these steps:
+
+- Go back to the Irrlicht base directory and copy "bin/", "lib/" and "include/"
+- Paste them in the "cpp_indie_studio/libs/irrlicht/" folder
 
 ## Compilation
 
