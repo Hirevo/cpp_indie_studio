@@ -5,33 +5,15 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 set(CMAKE_CXX_STANDARD 11)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
-include_directories(
-        ${PROJECT_SOURCE_DIR}/include
-)
-
 add_executable(bomberman
         src/main.cpp)
 
-if(UNIX)
+set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)
+find_package(Irrlicht REQUIRED)
+target_link_libraries(bomberman ${IRRLICHT_LIBRARY})
+target_include_directories(bomberman PRIVATE ${IRRLICHT_INCLUDE_DIR})
 
-set(IRRLICHT_LIBRARY
-        -L./libraries/irrlicht/linux
-        -lIrrlicht
-        -lGL
-        -lGLU
-        -lXext
-        -lX11
-        -lXxf86vm
-        )
-
-find_package(Irrlicht)
-link_libraries(Irrlicht)
-
-
-elseif(WIN32)
-
-add_library(Irrlicht STATIC IMPORTED)
-
-
-
-endif(UNIX)
+add_custom_command(TARGET bomberman PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ../libs/irrlicht/bin/Win64-VisualStudio/Irrlicht.dll
+        ../bin/Irrlicht.dll)

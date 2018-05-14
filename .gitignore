@@ -5,3 +5,7 @@ bin
 cmake-build-debug/
 CMakeFiles
 CMakeCache.txt
+
+cmake-build-release-msvc/
+
+cmake-build-debug-msvc/
