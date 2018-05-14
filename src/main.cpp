@@ -10,31 +10,23 @@
 #endif
 
 #include <irrlicht.h>
-#include "receiver.hpp"
 
 int main() {
 
-	//On rend invisible le curseur.
-	device->getCursorControl ()-> setVisible (false);
+	irr::IrrlichtDevice* device = irr::createDevice(  // creation du device
+		irr::video::EDT_OPENGL,                       // API = OpenGL
+		irr::core::dimension2d<irr::u32>(200,200),    // taille fenetre 640x480p
+		32);                                          // 32 bits par pixel
 
-	//Sydney
-	irr::scene::IAnimatedMeshMD2* modele;
-	modele = (irr::scene::IAnimatedMeshMD2*)sceneManager->getMesh("sydney.md2");
-	irr::scene::IAnimatedMeshSceneNode* Nmodele =
-		sceneManager->addAnimatedMeshSceneNode(modele);
+	irr::video::IVideoDriver* driver =                // video driver
+		device->getVideoDriver ();
+	irr::scene::ISceneManager* sceneManager =         // scene manager
+		device->getSceneManager ();
 
-	//On modifie les proprietes de Sydney
-	Nmodele->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	Nmodele->setFrameLoop(0, 0);
-	Nmodele->setMaterialTexture( 0, driver->getTexture("sydney.bmp") );
+	device->getCursorControl ()-> setVisible (false); // curseur invisible
 
-	//La camera
-	irr::scene::ICameraSceneNode *camera;
-	camera = sceneManager->addCameraSceneNodeFPS (0,100.0f,300.0f);
 
-	//On cree le capteur d'event et on l'associe au device.
-	CEventReceiver receiver(Nmodele);
-	device->setEventReceiver(&receiver);
+	/* CUBE */
 
 	irr::scene::IMeshSceneNode* cube =         // pointeur vers le node
 		sceneManager->addCubeSceneNode(        // la creation du cube
@@ -86,6 +78,6 @@ int main() {
 		driver->endScene ();                   // affiche le rendu
 	}
 
-	device->drop ();
+	device->drop ();                           // libere la memoire
 	return 0;
 }
