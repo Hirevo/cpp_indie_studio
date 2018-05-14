@@ -6,56 +6,49 @@
 */
 
 #include <irrlicht.h>
+#include "receiver.hpp"
 
-int main(void) {
+int main(void)
+{
 
+	//Device, driver et graphe de scene.
 	irr::IrrlichtDevice* device = irr::createDevice(irr::video::EDT_OPENGL,
-		irr::core::dimension2d<irr::u32>(640,480), 32);
-	irr::video::IVideoDriver* driver = device->getVideoDriver();
-	irr::scene::ISceneManager* sceneManager = device->getSceneManager();
+		irr::core::dimension2d<irr::u32>(800,800),32,false,false,false);
+	irr::video::IVideoDriver* driver = device->getVideoDriver ();
+	irr::scene::ISceneManager *sceneManager = device->getSceneManager ();
 
+	//On rend invisible le curseur.
+	device->getCursorControl ()-> setVisible (false);
 
-	/* MODELE */
+	//Sydney
+	irr::scene::IAnimatedMeshMD2* modele;
+	modele = (irr::scene::IAnimatedMeshMD2*)sceneManager->getMesh("sydney.md2");
+	irr::scene::IAnimatedMeshSceneNode* Nmodele =
+		sceneManager->addAnimatedMeshSceneNode(modele);
 
-	irr::scene::IAnimatedMeshSceneNode* sphere =        // cree un scene node nomme sphere
-		sceneManager->addAnimatedMeshSceneNode (          // via le scene manager
-			sceneManager->getMesh ("/opt/irrlicht-1.8.4/media/earth.x"),              // en chargeant le mesh "earth.x"
-			0, -1,                                          // pas de parent, pas d'ID
-			irr::core::vector3df(0.0f, 0.0f, 25.0f),        // position de la sphere
-			irr::core::vector3df(0.0f, 0.0f, 0.0f),         // rotation
-			irr::core::vector3df(15.0f, 15.0f, 15.0f));     // echelle
+	//On modifie les proprietes de Sydney
+	Nmodele->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	Nmodele->setFrameLoop(0, 0);
+	Nmodele->setMaterialTexture( 0, driver->getTexture("sydney.bmp") );
 
-	irr::scene::IAnimatedMeshSceneNode* sydney =        // cree un scene node nomme sydney
-		sceneManager->addAnimatedMeshSceneNode (          // via le scene manager
-			sceneManager->getMesh ("/opt/irrlicht-1.8.4/media/sydney.md2"));          // en chargeant le mesh "sydney.md2"
+	//La camera
+	irr::scene::ICameraSceneNode *camera;
+	camera = sceneManager->addCameraSceneNodeFPS (0,100.0f,300.0f);
 
+	//On cree le capteur d'event et on l'associe au device.
+	CEventReceiver receiver(Nmodele);
+	device->setEventReceiver(&receiver);
 
-	/* OVERRIDE MATERIAL */
-
-	driver->getOverrideMaterial().EnableFlags =         // indique que le flag EMF_WIREFRAME
-		irr::video::EMF_WIREFRAME;                        // va etre outrepasse
-	driver->getOverrideMaterial().Material.setFlag(     // active le flag EMF_WIREFRAME
-		irr::video::EMF_WIREFRAME, true);                 // de l'override material
-	driver->getOverrideMaterial().EnablePasses =        // indique le type de node affectes
-		irr::scene::ESNRP_SOLID;                          // par l'override material
-
-
-	/* CAMERA */
-
-	sceneManager->addCameraSceneNode(0,                 // cree une camera fixe
-		irr::core::vector3df(40.0f, 10.0f, 15.0f),        // position de la cam
-		irr::core::vector3df(0.0f, 9.0f, 15.0f));         // cible de la cam
-
-
-	/* RENDU */
-
-	while (device->run()) {                        // la boucle de rendu
-		driver->beginScene(true, true,               // demarre le rendu
-			irr::video::SColor(0,255,255,255));        // couleur blanche
-		sceneManager->drawAll ();                    // calcule le rendu
-		driver->endScene ();                         // affiche le rendu
+	//La boucle de rendu
+	while (device->run())
+	{
+		driver->beginScene(true, true, irr::video::SColor(0,200,200,200));
+		//Met a jour la position du mesh
+		receiver.majPosMesh();
+		sceneManager->drawAll ();
+		driver->endScene ();
 	}
 
-	device->drop ();                               // libere la memoire
+	device->drop ();
 	return 0;
 }

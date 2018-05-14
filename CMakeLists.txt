@@ -14,4 +14,4 @@ include_directories(${IRRLICHT_INCLUDE_DIR})
 include_directories(inc)
 
 add_executable(bomberman
-        src/main.cpp)
+        src/main.cpp src/receiver.hpp src/receiver.cpp)
