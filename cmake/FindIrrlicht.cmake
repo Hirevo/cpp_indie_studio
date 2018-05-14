@@ -1,77 +1,81 @@
-# - Try to find Irrlicht
-# Once done this will define
-#
-#  IRRLICHT_FOUND - system has Irrlicht
-#  IRRLICHT_INCLUDE_DIRS - the Irrlicht include directory
-#  IRRLICHT_LIBRARIES - Link these to use Irrlicht
-#  IRRLICHT_DEFINITIONS - Compiler switches required for using Irrlicht
-#
-#  Copyright (c) 2006 Andreas Schneider <mail@cynapses.org>
-#
-#  Redistribution and use is allowed according to the terms of the New
-#  BSD license.
-#  For details see the accompanying COPYING-CMAKE-SCRIPTS file.
-#
+mark_as_advanced(IRRLICHT_LIBRARY IRRLICHT_INCLUDE_DIR IRRLICHT_DLL)
+set(IRRLICHT_SOURCE_DIR "" CACHE PATH "Path to irrlicht source directory (optional)")
 
 
-if (IRRLICHT_LIBRARIES AND IRRLICHT_INCLUDE_DIRS)
-  # in cache already
-  set(IRRLICHT_FOUND TRUE)
-else (IRRLICHT_LIBRARIES AND IRRLICHT_INCLUDE_DIRS)
+# Find include directory
 
-  find_path(IRRLICHT_INCLUDE_DIR
-    NAMES
-      irrlicht.h
-    PATHS
-      /usr/include
-      /usr/include/irrlicht
-      /usr/local/include
-      /usr/local/include/irrlicht
-      /opt/local/include
-      /sw/include
-  )
+if (NOT IRRLICHT_SOURCE_DIR STREQUAL "")
+    set(IRRLICHT_SOURCE_DIR_INCLUDE
+            "${IRRLICHT_SOURCE_DIR}/include"
+            )
 
-  find_library(IRRLICHT_LIBRARY
-    NAMES
-        Irrlicht
-    PATHS
-      /usr/lib
-      /usr/local/lib
-      /opt/local/lib
-      /sw/lib
-  )
+    set(IRRLICHT_LIBRARY_NAMES libIrrlicht.a Irrlicht Irrlicht.lib)
 
-  if (IRRLICHT_LIBRARY)
-    set(IRRLICHT_FOUND TRUE)
-  endif (IRRLICHT_LIBRARY)
+    if (WIN32)
+        if (MSVC)
+            if (CMAKE_CL_64)
+                set(IRRLICHT_SOURCE_DIR_LIBS "${IRRLICHT_SOURCE_DIR}/lib/Win64-visualstudio")
+            else ()
+                set(IRRLICHT_SOURCE_DIR_LIBS "${IRRLICHT_SOURCE_DIR}/lib/Win32-visualstudio")
+            endif ()
+            set(IRRLICHT_LIBRARY_NAMES Irrlicht.lib)
+        else ()
+            set(IRRLICHT_SOURCE_DIR_LIBS "${IRRLICHT_SOURCE_DIR}/lib/Win32-gcc")
+            set(IRRLICHT_LIBRARY_NAMES libIrrlicht.a libIrrlicht.dll.a)
+        endif ()
+    else ()
+        set(IRRLICHT_SOURCE_DIR_LIBS "${IRRLICHT_SOURCE_DIR}/lib/Linux")
+        set(IRRLICHT_LIBRARY_NAMES libIrrlicht.a)
+    endif ()
 
-  set(IRRLICHT_INCLUDE_DIRS
-    ${IRRLICHT_INCLUDE_DIR}
-  )
+    find_path(IRRLICHT_INCLUDE_DIR NAMES irrlicht.h
+            PATHS
+            ${IRRLICHT_SOURCE_DIR_INCLUDE}
+            NO_DEFAULT_PATH
+            )
 
-  if (IRRLICHT_FOUND)
-    set(IRRLICHT_LIBRARIES
-      ${IRRLICHT_LIBRARIES}
-      ${IRRLICHT_LIBRARY}
-    )
-  endif (IRRLICHT_FOUND)
+    find_library(IRRLICHT_LIBRARY NAMES ${IRRLICHT_LIBRARY_NAMES}
+            PATHS
+            ${IRRLICHT_SOURCE_DIR_LIBS}
+            NO_DEFAULT_PATH
+            )
 
-  if (IRRLICHT_INCLUDE_DIRS AND IRRLICHT_LIBRARIES)
-     set(IRRLICHT_FOUND TRUE)
-  endif (IRRLICHT_INCLUDE_DIRS AND IRRLICHT_LIBRARIES)
+else ()
+    find_path(IRRLICHT_INCLUDE_DIR NAMES irrlicht.h
+            PATHS
+            /usr/local/include/irrlicht
+            /usr/include/irrlicht
+            )
 
-  if (IRRLICHT_FOUND)
-    if (NOT IRRLICHT_FIND_QUIETLY)
-      message(STATUS "Found Irrlicht: ${IRRLICHT_LIBRARIES}")
-    endif (NOT IRRLICHT_FIND_QUIETLY)
-  else (IRRLICHT_FOUND)
-    if (IRRLICHT_FIND_REQUIRED)
-      message(FATAL_ERROR "Could not find Irrlicht")
-    endif (IRRLICHT_FIND_REQUIRED)
-  endif (IRRLICHT_FOUND)
+    find_library(IRRLICHT_LIBRARY NAMES libIrrlicht.so libIrrlicht.a Irrlicht
+            PATHS
+            /usr/local/lib
+            /usr/lib
+            )
+endif ()
 
-  # show the IRRLICHT_INCLUDE_DIRS and IRRLICHT_LIBRARIES variables only in the advanced view
-  mark_as_advanced(IRRLICHT_INCLUDE_DIRS IRRLICHT_LIBRARIES)
 
-endif (IRRLICHT_LIBRARIES AND IRRLICHT_INCLUDE_DIRS)
+# On Windows, find the DLL for installation
+if (WIN32)
+    if (MSVC)
+        set(IRRLICHT_COMPILER "VisualStudio")
+    else ()
+        set(IRRLICHT_COMPILER "gcc")
+    endif ()
+    if (CMAKE_CL_64)
+        find_file(IRRLICHT_DLL NAMES Irrlicht.dll
+                PATHS
+                "${IRRLICHT_SOURCE_DIR}/bin/Win64-${IRRLICHT_COMPILER}"
+                DOC "Path of the Irrlicht dll (for installation)"
+                )
+    else ()
+        find_file(IRRLICHT_DLL NAMES Irrlicht.dll
+                PATHS
+                "${IRRLICHT_SOURCE_DIR}/bin/Win32-${IRRLICHT_COMPILER}"
+                DOC "Path of the Irrlicht dll (for installation)"
+                )
+    endif ()
+endif (WIN32)
 
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(Irrlicht DEFAULT_MSG IRRLICHT_LIBRARY IRRLICHT_INCLUDE_DIR)

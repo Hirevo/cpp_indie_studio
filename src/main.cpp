@@ -5,17 +5,14 @@
 ** main fucntion to start the bomberman
 */
 
+#ifdef _MSC_VER
+#pragma comment(lib, "Irrlicht.lib")
+#endif
+
 #include <irrlicht.h>
 #include "receiver.hpp"
 
-int main(void)
-{
-
-	//Device, driver et graphe de scene.
-	irr::IrrlichtDevice* device = irr::createDevice(irr::video::EDT_OPENGL,
-		irr::core::dimension2d<irr::u32>(800,800),32,false,false,false);
-	irr::video::IVideoDriver* driver = device->getVideoDriver ();
-	irr::scene::ISceneManager *sceneManager = device->getSceneManager ();
+int main() {
 
 	//On rend invisible le curseur.
 	device->getCursorControl ()-> setVisible (false);
@@ -39,14 +36,54 @@ int main(void)
 	CEventReceiver receiver(Nmodele);
 	device->setEventReceiver(&receiver);
 
-	//La boucle de rendu
-	while (device->run())
-	{
-		driver->beginScene(true, true, irr::video::SColor(0,200,200,200));
-		//Met a jour la position du mesh
-		receiver.majPosMesh();
-		sceneManager->drawAll ();
-		driver->endScene ();
+	irr::scene::IMeshSceneNode* cube =         // pointeur vers le node
+		sceneManager->addCubeSceneNode(        // la creation du cube
+			10.0f,                             // cote de 10 unites
+			0,                                 // parent = racine
+			-1,                                // pas d'ID
+			irr::core::vector3df(              // le vecteur de position
+				0.0f,                          // origine en X
+				0.0f,                          // origine en Y
+				20.0f));                       // +20 unites en Z
+
+	cube->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
+
+
+	/* CAMERA */
+
+	irr::SKeyMap keyMap[5];                    // re-assigne les commandes
+	keyMap[0].Action = irr::EKA_MOVE_FORWARD;  // avancer
+	keyMap[0].KeyCode = irr::KEY_KEY_Z;        // w
+	keyMap[1].Action = irr::EKA_MOVE_BACKWARD; // reculer
+	keyMap[1].KeyCode = irr::KEY_KEY_S;        // s
+	keyMap[2].Action = irr::EKA_STRAFE_LEFT;   // a gauche
+	keyMap[2].KeyCode = irr::KEY_KEY_Q;        // a
+	keyMap[3].Action = irr::EKA_STRAFE_RIGHT;  // a droite
+	keyMap[3].KeyCode = irr::KEY_KEY_D;        // d
+	keyMap[4].Action = irr::EKA_JUMP_UP;       // saut
+	keyMap[4].KeyCode = irr::KEY_SPACE;        // barre espace
+
+	sceneManager->addCameraSceneNodeFPS(       // ajout de la camera FPS
+		0,                                     // pas de noeud parent
+		100.0f,                                // vitesse de rotation
+		0.1f,                                  // vitesse de deplacement
+		-1,                                    // pas de numero d'ID
+		keyMap,                                // on change la keymap
+		5);                                    // avec une taille de 5
+
+
+	/* RENDU */
+
+	irr::video::SColor color(                  // contient la couleur blanc
+		255,                                   // composante A alpha (transparence)
+		255,                                   // composante R rouge
+		255,                                   // composante G verte
+		255);                                  // composante B bleue
+
+	while (device->run()) {                    // la boucle de rendu
+		driver->beginScene(true, true, color); // demarre le rendu
+		sceneManager->drawAll ();              // calcule le rendu
+		driver->endScene ();                   // affiche le rendu
 	}
 
 	device->drop ();
