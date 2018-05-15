@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 add_executable(bomberman
-        src/main.cpp src/receiver.hpp src/receiver.cpp)
+        src/main.cpp)
 
 set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)
 find_package(Irrlicht REQUIRED)
@@ -14,8 +14,8 @@ target_link_libraries(bomberman ${IRRLICHT_LIBRARY})
 target_include_directories(bomberman PRIVATE ${IRRLICHT_INCLUDE_DIR})
 
 if(WIN32)
-add_custom_command(TARGET bomberman PRE_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-        ../libs/irrlicht/bin/Win64-VisualStudio/Irrlicht.dll
-        ../bin/Irrlicht.dll)
+    add_custom_command(TARGET bomberman PRE_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy
+            ${PROJECT_SOURCE_DIR}/libs/irrlicht/bin/Win64-VisualStudio/Irrlicht.dll
+            ${PROJECT_SOURCE_DIR}/bin/Irrlicht.dll)
 endif()

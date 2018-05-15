@@ -15,3 +15,7 @@ bomberman
 cmake-build-debug-mvcs/
 
 cmake-build-release-mvcs/
+
+cmake-build-debug-mcvs/
+
+cmake-build-release-mcvs/
