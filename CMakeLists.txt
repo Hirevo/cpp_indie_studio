@@ -12,10 +12,17 @@ set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)
 find_package(Irrlicht REQUIRED)
 target_link_libraries(bomberman ${IRRLICHT_LIBRARY})
 target_include_directories(bomberman PRIVATE ${IRRLICHT_INCLUDE_DIR})
-
+message("${PROJECT_SOURCE_DIR}")
 if(WIN32)
-add_custom_command(TARGET bomberman PRE_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-        ../libs/irrlicht/bin/Win64-VisualStudio/Irrlicht.dll
-        ../bin/Irrlicht.dll)
+    if (CMAKE_CL_64)
+        add_custom_command(TARGET bomberman PRE_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                ${PROJECT_SOURCE_DIR}/libs/irrlicht/bin/Win64-VisualStudio/Irrlicht.dll
+                ${PROJECT_SOURCE_DIR}/bin/Irrlicht.dll)
+    else ()
+        add_custom_command(TARGET bomberman PRE_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                ${PROJECT_SOURCE_DIR}/libs/irrlicht/bin/Win32-VisualStudio/Irrlicht.dll
+                ${PROJECT_SOURCE_DIR}/bin/Irrlicht.dll)
+    endif ()
 endif()
