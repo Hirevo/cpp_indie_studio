@@ -1,7 +1,6 @@
 mark_as_advanced(IRRLICHT_LIBRARY IRRLICHT_INCLUDE_DIR IRRLICHT_DLL)
 set(IRRLICHT_SOURCE_DIR "" CACHE PATH "Path to irrlicht source directory (optional)")
 
-
 # Find include directory
 
 if (NOT IRRLICHT_SOURCE_DIR STREQUAL "")
@@ -14,12 +13,15 @@ if (NOT IRRLICHT_SOURCE_DIR STREQUAL "")
     if (WIN32)
         if (MSVC)
             if (CMAKE_CL_64)
+                message("MSVC > 64")
                 set(IRRLICHT_SOURCE_DIR_LIBS "${IRRLICHT_SOURCE_DIR}/lib/Win64-visualstudio")
             else ()
+                message("MSVC > 32")
                 set(IRRLICHT_SOURCE_DIR_LIBS "${IRRLICHT_SOURCE_DIR}/lib/Win32-visualstudio")
             endif ()
             set(IRRLICHT_LIBRARY_NAMES Irrlicht.lib)
         else ()
+            message("GCC > 32")
             set(IRRLICHT_SOURCE_DIR_LIBS "${IRRLICHT_SOURCE_DIR}/lib/Win32-gcc")
             set(IRRLICHT_LIBRARY_NAMES libIrrlicht.a libIrrlicht.dll.a)
         endif ()
@@ -63,12 +65,14 @@ if (WIN32)
         set(IRRLICHT_COMPILER "gcc")
     endif ()
     if (CMAKE_CL_64)
+        message("DLL MSVC > 64")
         find_file(IRRLICHT_DLL NAMES Irrlicht.dll
                 PATHS
                 "${IRRLICHT_SOURCE_DIR}/bin/Win64-${IRRLICHT_COMPILER}"
                 DOC "Path of the Irrlicht dll (for installation)"
                 )
     else ()
+        message("DLL MSVC > 32")
         find_file(IRRLICHT_DLL NAMES Irrlicht.dll
                 PATHS
                 "${IRRLICHT_SOURCE_DIR}/bin/Win32-${IRRLICHT_COMPILER}"
