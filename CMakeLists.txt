@@ -7,9 +7,24 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 add_executable(bomberman
         src/main.cpp
-        src/classes/Core.cpp inc/classes/Core.hpp src/classes/Options.cpp inc/classes/Options.hpp src/classes/Keymap.cpp inc/classes/Keymap.hpp inc/interface/ICaracter.hpp inc/interface/IMap.hpp inc/interface/IObject.hpp inc/interface/INpc.hpp src/abstract/AMenu.cpp inc/abstract/AMenu.hpp src/abstract/AGame.cpp inc/abstract/AGame.hpp src/abstract/AComputer.cpp inc/abstract/AComputer.hpp src/abstract/AMonster.cpp inc/abstract/AMonster.hpp src/abstract/AWall.cpp inc/abstract/AWall.hpp src/abstract/ABomb.cpp inc/abstract/ABomb.hpp src/abstract/ACollectible.cpp inc/abstract/ACollectible.hpp)
+        src/classes/Core.cpp
+        inc/classes/Core.hpp
+        src/classes/Options.cpp
+        inc/classes/Options.hpp
+        src/classes/Keymap.cpp
+        src/abstract/AMenu.cpp
+        src/abstract/AGame.cpp
+        src/abstract/AComputer.cpp
+        src/abstract/AMonster.cpp
+        src/abstract/AWall.cpp
+        src/abstract/ABomb.cpp
+        src/abstract/ACollectible.cpp)
 
-include_directories(inc inc/interface)
+include_directories(
+        inc
+        inc/abstract
+        inc/classes
+        inc/interface)
 set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)
 find_package(Irrlicht REQUIRED)
 target_link_libraries(bomberman ${IRRLICHT_LIBRARY})
