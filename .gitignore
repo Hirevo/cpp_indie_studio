@@ -12,3 +12,8 @@ cmake-build-release-mvcs/
 libs/
 
 bomberman
+cmake-build-debug-mcvs/
+
+cmake-build-release-mcvs/
+
+media/
