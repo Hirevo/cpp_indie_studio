@@ -5,4 +5,3 @@
 ** Created by Benjamin
 */
 
-#include "AWall.hpp"

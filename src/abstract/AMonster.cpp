@@ -5,4 +5,4 @@
 ** Created by Benjamin
 */
 
-#include "abstract/AMonster.hpp"
+#include "AMonster.hpp"

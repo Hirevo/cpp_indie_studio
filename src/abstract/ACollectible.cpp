@@ -5,4 +5,4 @@
 ** Created by Benjamin
 */
 
-#include "abstract/ACollectible.hpp"
+#include "ACollectible.hpp"

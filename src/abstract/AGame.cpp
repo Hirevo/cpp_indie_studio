@@ -5,4 +5,4 @@
 ** Created by Benjamin
 */
 
-#include "abstract/AGame.hpp"
+#include "AGame.hpp"

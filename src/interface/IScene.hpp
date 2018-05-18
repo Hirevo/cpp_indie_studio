@@ -8,9 +8,15 @@
 #ifndef BOMBERMAN_ISCENE_HPP
 #define BOMBERMAN_ISCENE_HPP
 
-class IScene {
-private:
-public:
-};
+#include <IVideoDriver.h>
+#include <memory>
+
+namespace Eo {
+	class IScene {
+	private:
+		std::unique_ptr <irr::video::IVideoDriver> _driver;
+	public:
+	};
+}
 
 #endif

@@ -5,12 +5,19 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 set(CMAKE_CXX_STANDARD 11)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
+include_directories(
+        src/interface)
+set(HEADER_FILES
+        src/interface/IScene.hpp
+        src/interface/ICaracter.hpp
+        src/interface/IMap.hpp
+        src/interface/INpc.hpp
+        src/interface/IObject.hpp)
+
 add_executable(bomberman
         src/main.cpp
         src/classes/Core.cpp
-        inc/classes/Core.hpp
         src/classes/Options.cpp
-        inc/classes/Options.hpp
         src/classes/Keymap.cpp
         src/abstract/AMenu.cpp
         src/abstract/AGame.cpp
@@ -18,13 +25,10 @@ add_executable(bomberman
         src/abstract/AMonster.cpp
         src/abstract/AWall.cpp
         src/abstract/ABomb.cpp
-        src/abstract/ACollectible.cpp)
+        src/abstract/ACollectible.cpp
+        src/classes/Scene.cpp
+        ${HEADER_FILES})
 
-include_directories(
-        inc
-        inc/abstract
-        inc/classes
-        inc/interface)
 set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)
 find_package(Irrlicht REQUIRED)
 target_link_libraries(bomberman ${IRRLICHT_LIBRARY})
