@@ -7,4 +7,14 @@
 
 #ifndef BOMBERMAN_INPC_HPP
 #define BOMBERMAN_INPC_HPP
+
+#include "ICharacter.hpp"
+
+namespace Eo {
+	class INpc : ICharacter {
+	public:
+	private:
+	};
+}
+
 #endif

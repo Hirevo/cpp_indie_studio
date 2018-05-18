@@ -11,15 +11,19 @@
 #include <memory>
 #include <stack>
 #include <IrrlichtDevice.h>
-#include "Scene.hpp"
+#include "Options.hpp"
 
 namespace Eo {
 	class Core {
 	public:
+		Core();
+		virtual ~Core();
+		irr::IrrlichtDevice *get_device() const;
 	private:
+		Eo::Options _options;
 		irr::IrrlichtDevice* _device;
-		irr::video::IVideoDriver* _driver;
-		std::stack<std::unique_ptr<Eo::Scene>> _stateMachine;
+		irr::video::IVideoDriver *_driver;
+		//std::stack<std::unique_ptr<Eo::Scene>> _stateMachine;
 	};
 }
 

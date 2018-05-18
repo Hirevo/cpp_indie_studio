@@ -5,13 +5,11 @@
 ** Created by Benjamin
 */
 
-#ifndef BOMBERMAN_AWALL_HPP
-#define BOMBERMAN_AWALL_HPP
-
-#include "IObject.hpp"
+#ifndef BOMBERMAN_ICHARACTER_HPP
+#define BOMBERMAN_ICHARACTER_HPP
 
 namespace Eo {
-	class AWall : IObject {
+	class ICharacter {
 	public:
 	private:
 	};

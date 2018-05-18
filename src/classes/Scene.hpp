@@ -8,12 +8,17 @@
 #ifndef BOMBERMAN_SCENE_HPP
 #define BOMBERMAN_SCENE_HPP
 
+#include <memory>
+#include "irrlicht.h"
 #include "IScene.hpp"
+#include "Core.hpp"
 
 namespace Eo {
 	class Scene : IScene {
-	private:
 	public:
+		Scene(Eo::Core &core);
+	private:
+		irr::scene::ISceneManager* _sceneManager;
 	};
 }
 #endif

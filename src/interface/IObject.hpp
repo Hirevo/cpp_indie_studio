@@ -7,4 +7,12 @@
 
 #ifndef BOMBERMAN_IOBJECT_HPP
 #define BOMBERMAN_IOBJECT_HPP
+
+namespace Eo {
+	class IObject {
+	public:
+	private:
+	};
+}
+
 #endif

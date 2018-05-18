@@ -7,4 +7,14 @@
 
 #ifndef BOMBERMAN_ABOMB_HPP
 #define BOMBERMAN_ABOMB_HPP
+
+#include "IObject.hpp"
+
+namespace Eo {
+	class ABomb : IObject {
+	public:
+	private:
+	};
+}
+
 #endif

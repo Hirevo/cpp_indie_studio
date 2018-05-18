@@ -7,4 +7,14 @@
 
 #ifndef BOMBERMAN_ACOMPUTER_HPP
 #define BOMBERMAN_ACOMPUTER_HPP
+
+#include "INpc.hpp"
+
+namespace Eo {
+	class AComputer : INpc {
+	public:
+	private:
+	};
+}
+
 #endif

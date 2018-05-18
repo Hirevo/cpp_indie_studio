@@ -9,10 +9,10 @@ include_directories(
         src/interface)
 set(HEADER_FILES
         src/interface/IScene.hpp
-        src/interface/ICaracter.hpp
+        src/interface/ICharacter.hpp
         src/interface/IMap.hpp
         src/interface/INpc.hpp
-        src/interface/IObject.hpp)
+        src/interface/IObject.hpp src/abstract/APlayer.cpp src/abstract/APlayer.hpp)
 
 add_executable(bomberman
         src/main.cpp

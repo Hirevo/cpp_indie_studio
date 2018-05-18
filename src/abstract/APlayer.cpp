@@ -5,6 +5,4 @@
 ** Created by Benjamin
 */
 
-#ifndef BOMBERMAN_ICARACTER_HPP
-#define BOMBERMAN_ICARACTER_HPP
-#endif
+#include "APlayer.hpp"

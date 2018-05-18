@@ -5,13 +5,13 @@
 ** Created by Benjamin
 */
 
-#ifndef BOMBERMAN_AWALL_HPP
-#define BOMBERMAN_AWALL_HPP
+#ifndef BOMBERMAN_APLAYER_HPP
+#define BOMBERMAN_APLAYER_HPP
 
-#include "IObject.hpp"
+#include "ICharacter.hpp"
 
 namespace Eo {
-	class AWall : IObject {
+	class APlayer : ICharacter {
 	public:
 	private:
 	};
