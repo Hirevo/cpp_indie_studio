@@ -8,7 +8,9 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 include_directories(
         src/interface
         src/classes
-        srC/abstract)
+        src/abstract
+        libs/irrlicht/include)
+
 set(HEADER_FILES
         src/interface/IScene.hpp
         src/interface/ICharacter.hpp
@@ -24,6 +26,7 @@ add_executable(bomberman
         src/classes/Core.cpp
         src/classes/Options.cpp
         src/classes/Keymap.cpp
+        src/classes/Camera.cpp
         src/abstract/AMenu.cpp
         src/abstract/AGame.cpp
         src/abstract/AComputer.cpp

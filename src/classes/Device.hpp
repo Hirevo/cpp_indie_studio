@@ -8,7 +8,7 @@
 #ifndef BOMBERMAN_DEVICE_HPP
 #define BOMBERMAN_DEVICE_HPP
 
-#include <Irrlicht.h>
+#include "irrlicht.h"
 #include "Options.hpp"
 
 namespace Eo {

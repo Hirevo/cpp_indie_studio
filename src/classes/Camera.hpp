@@ -16,7 +16,8 @@ namespace Eo {
 	class Camera {
 	public:
 		Camera(Eo::Scene &scene);
-		~Camera();
+		~Camera() = default;
+
 	private:
 		irr::SKeyMap _keyMap[5];
 		Eo::Scene &_scene;

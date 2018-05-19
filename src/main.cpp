@@ -14,7 +14,6 @@
 
 int main() {
 	Eo::Core core;
-	
 //    irr::IrrlichtDevice* device = irr::createDevice(  // creation du device
 //            irr::video::EDT_OPENGL,                       // API = OpenGL
 //            irr::core::dimension2d<irr::u32>(800,800),    // taille fenetre 640x480p

@@ -20,7 +20,6 @@ Eo::Camera::Camera(Eo::Scene &scene) :
 	_keyMap[3].KeyCode = irr::KEY_KEY_D;
 	_keyMap[4].Action = irr::EKA_JUMP_UP;
 	_keyMap[4].KeyCode = irr::KEY_SPACE;
-
 	_scene.get_sceneManager()->addCameraSceneNodeFPS(
 		0, 100.0f, 0.1f, -1, _keyMap, 5);
 }

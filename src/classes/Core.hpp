@@ -10,7 +10,7 @@
 
 #include <memory>
 #include <stack>
-#include <Irrlicht.h>
+#include "irrlicht.h"
 #include "Options.hpp"
 #include "Camera.hpp"
 #include "Scene.hpp"
@@ -25,7 +25,7 @@ namespace Eo {
 		Eo::Options _options;
 		Eo::Device _device;
 		Eo::Scene _scene;
-		//Eo::Camera _camera;
+		Eo::Camera _camera;
 
 		//std::stack<std::unique_ptr<Eo::Scene>> _stateMachine;
 	};
