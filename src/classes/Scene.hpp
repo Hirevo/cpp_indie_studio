@@ -12,14 +12,14 @@
 #include "irrlicht.h"
 #include <stack>
 #include "IScene.hpp"
+#include "Device.hpp"
 
 namespace Eo {
-	class Core;
 	class Scene : IScene {
 	public:
-		Scene(Eo::Core &core);
+		Scene(Eo::Device &device);
 	private:
-		Eo::Core &_core;
+		Eo::Device &_device;
 		irr::scene::ISceneManager* _sceneManager;
 		std::stack<irr::scene::IMeshSceneNode*> _map;
 	public:

@@ -6,12 +6,11 @@
 */
 
 #include "Scene.hpp"
-#include "Core.hpp"
 
-Eo::Scene::Scene(Eo::Core &core) :
-	_core(core)
+Eo::Scene::Scene(Eo::Device &device) :
+	_device(device)
 {
-	_sceneManager = _core.get_device()->getSceneManager();
+	_sceneManager = _device.get_device()->getSceneManager();
 }
 
 /*addCubeSceneNode(	f32 		size = 10.0f,

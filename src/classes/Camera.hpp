@@ -10,6 +10,7 @@
 
 #include <SKeyMap.h>
 #include "Scene.hpp"
+#include "irrlicht.h"
 
 namespace Eo {
 	class Camera {
