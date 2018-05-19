@@ -11,20 +11,21 @@
 #include <memory>
 #include "irrlicht.h"
 #include <stack>
-#include <IMeshSceneNode.h>
 #include "IScene.hpp"
-#include "Core.hpp"
 
 namespace Eo {
+	class Core;
 	class Scene : IScene {
 	public:
 		Scene(Eo::Core &core);
 	private:
+		Eo::Core &_core;
 		irr::scene::ISceneManager* _sceneManager;
 		std::stack<irr::scene::IMeshSceneNode*> _map;
 	public:
-		Scene();
-		void addMapBlock();
+		void addMapBlock(irr::f32 unitSize,
+			const irr::core::vector3df &pos);
+		irr::scene::ISceneManager *get_sceneManager() const;
 	};
 }
 #endif

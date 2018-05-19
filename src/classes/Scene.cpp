@@ -6,11 +6,12 @@
 */
 
 #include "Scene.hpp"
+#include "Core.hpp"
 
-
-Eo::Scene::Scene(Eo::Core &core)
+Eo::Scene::Scene(Eo::Core &core) :
+	_core(core)
 {
-	_sceneManager = core.get_device()->getSceneManager();
+	_sceneManager = _core.get_device()->getSceneManager();
 }
 
 /*addCubeSceneNode(	f32 		size = 10.0f,
@@ -18,17 +19,19 @@ Eo::Scene::Scene(Eo::Core &core)
 **			s32 		id = -1,
 **const core::vector3df & 		position = core::vector3df(0, 0, 0),
 **const core::vector3df & 		rotation = core::vector3df(0, 0, 0),
-**const core::vector3df & 		scale = core::vector3df(1.0f, 1.0f, 1.0f)
+**const core::vector3df & 		scale = core::vector3df(1.0f,1.0f,1.0f)
 */
-void Eo::Scene::addMapBlock()
+void Eo::Scene::addMapBlock(irr::f32 unitSize, const irr::core::vector3df &pos)
 {
-	irr::scene::IMeshSceneNode* cube =
-		sceneManager->addCubeSceneNode(
-			10.0f,                             // cote de 10 unites
-			0,                                 // parent = racine
-			-1,                                // pas d'ID
-			irr::core::vector3df(              // le vecteur de position
-				0.0f,                          // origine en X
-				0.0f,                          // origine en Y
-				20.0f));
+	irr::scene::IMeshSceneNode* cube = _sceneManager->addCubeSceneNode(
+			unitSize,
+			nullptr,
+			-1,
+			pos);
+	_map.push(cube);
+}
+
+irr::scene::ISceneManager *Eo::Scene::get_sceneManager() const
+{
+	return _sceneManager;
 }

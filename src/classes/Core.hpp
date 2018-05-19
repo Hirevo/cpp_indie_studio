@@ -10,8 +10,9 @@
 
 #include <memory>
 #include <stack>
-#include <IrrlichtDevice.h>
+#include <Irrlicht.h>
 #include "Options.hpp"
+#include "Camera.hpp"
 
 namespace Eo {
 	class Core {
@@ -23,6 +24,9 @@ namespace Eo {
 		Eo::Options _options;
 		irr::IrrlichtDevice* _device;
 		irr::video::IVideoDriver *_driver;
+//		Eo::Scene _scene;
+//		Eo::Camera _camera;
+
 		//std::stack<std::unique_ptr<Eo::Scene>> _stateMachine;
 	};
 

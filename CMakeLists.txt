@@ -12,7 +12,7 @@ set(HEADER_FILES
         src/interface/ICharacter.hpp
         src/interface/IMap.hpp
         src/interface/INpc.hpp
-        src/interface/IObject.hpp src/abstract/APlayer.cpp src/abstract/APlayer.hpp)
+        src/interface/IObject.hpp src/abstract/APlayer.cpp src/abstract/APlayer.hpp src/classes/Camera.cpp src/classes/Camera.hpp)
 
 add_executable(bomberman
         src/main.cpp
