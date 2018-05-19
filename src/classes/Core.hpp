@@ -25,6 +25,8 @@ namespace Eo {
 		irr::video::IVideoDriver *_driver;
 		//std::stack<std::unique_ptr<Eo::Scene>> _stateMachine;
 	};
+
+
 }
 
 #endif

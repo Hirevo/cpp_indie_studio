@@ -10,6 +10,8 @@
 
 #include <memory>
 #include "irrlicht.h"
+#include <stack>
+#include <IMeshSceneNode.h>
 #include "IScene.hpp"
 #include "Core.hpp"
 
@@ -19,6 +21,10 @@ namespace Eo {
 		Scene(Eo::Core &core);
 	private:
 		irr::scene::ISceneManager* _sceneManager;
+		std::stack<irr::scene::IMeshSceneNode*> _map;
+	public:
+		Scene();
+		void addMapBlock();
 	};
 }
 #endif
