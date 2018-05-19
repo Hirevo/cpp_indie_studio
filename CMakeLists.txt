@@ -6,13 +6,18 @@ set(CMAKE_CXX_STANDARD 11)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 include_directories(
-        src/interface)
+        src/interface
+        src/classes
+        srC/abstract)
 set(HEADER_FILES
         src/interface/IScene.hpp
         src/interface/ICharacter.hpp
         src/interface/IMap.hpp
         src/interface/INpc.hpp
-        src/interface/IObject.hpp src/abstract/APlayer.cpp src/abstract/APlayer.hpp src/classes/Camera.cpp src/classes/Camera.hpp src/classes/Device.cpp src/classes/Device.hpp)
+        src/interface/IObject.hpp
+        src/abstract/APlayer.hpp
+        src/classes/Camera.hpp
+        src/classes/Device.hpp)
 
 add_executable(bomberman
         src/main.cpp
@@ -27,6 +32,9 @@ add_executable(bomberman
         src/abstract/ABomb.cpp
         src/abstract/ACollectible.cpp
         src/classes/Scene.cpp
+        src/classes/Device.cpp
+        src/classes/Camera.cpp
+        src/abstract/APlayer.cpp
         ${HEADER_FILES})
 
 set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)

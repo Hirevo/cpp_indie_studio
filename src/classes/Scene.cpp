@@ -27,6 +27,24 @@ void Eo::Scene::addMapBlock(irr::f32 unitSize, const irr::core::vector3df &pos)
 			nullptr,
 			-1,
 			pos);
+	cube->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
+	_map.push(cube);
+}
+
+void Eo::Scene::addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z)
+{
+	irr::f32 unitSize = 10.0f;
+	irr::core::vector3df pos;
+
+	pos.X = x;
+	pos.Y = y;
+	pos.Z = z;
+	irr::scene::IMeshSceneNode* cube = _sceneManager->addCubeSceneNode(
+		unitSize,
+		nullptr,
+		-1,
+		pos);
+	cube->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
 	_map.push(cube);
 }
 
@@ -34,3 +52,4 @@ irr::scene::ISceneManager *Eo::Scene::get_sceneManager() const
 {
 	return _sceneManager;
 }
+
