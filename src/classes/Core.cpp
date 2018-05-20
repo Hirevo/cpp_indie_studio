@@ -20,8 +20,29 @@ Eo::Core::Core()
 	pos.Y = 0;
 	pos.Z = 20;
 
-	_scene.addMapBlock(unitSize, pos);
+	_scene.addMapBlock(0, 0, 20);
+	_scene.addMapBlock(0, 0, 30);
+	_scene.addMapBlock(0, 0, 40);
+	_scene.addMapBlock(0, 0, 50);
+	_scene.addMapBlock(0, 0, 60);
+	_scene.addMapBlock(10, 0, 40);
+	_scene.addMapBlock(-10, 0, 40);
+	_scene.addMapBlock(20, 0, 40);
+	_scene.addMapBlock(-20, 0, 40);
+	_scene.addMapBlock(-20, 0, 50);
+	_scene.addMapBlock(-20, 0, 60);
+	_scene.addMapBlock(20, 0, 30);
 	_scene.addMapBlock(20, 0, 20);
+	_scene.addMapBlock(-10, 0, 20);
+	_scene.addMapBlock(-20, 0, 20);
+	_scene.addMapBlock(10, 0, 60);
+	_scene.addMapBlock(20, 0, 60);
+
+
+
+
+
+
 	irr::video::SColor color(255, 255, 255, 255);
 
 	while (_device.get_device()->run()) {

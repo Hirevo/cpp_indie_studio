@@ -44,7 +44,9 @@ void Eo::Scene::addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z)
 		nullptr,
 		-1,
 		pos);
-	cube->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
+	cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	cube->setMaterialTexture( 0, _device.get_driver()->getTexture("../assets/img/oui.jpg") );
+
 	_map.push(cube);
 }
 
