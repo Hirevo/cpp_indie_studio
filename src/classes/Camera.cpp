@@ -7,7 +7,7 @@
 
 #include "Camera.hpp"
 
-Eo::Camera::Camera(Eo::Scene &scene) :
+Eo::Camera::Camera(Eo::Game &scene) :
 	_scene(scene)
 {
 	_keyMap[0].Action = irr::EKA_MOVE_FORWARD;

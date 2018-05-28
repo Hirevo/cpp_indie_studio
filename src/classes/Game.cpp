@@ -7,7 +7,7 @@
 
 #include "Game.hpp"
 
-Eo::Scene::Scene(Eo::Device &device)
+Eo::Game::Game(Eo::Device &device)
 	: _device(device)
 {
 	_sceneManager = _device.get_device()->getSceneManager();
@@ -17,14 +17,14 @@ Eo::Scene::Scene(Eo::Device &device)
  * addMapBlock create a cube with two constructor
  * 	x y z  ||  cubeSize and his pos
  */
-void Eo::Scene::addMapBlock(irr::f32 cubeSize, const irr::core::vector3df &pos)
+void Eo::Game::addMapBlock(irr::f32 cubeSize, const irr::core::vector3df &pos)
 {
 	irr::scene::IMeshSceneNode *cube = _sceneManager->addCubeSceneNode(
 		cubeSize, nullptr, -1, pos);
 	cube->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
 }
 
-void Eo::Scene::addMapFloor()
+void Eo::Game::addMapFloor()
 {
 	irr::core::dimension2d<irr::f32> tileSize(50,50);
 	irr::core::dimension2d<irr::u32> tileCount(50,50);
@@ -43,7 +43,7 @@ void Eo::Scene::addMapFloor()
 	_sceneManager->addMeshSceneNode(cube);
 }
 
-void Eo::Scene::addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z)
+void Eo::Game::addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z)
 {
 	irr::f32 unitSize = 10.0f;
 	irr::core::vector3df pos;
@@ -57,7 +57,7 @@ void Eo::Scene::addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z)
 		_device.get_driver()->getTexture("../assets/img/oui.jpg"));
 }
 
-irr::scene::ISceneManager *Eo::Scene::get_sceneManager() const
+irr::scene::ISceneManager *Eo::Game::get_sceneManager() const
 {
 	return _sceneManager;
 }

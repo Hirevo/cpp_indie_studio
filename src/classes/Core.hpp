@@ -25,7 +25,7 @@ namespace Eo {
 	private:
 		Eo::Options _options;
 		Eo::Device _device;
-		Eo::Scene _scene;
+		Eo::Game _scene;
 		Eo::Camera _camera;
 		Eo::Debug _debug;
 		bool _debugMode;

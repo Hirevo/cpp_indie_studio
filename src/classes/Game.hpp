@@ -15,9 +15,9 @@
 #include "irrlicht.h"
 
 namespace Eo {
-	class Scene : IScene {
+	class Game : IScene {
 	public:
-		Scene(Eo::Device &device);
+		Game(Eo::Device &device);
 
 	private:
 		Eo::Device &_device;

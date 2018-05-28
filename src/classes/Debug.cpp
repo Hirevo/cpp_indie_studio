@@ -7,7 +7,7 @@
 
 #include "Debug.hpp"
 
-Eo::Debug::Debug(Eo::Device &device, Eo::Scene &scene)
+Eo::Debug::Debug(Eo::Device &device, Eo::Game &scene)
 	: _device(device),
 	  _scene(scene)
 {
