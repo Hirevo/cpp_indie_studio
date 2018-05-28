@@ -17,6 +17,7 @@ namespace Eo {
 	public:
 		Camera(Eo::IScene *scene);
 		~Camera() = default;
+		irr::scene::ICameraSceneNode *getCameraHandle() const;
 
 	private:
 		irr::SKeyMap _keyMap[5];

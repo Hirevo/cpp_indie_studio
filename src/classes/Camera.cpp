@@ -28,3 +28,8 @@ Eo::Camera::Camera(Eo::IScene *scene) : _scene(scene)
 	_camera->setPosition(pos);
 	_scene->getSceneManager()->setActiveCamera(_camera);
 }
+
+irr::scene::ICameraSceneNode *Eo::Camera::getCameraHandle() const
+{
+	return _camera;
+}

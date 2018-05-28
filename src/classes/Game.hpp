@@ -11,7 +11,8 @@
 #include "Device.hpp"
 #include "JsonRead.hpp"
 #include "Map.hpp"
-#include "interfaces/IScene.hpp"
+#include "Camera.hpp"
+#include "IScene.hpp"
 #include "irrlicht.h"
 #include <AGame.hpp>
 #include <memory>
@@ -27,6 +28,7 @@ namespace Eo {
 	private:
 		Eo::JsonRead _json;
 		Eo::Map _map;
+		Eo::Camera _camera;
 	};
 }
 #endif
