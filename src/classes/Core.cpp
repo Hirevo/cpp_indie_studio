@@ -20,6 +20,27 @@ Eo::Core::Core() :
 	_debug(_device, _sceneHandler.getCurrentScene()),
 	_debugMode(false)
 {
+<<<<<<< Updated upstream
+=======
+	_scene.addMapBlock(0, 5, 20);
+	_scene.addMapBlock(0, 5, 30);
+	_scene.addMapBlock(0, 5, 40);
+	_scene.addMapBlock(0, 5, 50);
+	_scene.addMapBlock(0, 5, 60);
+	_scene.addMapBlock(10, 5, 40);
+	_scene.addMapBlock(-10, 5, 40);
+	_scene.addMapBlock(20, 5, 40);
+	_scene.addMapBlock(-20, 5, 40);
+	_scene.addMapBlock(-20, 5, 50);
+	_scene.addMapBlock(-20, 5, 60);
+	_scene.addMapBlock(20, 5, 30);
+	_scene.addMapBlock(20, 5, 20);
+	_scene.addMapBlock(-10, 5, 20);
+	_scene.addMapBlock(-20, 5, 20);
+	_scene.addMapBlock(10, 5, 60);
+	_scene.addMapBlock(20, 5, 60);
+	_scene.addMapFloor();
+>>>>>>> Stashed changes
 	_device.get_device()->getCursorControl()->setVisible(false);
 	_debugMode = true;
 	irr::video::SColor color(255, 255, 2, 255);
