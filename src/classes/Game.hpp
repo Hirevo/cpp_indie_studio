@@ -21,9 +21,9 @@ namespace Eo {
 	class Game : public AGame {
 	public:
 		Game(Eo::Device &device, const std::string &mapPath);
-		virtual ~Game() = default;
-		irr::scene::ISceneManager *getSceneManager() const override;
-		irr::scene::ICameraSceneNode *getCamera() const override;
+		~Game();
+		//irr::scene::ISceneManager *getSceneManager() const override;
+		//irr::scene::ICameraSceneNode *getCamera() const override;
 
 	private:
 		Eo::JsonRead _json;

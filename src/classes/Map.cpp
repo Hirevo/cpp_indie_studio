@@ -16,7 +16,7 @@ Eo::Map::Map(size_t w, size_t h)
 	_map.reserve(w * h);
 	for (size_t i = 0; i < w; i++)
 		for (size_t j = 0; j < w; j++)
-			_map.emplace_back(0);
+			_map.push_back(static_cast<Eo::IObject *>(0));
 }
 
 Eo::IObject *Eo::Map::getObject(size_t x, size_t y)

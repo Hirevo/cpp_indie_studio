@@ -15,7 +15,11 @@ Eo::Game::Game(Eo::Device &device, const std::string &mapPath) :
 {
 }
 
-irr::scene::ISceneManager *Eo::Game::getSceneManager() const
+Eo::Game::~Game()
 {
-	return _sceneManager;
 }
+
+//irr::scene::ISceneManager *Eo::Game::getSceneManager() const
+//{
+//	return _sceneManager;
+//}
