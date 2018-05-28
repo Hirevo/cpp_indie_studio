@@ -11,7 +11,7 @@
 #include "ICharacter.hpp"
 
 namespace Eo {
-	class INpc : ICharacter {
+	class INpc : public ICharacter {
 	public:
 	private:
 	};

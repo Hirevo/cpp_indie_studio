@@ -21,18 +21,19 @@ std::string Eo::JsonRead::readSingleValue(std::string const &name) const
 	return this->_root.get<std::string>(name);
 }
 
-std::vector<std::vector<Eo::MapWall>> Eo::JsonRead::readMatrix(std::string const &name)
+std::vector<std::vector<Eo::MapWall>> Eo::JsonRead::readMatrix(
+	std::string const &name)
 {
 	std::vector<std::vector<Eo::MapWall>> matrix;
 	int x = 0;
 
-	for (boost::property_tree::ptree::value_type &row :
-		     this->_root.get_child(name)) {
+	for (auto &row : this->_root.get_child(name)) {
 		int y = 0;
 
-		matrix.push_back(std::vector<Eo::MapWall>());
-		for (boost::property_tree::ptree::value_type &cell :row.second) {
-			matrix.at(x).push_back(static_cast<Eo::MapWall>(cell.second.get_value<int>()));
+		matrix.emplace_back();
+		for (auto &cell : row.second) {
+			matrix.at(x).emplace_back(static_cast<Eo::MapWall>(
+				cell.second.get_value<int>()));
 			y++;
 		}
 		x++;

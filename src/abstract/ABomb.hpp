@@ -11,9 +11,16 @@
 #include "IObject.hpp"
 
 namespace Eo {
-	class ABomb : IObject {
+	class ABomb : public IObject {
 	public:
+		ABomb();
+		~ABomb() = default;
+		Eo::IObject::Type getType() const override;
+		irr::scene::IMeshSceneNode *getSceneNode() override;
+		void setSceneNode(irr::scene::IMeshSceneNode *node) override;
+
 	private:
+		
 	};
 }
 

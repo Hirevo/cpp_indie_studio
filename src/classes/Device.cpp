@@ -15,12 +15,12 @@ Eo::Device::Device(Eo::Options &options) :
 	_driver = _device->getVideoDriver();
 }
 
-irr::IrrlichtDevice *Eo::Device::get_device() const
+irr::IrrlichtDevice *Eo::Device::getDevice() const
 {
 	return _device;
 }
 
-irr::video::IVideoDriver *Eo::Device::get_driver() const
+irr::video::IVideoDriver *Eo::Device::getDriver() const
 {
 	return _driver;
 }

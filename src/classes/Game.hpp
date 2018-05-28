@@ -12,7 +12,7 @@
 #include <stack>
 #include <AGame.hpp>
 #include "Device.hpp"
-#include "IScene.hpp"
+#include "interfaces/IScene.hpp"
 #include "irrlicht.h"
 
 namespace Eo {
@@ -24,6 +24,7 @@ namespace Eo {
 			irr::f32 unitSize, const irr::core::vector3df &pos);
 		void addMapFloor();
 		void addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z);
+		irr::scene::ISceneManager *getSceneManager() const override;
 	};
 }
 #endif

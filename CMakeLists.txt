@@ -6,18 +6,19 @@ set(CMAKE_CXX_STANDARD 11)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 include_directories(
-        src/interface
+        src/interfaces
         src/classes
         src/abstract
+        src
         libs/irrlicht/include
 )
 
 set(HEADER_FILES
-        src/interface/IScene.hpp
-        src/interface/ICharacter.hpp
-        src/interface/IMap.hpp
-        src/interface/INpc.hpp
-        src/interface/IObject.hpp
+        src/interfaces/IScene.hpp
+        src/interfaces/ICharacter.hpp
+        src/interfaces/IMap.hpp
+        src/interfaces/INpc.hpp
+        src/interfaces/IObject.hpp
         src/abstract/ABomb.hpp
         src/abstract/ACollectible.hpp
         src/abstract/AGame.hpp
@@ -41,6 +42,8 @@ add_executable(bomberman
         src/abstract/AMenu.cpp
         src/abstract/AGame.cpp
         src/abstract/AComputer.cpp
+        src/abstract/AObject.cpp
+        src/abstract/AMovable.cpp
         src/abstract/AMonster.cpp
         src/abstract/AWall.cpp
         src/abstract/ABomb.cpp

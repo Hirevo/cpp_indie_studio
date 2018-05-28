@@ -7,11 +7,9 @@
 
 #include "Debug.hpp"
 
-Eo::Debug::Debug(Eo::Device &device, Eo::IScene *scene) :
-	_device(device),
-	_scene(scene)
+Eo::Debug::Debug(Eo::Device &device, Eo::IScene *scene)
+	: _device(device), _scene(scene)
 {
-
 }
 
 Eo::Debug::~Debug()
@@ -28,12 +26,15 @@ void Eo::Debug::dumpCameraPosTitleWindow()
 	if (_cameraPosTitleWindow) {
 		irr::core::vector3df posCam;
 		wchar_t titre[100];
-		posCam = _scene->get_sceneManager()->getActiveCamera()->getPosition();
-		swprintf(titre, 100, L"FPS : %d (mode debug) |  PosCam :  "
-				     "X : %f Y : %f Z : %f",
-			_device.get_driver()->getFPS(), posCam.X, posCam.Y,
+		posCam = _scene->getSceneManager()
+				 ->getActiveCamera()
+				 ->getPosition();
+		swprintf(titre, 100,
+			L"FPS : %d (mode debug) |  PosCam :  "
+			"X : %f Y : %f Z : %f",
+			_device.getDriver()->getFPS(), posCam.X, posCam.Y,
 			posCam.Z);
-		_device.get_device()->setWindowCaption(titre);
+		_device.getDevice()->setWindowCaption(titre);
 	}
 }
 

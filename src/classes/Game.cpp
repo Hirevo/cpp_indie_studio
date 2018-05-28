@@ -30,7 +30,7 @@ void Eo::Game::addMapFloor()
 	irr::core::dimension2d<irr::f32> textureRepeatCount(50,50);
 
 	material.setTexture(0,
-		_device.get_driver()->getTexture("../assets/img/damier.jpg"));
+		_device.getDriver()->getTexture("../assets/img/damier.jpg"));
 	irr::scene::IMesh *cube =
 	_sceneManager->getGeometryCreator()->createPlaneMesh(
 		tileSize,
@@ -52,6 +52,12 @@ void Eo::Game::addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z)
 		unitSize, nullptr, -1, pos);
 	cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	cube->setMaterialTexture(0,
-		_device.get_driver()->getTexture("../assets/img/oui.jpg"));
+		_device.getDriver()->getTexture("../assets/img/oui.jpg"));
+	// _map.push(cube);
+}
+
+irr::scene::ISceneManager *Eo::Game::getSceneManager() const
+{
+	return _sceneManager;
 }
 

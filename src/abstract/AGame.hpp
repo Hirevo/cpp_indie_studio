@@ -16,7 +16,7 @@ namespace Eo {
 	public:
 		explicit AGame(Eo::Device &_device);
 		~AGame();
-		irr::scene::ISceneManager *get_sceneManager() const override;
+		irr::scene::ISceneManager *getSceneManager() const override;
 
 	protected:
 		Eo::Device &_device;

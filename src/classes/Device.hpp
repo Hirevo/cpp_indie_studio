@@ -20,8 +20,8 @@ namespace Eo {
 		Eo::Options _options;
 		irr::video::IVideoDriver *_driver;
 	public:
-		irr::IrrlichtDevice *get_device() const;
-		irr::video::IVideoDriver *get_driver() const;
+		irr::IrrlichtDevice *getDevice() const;
+		irr::video::IVideoDriver *getDriver() const;
 	};
 }
 

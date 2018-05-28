@@ -11,10 +11,10 @@
 #include "IScene.hpp"
 
 namespace Eo {
-	class AMenu : IScene {
+	class AMenu : public IScene {
 	public:
 	private:
 	};
-}
+};
 
 #endif

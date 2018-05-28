@@ -7,49 +7,38 @@
 
 #include "Core.hpp"
 #include "JsonRead.hpp"
+#include "abstract/AWall.hpp"
 
 Eo::Core::~Core()
 {
 }
 
-Eo::Core::Core() :
-	_options(),
-	_device(_options),
-	_sceneHandler(_device),
-	_camera(_sceneHandler.getCurrentScene()),
-	_debug(_device, _sceneHandler.getCurrentScene()),
-	_debugMode(false)
+Eo::Core::Core()
+	: _options(), _device(_options), _sceneHandler(_device),
+	  _camera(_sceneHandler.getCurrentScene()),
+	  _debug(_device, _sceneHandler.getCurrentScene()), _debugMode(false)
 {
-<<<<<<< Updated upstream
-=======
-	_scene.addMapBlock(0, 5, 20);
-	_scene.addMapBlock(0, 5, 30);
-	_scene.addMapBlock(0, 5, 40);
-	_scene.addMapBlock(0, 5, 50);
-	_scene.addMapBlock(0, 5, 60);
-	_scene.addMapBlock(10, 5, 40);
-	_scene.addMapBlock(-10, 5, 40);
-	_scene.addMapBlock(20, 5, 40);
-	_scene.addMapBlock(-20, 5, 40);
-	_scene.addMapBlock(-20, 5, 50);
-	_scene.addMapBlock(-20, 5, 60);
-	_scene.addMapBlock(20, 5, 30);
-	_scene.addMapBlock(20, 5, 20);
-	_scene.addMapBlock(-10, 5, 20);
-	_scene.addMapBlock(-20, 5, 20);
-	_scene.addMapBlock(10, 5, 60);
-	_scene.addMapBlock(20, 5, 60);
-	_scene.addMapFloor();
->>>>>>> Stashed changes
-	_device.get_device()->getCursorControl()->setVisible(false);
+	Eo::AWall wall(Eo::AWall::INDESTRUCTIBLE);
+
+	wall.insertInScene(_sceneHandler.getCurrentScene());
+	// _sceneHandler.getCurrentScene()->addMapFloor();
+	_device.getDevice()->getCursorControl()->setVisible(false);
 	_debugMode = true;
 	irr::video::SColor color(255, 255, 2, 255);
-	while (_device.get_device()->run()) {
-		_device.get_driver()->beginScene(true, true, color);
+	float val = 0, inc = 0.03;
+	while (_device.getDevice()->run()) {
+		wall.setPosition(sin(val) * 50, 0, 0);
+		val += inc;
+		if (val >= 1)
+			inc = -0.03;
+		if (val <= -1)
+			inc = 0.03;
+		wall.updateInScene(_sceneHandler.getCurrentScene());
+		_device.getDriver()->beginScene(true, true, color);
 		if (_debugMode)
 			_debug.dumpDebug();
-		this->_sceneHandler.getCurrentScene()->get_sceneManager()->drawAll();
-		_device.get_driver()->endScene();
+		_sceneHandler.getCurrentScene()->getSceneManager()->drawAll();
+		_device.getDriver()->endScene();
 	}
-	_device.get_device()->drop();
+	_device.getDevice()->drop();
 }

@@ -9,7 +9,7 @@
 
 Eo::AGame::AGame(Eo::Device &device) : _device(device)
 {
-	_sceneManager = _device.get_device()->getSceneManager();
+	_sceneManager = _device.getDevice()->getSceneManager();
 }
 
 Eo::AGame::~AGame()
@@ -17,7 +17,7 @@ Eo::AGame::~AGame()
 
 }
 
-irr::scene::ISceneManager *Eo::AGame::get_sceneManager() const
+irr::scene::ISceneManager *Eo::AGame::getSceneManager() const
 {
 	return _sceneManager;
 }
