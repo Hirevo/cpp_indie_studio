@@ -10,24 +10,24 @@
 
 Eo::SceneHandler::SceneHandler(Eo::Device &device)
 {
-	auto scene = new Eo::Game(device);
-	scene->addMapBlock(0, 5, 20);
-	scene->addMapBlock(0, 5, 30);
-	scene->addMapBlock(0, 5, 40);
-	scene->addMapBlock(0, 5, 50);
-	scene->addMapBlock(0, 5, 60);
-	scene->addMapBlock(10, 5, 40);
-	scene->addMapBlock(-10, 5, 40);
-	scene->addMapBlock(20, 5, 40);
-	scene->addMapBlock(-20, 5, 40);
-	scene->addMapBlock(-20, 5, 50);
-	scene->addMapBlock(-20, 5, 60);
-	scene->addMapBlock(20, 5, 30);
-	scene->addMapBlock(20, 5, 20);
-	scene->addMapBlock(-10, 5, 20);
-	scene->addMapBlock(-20, 5, 20);
-	scene->addMapBlock(10, 5, 60);
-	scene->addMapBlock(20, 5, 60);
+	auto scene = new Eo::Game(device, "../map2.json");
+//	scene->addMapBlock(0, 5, 20);
+//	scene->addMapBlock(0, 5, 30);
+//	scene->addMapBlock(0, 5, 40);
+//	scene->addMapBlock(0, 5, 50);
+//	scene->addMapBlock(0, 5, 60);
+//	scene->addMapBlock(10, 5, 40);
+//	scene->addMapBlock(-10, 5, 40);
+//	scene->addMapBlock(20, 5, 40);
+//	scene->addMapBlock(-20, 5, 40);
+//	scene->addMapBlock(-20, 5, 50);
+//	scene->addMapBlock(-20, 5, 60);
+//	scene->addMapBlock(20, 5, 30);
+//	scene->addMapBlock(20, 5, 20);
+//	scene->addMapBlock(-10, 5, 20);
+//	scene->addMapBlock(-20, 5, 20);
+//	scene->addMapBlock(10, 5, 60);
+//	scene->addMapBlock(20, 5, 60);
 	scene->addMapFloor();
 	this->addScene(scene);
 }

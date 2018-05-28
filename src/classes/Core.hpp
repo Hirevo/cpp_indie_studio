@@ -28,7 +28,6 @@ namespace Eo {
 		Eo::Device _device;
 		Eo::SceneHandler _sceneHandler;
 		Eo::Camera _camera;
-		Eo::Debug _debug;
 		bool _debugMode;
 	};
 

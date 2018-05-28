@@ -7,19 +7,12 @@
 
 #include "Game.hpp"
 
-Eo::Game::Game(Eo::Device &device) : AGame(device)
+Eo::Game::Game(Eo::Device &device, const std::string &mapPath) :
+	AGame(device),
+	_json(mapPath),
+	_map(_json.readMatrix("map").size(),
+		_json.readMatrix("map").at(0).size())
 {
-}
-
-/*
- * addMapBlock create a cube with two constructor
- * 	x y z  ||  cubeSize and his pos
- */
-void Eo::Game::addMapBlock(irr::f32 cubeSize, const irr::core::vector3df &pos)
-{
-	irr::scene::IMeshSceneNode *cube = _sceneManager->addCubeSceneNode(
-		cubeSize, nullptr, -1, pos);
-	cube->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
 }
 
 void Eo::Game::addMapFloor()
@@ -53,11 +46,9 @@ void Eo::Game::addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z)
 	cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	cube->setMaterialTexture(0,
 		_device.getDriver()->getTexture("../assets/img/oui.jpg"));
-	// _map.push(cube);
 }
 
 irr::scene::ISceneManager *Eo::Game::getSceneManager() const
 {
 	return _sceneManager;
 }
-
