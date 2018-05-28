@@ -13,7 +13,7 @@
 #include "irrlicht.h"
 #include "Options.hpp"
 #include "Camera.hpp"
-#include "Scene.hpp"
+#include "Game.hpp"
 #include "Device.hpp"
 #include "Debug.hpp"
 

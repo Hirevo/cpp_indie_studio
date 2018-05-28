@@ -8,7 +8,7 @@
 #ifndef BOMBERMAN_DEBUG_HPP
 #define BOMBERMAN_DEBUG_HPP
 
-#include "Scene.hpp"
+#include "Game.hpp"
 #include "Device.hpp"
 
 namespace Eo {

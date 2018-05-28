@@ -5,7 +5,7 @@
 ** Created by Benjamin
 */
 
-#include "Scene.hpp"
+#include "Game.hpp"
 
 Eo::Scene::Scene(Eo::Device &device)
 	: _device(device)
@@ -22,7 +22,6 @@ void Eo::Scene::addMapBlock(irr::f32 cubeSize, const irr::core::vector3df &pos)
 	irr::scene::IMeshSceneNode *cube = _sceneManager->addCubeSceneNode(
 		cubeSize, nullptr, -1, pos);
 	cube->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
-	_map.push(cube);
 }
 
 void Eo::Scene::addMapFloor()
@@ -56,7 +55,6 @@ void Eo::Scene::addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z)
 	cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	cube->setMaterialTexture(0,
 		_device.get_driver()->getTexture("../assets/img/oui.jpg"));
-	_map.push(cube);
 }
 
 irr::scene::ISceneManager *Eo::Scene::get_sceneManager() const

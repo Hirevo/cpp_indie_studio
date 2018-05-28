@@ -9,7 +9,7 @@
 #define BOMBERMAN_CAMERA_HPP
 
 #include <SKeyMap.h>
-#include "Scene.hpp"
+#include "Game.hpp"
 #include "irrlicht.h"
 
 namespace Eo {

@@ -28,7 +28,6 @@ set(HEADER_FILES
         src/classes/Camera.hpp
         src/classes/Device.hpp
         src/classes/JsonRead.hpp
-        src/classes/MapWall.hpp
         src/classes/Debug.cpp src/classes/Debug.hpp)
 
 add_executable(bomberman
@@ -44,7 +43,7 @@ add_executable(bomberman
         src/abstract/AWall.cpp
         src/abstract/ABomb.cpp
         src/abstract/ACollectible.cpp
-        src/classes/Scene.cpp
+        src/classes/Game.cpp
         src/classes/Device.cpp
         src/classes/Camera.cpp
         src/classes/JsonRead.cpp

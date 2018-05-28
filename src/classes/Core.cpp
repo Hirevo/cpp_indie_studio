@@ -42,7 +42,6 @@ Eo::Core::Core()
 	_device.get_device()->getCursorControl()->setVisible(false);
 
 	_debugMode = true;
-
 	irr::video::SColor color(255, 255, 2, 255);
 	while (_device.get_device()->run()) {
 		_device.get_driver()->beginScene(true, true, color);

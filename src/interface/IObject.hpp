@@ -8,10 +8,14 @@
 #ifndef BOMBERMAN_IOBJECT_HPP
 #define BOMBERMAN_IOBJECT_HPP
 
+#include <irrlicht.h>
+
 namespace Eo {
 	class IObject {
 	public:
+
 	private:
+		irr::scene::IMeshSceneNode *_meshSceneNode;
 	};
 }
 

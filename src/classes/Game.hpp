@@ -22,7 +22,6 @@ namespace Eo {
 	private:
 		Eo::Device &_device;
 		irr::scene::ISceneManager *_sceneManager;
-		std::stack<irr::scene::IMeshSceneNode *> _map;
 
 	public:
 		void addMapBlock(
