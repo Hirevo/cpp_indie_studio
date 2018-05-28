@@ -17,12 +17,13 @@
 #include <AGame.hpp>
 #include <memory>
 #include <stack>
+
 namespace Eo {
 	class Game : public AGame {
 	public:
 		Game(Eo::Device &device, const std::string &mapPath);
-		virtual ~Game() = default;
-		irr::scene::ISceneManager *getSceneManager() const override;
+		~Game();
+		//irr::scene::ISceneManager *getSceneManager() const override;
 		irr::scene::ICameraSceneNode *getCamera() const override;
 
 	private:
