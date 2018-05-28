@@ -31,8 +31,7 @@ std::vector<std::vector<Eo::MapWall>> Eo::JsonRead::readMatrix(std::string const
 		int y = 0;
 
 		matrix.push_back(std::vector<Eo::MapWall>());
-		for (boost::property_tree::ptree::value_type &cell :
-			     row.second) {
+		for (boost::property_tree::ptree::value_type &cell :row.second) {
 			matrix.at(x).push_back(static_cast<Eo::MapWall>(cell.second.get_value<int>()));
 			y++;
 		}

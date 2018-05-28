@@ -21,6 +21,7 @@ namespace Eo {
 	private:
 		irr::SKeyMap _keyMap[5];
 		Eo::Scene &_scene;
+		irr::scene::ICameraSceneNode *_camera;
 	};
 
 

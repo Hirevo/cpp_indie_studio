@@ -8,11 +8,11 @@
 #ifndef BOMBERMAN_SCENE_HPP
 #define BOMBERMAN_SCENE_HPP
 
+#include <memory>
+#include <stack>
 #include "Device.hpp"
 #include "IScene.hpp"
 #include "irrlicht.h"
-#include <memory>
-#include <stack>
 
 namespace Eo {
 	class Scene : IScene {
@@ -27,6 +27,7 @@ namespace Eo {
 	public:
 		void addMapBlock(
 			irr::f32 unitSize, const irr::core::vector3df &pos);
+		void addMapFloor();
 		void addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z);
 		irr::scene::ISceneManager *get_sceneManager() const;
 	};

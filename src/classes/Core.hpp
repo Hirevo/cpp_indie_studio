@@ -15,6 +15,7 @@
 #include "Camera.hpp"
 #include "Scene.hpp"
 #include "Device.hpp"
+#include "Debug.hpp"
 
 namespace Eo {
 	class Core {
@@ -26,8 +27,8 @@ namespace Eo {
 		Eo::Device _device;
 		Eo::Scene _scene;
 		Eo::Camera _camera;
-
-		//std::stack<std::unique_ptr<Eo::Scene>> _stateMachine;
+		Eo::Debug _debug;
+		bool _debugMode;
 	};
 
 

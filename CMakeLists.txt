@@ -9,7 +9,8 @@ include_directories(
         src/interface
         src/classes
         src/abstract
-        libs/irrlicht/include)
+        libs/irrlicht/include
+)
 
 set(HEADER_FILES
         src/interface/IScene.hpp
@@ -17,9 +18,18 @@ set(HEADER_FILES
         src/interface/IMap.hpp
         src/interface/INpc.hpp
         src/interface/IObject.hpp
+        src/abstract/ABomb.hpp
+        src/abstract/ACollectible.hpp
+        src/abstract/AGame.hpp
+        src/abstract/AMenu.hpp
+        src/abstract/AMonster.hpp
         src/abstract/APlayer.hpp
+        src/abstract/AWall.hpp
         src/classes/Camera.hpp
-        src/classes/Device.hpp)
+        src/classes/Device.hpp
+        src/classes/JsonRead.hpp
+        src/classes/MapWall.hpp
+        src/classes/Debug.cpp src/classes/Debug.hpp)
 
 add_executable(bomberman
         src/main.cpp
@@ -37,6 +47,7 @@ add_executable(bomberman
         src/classes/Scene.cpp
         src/classes/Device.cpp
         src/classes/Camera.cpp
+        src/classes/JsonRead.cpp
         src/abstract/APlayer.cpp
         ${HEADER_FILES})
 
@@ -45,6 +56,23 @@ find_package(Irrlicht REQUIRED)
 target_link_libraries(bomberman ${IRRLICHT_LIBRARY})
 target_include_directories(bomberman PRIVATE ${IRRLICHT_INCLUDE_DIR})
 message("${PROJECT_SOURCE_DIR}")
+
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost REQUIRED)
+
+if(Boost_FOUND)
+    message(status "** Boost Include: ${Boost_INCLUDE_DIR}")
+    message(status "** Boost Libraries: ${Boost_LIBRARY_DIRS}")
+    message(status "** Boost Libraries: ${Boost_LIBRARIES}")
+    INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
+    LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
+    target_link_libraries(bomberman ${Boost_LIBRARIES})
+else()
+    message("J'ai PAS trouve BOOST")
+endif()
+
 if(WIN32)
     if (CMAKE_CL_64)
         add_custom_command(TARGET bomberman PRE_BUILD
