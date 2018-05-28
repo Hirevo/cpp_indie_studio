@@ -73,12 +73,12 @@ bool Eo::AMovable::hasPositionChanged() const
 	return _hasPositionChanged;
 }
 
-bool Eo::AMovable::setPositionChanged(bool changed)
+void Eo::AMovable::setPositionChanged(bool changed)
 {
 	_hasPositionChanged = changed;
 }
 
-bool Eo::AMovable::resetPositionChanged()
+void Eo::AMovable::resetPositionChanged()
 {
 	Eo::AMovable::setPositionChanged(false);
 }

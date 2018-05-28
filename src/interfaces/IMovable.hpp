@@ -24,8 +24,8 @@ namespace Eo {
 		virtual void translateY(float y) = 0;
 		virtual void translateZ(float z) = 0;
 		virtual bool hasPositionChanged() const = 0;
-		virtual bool setPositionChanged(bool changed) = 0;
-		virtual bool resetPositionChanged() = 0;
+		virtual void setPositionChanged(bool changed) = 0;
+		virtual void resetPositionChanged() = 0;
 
 	protected:
 	private:

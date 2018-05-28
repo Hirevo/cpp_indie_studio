@@ -26,8 +26,8 @@ namespace Eo {
 		void translateY(float y) override;
 		void translateZ(float z) override;
 		bool hasPositionChanged() const override;
-		bool setPositionChanged(bool changed) override;
-		bool resetPositionChanged() override;
+		void setPositionChanged(bool changed) override;
+		void resetPositionChanged() override;
 
 	protected:
 		irr::core::vector3df _pos;
