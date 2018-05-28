@@ -1,24 +1,23 @@
 /*
 ** EPITECH PROJECT, 2018
-** bomberman
+** cpp_indie_studio
 ** File description:
-** Created by Benjamin
+** Wall
 */
 
-#ifndef BOMBERMAN_AWALL_HPP
-#define BOMBERMAN_AWALL_HPP
+#pragma once
 
 #include "AMovable.hpp"
 #include "AObject.hpp"
 
 namespace Eo {
-	class AWall : public AObject, public AMovable {
+	class Wall : public AObject, public AMovable {
 	public:
 		enum WallType { DESTRUCTIBLE, INDESTRUCTIBLE };
-		AWall(Eo::AWall::WallType type,
+		Wall(Eo::Wall::WallType type,
 			irr::core::vector3df pos = irr::core::vector3df(
 				0, 0, 0));
-		~AWall() = default;
+		~Wall() = default;
 		void insertInScene(Eo::IScene *scene) override;
 		void removeFromScene(Eo::IScene *scene) override;
 		void updateInScene(Eo::IScene *scene) override;
@@ -28,4 +27,3 @@ namespace Eo {
 	};
 }
 
-#endif

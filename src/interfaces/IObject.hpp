@@ -16,12 +16,13 @@ namespace Eo {
 	class IObject {
 	public:
 		enum Type {
+			FLOOR,
 			WALL,
 			BOMB
 		};
 		virtual ~IObject() = default;
 		virtual Eo::IObject::Type getType() const = 0;
-		virtual irr::scene::IMeshSceneNode *getSceneNode() = 0;
+		virtual irr::scene::IMeshSceneNode *getSceneNode() const = 0;
 		virtual void setSceneNode(irr::scene::IMeshSceneNode *node) = 0;
 		virtual void insertInScene(Eo::IScene *scene) = 0;
 		virtual void removeFromScene(Eo::IScene *scene) = 0;

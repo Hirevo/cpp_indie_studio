@@ -10,10 +10,8 @@ cmake-build-release-mvcs/
 \.vs/
 \.idea/
 libs/
-
+.vscode
 bomberman
 cmake-build-debug-mcvs/
-
 cmake-build-release-mcvs/
-
 media/

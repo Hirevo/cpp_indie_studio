@@ -8,7 +8,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 include_directories(
         src/interfaces
         src/classes
-        src/abstract
+        src/abstracts
         src
         libs/irrlicht/include
 )
@@ -19,18 +19,18 @@ set(HEADER_FILES
         src/interfaces/IMap.hpp
         src/interfaces/INpc.hpp
         src/interfaces/IObject.hpp
-        src/abstract/ABomb.hpp
-        src/abstract/ACollectible.hpp
-        src/abstract/AGame.hpp
-        src/abstract/AMenu.hpp
-        src/abstract/AMonster.hpp
-        src/abstract/APlayer.hpp
-        src/abstract/AWall.hpp
+        src/abstracts/ABomb.hpp
+        src/abstracts/ACollectible.hpp
+        src/abstracts/AGame.hpp
+        src/abstracts/AMenu.hpp
+        src/abstracts/AMonster.hpp
+        src/abstracts/APlayer.hpp
         src/classes/Camera.hpp
         src/classes/Device.hpp
         src/classes/JsonRead.hpp
         src/classes/MapWall.hpp
         src/classes/Debug.hpp
+        src/classes/Wall.hpp
         src/classes/SceneHandler.hpp)
 
 add_executable(bomberman
@@ -39,21 +39,21 @@ add_executable(bomberman
         src/classes/Options.cpp
         src/classes/Keymap.cpp
         src/classes/Camera.cpp
-        src/abstract/AMenu.cpp
-        src/abstract/AGame.cpp
-        src/abstract/AComputer.cpp
-        src/abstract/AObject.cpp
-        src/abstract/AMovable.cpp
-        src/abstract/AMonster.cpp
-        src/abstract/AWall.cpp
-        src/abstract/ABomb.cpp
-        src/abstract/ACollectible.cpp
+        src/abstracts/AMenu.cpp
+        src/abstracts/AGame.cpp
+        src/abstracts/AComputer.cpp
+        src/abstracts/AObject.cpp
+        src/abstracts/AMovable.cpp
+        src/abstracts/AMonster.cpp
+        src/abstracts/ABomb.cpp
+        src/abstracts/ACollectible.cpp
         src/classes/Game.cpp
         src/classes/Device.cpp
         src/classes/Camera.cpp
         src/classes/JsonRead.cpp
-        src/abstract/APlayer.cpp
+        src/abstracts/APlayer.cpp
         src/classes/Debug.cpp
+        src/classes/Wall.cpp
         src/classes/SceneHandler.cpp
         ${HEADER_FILES})
 

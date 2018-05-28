@@ -18,7 +18,7 @@ Eo::IObject::Type Eo::AObject::getType() const
 	return _type;
 }
 
-irr::scene::IMeshSceneNode *Eo::AObject::getSceneNode()
+irr::scene::IMeshSceneNode *Eo::AObject::getSceneNode() const
 {
 	return _node;
 }

@@ -10,5 +10,6 @@
 
 int main() {
 	Eo::Core core;
-    return 0;
+
+	return 0;
 }

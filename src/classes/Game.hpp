@@ -19,12 +19,10 @@ namespace Eo {
 	class Game : public AGame {
 	public:
 		Game(Eo::Device &device);
+		virtual ~Game() = default;
 
-		void addMapBlock(
-			irr::f32 unitSize, const irr::core::vector3df &pos);
-		void addMapFloor();
-		void addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z);
 		irr::scene::ISceneManager *getSceneManager() const override;
+		irr::scene::ICameraSceneNode *getCamera() const override;
 	};
 }
 #endif

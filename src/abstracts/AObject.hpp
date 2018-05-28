@@ -16,7 +16,7 @@ namespace Eo {
 			irr::scene::IMeshSceneNode *node = 0);
 		~AObject() = default;
 		Eo::IObject::Type getType() const override;
-		irr::scene::IMeshSceneNode *getSceneNode() override;
+		irr::scene::IMeshSceneNode *getSceneNode() const override;
 		void setSceneNode(irr::scene::IMeshSceneNode *node) override;
 		void insertInScene(Eo::IScene *scene) override;
 		void removeFromScene(Eo::IScene *scene) override;
