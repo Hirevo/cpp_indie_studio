@@ -9,6 +9,7 @@
 	#define BOMBERMAN_AGAME_HPP
 
 #include <Device.hpp>
+#include <string>
 #include "IScene.hpp"
 
 namespace Eo {
@@ -17,7 +18,6 @@ namespace Eo {
 		explicit AGame(Eo::Device &_device);
 		~AGame();
 		irr::scene::ISceneManager *getSceneManager() const override;
-
 	protected:
 		Eo::Device &_device;
 		irr::scene::ISceneManager *_sceneManager;

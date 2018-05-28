@@ -27,6 +27,7 @@ set(HEADER_FILES
         src/abstracts/APlayer.hpp
         src/classes/Camera.hpp
         src/classes/Device.hpp
+        src/classes/Map.cpp
         src/classes/JsonRead.hpp
         src/classes/MapWall.hpp
         src/classes/Debug.hpp

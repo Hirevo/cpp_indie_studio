@@ -23,5 +23,6 @@ namespace Eo {
 		size_t _w;
 		size_t _h;
 		std::vector<Eo::IObject *> _map;
+		void generateMap(const std::string &mapPath);
 	};
 }
