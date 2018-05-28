@@ -21,7 +21,6 @@ Eo::Core::Core() :
 	_debugMode(false)
 {
 	_device.get_device()->getCursorControl()->setVisible(false);
-
 	_debugMode = true;
 	irr::video::SColor color(255, 255, 2, 255);
 	while (_device.get_device()->run()) {
