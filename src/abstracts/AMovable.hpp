@@ -10,7 +10,7 @@
 #include "interfaces/IMovable.hpp"
 
 namespace Eo {
-	class AMovable : public IMovable {
+	class AMovable : public virtual IMovable {
 	public:
 		AMovable(irr::core::vector3df pos = irr::core::vector3df(
 				0, 0, 0));

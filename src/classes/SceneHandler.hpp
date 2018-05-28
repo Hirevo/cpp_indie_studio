@@ -19,6 +19,7 @@ namespace Eo {
 		Eo::IScene *getCurrentScene() const;
 		bool addScene(Eo::IScene *scene);
 		bool endCurrentScene();
+
 	private:
 		std::stack<Eo::IScene *> _scenes;
 	};

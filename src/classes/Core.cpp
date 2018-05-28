@@ -6,6 +6,7 @@
 */
 
 #include "Core.hpp"
+#include "Game.hpp"
 #include "JsonRead.hpp"
 #include "Wall.hpp"
 #include <iostream>
@@ -23,12 +24,12 @@ Eo::Core::~Core()
 Eo::Core::Core()
 	: _options(),
 	  _device(_options),
-	  _sceneHandler(_device),
-	  _camera(_sceneHandler.getCurrentScene()),
-	  _debugMode(false)
+	  _sceneHandler(_device)
 {
-	while (_device.getDevice()->run()) {
+	_sceneHandler.addScene(new Eo::Game(_device, "../map2.json"));
 
+	while (_device.getDevice()->run()) {
+		_device.getDriver()->beginScene();
 		_sceneHandler.getCurrentScene()->getSceneManager()->drawAll();
 		_device.getDriver()->endScene();
 	}

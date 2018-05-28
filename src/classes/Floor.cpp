@@ -8,7 +8,7 @@
 #include "Floor.hpp"
 
 Eo::Floor::Floor(size_t size, irr::core::vector3df pos)
-	: AObject(Eo::IObject::FLOOR), AMovable(pos), _size(size)
+	: AObject(Eo::IObject::FLOOR), _size(size)
 {
 }
 
@@ -23,6 +23,7 @@ void Eo::Floor::insertInScene(Eo::IScene *scene)
 		irr::core::dimension2df(_size, _size));
 	_node = manager->addMeshSceneNode(mesh);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	Eo::Floor::updateInScene(scene);
 	_hasPositionChanged = false;
 	_placedInScene = true;
 }

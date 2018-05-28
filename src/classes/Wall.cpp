@@ -8,7 +8,7 @@
 #include "Wall.hpp"
 
 Eo::Wall::Wall(Eo::Wall::WallType wallType, irr::core::vector3df pos)
-	: AObject(Eo::IObject::WALL), AMovable(pos), _wallType(wallType)
+	: AObject(Eo::IObject::WALL), _wallType(wallType)
 {
 }
 
@@ -21,6 +21,7 @@ void Eo::Wall::insertInScene(Eo::IScene *scene)
 		return;
 	_node = manager->addCubeSceneNode(unitSize, nullptr, -1, _pos);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	Eo::Wall::updateInScene(scene);
 	_hasPositionChanged = false;
 	_placedInScene = true;
 }

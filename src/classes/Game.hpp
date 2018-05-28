@@ -14,7 +14,7 @@
 #include "Camera.hpp"
 #include "IScene.hpp"
 #include "irrlicht.h"
-#include <AGame.hpp>
+#include "AGame.hpp"
 #include <memory>
 #include <stack>
 

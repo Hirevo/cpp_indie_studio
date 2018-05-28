@@ -7,24 +7,28 @@
 
 #pragma once
 
-#include "interfaces/IObject.hpp"
+#include "AMovable.hpp"
+#include "IObject.hpp"
 
 namespace Eo {
-	class AObject : public IObject {
+	class AObject : public IObject, public AMovable {
 	public:
-		AObject(Eo::IObject::Type type = WALL,
-			irr::scene::IMeshSceneNode *node = 0);
+		AObject(Eo::IObject::Type type,
+			irr::scene::ISceneNode *node = nullptr,
+			irr::core::vector3df pos = irr::core::vector3df(
+				0, 0, 0));
 		~AObject() = default;
 		Eo::IObject::Type getType() const override;
-		irr::scene::IMeshSceneNode *getSceneNode() const override;
-		void setSceneNode(irr::scene::IMeshSceneNode *node) override;
+		irr::scene::ISceneNode *getSceneNode() const override;
+		void setSceneNode(irr::scene::ISceneNode *node) override;
 		void insertInScene(Eo::IScene *scene) override;
 		void removeFromScene(Eo::IScene *scene) override;
 		void updateInScene(Eo::IScene *scene) override;
 
 	protected:
 		Eo::IObject::Type _type;
-		irr::scene::IMeshSceneNode *_node;
+		irr::scene::ISceneNode *_node;
+		bool _isInstanciated;
 		bool _placedInScene;
 
 	private:

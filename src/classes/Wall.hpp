@@ -11,7 +11,7 @@
 #include "AObject.hpp"
 
 namespace Eo {
-	class Wall : public AObject, public AMovable {
+	class Wall : public AObject {
 	public:
 		enum WallType { DESTRUCTIBLE, INDESTRUCTIBLE };
 		Wall(Eo::Wall::WallType type,

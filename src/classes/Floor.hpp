@@ -11,7 +11,7 @@
 #include "AObject.hpp"
 
 namespace Eo {
-	class Floor : public AObject, public AMovable {
+	class Floor : public AObject {
 	public:
 		Floor(size_t size,
 			irr::core::vector3df pos = irr::core::vector3df(

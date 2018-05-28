@@ -5,11 +5,12 @@
 ** AObject
 */
 
-#include <stdexcept>
 #include "AObject.hpp"
+#include <stdexcept>
 
-Eo::AObject::AObject(Eo::IObject::Type type, irr::scene::IMeshSceneNode *node)
-	: _type(type), _node(node), _placedInScene(false)
+Eo::AObject::AObject(Eo::IObject::Type type, irr::scene::ISceneNode *node, irr::core::vector3df pos)
+	: AMovable(pos), _type(type), _node(node), _placedInScene(false),
+	  _isInstanciated(node != nullptr)
 {
 }
 
@@ -18,12 +19,12 @@ Eo::IObject::Type Eo::AObject::getType() const
 	return _type;
 }
 
-irr::scene::IMeshSceneNode *Eo::AObject::getSceneNode() const
+irr::scene::ISceneNode *Eo::AObject::getSceneNode() const
 {
 	return _node;
 }
 
-void Eo::AObject::setSceneNode(irr::scene::IMeshSceneNode *node)
+void Eo::AObject::setSceneNode(irr::scene::ISceneNode *node)
 {
 	_node = node;
 }

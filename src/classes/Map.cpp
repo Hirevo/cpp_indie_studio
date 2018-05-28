@@ -5,18 +5,43 @@
 ** Map
 */
 
-#include <Wall.hpp>
 #include "Map.hpp"
 #include "JsonRead.hpp"
+#include "Wall.hpp"
 
-Eo::Map::Map(size_t w, size_t h)
-	: _w(w),
-	  _h(h)
+Eo::Map::Map(size_t w, size_t h) : _w(w), _h(h)
 {
 	_map.reserve(w * h);
 	for (size_t i = 0; i < w; i++)
 		for (size_t j = 0; j < w; j++)
-			_map.push_back(static_cast<Eo::IObject *>(0));
+			_map.push_back(nullptr);
+}
+
+Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
+{
+	auto matrix = json.readMatrix("map");
+
+	_w = matrix.size();
+	_h = matrix.at(0).size();
+	_map.reserve(_w * _h);
+	for (size_t i = 0; i < _h; i++)
+		for (size_t j = 0; j < _w; j++) {
+			auto isWall = i == 0 || j == 0;
+			isWall |= i == (_w - 1) || j == (_h - 1);
+			_map.push_back(isWall ?
+					new Wall(Eo::Wall::INDESTRUCTIBLE) :
+					nullptr);
+		}
+}
+
+size_t Eo::Map::getWidth() const
+{
+	return _w;
+}
+
+size_t Eo::Map::getHeight() const
+{
+	return _h;
 }
 
 Eo::IObject *Eo::Map::getObject(size_t x, size_t y)
@@ -38,15 +63,15 @@ std::vector<Eo::IObject *> &Eo::Map::getObjects()
 void Eo::Map::generateMap(const std::string &mapPath)
 {
 	auto json = Eo::JsonRead(mapPath);
-	size_t width = json.readMatrix("map").size();
-	size_t height = json.readMatrix("map").at(0).size();
+	_w = json.readMatrix("map").size();
+	_h = json.readMatrix("map").at(0).size();
 
-	for (size_t l = 0; l < height; ++l) {
+	for (size_t l = 0; l < _h; ++l) {
 		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), 0, l);
-		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), height, l);
+		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), _h, l);
 	}
-	for (size_t l = 1; l < width - 1; ++l) {
+	for (size_t l = 1; l < _w - 1; ++l) {
 		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), 0, 1);
-		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), l, height - 1);
+		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), l, _h - 1);
 	}
 }
