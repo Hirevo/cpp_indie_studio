@@ -14,11 +14,11 @@
 namespace Eo {
 	class Debug {
 	public:
-		Debug(Eo::Device &device, Eo::Game &scene);
+		Debug(Eo::Device &device, Eo::IScene *scene);
 		virtual ~Debug();
 	private:
 		Eo::Device _device;
-		Eo::Game _scene;
+		Eo::IScene *_scene;
 		bool _cameraPosTitleWindow = true;
 		void dumpCameraPosTitleWindow();
 	public:

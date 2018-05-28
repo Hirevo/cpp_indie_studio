@@ -15,12 +15,12 @@
 namespace Eo {
 	class Camera {
 	public:
-		Camera(Eo::Game &scene);
+		Camera(Eo::IScene *scene);
 		~Camera() = default;
 
 	private:
 		irr::SKeyMap _keyMap[5];
-		Eo::Game &_scene;
+		Eo::IScene *_scene;
 		irr::scene::ICameraSceneNode *_camera;
 	};
 

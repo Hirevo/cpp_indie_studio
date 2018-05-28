@@ -7,10 +7,8 @@
 
 #include "Game.hpp"
 
-Eo::Game::Game(Eo::Device &device)
-	: _device(device)
+Eo::Game::Game(Eo::Device &device) : AGame(device)
 {
-	_sceneManager = _device.get_device()->getSceneManager();
 }
 
 /*
@@ -55,10 +53,5 @@ void Eo::Game::addMapBlock(irr::f32 x, irr::f32 y, irr::f32 z)
 	cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	cube->setMaterialTexture(0,
 		_device.get_driver()->getTexture("../assets/img/oui.jpg"));
-}
-
-irr::scene::ISceneManager *Eo::Game::get_sceneManager() const
-{
-	return _sceneManager;
 }
 

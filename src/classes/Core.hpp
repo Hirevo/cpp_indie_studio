@@ -16,6 +16,7 @@
 #include "Game.hpp"
 #include "Device.hpp"
 #include "Debug.hpp"
+#include "SceneHandler.hpp"
 
 namespace Eo {
 	class Core {
@@ -25,7 +26,7 @@ namespace Eo {
 	private:
 		Eo::Options _options;
 		Eo::Device _device;
-		Eo::Game _scene;
+		Eo::SceneHandler _sceneHandler;
 		Eo::Camera _camera;
 		Eo::Debug _debug;
 		bool _debugMode;

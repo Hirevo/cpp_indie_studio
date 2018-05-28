@@ -6,12 +6,16 @@
 */
 
 #ifndef BOMBERMAN_ISCENE_HPP
-#define BOMBERMAN_ISCENE_HPP
+	#define BOMBERMAN_ISCENE_HPP
+
+	#include "irrlicht.h"
 
 namespace Eo {
 	class IScene {
-	private:
 	public:
+		virtual ~IScene() = default;
+		virtual irr::scene::ISceneManager *get_sceneManager() const = 0;
+	private:
 	};
 }
 

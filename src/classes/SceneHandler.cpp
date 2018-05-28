@@ -6,30 +6,50 @@
 */
 
 #include "SceneHandler.hpp"
+#include "Game.hpp"
 
-SceneHandler::SceneHandler(Eo::IScene *scene)
+Eo::SceneHandler::SceneHandler(Eo::Device &device)
 {
+	auto scene = new Eo::Game(device);
+	scene->addMapBlock(0, 5, 20);
+	scene->addMapBlock(0, 5, 30);
+	scene->addMapBlock(0, 5, 40);
+	scene->addMapBlock(0, 5, 50);
+	scene->addMapBlock(0, 5, 60);
+	scene->addMapBlock(10, 5, 40);
+	scene->addMapBlock(-10, 5, 40);
+	scene->addMapBlock(20, 5, 40);
+	scene->addMapBlock(-20, 5, 40);
+	scene->addMapBlock(-20, 5, 50);
+	scene->addMapBlock(-20, 5, 60);
+	scene->addMapBlock(20, 5, 30);
+	scene->addMapBlock(20, 5, 20);
+	scene->addMapBlock(-10, 5, 20);
+	scene->addMapBlock(-20, 5, 20);
+	scene->addMapBlock(10, 5, 60);
+	scene->addMapBlock(20, 5, 60);
+	scene->addMapFloor();
 	this->addScene(scene);
 }
 
-SceneHandler::~SceneHandler()
+Eo::SceneHandler::~SceneHandler()
 {
 	while (!this->scenes.empty())
 		this->scenes.pop();
 }
 
-Eo::IScene *SceneHandler::getCurrentScene()
+Eo::IScene *Eo::SceneHandler::getCurrentScene()
 {
 	return this->scenes.top();
 }
 
-bool SceneHandler::addScene(Eo::IScene *scene)
+bool Eo::SceneHandler::addScene(Eo::IScene *scene)
 {
 	this->scenes.push(scene);
 	return true;
 }
 
-bool SceneHandler::endCurrentScene()
+bool Eo::SceneHandler::endCurrentScene()
 {
 	this->scenes.pop();
 	return true;

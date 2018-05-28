@@ -7,8 +7,7 @@
 
 #include "Camera.hpp"
 
-Eo::Camera::Camera(Eo::Game &scene) :
-	_scene(scene)
+Eo::Camera::Camera(Eo::IScene *scene) : _scene(scene)
 {
 	_keyMap[0].Action = irr::EKA_MOVE_FORWARD;
 	_keyMap[0].KeyCode = irr::KEY_KEY_Z;
@@ -20,12 +19,12 @@ Eo::Camera::Camera(Eo::Game &scene) :
 	_keyMap[3].KeyCode = irr::KEY_KEY_D;
 	_keyMap[4].Action = irr::EKA_JUMP_UP;
 	_keyMap[4].KeyCode = irr::KEY_SPACE;
-	_camera = _scene.get_sceneManager()->addCameraSceneNodeFPS(
+	_camera = _scene->get_sceneManager()->addCameraSceneNodeFPS(
 		nullptr, 100.0f, 0.1f, -1, _keyMap, 5);
 	irr::core::vector3df pos;
 	pos.X = 0;
 	pos.Y = 50;
 	pos.Z = 0;
 	_camera->setPosition(pos);
-	_scene.get_sceneManager()->setActiveCamera(_camera);
+	_scene->get_sceneManager()->setActiveCamera(_camera);
 }
