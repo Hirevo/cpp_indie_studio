@@ -28,7 +28,9 @@ set(HEADER_FILES
         src/classes/Camera.hpp
         src/classes/Device.hpp
         src/classes/JsonRead.hpp
-        src/classes/Debug.cpp src/classes/Debug.hpp)
+        src/classes/MapWall.hpp
+        src/classes/Debug.hpp
+        src/classes/SceneHandler.hpp)
 
 add_executable(bomberman
         src/main.cpp
@@ -48,6 +50,8 @@ add_executable(bomberman
         src/classes/Camera.cpp
         src/classes/JsonRead.cpp
         src/abstract/APlayer.cpp
+        src/classes/Debug.cpp
+        src/classes/SceneHandler.cpp
         ${HEADER_FILES})
 
 set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)
