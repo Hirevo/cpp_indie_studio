@@ -16,7 +16,7 @@ Eo::Core::~Core()
 
 static void sampleScene(Eo::SceneHandler *sceneHandler, Eo::Device *device)
 {
-	auto scene = new Eo::Game(*device);
+	auto scene = new Eo::Game(*device, "../map.json");
 	sceneHandler->addScene(scene);
 }
 

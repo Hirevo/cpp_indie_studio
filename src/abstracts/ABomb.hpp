@@ -15,9 +15,9 @@ namespace Eo {
 	public:
 		ABomb();
 		~ABomb() = default;
-		Eo::IObject::Type getType() const override;
-		irr::scene::IMeshSceneNode *getSceneNode() override;
-		void setSceneNode(irr::scene::IMeshSceneNode *node) override;
+//		o::IObject::Type getType() const override;
+//		irr::scene::IMeshSceneNode *getSceneNode() override;
+//		void setSceneNode(irr::scene::IMeshSceneNode *node) override;
 
 	private:
 		

@@ -5,7 +5,7 @@
 ** Map
 */
 
-#include <AWall.hpp>
+#include <Wall.hpp>
 #include "Map.hpp"
 #include "JsonRead.hpp"
 
@@ -42,11 +42,11 @@ void Eo::Map::generateMap(const std::string &mapPath)
 	size_t height = json.readMatrix("map").at(0).size();
 
 	for (size_t l = 0; l < height; ++l) {
-		putObject(new AWall(Eo::AWall::INDESTRUCTIBLE), 0, l);
-		putObject(new AWall(Eo::AWall::INDESTRUCTIBLE), height, l);
+		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), 0, l);
+		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), height, l);
 	}
 	for (size_t l = 1; l < width - 1; ++l) {
-		putObject(new AWall(Eo::AWall::INDESTRUCTIBLE), 0, 1);
-		putObject(new AWall(Eo::AWall::INDESTRUCTIBLE), l, height - 1);
+		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), 0, 1);
+		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), l, height - 1);
 	}
 }

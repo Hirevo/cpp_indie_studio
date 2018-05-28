@@ -6,3 +6,7 @@
 */
 
 #include "ABomb.hpp"
+
+Eo::ABomb::ABomb()
+{
+}

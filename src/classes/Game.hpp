@@ -16,6 +16,7 @@
 #include <AGame.hpp>
 #include <memory>
 #include <stack>
+
 namespace Eo {
 	class Game : public AGame {
 	public:
