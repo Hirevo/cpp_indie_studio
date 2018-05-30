@@ -15,6 +15,7 @@ Eo::Floor::Floor(size_t size, irr::core::vector3df pos)
 void Eo::Floor::insertInScene(Eo::IScene *scene)
 {
 	auto manager = scene->getSceneManager();
+	auto texture = scene->getSceneManager()->getVideoDriver()->getTexture("../assets/img/damier.jpg");
 	irr::f32 unitSize = 10.0f;
 
 	if (_placedInScene == true)
@@ -24,6 +25,7 @@ void Eo::Floor::insertInScene(Eo::IScene *scene)
 	_node = manager->addMeshSceneNode(mesh);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	Eo::Floor::updateInScene(scene);
+	_node->setMaterialTexture(0,texture);
 	_hasPositionChanged = false;
 	_placedInScene = true;
 }

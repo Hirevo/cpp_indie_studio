@@ -8,6 +8,7 @@
 #include "Map.hpp"
 #include "JsonRead.hpp"
 #include "Wall.hpp"
+#include "Floor.hpp"
 
 Eo::Map::Map(size_t w, size_t h) : _w(w), _h(h)
 {
@@ -30,6 +31,7 @@ Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
 		[]{ return new Wall(Eo::Wall::WallType::INDESTRUCTIBLE); }
 	};
 
+	Eo::Floor floor(200);
 	_w = matrix.size();
 	_h = matrix.at(0).size();
 	_map.reserve(_w * _h);

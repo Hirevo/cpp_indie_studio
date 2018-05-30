@@ -5,4 +5,9 @@
 ** Created by Benjamin
 */
 
-#include "AComputer.hpp"
+#include "Computer.hpp"
+
+Eo::Computer::Computer()
+{
+
+}
