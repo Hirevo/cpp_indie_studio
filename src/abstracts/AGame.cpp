@@ -7,7 +7,8 @@
 
 #include "AGame.hpp"
 
-Eo::AGame::AGame(Eo::Device &device) : _device(device), _sceneManager(_device.getDevice()->getSceneManager())
+Eo::AGame::AGame(Eo::Device &device) : _device(device),
+	_sceneManager(_device.getDevice()->getSceneManager())
 {
 }
 

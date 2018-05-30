@@ -10,6 +10,7 @@
 #include "JsonRead.hpp"
 #include "Wall.hpp"
 #include <iostream>
+#include <menu/MainMenu.hpp>
 
 Eo::Core::~Core()
 {
@@ -27,10 +28,12 @@ Eo::Core::Core()
 	  _sceneHandler(_device)
 {
 	_sceneHandler.addScene(new Eo::Game(_device, "../map2.json"));
+	_sceneHandler.addScene(new Eo::MainMenu(_device));
 
 	while (_device.getDevice()->run()) {
 		_device.getDriver()->beginScene();
 		_sceneHandler.getCurrentScene()->getSceneManager()->drawAll();
+		_device.getDevice()->getGUIEnvironment()->drawAll();
 		_device.getDriver()->endScene();
 	}
 	_device.getDevice()->drop();

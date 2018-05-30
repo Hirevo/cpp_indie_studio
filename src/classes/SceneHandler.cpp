@@ -20,7 +20,7 @@ Eo::SceneHandler::~SceneHandler()
 
 Eo::IScene *Eo::SceneHandler::getCurrentScene() const
 {
-	return _scenes.size() ? _scenes.top() : 0;
+	return !_scenes.empty() ? _scenes.top() : nullptr;
 }
 
 bool Eo::SceneHandler::addScene(Eo::IScene *scene)

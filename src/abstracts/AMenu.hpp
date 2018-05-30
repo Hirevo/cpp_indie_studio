@@ -6,14 +6,21 @@
 */
 
 #ifndef BOMBERMAN_AMENU_HPP
-#define BOMBERMAN_AMENU_HPP
+	#define BOMBERMAN_AMENU_HPP
 
-#include "IScene.hpp"
+	#include <Device.hpp>
+	#include "IScene.hpp"
 
 namespace Eo {
 	class AMenu : public IScene {
 	public:
-	private:
+		explicit AMenu(Eo::Device &_device);
+		~AMenu();
+		irr::scene::ISceneManager *getSceneManager() const override;
+		irr::scene::ICameraSceneNode *getCamera() const override;
+	protected:
+		Eo::Device &_device;
+		irr::scene::ISceneManager *_sceneManager;
 	};
 };
 

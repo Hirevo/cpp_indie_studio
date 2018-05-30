@@ -19,6 +19,7 @@ namespace Eo {
 		irr::IrrlichtDevice* _device;
 		Eo::Options _options;
 		irr::video::IVideoDriver *_driver;
+		irr::gui::IGUIEnvironment *_env;
 	public:
 		irr::IrrlichtDevice *getDevice() const;
 		irr::video::IVideoDriver *getDriver() const;

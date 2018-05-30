@@ -30,8 +30,6 @@ namespace Eo {
 		Eo::Camera _camera;
 		bool _debugMode;
 	};
-
-
 }
 
 #endif

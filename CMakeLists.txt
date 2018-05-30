@@ -34,7 +34,7 @@ set(HEADER_FILES
         src/classes/Debug.hpp
         src/classes/Wall.hpp
         src/classes/SceneHandler.hpp
-        src/classes/Game.hpp)
+        src/classes/Game.hpp src/classes/menu/MainMenu.cpp src/classes/menu/MainMenu.hpp)
 
 add_executable(bomberman
         src/main.cpp
