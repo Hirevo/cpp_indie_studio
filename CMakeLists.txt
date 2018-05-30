@@ -3,7 +3,6 @@ project(bomberman)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 set(CMAKE_CXX_STANDARD 11)
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 include_directories(
@@ -44,7 +43,7 @@ add_executable(bomberman
         src/classes/Camera.cpp
         src/abstracts/AMenu.cpp
         src/abstracts/AGame.cpp
-        src/abstracts/AComputer.cpp
+        src/classes/Computer.cpp
         src/abstracts/AObject.cpp
         src/abstracts/AMovable.cpp
         src/abstracts/AMonster.cpp
@@ -58,6 +57,7 @@ add_executable(bomberman
         src/classes/Debug.cpp
         src/classes/Wall.cpp
         src/classes/SceneHandler.cpp
+        src/classes/Floor.cpp
         ${HEADER_FILES})
 
 set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)

@@ -23,7 +23,6 @@ namespace Eo {
 	public:
 		Game(Eo::Device &device, const std::string &mapPath);
 		~Game();
-		//irr::scene::ISceneManager *getSceneManager() const override;
 		irr::scene::ICameraSceneNode *getCamera() const override;
 
 	private:

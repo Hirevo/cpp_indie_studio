@@ -11,8 +11,9 @@
 #include "INpc.hpp"
 
 namespace Eo {
-	class AComputer : INpc {
+	class Computer : INpc {
 	public:
+		Computer();
 	private:
 	};
 }
