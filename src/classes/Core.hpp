@@ -17,6 +17,7 @@
 #include "Device.hpp"
 #include "Debug.hpp"
 #include "SceneHandler.hpp"
+#include "Event.hpp"
 
 namespace Eo {
 	class Core {
@@ -27,8 +28,8 @@ namespace Eo {
 		Eo::Options _options;
 		Eo::Device _device;
 		Eo::SceneHandler _sceneHandler;
-		Eo::Camera _camera;
-		bool _debugMode;
+		Eo::Event _event;
+		bool _debugMode = true;
 	};
 }
 

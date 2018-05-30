@@ -16,7 +16,7 @@ void Eo::Camera::insertInScene(Eo::IScene *scene)
 {
 	if (_placedInScene)
 		return;
-	if (_isInstanciated == false) {
+	if (!_isInstanciated) {
 		_keyMap[0].Action = irr::EKA_MOVE_FORWARD;
 		_keyMap[0].KeyCode = irr::KEY_KEY_Z;
 		_keyMap[1].Action = irr::EKA_MOVE_BACKWARD;
