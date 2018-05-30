@@ -23,7 +23,8 @@ Eo::Game::Game(Eo::Device &device, const std::string &mapPath)
 				obj->setPosition((j - (wth / 2)) * 10, 0,
 					(i - (hgt / 2)) * 10);
 				obj->insertInScene(this);
-				obj->getSceneNode()->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
+				obj->getSceneNode()->setMaterialFlag(
+					irr::video::EMF_WIREFRAME, true);
 			}
 		}
 }

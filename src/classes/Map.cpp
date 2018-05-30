@@ -11,18 +11,6 @@
 
 Eo::Map::Map(size_t w, size_t h) : _w(w), _h(h)
 {
-	_map.reserve(w * h);
-	for (size_t i = 0; i < w; i++)
-		for (size_t j = 0; j < w; j++)
-			_map.push_back(nullptr);
-}
-
-Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
-{
-	auto matrix = json.readMatrix("map");
-
-	_w = matrix.size();
-	_h = matrix.at(0).size();
 	_map.reserve(_w * _h);
 	for (size_t i = 0; i < _h; i++)
 		for (size_t j = 0; j < _w; j++) {
@@ -32,6 +20,22 @@ Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
 					new Wall(Eo::Wall::INDESTRUCTIBLE) :
 					nullptr);
 		}
+}
+
+Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
+{
+	auto matrix = json.readMatrix("map");
+	const std::vector<std::function<IObject *(void)>> v = {
+		[]{ return nullptr; },
+		[]{ return new Wall(Eo::Wall::WallType::INDESTRUCTIBLE); }
+	};
+
+	_w = matrix.size();
+	_h = matrix.at(0).size();
+	_map.reserve(_w * _h);
+	for (size_t i = 0; i < _h; i++)
+		for (size_t j = 0; j < _w; j++)
+			_map.push_back(v.at(matrix.at(i).at(j))());
 }
 
 size_t Eo::Map::getWidth() const
