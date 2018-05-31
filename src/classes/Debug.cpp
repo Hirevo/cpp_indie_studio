@@ -26,14 +26,16 @@ void Eo::Debug::dumpCameraPosTitleWindow()
 	if (_cameraPosTitleWindow) {
 		irr::core::vector3df posCam;
 		wchar_t titre[150];
-		posCam = _scene->getSceneManager()
-				 ->getActiveCamera()
-				 ->getPosition();
-		swprintf(titre, 150,
-			L"GET THE CAMERA >> FPS : %d (mode debug) |  PosCam :  "
-			"X : %f Y : %f Z : %f",
-			_device.getDriver()->getFPS(), posCam.X, posCam.Y,
-			posCam.Z);
+		auto camera = _scene->getSceneManager()->getActiveCamera();
+		if (camera != nullptr) {
+			posCam = camera->getPosition();
+			swprintf(titre, 150, L"GET THE CAMERA >> FPS : %d"
+					     "(mode debug) |  PosCam :  X :"
+					     "%f Y : %f Z : %f",
+				_device.getDriver()->getFPS(), posCam.X,
+				posCam.Y,
+				posCam.Z);
+		}
 		_device.getDevice()->setWindowCaption(titre);
 	}
 }

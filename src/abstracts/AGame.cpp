@@ -21,3 +21,9 @@ irr::scene::ISceneManager *Eo::AGame::getSceneManager() const
 {
 	return _sceneManager;
 }
+
+bool Eo::AGame::clean() const
+{
+	this->_sceneManager->clear();
+	return false;
+}
