@@ -29,7 +29,12 @@ void Eo::AObject::setSceneNode(irr::scene::ISceneNode *node)
 	_node = node;
 }
 
-void Eo::AObject::insertInScene(Eo::IScene *scene)
+void Eo::AObject::insertFPSInScene(Eo::IScene *scene)
+{
+	throw std::runtime_error("Method non implemented");
+}
+
+void Eo::AObject::insertStaticInScene(Eo::IScene *scene)
 {
 	throw std::runtime_error("Method non implemented");
 }
@@ -43,3 +48,4 @@ void Eo::AObject::updateInScene(Eo::IScene *scene)
 {
 	throw std::runtime_error("Method non implemented");
 }
+

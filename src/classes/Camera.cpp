@@ -13,7 +13,7 @@ Eo::Camera::Camera(irr::core::vector3df pos)
 {
 }
 
-void Eo::Camera::insertInScene(Eo::IScene *scene)
+void Eo::Camera::insertFPSInScene(Eo::IScene *scene)
 {
 	if (_placedInScene)
 		return;
@@ -30,6 +30,25 @@ void Eo::Camera::insertInScene(Eo::IScene *scene)
 		_keyMap[4].KeyCode = irr::KEY_SPACE;
 		_camera = scene->getSceneManager()->addCameraSceneNodeFPS(
 			nullptr, 200.0f, 0.1f, -1, _keyMap, 5);
+		_node = _camera;
+		_isInstanciated = true;
+	}
+	else
+		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
+	Eo::Camera::updateInScene(scene);
+	_placedInScene = true;
+}
+
+void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
+{
+	irr::core::vector3df position(0, 80, -80);
+	irr::core::vector3df lookat = irr::core::vector3df(0, 0, 100);
+
+	if (_placedInScene)
+		return;
+	if (!_isInstanciated) {
+		_camera = scene->getSceneManager()->addCameraSceneNode(
+			nullptr,position,lookat);
 		_node = _camera;
 		_isInstanciated = true;
 	}
@@ -57,3 +76,4 @@ irr::scene::ICameraSceneNode *Eo::Camera::getCameraHandle() const
 {
 	return _camera;
 }
+

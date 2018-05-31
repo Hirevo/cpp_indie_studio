@@ -12,7 +12,7 @@ Eo::Wall::Wall(Eo::Wall::WallType wallType, irr::core::vector3df pos)
 {
 }
 
-void Eo::Wall::insertInScene(Eo::IScene *scene)
+void Eo::Wall::insertFPSInScene(Eo::IScene *scene)
 {
 	auto manager = scene->getSceneManager();
 	irr::f32 unitSize = 10.0f;
