@@ -12,7 +12,7 @@
 namespace Eo {
 	class MainMenu : public AScene {
 	public:
-		explicit MainMenu(Eo::Device &_device);
+		MainMenu(Eo::Device &_device);
 		~MainMenu() override;
 
 		enum ButtonType {

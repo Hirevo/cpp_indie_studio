@@ -16,6 +16,6 @@ namespace Eo {
 		virtual ~IScene() = default;
 		virtual irr::scene::ISceneManager *getSceneManager() const = 0;
 		virtual irr::scene::ICameraSceneNode *getCamera() const = 0;
-		virtual bool clean() const = 0;
+		// virtual bool clean() const = 0;
 	};
 }

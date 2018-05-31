@@ -22,7 +22,7 @@ namespace Eo {
 	private:
 		Eo::Options &_options;
 		Eo::Device &_device;
-		void keyExit();
+		void keyExit(const irr::SEvent &event);
 		void keyDebugToggle(const irr::SEvent &event);
 	};
 }
