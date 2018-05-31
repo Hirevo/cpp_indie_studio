@@ -29,3 +29,8 @@ void Eo::Device::setDeviceTitle(const wchar_t *title)
 {
 	this->getDevice()->setWindowCaption(title);
 }
+
+const Eo::Options &Eo::Device::getOptions() const
+{
+	return _options;
+}

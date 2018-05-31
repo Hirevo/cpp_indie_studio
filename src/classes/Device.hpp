@@ -25,6 +25,7 @@ namespace Eo {
 		irr::IrrlichtDevice *getDevice() const;
 		irr::video::IVideoDriver *getDriver() const;
 		void setDeviceTitle(const wchar_t *title);
+		const Options &getOptions() const;
 	};
 }
 
