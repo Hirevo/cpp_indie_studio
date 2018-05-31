@@ -11,6 +11,7 @@
 Eo::Options::Options()
 	: _windowSize(1680, 1250),
 	  _exit(false),
+	  _debugMode(false),
 	  _keyExit(irr::EKEY_CODE::KEY_KEY_K),
 	  _keyDebugMode(irr::EKEY_CODE::KEY_F12)
 {
@@ -56,4 +57,14 @@ void Eo::Options::setExit(bool _exit)
 void Eo::Options::setKeyDebugMode(irr::EKEY_CODE _keyDebugMode)
 {
 	Options::_keyDebugMode = _keyDebugMode;
+}
+
+bool Eo::Options::isDebugMode() const
+{
+	return _debugMode;
+}
+
+void Eo::Options::setDebugMode(bool _debugMode)
+{
+	Options::_debugMode = _debugMode;
 }

@@ -17,6 +17,7 @@ namespace Eo {
 	private:
 		irr::core::dimension2d<irr::u32> _windowSize;
 		bool _exit;
+		bool _debugMode;
 		irr::EKEY_CODE _keyExit;
 		irr::EKEY_CODE _keyDebugMode;
 	public:
@@ -30,6 +31,8 @@ namespace Eo {
 		void setKeyExit(irr::EKEY_CODE _keyExit);
 		irr::EKEY_CODE getKeyDebugMode() const;
 		void setKeyDebugMode(irr::EKEY_CODE _keyDebugMode);
+		bool isDebugMode() const;
+		void setDebugMode(bool _debugMode);
 	};
 }
 

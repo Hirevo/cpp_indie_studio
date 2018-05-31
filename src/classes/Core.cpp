@@ -30,6 +30,7 @@ Eo::Core::Core()
 	_sceneHandler.addScene(new Eo::MainMenu(_device));
 
 	while (_device.getDevice()->run() && !_options.isExit()) {
+		std::cout << "On as: " << _options.isExit() << std::endl;
 		if(_debugMode)
 			debug.dumpDebug();
 		_device.getDriver()->beginScene();

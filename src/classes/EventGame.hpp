@@ -19,7 +19,7 @@ namespace Eo {
 		EventGame(Eo::Options &);
 		virtual bool OnEvent(const irr::SEvent &event);
 	private:
-		Eo::Options _options;
+		Eo::Options &_options;
 	};
 }
 #endif

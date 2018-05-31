@@ -21,7 +21,10 @@ bool Eo::EventGame::OnEvent(const irr::SEvent &event)
 		{
 			_options.getKeyDebugMode(),
 			[this] (const irr::SEvent &event) {
-				_options.setExit(true);
+				_options.isDebugMode() ?
+					_options.setDebugMode(false) :
+					_options.setDebugMode(true);
+
 			}
 		}
 	};
