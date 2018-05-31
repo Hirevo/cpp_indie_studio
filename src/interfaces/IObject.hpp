@@ -16,6 +16,7 @@ namespace Eo {
 	class IObject : public virtual IMovable {
 	public:
 		enum Type {
+			CHARACTER,
 			CAMERA,
 			FLOOR,
 			WALL,
@@ -25,9 +26,9 @@ namespace Eo {
 		virtual Eo::IObject::Type getType() const = 0;
 		virtual irr::scene::ISceneNode *getSceneNode() const = 0;
 		virtual void setSceneNode(irr::scene::ISceneNode *node) = 0;
-		virtual void insertInScene(Eo::IScene *scene) = 0;
-		virtual void removeFromScene(Eo::IScene *scene) = 0;
-		virtual void updateInScene(Eo::IScene *scene) = 0;
+		virtual void insertInScene(const Eo::IScene *scene) = 0;
+		virtual void removeFromScene(const Eo::IScene *scene) = 0;
+		virtual void updateInScene(const Eo::IScene *scene) = 0;
 
 	private:
 	};

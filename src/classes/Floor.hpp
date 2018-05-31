@@ -13,13 +13,11 @@
 namespace Eo {
 	class Floor : public AObject {
 	public:
-		Floor(size_t size,
-			irr::core::vector3df pos = irr::core::vector3df(
-				0, 0, 0));
+		Floor(size_t size, vec3 pos = vec3(0, 0, 0));
 		~Floor() = default;
-		void insertInScene(Eo::IScene *scene) override;
-		void removeFromScene(Eo::IScene *scene) override;
-		void updateInScene(Eo::IScene *scene) override;
+		void insertInScene(const Eo::IScene *scene) override;
+		void removeFromScene(const Eo::IScene *scene) override;
+		void updateInScene(const Eo::IScene *scene) override;
 
 	private:
 		size_t _size;

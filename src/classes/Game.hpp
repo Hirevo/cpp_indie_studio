@@ -14,12 +14,12 @@
 #include "Camera.hpp"
 #include "IScene.hpp"
 #include "irrlicht.h"
-#include "AGame.hpp"
+#include "AScene.hpp"
 #include <memory>
 #include <stack>
 
 namespace Eo {
-	class Game : public AGame {
+	class Game : public AScene {
 	public:
 		Game(Eo::Device &device, const std::string &mapPath);
 		~Game();

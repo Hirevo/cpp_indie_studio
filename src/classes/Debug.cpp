@@ -24,11 +24,11 @@ void Eo::Debug::dumpDebug()
 void Eo::Debug::dumpCameraPosTitleWindow()
 {
 	if (_cameraPosTitleWindow) {
-		irr::core::vector3df posCam;
+		vec3 posCam;
 		wchar_t titre[100];
 		posCam = _scene->getSceneManager()
-				 ->getActiveCamera()
-				 ->getPosition();
+				->getActiveCamera()
+				->getPosition();
 		swprintf(titre, 100,
 			L"FPS : %d (mode debug) |  PosCam :  "
 			"X : %f Y : %f Z : %f",

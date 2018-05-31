@@ -5,14 +5,18 @@
 ** Created by Benjamin
 */
 
-#ifndef BOMBERMAN_ICHARACTER_HPP
-#define BOMBERMAN_ICHARACTER_HPP
+#pragma once
+
+#include "AObject.hpp"
+#include <string>
 
 namespace Eo {
 	class ICharacter {
 	public:
+		virtual ~ICharacter() = default;
+		virtual void loadModel(const std::string &path) = 0;
+		virtual irr::scene::IAnimatedMesh *getModel() const = 0;
+
 	private:
 	};
 }
-
-#endif

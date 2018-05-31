@@ -11,9 +11,10 @@
 #include "ICharacter.hpp"
 
 namespace Eo {
-	class APlayer : ICharacter {
+	class APlayer : public ICharacter {
 	public:
 	private:
+		
 	};
 }
 

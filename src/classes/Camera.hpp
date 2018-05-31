@@ -17,11 +17,11 @@
 namespace Eo {
 	class Camera : public AObject {
 	public:
-		Camera(irr::core::vector3df pos = irr::core::vector3df(0, 0, 0));
+		Camera(vec3 pos = vec3(0, 0, 0));
 		~Camera() = default;
-		void insertInScene(Eo::IScene *scene) override;
-		void removeFromScene(Eo::IScene *scene) override;
-		void updateInScene(Eo::IScene *scene) override;
+		void insertInScene(const Eo::IScene *scene) override;
+		void removeFromScene(const Eo::IScene *scene) override;
+		void updateInScene(const Eo::IScene *scene) override;
 		irr::scene::ICameraSceneNode *getCameraHandle() const;
 
 	private:

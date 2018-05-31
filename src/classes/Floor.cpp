@@ -7,15 +7,16 @@
 
 #include "Floor.hpp"
 
-Eo::Floor::Floor(size_t size, irr::core::vector3df pos)
+Eo::Floor::Floor(size_t size, vec3 pos)
 	: AObject(Eo::IObject::FLOOR), _size(size)
 {
 }
 
-void Eo::Floor::insertInScene(Eo::IScene *scene)
+void Eo::Floor::insertInScene(const Eo::IScene *scene)
 {
 	auto manager = scene->getSceneManager();
-	auto texture = scene->getSceneManager()->getVideoDriver()->getTexture("../assets/img/damier.jpg");
+	auto texture = scene->getSceneManager()->getVideoDriver()->getTexture(
+		"../assets/img/damier.jpg");
 	irr::f32 unitSize = 10.0f;
 
 	if (_placedInScene == true)
@@ -25,12 +26,12 @@ void Eo::Floor::insertInScene(Eo::IScene *scene)
 	_node = manager->addMeshSceneNode(mesh);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	Eo::Floor::updateInScene(scene);
-	_node->setMaterialTexture(0,texture);
+	_node->setMaterialTexture(0, texture);
 	_hasPositionChanged = false;
 	_placedInScene = true;
 }
 
-void Eo::Floor::removeFromScene(Eo::IScene *scene)
+void Eo::Floor::removeFromScene(const Eo::IScene *scene)
 {
 	(void)(scene);
 	if (_placedInScene == false)
@@ -40,7 +41,7 @@ void Eo::Floor::removeFromScene(Eo::IScene *scene)
 	_placedInScene = false;
 }
 
-void Eo::Floor::updateInScene(Eo::IScene *scene)
+void Eo::Floor::updateInScene(const Eo::IScene *scene)
 {
 	_node->setPosition(_pos);
 	_hasPositionChanged = false;

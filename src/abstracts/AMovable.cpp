@@ -7,17 +7,18 @@
 
 #include "AMovable.hpp"
 
-Eo::AMovable::AMovable(irr::core::vector3df pos)
-	: _pos(pos), _hasPositionChanged(true)
+Eo::AMovable::AMovable(Eo::vec3 pos) : _pos(pos), _hasPositionChanged(true)
 {
 }
 
-irr::core::vector3df Eo::AMovable::getPosition() const
+Eo::AMovable::~AMovable() = default;
+
+Eo::vec3 Eo::AMovable::getPosition() const
 {
 	return _pos;
 }
 
-void Eo::AMovable::setPosition(const irr::core::vector3df &pos)
+void Eo::AMovable::setPosition(const Eo::vec3 &pos)
 {
 	if (_pos != pos) {
 		_pos = pos;
@@ -27,15 +28,15 @@ void Eo::AMovable::setPosition(const irr::core::vector3df &pos)
 
 void Eo::AMovable::setPosition(float x, float y, float z)
 {
-	Eo::AMovable::setPosition(irr::core::vector3df(x, y, z));
+	Eo::AMovable::setPosition(Eo::vec3(x, y, z));
 }
 
 void Eo::AMovable::setPosition(float v)
 {
-	Eo::AMovable::setPosition(irr::core::vector3df(v, v, v));
+	Eo::AMovable::setPosition(Eo::vec3(v, v, v));
 }
 
-void Eo::AMovable::translate(const irr::core::vector3df &v)
+void Eo::AMovable::translate(const Eo::vec3 &v)
 {
 	if (v.X != 0 || v.Y != 0 || v.Z != 0) {
 		_pos += v;
@@ -45,27 +46,27 @@ void Eo::AMovable::translate(const irr::core::vector3df &v)
 
 void Eo::AMovable::translate(float v)
 {
-	Eo::AMovable::translate(irr::core::vector3df(v, v, v));
+	Eo::AMovable::translate(Eo::vec3(v, v, v));
 }
 
 void Eo::AMovable::translate(float x, float y, float z)
 {
-	Eo::AMovable::translate(irr::core::vector3df(x, y, z));
+	Eo::AMovable::translate(Eo::vec3(x, y, z));
 }
 
 void Eo::AMovable::translateX(float x)
 {
-	Eo::AMovable::translate(irr::core::vector3df(x, 0, 0));
+	Eo::AMovable::translate(Eo::vec3(x, 0, 0));
 }
 
 void Eo::AMovable::translateY(float y)
 {
-	Eo::AMovable::translate(irr::core::vector3df(0, y, 0));
+	Eo::AMovable::translate(Eo::vec3(0, y, 0));
 }
 
 void Eo::AMovable::translateZ(float z)
 {
-	Eo::AMovable::translate(irr::core::vector3df(0, 0, z));
+	Eo::AMovable::translate(Eo::vec3(0, 0, z));
 }
 
 bool Eo::AMovable::hasPositionChanged() const

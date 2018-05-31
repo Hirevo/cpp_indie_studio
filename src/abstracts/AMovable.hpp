@@ -7,19 +7,19 @@
 
 #pragma once
 
-#include "interfaces/IMovable.hpp"
+#include "IMovable.hpp"
+#include "Types.hpp"
 
 namespace Eo {
 	class AMovable : public virtual IMovable {
 	public:
-		AMovable(irr::core::vector3df pos = irr::core::vector3df(
-				0, 0, 0));
-		~AMovable() = default;
-		irr::core::vector3df getPosition() const final;
-		void setPosition(const irr::core::vector3df &pos) final;
+		AMovable(vec3 pos = vec3(0, 0, 0));
+		virtual ~AMovable() = 0;
+		vec3 getPosition() const final;
+		void setPosition(const vec3 &pos) final;
 		void setPosition(float x, float y, float z) final;
 		void setPosition(float v) final;
-		void translate(const irr::core::vector3df &v) final;
+		void translate(const vec3 &v) final;
 		void translate(float v) final;
 		void translate(float x, float y, float z) final;
 		void translateX(float x) final;
@@ -30,7 +30,7 @@ namespace Eo {
 		void resetPositionChanged() final;
 
 	protected:
-		irr::core::vector3df _pos;
+		vec3 _pos;
 		bool _hasPositionChanged;
 
 	private:

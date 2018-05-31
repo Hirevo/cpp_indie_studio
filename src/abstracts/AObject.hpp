@@ -15,20 +15,16 @@ namespace Eo {
 	public:
 		AObject(Eo::IObject::Type type,
 			irr::scene::ISceneNode *node = nullptr,
-			irr::core::vector3df pos = irr::core::vector3df(
-				0, 0, 0));
-		~AObject() = default;
+			vec3 pos = vec3(0, 0, 0));
+		virtual ~AObject() = 0;
 		Eo::IObject::Type getType() const override;
 		irr::scene::ISceneNode *getSceneNode() const override;
 		void setSceneNode(irr::scene::ISceneNode *node) override;
-		void insertInScene(Eo::IScene *scene) override;
-		void removeFromScene(Eo::IScene *scene) override;
-		void updateInScene(Eo::IScene *scene) override;
 
 	protected:
 		Eo::IObject::Type _type;
 		irr::scene::ISceneNode *_node;
-		bool _isInstanciated;
+		bool _hasNode;
 		bool _placedInScene;
 
 	private:

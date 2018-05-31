@@ -8,16 +8,17 @@
 #pragma once
 
 #include "irrlicht.h"
+#include "Types.hpp"
 
 namespace Eo {
 	class IMovable {
 	public:
 		virtual ~IMovable() = default;
-		virtual irr::core::vector3df getPosition() const = 0;
-		virtual void setPosition(const irr::core::vector3df &pos) = 0;
+		virtual vec3 getPosition() const = 0;
+		virtual void setPosition(const vec3 &pos) = 0;
 		virtual void setPosition(float x, float y, float z) = 0;
 		virtual void setPosition(float v) = 0;
-		virtual void translate(const irr::core::vector3df &v) = 0;
+		virtual void translate(const vec3 &v) = 0;
 		virtual void translate(float v) = 0;
 		virtual void translate(float x, float y, float z) = 0;
 		virtual void translateX(float x) = 0;

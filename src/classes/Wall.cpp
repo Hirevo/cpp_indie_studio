@@ -7,12 +7,12 @@
 
 #include "Wall.hpp"
 
-Eo::Wall::Wall(Eo::Wall::WallType wallType, irr::core::vector3df pos)
+Eo::Wall::Wall(Eo::Wall::WallType wallType, Eo::vec3 pos)
 	: AObject(Eo::IObject::WALL), _wallType(wallType)
 {
 }
 
-void Eo::Wall::insertInScene(Eo::IScene *scene)
+void Eo::Wall::insertInScene(const Eo::IScene *scene)
 {
 	auto manager = scene->getSceneManager();
 	irr::f32 unitSize = 10.0f;
@@ -26,7 +26,7 @@ void Eo::Wall::insertInScene(Eo::IScene *scene)
 	_placedInScene = true;
 }
 
-void Eo::Wall::removeFromScene(Eo::IScene *scene)
+void Eo::Wall::removeFromScene(const Eo::IScene *scene)
 {
 	(void)(scene);
 	if (_placedInScene == false)
@@ -36,7 +36,7 @@ void Eo::Wall::removeFromScene(Eo::IScene *scene)
 	_placedInScene = false;
 }
 
-void Eo::Wall::updateInScene(Eo::IScene *scene)
+void Eo::Wall::updateInScene(const Eo::IScene *scene)
 {
 	_node->setPosition(_pos);
 	_hasPositionChanged = false;

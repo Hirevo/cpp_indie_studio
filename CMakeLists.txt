@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 project(bomberman)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 include_directories(
@@ -21,8 +21,7 @@ set(HEADER_FILES
         src/interfaces/IObject.hpp
         src/abstracts/ABomb.hpp
         src/abstracts/ACollectible.hpp
-        src/abstracts/AGame.hpp
-        src/abstracts/AMenu.hpp
+        src/abstracts/AScene.hpp
         src/abstracts/AMonster.hpp
         src/abstracts/APlayer.hpp
         src/classes/Camera.hpp
@@ -41,8 +40,7 @@ add_executable(bomberman
         src/classes/Options.cpp
         src/classes/Keymap.cpp
         src/classes/Camera.cpp
-        src/abstracts/AMenu.cpp
-        src/abstracts/AGame.cpp
+        src/abstracts/AScene.cpp
         src/classes/Computer.cpp
         src/abstracts/AObject.cpp
         src/abstracts/AMovable.cpp

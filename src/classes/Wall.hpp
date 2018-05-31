@@ -14,16 +14,13 @@ namespace Eo {
 	class Wall : public AObject {
 	public:
 		enum WallType { DESTRUCTIBLE, INDESTRUCTIBLE };
-		Wall(Eo::Wall::WallType type,
-			irr::core::vector3df pos = irr::core::vector3df(
-				0, 0, 0));
+		Wall(Eo::Wall::WallType type, vec3 pos = vec3(0, 0, 0));
 		~Wall() = default;
-		void insertInScene(Eo::IScene *scene) override;
-		void removeFromScene(Eo::IScene *scene) override;
-		void updateInScene(Eo::IScene *scene) override;
+		void insertInScene(const Eo::IScene *scene) override;
+		void removeFromScene(const Eo::IScene *scene) override;
+		void updateInScene(const Eo::IScene *scene) override;
 
 	private:
 		WallType _wallType;
 	};
 }
-

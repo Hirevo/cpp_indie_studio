@@ -5,13 +5,12 @@
 ** MainMenu.hpp
 */
 
-#ifndef BOMBERMAN_MAINMENU_HPP
-	#define BOMBERMAN_MAINMENU_HPP
+#pragma once
 
-	#include "AMenu.hpp"
+#include "AScene.hpp"
 
 namespace Eo {
-	class MainMenu : public AMenu {
+	class MainMenu : public AScene {
 	public:
 		explicit MainMenu(Eo::Device &_device);
 		~MainMenu() override;
@@ -26,6 +25,3 @@ namespace Eo {
 	private:
 	};
 }
-
-
-#endif //BOMBERMAN_MAINMENU_HPP
