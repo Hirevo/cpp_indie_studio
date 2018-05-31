@@ -9,6 +9,7 @@
 #include "Game.hpp"
 #include "JsonRead.hpp"
 #include "Wall.hpp"
+#include "Floor.hpp"
 #include <iostream>
 #include <menu/MainMenu.hpp>
 
