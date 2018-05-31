@@ -5,9 +5,9 @@
 ** Created by Benjamin
 */
 
-#include "Event.hpp"
+#include "EventGame.hpp"
 
-bool Eo::Event::OnEvent(const irr::SEvent &event)
+bool Eo::EventGame::OnEvent(const irr::SEvent &event)
 {
 	bool ret = false;
 	if(event.EventType == irr::EET_KEY_INPUT_EVENT
@@ -19,12 +19,12 @@ bool Eo::Event::OnEvent(const irr::SEvent &event)
 	return ret;
 }
 
-Eo::Event::Event() :
+Eo::EventGame::EventGame() :
 	_leaveRequest(false)
 {
 }
 
-bool Eo::Event::isleaveRequest() const
+bool Eo::EventGame::isleaveRequest() const
 {
 	return _leaveRequest;
 }

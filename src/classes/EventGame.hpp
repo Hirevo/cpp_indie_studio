@@ -10,9 +10,9 @@
 
 #include <irrlicht.h>
 namespace Eo {
-	class Event : public irr::IEventReceiver {
+	class EventGame : public irr::IEventReceiver {
 	public:
-		Event();
+		EventGame();
 		void majPosMesh();
 		virtual bool OnEvent(const irr::SEvent &event);
 	private:
