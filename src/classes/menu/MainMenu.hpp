@@ -16,7 +16,7 @@ namespace Eo {
 		explicit MainMenu(Eo::Device &_device);
 		~MainMenu() override;
 
-		enum {
+		enum ButtonType {
 			GUI_ID_MAIN_PLAY_BUTTON = 1900,
 			GUI_ID_MAIN_SETTINGS_BUTTON,
 			GUI_ID_MAIN_EXIT_BUTTON

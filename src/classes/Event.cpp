@@ -6,11 +6,32 @@
 */
 
 #include <iostream>
+#include <menu/MainMenu.hpp>
 #include "Event.hpp"
+
+static const std::map<irr::gui::EGUI_EVENT_TYPE, std::map<irr::s32, std::function<void(const irr::SEvent &, Eo::Options &)>>> GUI_EVENTS = {
+	{
+		irr::gui::EGUI_EVENT_TYPE::EGET_BUTTON_CLICKED,
+		{
+			{
+				Eo::MainMenu::GUI_ID_MAIN_PLAY_BUTTON,
+				[](const irr::SEvent &event, Eo::Options &options) {
+					std::cout << "YOU CLICKED PLAY" << std::endl;
+				}
+			},
+			{
+				Eo::MainMenu::GUI_ID_MAIN_EXIT_BUTTON,
+				[](const irr::SEvent &event, Eo::Options &options) {
+					options.setExit(true);
+				}
+			}
+		}
+	}
+};
 
 bool Eo::Event::OnEvent(const irr::SEvent &event)
 {
-	std::map<irr::EKEY_CODE, std::function<void (
+	std::map<irr::EKEY_CODE, std::function<void(
 		const irr::SEvent &)>> _keyHandler = {
 		{
 			_options.getKeyExit(),
@@ -26,11 +47,18 @@ bool Eo::Event::OnEvent(const irr::SEvent &event)
 		}
 	};
 	try {
-		if(event.EventType == irr::EET_KEY_INPUT_EVENT)
+		if (event.EventType == irr::EET_KEY_INPUT_EVENT)
 			_keyHandler.at(event.KeyInput.Key)(event);
+		else if (event.EventType == irr::EET_GUI_EVENT) {
+			std::cout << "hey, there is a GUI_EVENT" << std::endl;
+			irr::s32 id = event.GUIEvent.Caller->getID();
+			auto type = event.GUIEvent.EventType;
+			GUI_EVENTS.at(type).at(id)(event, this->_options);
+		}
 		else
 			return false;
 	} catch (const std::exception &execption) {
+		std::cout << execption.what() << std::endl;
 		return false;
 	}
 	return true;
