@@ -17,7 +17,7 @@
 #include "Device.hpp"
 #include "Debug.hpp"
 #include "SceneHandler.hpp"
-#include "EventGame.hpp"
+#include "Event.hpp"
 
 namespace Eo {
 	class Core {
@@ -28,7 +28,7 @@ namespace Eo {
 		Eo::Options _options;
 		Eo::Device _device;
 		Eo::SceneHandler _sceneHandler;
-		Eo::EventGame _event;
+		Eo::Event _event;
 		bool _debugMode = true;
 	public:
 		bool is_debugMode() const;

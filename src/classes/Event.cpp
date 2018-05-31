@@ -6,9 +6,9 @@
 */
 
 #include <iostream>
-#include "EventGame.hpp"
+#include "Event.hpp"
 
-bool Eo::EventGame::OnEvent(const irr::SEvent &event)
+bool Eo::Event::OnEvent(const irr::SEvent &event)
 {
 	std::map<irr::EKEY_CODE, std::function<void (
 		const irr::SEvent &)>> _keyHandler = {
@@ -37,7 +37,7 @@ bool Eo::EventGame::OnEvent(const irr::SEvent &event)
 	return true;
 }
 
-Eo::EventGame::EventGame(Eo::Options &options) :
+Eo::Event::Event(Eo::Options &options) :
 	_options(options)
 {
 }

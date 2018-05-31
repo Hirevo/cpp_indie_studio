@@ -14,9 +14,9 @@
 #include "Options.hpp"
 
 namespace Eo {
-	class EventGame : public irr::IEventReceiver {
+	class Event : public irr::IEventReceiver {
 	public:
-		EventGame(Eo::Options &);
+		Event(Eo::Options &);
 		virtual bool OnEvent(const irr::SEvent &event);
 	private:
 		Eo::Options &_options;

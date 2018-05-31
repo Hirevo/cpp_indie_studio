@@ -13,7 +13,7 @@ Eo::Options::Options()
 	  _exit(false),
 	  _debugMode(false),
 	  _keyExit(irr::EKEY_CODE::KEY_KEY_K),
-	  _keyDebugMode(irr::EKEY_CODE::KEY_F12)
+	  _keyDebugMode(irr::EKEY_CODE::KEY_F2)
 {
 }
 
