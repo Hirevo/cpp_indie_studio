@@ -24,3 +24,8 @@ irr::video::IVideoDriver *Eo::Device::getDriver() const
 {
 	return _driver;
 }
+
+void Eo::Device::setDeviceTitle(const wchar_t *title)
+{
+	this->getDevice()->setWindowCaption(title);
+}

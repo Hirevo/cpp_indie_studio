@@ -8,6 +8,7 @@
 #ifndef BOMBERMAN_DEVICE_HPP
 #define BOMBERMAN_DEVICE_HPP
 
+#include <string>
 #include "irrlicht.h"
 #include "Options.hpp"
 
@@ -23,6 +24,7 @@ namespace Eo {
 	public:
 		irr::IrrlichtDevice *getDevice() const;
 		irr::video::IVideoDriver *getDriver() const;
+		void setDeviceTitle(const wchar_t *title);
 	};
 }
 

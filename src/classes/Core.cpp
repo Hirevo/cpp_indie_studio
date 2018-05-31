@@ -21,16 +21,16 @@ Eo::Core::Core()
 	: _options(),
 	  _device(_options),
 	  _sceneHandler(_device),
-	  _event(_options)
+	  _event(_options, _device)
 {
 	_device.getDevice()->setEventReceiver(&_event);
 	_sceneHandler.addScene(new Eo::Game(_device, "../map2.json"));
 	auto game = _sceneHandler.getCurrentScene();
 	Eo::Debug debug(_device, game);
-	_sceneHandler.addScene(new Eo::MainMenu(_device));
+	//_sceneHandler.addScene(new Eo::MainMenu(_device));
 
 	while (_device.getDevice()->run() && !_options.isExit()) {
-		if(_debugMode)
+		if(_options.isDebugMode())
 			debug.dumpDebug();
 		_device.getDriver()->beginScene();
 		_sceneHandler.getCurrentScene()->getSceneManager()->drawAll();
@@ -38,14 +38,4 @@ Eo::Core::Core()
 		_device.getDriver()->endScene();
 	}
 	_device.getDevice()->drop();
-}
-
-bool Eo::Core::is_debugMode() const
-{
-	return _debugMode;
-}
-
-void Eo::Core::set_debugMode(bool _debugMode)
-{
-	Core::_debugMode = _debugMode;
 }

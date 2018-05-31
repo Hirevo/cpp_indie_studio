@@ -29,10 +29,8 @@ namespace Eo {
 		Eo::Device _device;
 		Eo::SceneHandler _sceneHandler;
 		Eo::Event _event;
-		bool _debugMode = true;
 	public:
-		bool is_debugMode() const;
-		void set_debugMode(bool _debugMode);
+
 	};
 }
 

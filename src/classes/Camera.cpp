@@ -5,6 +5,7 @@
 ** Created by Benjamin
 */
 
+#include <iostream>
 #include "Camera.hpp"
 
 Eo::Camera::Camera(irr::core::vector3df pos)
@@ -27,15 +28,12 @@ void Eo::Camera::insertInScene(Eo::IScene *scene)
 		_keyMap[3].KeyCode = irr::KEY_KEY_D;
 		_keyMap[4].Action = irr::EKA_JUMP_UP;
 		_keyMap[4].KeyCode = irr::KEY_SPACE;
-		// _camera = scene->getSceneManager()->addCameraSceneNodeMaya(
-		// 	nullptr, 200.0f, 0.1f, 200.0f, -1);
 		_camera = scene->getSceneManager()->addCameraSceneNodeFPS(
 			nullptr, 200.0f, 0.1f, -1, _keyMap, 5);
 		_node = _camera;
 		_isInstanciated = true;
 	}
 	else
-		// scene->getSceneManager()->addCameraSceneNodeMaya(_node);
 		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
 	Eo::Camera::updateInScene(scene);
 	_placedInScene = true;

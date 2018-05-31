@@ -25,12 +25,12 @@ void Eo::Debug::dumpDebug()
 void Eo::Debug::dumpCameraPos()
 {
 	if (_cameraPos) {
-		auto font = _device.getDevice()->getGUIEnvironment()->getBuiltInFont();
-		_scene->getSceneManager()->addTextSceneNode(
-			font,
-			L"Oui",
-			irr::video::SColor(255,255,255,255)
-		);
+//		auto font = _device.getDevice()->getGUIEnvironment()->getBuiltInFont();
+//		_scene->getSceneManager()->addTextSceneNode(
+//			font,
+//			L"Oui",
+//			irr::video::SColor(255,255,255,255)
+//		);
 	}
 }
 
