@@ -5,6 +5,7 @@
 ** Created by Benjamin
 */
 
+#include <iostream>
 #include "Camera.hpp"
 
 Eo::Camera::Camera(vec3 pos) : AObject(Eo::IObject::Type::CAMERA, nullptr, pos)
@@ -15,7 +16,7 @@ void Eo::Camera::insertInScene(const Eo::IScene *scene)
 {
 	if (_placedInScene)
 		return;
-	if (_hasNode == false) {
+	if (!_isInstanciated) {
 		_keyMap[0].Action = irr::EKA_MOVE_FORWARD;
 		_keyMap[0].KeyCode = irr::KEY_KEY_Z;
 		_keyMap[1].Action = irr::EKA_MOVE_BACKWARD;

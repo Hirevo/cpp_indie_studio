@@ -19,21 +19,36 @@ Eo::Debug::~Debug()
 void Eo::Debug::dumpDebug()
 {
 	dumpCameraPosTitleWindow();
+	dumpCameraPos();
+}
+
+void Eo::Debug::dumpCameraPos()
+{
+	if (_cameraPos) {
+//		auto font = _device.getDevice()->getGUIEnvironment()->getBuiltInFont();
+//		_scene->getSceneManager()->addTextSceneNode(
+//			font,
+//			L"Oui",
+//			irr::video::SColor(255,255,255,255)
+//		);
+	}
 }
 
 void Eo::Debug::dumpCameraPosTitleWindow()
 {
 	if (_cameraPosTitleWindow) {
-		vec3 posCam;
-		wchar_t titre[100];
-		posCam = _scene->getSceneManager()
-				->getActiveCamera()
-				->getPosition();
-		swprintf(titre, 100,
-			L"FPS : %d (mode debug) |  PosCam :  "
-			"X : %f Y : %f Z : %f",
-			_device.getDriver()->getFPS(), posCam.X, posCam.Y,
-			posCam.Z);
+		irr::core::vector3df posCam;
+		wchar_t titre[150];
+		auto camera = _scene->getSceneManager()->getActiveCamera();
+		if (camera != nullptr) {
+			posCam = camera->getPosition();
+			swprintf(titre, 150, L"GET THE CAMERA >> FPS : %d"
+					     "(mode debug) |  PosCam :  X :"
+					     "%f Y : %f Z : %f",
+				_device.getDriver()->getFPS(), posCam.X,
+				posCam.Y,
+				posCam.Z);
+		}
 		_device.getDevice()->setWindowCaption(titre);
 	}
 }

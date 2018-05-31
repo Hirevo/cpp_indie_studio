@@ -25,12 +25,18 @@ Eo::IScene *Eo::SceneHandler::getCurrentScene() const
 
 bool Eo::SceneHandler::addScene(Eo::IScene *scene)
 {
+	auto scn = this->getCurrentScene();
+	if (scn != nullptr)
+		scn->clean();
 	_scenes.push(scene);
 	return true;
 }
 
 bool Eo::SceneHandler::endCurrentScene()
 {
+	auto scn = this->getCurrentScene();
+	if (scn != nullptr)
+		scn->clean();
 	_scenes.pop();
 	return true;
 }

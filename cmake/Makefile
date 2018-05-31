@@ -123,6 +123,627 @@ bomberman/fast:
 	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/build
 .PHONY : bomberman/fast
 
+src/abstracts/ABomb.o: src/abstracts/ABomb.cpp.o
+
+.PHONY : src/abstracts/ABomb.o
+
+# target to build an object file
+src/abstracts/ABomb.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/ABomb.cpp.o
+.PHONY : src/abstracts/ABomb.cpp.o
+
+src/abstracts/ABomb.i: src/abstracts/ABomb.cpp.i
+
+.PHONY : src/abstracts/ABomb.i
+
+# target to preprocess a source file
+src/abstracts/ABomb.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/ABomb.cpp.i
+.PHONY : src/abstracts/ABomb.cpp.i
+
+src/abstracts/ABomb.s: src/abstracts/ABomb.cpp.s
+
+.PHONY : src/abstracts/ABomb.s
+
+# target to generate assembly for a file
+src/abstracts/ABomb.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/ABomb.cpp.s
+.PHONY : src/abstracts/ABomb.cpp.s
+
+src/abstracts/ACollectible.o: src/abstracts/ACollectible.cpp.o
+
+.PHONY : src/abstracts/ACollectible.o
+
+# target to build an object file
+src/abstracts/ACollectible.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/ACollectible.cpp.o
+.PHONY : src/abstracts/ACollectible.cpp.o
+
+src/abstracts/ACollectible.i: src/abstracts/ACollectible.cpp.i
+
+.PHONY : src/abstracts/ACollectible.i
+
+# target to preprocess a source file
+src/abstracts/ACollectible.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/ACollectible.cpp.i
+.PHONY : src/abstracts/ACollectible.cpp.i
+
+src/abstracts/ACollectible.s: src/abstracts/ACollectible.cpp.s
+
+.PHONY : src/abstracts/ACollectible.s
+
+# target to generate assembly for a file
+src/abstracts/ACollectible.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/ACollectible.cpp.s
+.PHONY : src/abstracts/ACollectible.cpp.s
+
+src/abstracts/AGame.o: src/abstracts/AGame.cpp.o
+
+.PHONY : src/abstracts/AGame.o
+
+# target to build an object file
+src/abstracts/AGame.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AGame.cpp.o
+.PHONY : src/abstracts/AGame.cpp.o
+
+src/abstracts/AGame.i: src/abstracts/AGame.cpp.i
+
+.PHONY : src/abstracts/AGame.i
+
+# target to preprocess a source file
+src/abstracts/AGame.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AGame.cpp.i
+.PHONY : src/abstracts/AGame.cpp.i
+
+src/abstracts/AGame.s: src/abstracts/AGame.cpp.s
+
+.PHONY : src/abstracts/AGame.s
+
+# target to generate assembly for a file
+src/abstracts/AGame.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AGame.cpp.s
+.PHONY : src/abstracts/AGame.cpp.s
+
+src/abstracts/AMenu.o: src/abstracts/AMenu.cpp.o
+
+.PHONY : src/abstracts/AMenu.o
+
+# target to build an object file
+src/abstracts/AMenu.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AMenu.cpp.o
+.PHONY : src/abstracts/AMenu.cpp.o
+
+src/abstracts/AMenu.i: src/abstracts/AMenu.cpp.i
+
+.PHONY : src/abstracts/AMenu.i
+
+# target to preprocess a source file
+src/abstracts/AMenu.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AMenu.cpp.i
+.PHONY : src/abstracts/AMenu.cpp.i
+
+src/abstracts/AMenu.s: src/abstracts/AMenu.cpp.s
+
+.PHONY : src/abstracts/AMenu.s
+
+# target to generate assembly for a file
+src/abstracts/AMenu.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AMenu.cpp.s
+.PHONY : src/abstracts/AMenu.cpp.s
+
+src/abstracts/AMonster.o: src/abstracts/AMonster.cpp.o
+
+.PHONY : src/abstracts/AMonster.o
+
+# target to build an object file
+src/abstracts/AMonster.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AMonster.cpp.o
+.PHONY : src/abstracts/AMonster.cpp.o
+
+src/abstracts/AMonster.i: src/abstracts/AMonster.cpp.i
+
+.PHONY : src/abstracts/AMonster.i
+
+# target to preprocess a source file
+src/abstracts/AMonster.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AMonster.cpp.i
+.PHONY : src/abstracts/AMonster.cpp.i
+
+src/abstracts/AMonster.s: src/abstracts/AMonster.cpp.s
+
+.PHONY : src/abstracts/AMonster.s
+
+# target to generate assembly for a file
+src/abstracts/AMonster.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AMonster.cpp.s
+.PHONY : src/abstracts/AMonster.cpp.s
+
+src/abstracts/AMovable.o: src/abstracts/AMovable.cpp.o
+
+.PHONY : src/abstracts/AMovable.o
+
+# target to build an object file
+src/abstracts/AMovable.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AMovable.cpp.o
+.PHONY : src/abstracts/AMovable.cpp.o
+
+src/abstracts/AMovable.i: src/abstracts/AMovable.cpp.i
+
+.PHONY : src/abstracts/AMovable.i
+
+# target to preprocess a source file
+src/abstracts/AMovable.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AMovable.cpp.i
+.PHONY : src/abstracts/AMovable.cpp.i
+
+src/abstracts/AMovable.s: src/abstracts/AMovable.cpp.s
+
+.PHONY : src/abstracts/AMovable.s
+
+# target to generate assembly for a file
+src/abstracts/AMovable.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AMovable.cpp.s
+.PHONY : src/abstracts/AMovable.cpp.s
+
+src/abstracts/AObject.o: src/abstracts/AObject.cpp.o
+
+.PHONY : src/abstracts/AObject.o
+
+# target to build an object file
+src/abstracts/AObject.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AObject.cpp.o
+.PHONY : src/abstracts/AObject.cpp.o
+
+src/abstracts/AObject.i: src/abstracts/AObject.cpp.i
+
+.PHONY : src/abstracts/AObject.i
+
+# target to preprocess a source file
+src/abstracts/AObject.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AObject.cpp.i
+.PHONY : src/abstracts/AObject.cpp.i
+
+src/abstracts/AObject.s: src/abstracts/AObject.cpp.s
+
+.PHONY : src/abstracts/AObject.s
+
+# target to generate assembly for a file
+src/abstracts/AObject.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/AObject.cpp.s
+.PHONY : src/abstracts/AObject.cpp.s
+
+src/abstracts/APlayer.o: src/abstracts/APlayer.cpp.o
+
+.PHONY : src/abstracts/APlayer.o
+
+# target to build an object file
+src/abstracts/APlayer.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/APlayer.cpp.o
+.PHONY : src/abstracts/APlayer.cpp.o
+
+src/abstracts/APlayer.i: src/abstracts/APlayer.cpp.i
+
+.PHONY : src/abstracts/APlayer.i
+
+# target to preprocess a source file
+src/abstracts/APlayer.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/APlayer.cpp.i
+.PHONY : src/abstracts/APlayer.cpp.i
+
+src/abstracts/APlayer.s: src/abstracts/APlayer.cpp.s
+
+.PHONY : src/abstracts/APlayer.s
+
+# target to generate assembly for a file
+src/abstracts/APlayer.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/abstracts/APlayer.cpp.s
+.PHONY : src/abstracts/APlayer.cpp.s
+
+src/classes/Camera.o: src/classes/Camera.cpp.o
+
+.PHONY : src/classes/Camera.o
+
+# target to build an object file
+src/classes/Camera.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Camera.cpp.o
+.PHONY : src/classes/Camera.cpp.o
+
+src/classes/Camera.i: src/classes/Camera.cpp.i
+
+.PHONY : src/classes/Camera.i
+
+# target to preprocess a source file
+src/classes/Camera.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Camera.cpp.i
+.PHONY : src/classes/Camera.cpp.i
+
+src/classes/Camera.s: src/classes/Camera.cpp.s
+
+.PHONY : src/classes/Camera.s
+
+# target to generate assembly for a file
+src/classes/Camera.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Camera.cpp.s
+.PHONY : src/classes/Camera.cpp.s
+
+src/classes/Computer.o: src/classes/Computer.cpp.o
+
+.PHONY : src/classes/Computer.o
+
+# target to build an object file
+src/classes/Computer.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Computer.cpp.o
+.PHONY : src/classes/Computer.cpp.o
+
+src/classes/Computer.i: src/classes/Computer.cpp.i
+
+.PHONY : src/classes/Computer.i
+
+# target to preprocess a source file
+src/classes/Computer.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Computer.cpp.i
+.PHONY : src/classes/Computer.cpp.i
+
+src/classes/Computer.s: src/classes/Computer.cpp.s
+
+.PHONY : src/classes/Computer.s
+
+# target to generate assembly for a file
+src/classes/Computer.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Computer.cpp.s
+.PHONY : src/classes/Computer.cpp.s
+
+src/classes/Core.o: src/classes/Core.cpp.o
+
+.PHONY : src/classes/Core.o
+
+# target to build an object file
+src/classes/Core.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Core.cpp.o
+.PHONY : src/classes/Core.cpp.o
+
+src/classes/Core.i: src/classes/Core.cpp.i
+
+.PHONY : src/classes/Core.i
+
+# target to preprocess a source file
+src/classes/Core.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Core.cpp.i
+.PHONY : src/classes/Core.cpp.i
+
+src/classes/Core.s: src/classes/Core.cpp.s
+
+.PHONY : src/classes/Core.s
+
+# target to generate assembly for a file
+src/classes/Core.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Core.cpp.s
+.PHONY : src/classes/Core.cpp.s
+
+src/classes/Debug.o: src/classes/Debug.cpp.o
+
+.PHONY : src/classes/Debug.o
+
+# target to build an object file
+src/classes/Debug.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Debug.cpp.o
+.PHONY : src/classes/Debug.cpp.o
+
+src/classes/Debug.i: src/classes/Debug.cpp.i
+
+.PHONY : src/classes/Debug.i
+
+# target to preprocess a source file
+src/classes/Debug.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Debug.cpp.i
+.PHONY : src/classes/Debug.cpp.i
+
+src/classes/Debug.s: src/classes/Debug.cpp.s
+
+.PHONY : src/classes/Debug.s
+
+# target to generate assembly for a file
+src/classes/Debug.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Debug.cpp.s
+.PHONY : src/classes/Debug.cpp.s
+
+src/classes/Device.o: src/classes/Device.cpp.o
+
+.PHONY : src/classes/Device.o
+
+# target to build an object file
+src/classes/Device.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Device.cpp.o
+.PHONY : src/classes/Device.cpp.o
+
+src/classes/Device.i: src/classes/Device.cpp.i
+
+.PHONY : src/classes/Device.i
+
+# target to preprocess a source file
+src/classes/Device.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Device.cpp.i
+.PHONY : src/classes/Device.cpp.i
+
+src/classes/Device.s: src/classes/Device.cpp.s
+
+.PHONY : src/classes/Device.s
+
+# target to generate assembly for a file
+src/classes/Device.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Device.cpp.s
+.PHONY : src/classes/Device.cpp.s
+
+src/classes/Event.o: src/classes/Event.cpp.o
+
+.PHONY : src/classes/Event.o
+
+# target to build an object file
+src/classes/Event.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Event.cpp.o
+.PHONY : src/classes/Event.cpp.o
+
+src/classes/Event.i: src/classes/Event.cpp.i
+
+.PHONY : src/classes/Event.i
+
+# target to preprocess a source file
+src/classes/Event.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Event.cpp.i
+.PHONY : src/classes/Event.cpp.i
+
+src/classes/Event.s: src/classes/Event.cpp.s
+
+.PHONY : src/classes/Event.s
+
+# target to generate assembly for a file
+src/classes/Event.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Event.cpp.s
+.PHONY : src/classes/Event.cpp.s
+
+src/classes/Floor.o: src/classes/Floor.cpp.o
+
+.PHONY : src/classes/Floor.o
+
+# target to build an object file
+src/classes/Floor.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Floor.cpp.o
+.PHONY : src/classes/Floor.cpp.o
+
+src/classes/Floor.i: src/classes/Floor.cpp.i
+
+.PHONY : src/classes/Floor.i
+
+# target to preprocess a source file
+src/classes/Floor.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Floor.cpp.i
+.PHONY : src/classes/Floor.cpp.i
+
+src/classes/Floor.s: src/classes/Floor.cpp.s
+
+.PHONY : src/classes/Floor.s
+
+# target to generate assembly for a file
+src/classes/Floor.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Floor.cpp.s
+.PHONY : src/classes/Floor.cpp.s
+
+src/classes/Game.o: src/classes/Game.cpp.o
+
+.PHONY : src/classes/Game.o
+
+# target to build an object file
+src/classes/Game.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Game.cpp.o
+.PHONY : src/classes/Game.cpp.o
+
+src/classes/Game.i: src/classes/Game.cpp.i
+
+.PHONY : src/classes/Game.i
+
+# target to preprocess a source file
+src/classes/Game.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Game.cpp.i
+.PHONY : src/classes/Game.cpp.i
+
+src/classes/Game.s: src/classes/Game.cpp.s
+
+.PHONY : src/classes/Game.s
+
+# target to generate assembly for a file
+src/classes/Game.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Game.cpp.s
+.PHONY : src/classes/Game.cpp.s
+
+src/classes/JsonRead.o: src/classes/JsonRead.cpp.o
+
+.PHONY : src/classes/JsonRead.o
+
+# target to build an object file
+src/classes/JsonRead.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/JsonRead.cpp.o
+.PHONY : src/classes/JsonRead.cpp.o
+
+src/classes/JsonRead.i: src/classes/JsonRead.cpp.i
+
+.PHONY : src/classes/JsonRead.i
+
+# target to preprocess a source file
+src/classes/JsonRead.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/JsonRead.cpp.i
+.PHONY : src/classes/JsonRead.cpp.i
+
+src/classes/JsonRead.s: src/classes/JsonRead.cpp.s
+
+.PHONY : src/classes/JsonRead.s
+
+# target to generate assembly for a file
+src/classes/JsonRead.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/JsonRead.cpp.s
+.PHONY : src/classes/JsonRead.cpp.s
+
+src/classes/Keymap.o: src/classes/Keymap.cpp.o
+
+.PHONY : src/classes/Keymap.o
+
+# target to build an object file
+src/classes/Keymap.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Keymap.cpp.o
+.PHONY : src/classes/Keymap.cpp.o
+
+src/classes/Keymap.i: src/classes/Keymap.cpp.i
+
+.PHONY : src/classes/Keymap.i
+
+# target to preprocess a source file
+src/classes/Keymap.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Keymap.cpp.i
+.PHONY : src/classes/Keymap.cpp.i
+
+src/classes/Keymap.s: src/classes/Keymap.cpp.s
+
+.PHONY : src/classes/Keymap.s
+
+# target to generate assembly for a file
+src/classes/Keymap.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Keymap.cpp.s
+.PHONY : src/classes/Keymap.cpp.s
+
+src/classes/Map.o: src/classes/Map.cpp.o
+
+.PHONY : src/classes/Map.o
+
+# target to build an object file
+src/classes/Map.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Map.cpp.o
+.PHONY : src/classes/Map.cpp.o
+
+src/classes/Map.i: src/classes/Map.cpp.i
+
+.PHONY : src/classes/Map.i
+
+# target to preprocess a source file
+src/classes/Map.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Map.cpp.i
+.PHONY : src/classes/Map.cpp.i
+
+src/classes/Map.s: src/classes/Map.cpp.s
+
+.PHONY : src/classes/Map.s
+
+# target to generate assembly for a file
+src/classes/Map.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Map.cpp.s
+.PHONY : src/classes/Map.cpp.s
+
+src/classes/Options.o: src/classes/Options.cpp.o
+
+.PHONY : src/classes/Options.o
+
+# target to build an object file
+src/classes/Options.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Options.cpp.o
+.PHONY : src/classes/Options.cpp.o
+
+src/classes/Options.i: src/classes/Options.cpp.i
+
+.PHONY : src/classes/Options.i
+
+# target to preprocess a source file
+src/classes/Options.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Options.cpp.i
+.PHONY : src/classes/Options.cpp.i
+
+src/classes/Options.s: src/classes/Options.cpp.s
+
+.PHONY : src/classes/Options.s
+
+# target to generate assembly for a file
+src/classes/Options.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Options.cpp.s
+.PHONY : src/classes/Options.cpp.s
+
+src/classes/SceneHandler.o: src/classes/SceneHandler.cpp.o
+
+.PHONY : src/classes/SceneHandler.o
+
+# target to build an object file
+src/classes/SceneHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/SceneHandler.cpp.o
+.PHONY : src/classes/SceneHandler.cpp.o
+
+src/classes/SceneHandler.i: src/classes/SceneHandler.cpp.i
+
+.PHONY : src/classes/SceneHandler.i
+
+# target to preprocess a source file
+src/classes/SceneHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/SceneHandler.cpp.i
+.PHONY : src/classes/SceneHandler.cpp.i
+
+src/classes/SceneHandler.s: src/classes/SceneHandler.cpp.s
+
+.PHONY : src/classes/SceneHandler.s
+
+# target to generate assembly for a file
+src/classes/SceneHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/SceneHandler.cpp.s
+.PHONY : src/classes/SceneHandler.cpp.s
+
+src/classes/Wall.o: src/classes/Wall.cpp.o
+
+.PHONY : src/classes/Wall.o
+
+# target to build an object file
+src/classes/Wall.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Wall.cpp.o
+.PHONY : src/classes/Wall.cpp.o
+
+src/classes/Wall.i: src/classes/Wall.cpp.i
+
+.PHONY : src/classes/Wall.i
+
+# target to preprocess a source file
+src/classes/Wall.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Wall.cpp.i
+.PHONY : src/classes/Wall.cpp.i
+
+src/classes/Wall.s: src/classes/Wall.cpp.s
+
+.PHONY : src/classes/Wall.s
+
+# target to generate assembly for a file
+src/classes/Wall.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/Wall.cpp.s
+.PHONY : src/classes/Wall.cpp.s
+
+src/classes/menu/MainMenu.o: src/classes/menu/MainMenu.cpp.o
+
+.PHONY : src/classes/menu/MainMenu.o
+
+# target to build an object file
+src/classes/menu/MainMenu.cpp.o:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/menu/MainMenu.cpp.o
+.PHONY : src/classes/menu/MainMenu.cpp.o
+
+src/classes/menu/MainMenu.i: src/classes/menu/MainMenu.cpp.i
+
+.PHONY : src/classes/menu/MainMenu.i
+
+# target to preprocess a source file
+src/classes/menu/MainMenu.cpp.i:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/menu/MainMenu.cpp.i
+.PHONY : src/classes/menu/MainMenu.cpp.i
+
+src/classes/menu/MainMenu.s: src/classes/menu/MainMenu.cpp.s
+
+.PHONY : src/classes/menu/MainMenu.s
+
+# target to generate assembly for a file
+src/classes/menu/MainMenu.cpp.s:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/src/classes/menu/MainMenu.cpp.s
+.PHONY : src/classes/menu/MainMenu.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -159,6 +780,75 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... bomberman"
 	@echo "... edit_cache"
+	@echo "... src/abstracts/ABomb.o"
+	@echo "... src/abstracts/ABomb.i"
+	@echo "... src/abstracts/ABomb.s"
+	@echo "... src/abstracts/ACollectible.o"
+	@echo "... src/abstracts/ACollectible.i"
+	@echo "... src/abstracts/ACollectible.s"
+	@echo "... src/abstracts/AGame.o"
+	@echo "... src/abstracts/AGame.i"
+	@echo "... src/abstracts/AGame.s"
+	@echo "... src/abstracts/AMenu.o"
+	@echo "... src/abstracts/AMenu.i"
+	@echo "... src/abstracts/AMenu.s"
+	@echo "... src/abstracts/AMonster.o"
+	@echo "... src/abstracts/AMonster.i"
+	@echo "... src/abstracts/AMonster.s"
+	@echo "... src/abstracts/AMovable.o"
+	@echo "... src/abstracts/AMovable.i"
+	@echo "... src/abstracts/AMovable.s"
+	@echo "... src/abstracts/AObject.o"
+	@echo "... src/abstracts/AObject.i"
+	@echo "... src/abstracts/AObject.s"
+	@echo "... src/abstracts/APlayer.o"
+	@echo "... src/abstracts/APlayer.i"
+	@echo "... src/abstracts/APlayer.s"
+	@echo "... src/classes/Camera.o"
+	@echo "... src/classes/Camera.i"
+	@echo "... src/classes/Camera.s"
+	@echo "... src/classes/Computer.o"
+	@echo "... src/classes/Computer.i"
+	@echo "... src/classes/Computer.s"
+	@echo "... src/classes/Core.o"
+	@echo "... src/classes/Core.i"
+	@echo "... src/classes/Core.s"
+	@echo "... src/classes/Debug.o"
+	@echo "... src/classes/Debug.i"
+	@echo "... src/classes/Debug.s"
+	@echo "... src/classes/Device.o"
+	@echo "... src/classes/Device.i"
+	@echo "... src/classes/Device.s"
+	@echo "... src/classes/Event.o"
+	@echo "... src/classes/Event.i"
+	@echo "... src/classes/Event.s"
+	@echo "... src/classes/Floor.o"
+	@echo "... src/classes/Floor.i"
+	@echo "... src/classes/Floor.s"
+	@echo "... src/classes/Game.o"
+	@echo "... src/classes/Game.i"
+	@echo "... src/classes/Game.s"
+	@echo "... src/classes/JsonRead.o"
+	@echo "... src/classes/JsonRead.i"
+	@echo "... src/classes/JsonRead.s"
+	@echo "... src/classes/Keymap.o"
+	@echo "... src/classes/Keymap.i"
+	@echo "... src/classes/Keymap.s"
+	@echo "... src/classes/Map.o"
+	@echo "... src/classes/Map.i"
+	@echo "... src/classes/Map.s"
+	@echo "... src/classes/Options.o"
+	@echo "... src/classes/Options.i"
+	@echo "... src/classes/Options.s"
+	@echo "... src/classes/SceneHandler.o"
+	@echo "... src/classes/SceneHandler.i"
+	@echo "... src/classes/SceneHandler.s"
+	@echo "... src/classes/Wall.o"
+	@echo "... src/classes/Wall.i"
+	@echo "... src/classes/Wall.s"
+	@echo "... src/classes/menu/MainMenu.o"
+	@echo "... src/classes/menu/MainMenu.i"
+	@echo "... src/classes/menu/MainMenu.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

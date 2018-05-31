@@ -15,11 +15,10 @@ Eo::Floor::Floor(size_t size, vec3 pos)
 void Eo::Floor::insertInScene(const Eo::IScene *scene)
 {
 	auto manager = scene->getSceneManager();
-	auto texture = scene->getSceneManager()->getVideoDriver()->getTexture(
-		"../assets/img/damier.jpg");
-	irr::f32 unitSize = 10.0f;
+	auto texture = scene->getSceneManager()->getVideoDriver()
+		->getTexture("../assets/img/damier.jpg");
 
-	if (_placedInScene == true)
+	if (_placedInScene)
 		return;
 	auto mesh = manager->getGeometryCreator()->createPlaneMesh(
 		irr::core::dimension2df(_size, _size));

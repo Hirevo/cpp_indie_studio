@@ -15,13 +15,15 @@ namespace Eo {
 		explicit MainMenu(Eo::Device &_device);
 		~MainMenu() override;
 
-		enum {
-			GUI_ID_QUIT_BUTTON = 101,
-			GUI_ID_NEW_WINDOW_BUTTON,
-			GUI_ID_FILE_OPEN_BUTTON,
-			GUI_ID_TRANSPARENCY_SCROLL_BAR
+		enum ButtonType {
+			GUI_ID_MAIN_PLAY_BUTTON = 1900,
+			GUI_ID_MAIN_SETTINGS_BUTTON,
+			GUI_ID_MAIN_EXIT_BUTTON
 		};
 
 	private:
+		void putPlayButton();
+		void putSettingsButton();
+		void putExitButton();
 	};
 }
