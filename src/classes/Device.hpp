@@ -23,6 +23,7 @@ namespace Eo {
 	public:
 		irr::IrrlichtDevice *getDevice() const;
 		irr::video::IVideoDriver *getDriver() const;
+		const Options &getOptions() const;
 	};
 }
 

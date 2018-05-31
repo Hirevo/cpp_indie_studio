@@ -9,7 +9,7 @@
 #include "Options.hpp"
 
 Eo::Options::Options()
-	: _windowSize(1680, 1250),
+	: _windowSize(1280, 720),
 	  _exit(false),
 	  _debugMode(false),
 	  _keyExit(irr::EKEY_CODE::KEY_KEY_K),

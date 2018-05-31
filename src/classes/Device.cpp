@@ -24,3 +24,8 @@ irr::video::IVideoDriver *Eo::Device::getDriver() const
 {
 	return _driver;
 }
+
+const Eo::Options &Eo::Device::getOptions() const
+{
+	return _options;
+}
