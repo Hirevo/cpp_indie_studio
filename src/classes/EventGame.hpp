@@ -9,17 +9,17 @@
 #define BOMBERMAN_EOEVENT_HPP
 
 #include <irrlicht.h>
+#include <map>
+#include <functional>
+#include "Options.hpp"
+
 namespace Eo {
 	class EventGame : public irr::IEventReceiver {
 	public:
-		EventGame();
-		void majPosMesh();
+		EventGame(Eo::Options &);
 		virtual bool OnEvent(const irr::SEvent &event);
 	private:
-		bool _leaveRequest;
-	public:
-		bool isleaveRequest() const;
+		Eo::Options _options;
 	};
 }
-
 #endif

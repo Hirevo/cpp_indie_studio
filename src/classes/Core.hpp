@@ -30,6 +30,9 @@ namespace Eo {
 		Eo::SceneHandler _sceneHandler;
 		Eo::EventGame _event;
 		bool _debugMode = true;
+	public:
+		bool is_debugMode() const;
+		void set_debugMode(bool _debugMode);
 	};
 }
 

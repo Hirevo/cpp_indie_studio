@@ -5,26 +5,37 @@
 ** Created by Benjamin
 */
 
+#include <iostream>
 #include "EventGame.hpp"
 
 bool Eo::EventGame::OnEvent(const irr::SEvent &event)
 {
-	bool ret = false;
-	if(event.EventType == irr::EET_KEY_INPUT_EVENT
-		&& event.KeyInput.Key == irr::KEY_KEY_K)
-	{
-		_leaveRequest = event.KeyInput.PressedDown;
-		ret = true;
+	std::map<irr::EKEY_CODE, std::function<void (
+		const irr::SEvent &)>> _keyHandler = {
+		{
+			_options.getKeyExit(),
+			[this] (const irr::SEvent &event) {
+				_options.setExit(true);
+			}
+		},
+		{
+			_options.getKeyDebugMode(),
+			[this] (const irr::SEvent &event) {
+				_options.setExit(true);
+			}
+		}
+	};
+	try {
+		if(event.EventType == irr::EET_KEY_INPUT_EVENT)
+			_keyHandler.at(event.KeyInput.Key)(event);
+	} catch (const std::exception &execption) {
+
 	}
-	return ret;
+	return true;
 }
 
-Eo::EventGame::EventGame() :
-	_leaveRequest(false)
+Eo::EventGame::EventGame(Eo::Options &options) :
+	_options(options)
 {
 }
 
-bool Eo::EventGame::isleaveRequest() const
-{
-	return _leaveRequest;
-}

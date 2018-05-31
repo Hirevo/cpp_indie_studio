@@ -20,7 +20,9 @@ namespace Eo {
 		Eo::Device _device;
 		Eo::IScene *_scene;
 		bool _cameraPosTitleWindow = true;
+		bool _cameraPos = true;
 		void dumpCameraPosTitleWindow();
+		void dumpCameraPos();
 	public:
 		void dumpDebug();
 		bool isCameraPosTitleWindow() const;

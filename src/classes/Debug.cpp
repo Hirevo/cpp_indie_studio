@@ -19,6 +19,19 @@ Eo::Debug::~Debug()
 void Eo::Debug::dumpDebug()
 {
 	dumpCameraPosTitleWindow();
+	dumpCameraPos();
+}
+
+void Eo::Debug::dumpCameraPos()
+{
+	if (_cameraPos) {
+		auto font = _device.getDevice()->getGUIEnvironment()->getBuiltInFont();
+		_scene->getSceneManager()->addTextSceneNode(
+			font,
+			L"Oui",
+			irr::video::SColor(255,255,255,255)
+		);
+	}
 }
 
 void Eo::Debug::dumpCameraPosTitleWindow()
