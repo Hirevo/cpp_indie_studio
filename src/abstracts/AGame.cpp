@@ -25,5 +25,11 @@ irr::scene::ISceneManager *Eo::AGame::getSceneManager() const
 bool Eo::AGame::clean() const
 {
 	this->_sceneManager->clear();
+	this->_device.getDevice()->getGUIEnvironment()->clear();
+	return false;
+}
+
+bool Eo::AGame::draw()
+{
 	return false;
 }

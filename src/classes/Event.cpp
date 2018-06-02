@@ -6,33 +6,34 @@
 */
 
 #include "Event.hpp"
+#include "Game.hpp"
 #include <iostream>
 #include <menu/MainMenu.hpp>
 
 static const std::map<irr::gui::EGUI_EVENT_TYPE, std::map<irr::s32,
-	std::function<void(const irr::SEvent &, Eo::Options &)>>> GUI_EVENTS =
+	std::function<void(Eo::Device &, Eo::Options &,
+		Eo::SceneHandler &)>>> GUI_EVENTS = {
+	{irr::gui::EGUI_EVENT_TYPE::EGET_BUTTON_CLICKED,
 	{
 		{
-			irr::gui::EGUI_EVENT_TYPE::EGET_BUTTON_CLICKED,
-			{
-				{
-					Eo::MainMenu::GUI_ID_MAIN_PLAY_BUTTON,
-					[](const irr::SEvent &event,
-						Eo::Options &options) {
-						std::cout << "YOU CLICKED PLAY"
-							<< std::endl;
-					}
-				},
-				{
-					Eo::MainMenu::GUI_ID_MAIN_EXIT_BUTTON,
-					[](const irr::SEvent &event,
-						Eo::Options &options) {
-						options.setExit(true);
-					}
-				}
+			Eo::MainMenu::GUI_ID_MAIN_PLAY_BUTTON,
+			[](Eo::Device &device, Eo::Options &options,
+				Eo::SceneHandler &sceneHandler) {
+				std::cout << sceneHandler.getNumberScenes() << std::endl;
+				sceneHandler.loadScene(new
+					Eo::Game(device, "../map2.json"));
+				std::cout << sceneHandler.getNumberScenes() << std::endl;
+			}
+		},
+		{
+			Eo::MainMenu::GUI_ID_MAIN_EXIT_BUTTON,
+			[](Eo::Device &device, Eo::Options &options,
+				Eo::SceneHandler &sceneHandler) {
+				options.setExit(true);
 			}
 		}
-	};
+	}}
+};
 
 bool Eo::Event::OnEvent(const irr::SEvent &event)
 {
@@ -46,7 +47,8 @@ bool Eo::Event::OnEvent(const irr::SEvent &event)
 		else if (event.EventType == irr::EET_GUI_EVENT) {
 			irr::s32 id = event.GUIEvent.Caller->getID();
 			auto type = event.GUIEvent.EventType;
-			GUI_EVENTS.at(type).at(id)(event, this->_options);
+			GUI_EVENTS.at(type).at(id)(this->_device,
+				this->_options, this->_sceneHandler);
 		} else
 			return false;
 	}
@@ -57,8 +59,9 @@ bool Eo::Event::OnEvent(const irr::SEvent &event)
 	return true;
 }
 
-Eo::Event::Event(Eo::Options &options, Eo::Device &device)
-	: _options(options), _device(device)
+Eo::Event::Event(Eo::Options &options, Eo::Device &device,
+	Eo::SceneHandler &sceneHandler)
+	: _options(options), _device(device), _sceneHandler(sceneHandler)
 {
 }
 

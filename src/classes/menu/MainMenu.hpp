@@ -14,6 +14,7 @@ namespace Eo {
 	public:
 		MainMenu(Eo::Device &_device);
 		~MainMenu() override;
+		bool draw() override;
 
 		enum ButtonType {
 			GUI_ID_MAIN_PLAY_BUTTON = 1900,

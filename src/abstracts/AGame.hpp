@@ -19,6 +19,7 @@ namespace Eo {
 		~AGame();
 		irr::scene::ISceneManager *getSceneManager() const override;
 		bool clean() const override;
+		bool draw() override;
 	protected:
 		Eo::Device &_device;
 		irr::scene::ISceneManager *_sceneManager;

@@ -18,6 +18,7 @@ namespace Eo {
 		irr::scene::ISceneManager *getSceneManager() const override;
 		irr::scene::ICameraSceneNode *getCamera() const override;
 		bool clean() const override;
+		bool draw() override;
 
 	protected:
 		Device _device;

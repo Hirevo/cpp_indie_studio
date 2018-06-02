@@ -12,6 +12,20 @@
 Eo::Game::Game(Eo::Device &device, const std::string &mapPath)
 	: AScene(device), _json(mapPath), _map(_json), _camera()
 {
+}
+
+Eo::Game::~Game()
+{
+}
+
+irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
+{
+	return dynamic_cast<irr::scene::ICameraSceneNode *>(
+		_camera.getSceneNode());
+}
+
+bool Eo::Game::draw()
+{
 	Eo::IObject *obj;
 	irr::s32 wth = _map.getWidth();
 	irr::s32 hgt = _map.getHeight();
@@ -34,14 +48,4 @@ Eo::Game::Game(Eo::Device &device, const std::string &mapPath)
 					0, texture);
 			}
 		}
-}
-
-Eo::Game::~Game()
-{
-}
-
-irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
-{
-	return dynamic_cast<irr::scene::ICameraSceneNode *>(
-		_camera.getSceneNode());
 }

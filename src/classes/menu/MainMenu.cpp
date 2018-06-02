@@ -11,17 +11,7 @@
 
 Eo::MainMenu::MainMenu(Eo::Device &device) : AScene(device)
 {
-	irr::gui::IGUIEnvironment *env =
-		this->_device.getDevice()->getGUIEnvironment();
-
-	irr::gui::IGUISkin *skin = env->getSkin();
-	irr::gui::IGUIFont *font = env->getFont("./fonthaettenschweiler.bmp");
-	if (font)
-		skin->setFont(font);
-	this->putPlayButton();
-	this->putSettingsButton();
-	this->putExitButton();
-	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
+	this->draw();
 }
 
 Eo::MainMenu::~MainMenu()
@@ -71,4 +61,18 @@ void Eo::MainMenu::putExitButton()
 			(int)((h / 6) * 3 + h / 6)},
 		0,
 		GUI_ID_MAIN_EXIT_BUTTON, L"Exit", L"Exit the game");
+}
+
+bool Eo::MainMenu::draw()
+{
+	irr::gui::IGUIEnvironment *env =
+		this->_device.getDevice()->getGUIEnvironment();
+	irr::gui::IGUISkin *skin = env->getSkin();
+	irr::gui::IGUIFont *font = env->getFont("../fonthaettenschweiler.bmp");
+	if (font)
+		skin->setFont(font);
+	this->putPlayButton();
+	this->putSettingsButton();
+	this->putExitButton();
+	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
 }

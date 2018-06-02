@@ -24,6 +24,7 @@ namespace Eo {
 		Game(Eo::Device &device, const std::string &mapPath);
 		~Game();
 		irr::scene::ICameraSceneNode *getCamera() const override;
+		bool draw() override;
 
 	private:
 		Eo::JsonRead _json;

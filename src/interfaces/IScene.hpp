@@ -20,5 +20,7 @@ namespace Eo {
 		virtual irr::scene::ICameraSceneNode *getCamera() const = 0;
 
 		virtual bool clean() const = 0;
+
+		virtual bool draw() = 0;
 	};
 }

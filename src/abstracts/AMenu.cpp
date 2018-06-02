@@ -29,6 +29,12 @@ irr::scene::ICameraSceneNode *Eo::AMenu::getCamera() const
 
 bool Eo::AMenu::clean() const
 {
+	this->_sceneManager->clear();
 	this->_device.getDevice()->getGUIEnvironment()->clear();
+	return false;
+}
+
+bool Eo::AMenu::draw()
+{
 	return false;
 }
