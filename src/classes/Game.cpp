@@ -16,8 +16,7 @@ Eo::Game::Game(Eo::Device &device, const std::string &mapPath)
 	irr::s32 wth = _map.getWidth();
 	irr::s32 hgt = _map.getHeight();
 	auto texture = device.getDevice()->getSceneManager()->getVideoDriver()->getTexture("../assets/img/red_silk.jpg");
-	//_camera.insertStaticInScene(this);
-	_camera.insertFPSInScene(this);
+	_camera.insertStaticInScene(this);
 	Eo::Floor floor((wth - 1)*(hgt - 1) - 10);
 	floor.insertFPSInScene(this);
 	for (irr::s32 i = 0; i < hgt; i++)
@@ -42,4 +41,9 @@ irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
 {
 	return dynamic_cast<irr::scene::ICameraSceneNode *>(
 		_camera.getSceneNode());
+}
+
+Eo::Camera &Eo::Game::get_camera()
+{
+	return _camera;
 }

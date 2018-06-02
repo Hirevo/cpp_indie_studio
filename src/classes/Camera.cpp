@@ -15,6 +15,7 @@ Eo::Camera::Camera(irr::core::vector3df pos)
 
 void Eo::Camera::insertFPSInScene(Eo::IScene *scene)
 {
+	_camType = FPS;
 	if (_placedInScene)
 		return;
 	if (!_isInstanciated) {
@@ -44,25 +45,27 @@ void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
 	irr::core::vector3df position(0, 80, -80);
 	irr::core::vector3df lookat = irr::core::vector3df(0, 0, 0);
 
+	_camType = STATIC;
 	if (_placedInScene)
 		return;
 	if (!_isInstanciated) {
 		_camera = scene->getSceneManager()->addCameraSceneNode(
-			nullptr,position,lookat);
+			nullptr,position,lookat,-1,true);
 		_node = _camera;
-		_node->setPosition(position);
 		_isInstanciated = true;
 	}
 	else
 		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
+	_pos = position;
 	Eo::Camera::updateInScene(scene);
 	_placedInScene = true;
 }
 
 void Eo::Camera::removeFromScene(Eo::IScene *scene)
 {
-	if (_placedInScene)
+	if (_placedInScene) {
 		_node->remove();
+	}
 }
 
 void Eo::Camera::updateInScene(Eo::IScene *scene)
@@ -76,5 +79,10 @@ void Eo::Camera::updateInScene(Eo::IScene *scene)
 irr::scene::ICameraSceneNode *Eo::Camera::getCameraHandle() const
 {
 	return _camera;
+}
+
+Eo::Camera::cameraType Eo::Camera::getCamType() const
+{
+	return _camType;
 }
 

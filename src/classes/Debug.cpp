@@ -17,10 +17,11 @@ Eo::Debug::~Debug()
 {
 }
 
-void Eo::Debug::dumpDebug(irr::scene::ISceneManager *scene)
+void Eo::Debug::dumpDebug(IScene *scene, Eo::Game *game)
 {
-	dumpCameraPosTitleWindow(scene);
-	dumpCameraPos(scene);
+	dumpCameraPosTitleWindow(scene->getSceneManager());
+	dumpCameraPos(scene->getSceneManager());
+	toogleFpsCamera(scene, game);
 }
 
 void Eo::Debug::dumpCameraPos(irr::scene::ISceneManager *scene)
@@ -74,4 +75,14 @@ void Eo::Debug::setCameraPosTitleWindow(bool _cameraPosTitleWindow)
 void Eo::Debug::clearDebugList(irr::scene::ISceneManager *scene)
 {
 	scene->getGUIEnvironment()->clear();
+}
+
+void Eo::Debug::toogleFpsCamera(IScene *scene, Eo::Game *game)
+{
+	if (game->get_camera().getCamType() != Eo::Camera::FPS) {
+		game->get_camera().removeFromScene(scene);
+		game->get_camera().insertFPSInScene(scene);
+		std::cout << "loool\n";
+	}
+//	scene->setActiveCamera()
 }

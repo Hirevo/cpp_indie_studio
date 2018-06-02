@@ -25,12 +25,12 @@ Eo::Core::Core()
 	  _event(_options, _device, _debug)
 {
 	_device.getDevice()->setEventReceiver(&_event);
-	_sceneHandler.addScene(new Eo::Game(_device, "../map2.json"));;
-	//_sceneHandler.addScene(new Eo::MainMenu(_device));
+	auto game = new Eo::Game(_device, "../map2.json");
+	_sceneHandler.addScene(game);
 
 	while (_device.getDevice()->run() && !_options.isExit()) {
 		if(_options.isDebugMode())
-			_debug.dumpDebug(_sceneHandler.getCurrentScene()->getSceneManager());
+			_debug.dumpDebug(_sceneHandler.getCurrentScene(), game);
 		_device.getDriver()->beginScene();
 		_sceneHandler.getCurrentScene()->getSceneManager()->drawAll();
 		_device.getDevice()->getGUIEnvironment()->drawAll();

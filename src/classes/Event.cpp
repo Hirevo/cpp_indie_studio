@@ -58,7 +58,7 @@ bool Eo::Event::OnEvent(const irr::SEvent &event)
 		else
 			return false;
 	} catch (const std::exception &execption) {
-		std::cout << execption.what() << std::endl;
+		//std::cout << execption.what() << std::endl;
 		return false;
 	}
 	return true;
