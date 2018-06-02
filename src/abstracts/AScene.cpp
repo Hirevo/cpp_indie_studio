@@ -24,3 +24,9 @@ irr::scene::ICameraSceneNode *Eo::AScene::getCamera() const
 {
 	return nullptr;
 }
+
+bool Eo::AScene::clean() const
+{
+	this->_sceneManager->clear();
+	return true;
+}

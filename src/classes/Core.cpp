@@ -27,7 +27,7 @@ Eo::Core::Core()
 	_sceneHandler.addScene(new Eo::Game(_device, "../map2.json"));
 	auto game = _sceneHandler.getCurrentScene();
 	Eo::Debug debug(_device, game);
-	//_sceneHandler.addScene(new Eo::MainMenu(_device));
+	_sceneHandler.addScene(new Eo::MainMenu(_device));
 
 	while (_device.getDevice()->run() && !_options.isExit()) {
 		if(_options.isDebugMode())
