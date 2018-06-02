@@ -18,7 +18,7 @@ void Eo::Camera::insertFPSInScene(Eo::IScene *scene)
 	_camType = FPS;
 	if (_placedInScene)
 		return;
-	if (!_isInstanciated) {
+	if (!_hasNode) {
 		_keyMap[0].Action = irr::EKA_MOVE_FORWARD;
 		_keyMap[0].KeyCode = irr::KEY_KEY_Z;
 		_keyMap[1].Action = irr::EKA_MOVE_BACKWARD;
@@ -32,7 +32,7 @@ void Eo::Camera::insertFPSInScene(Eo::IScene *scene)
 		_camera = scene->getSceneManager()->addCameraSceneNodeFPS(
 			nullptr, 200.0f, 0.1f, -1, _keyMap, 5);
 		_node = _camera;
-		_isInstanciated = true;
+		_hasNode = true;
 	}
 	else
 		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
@@ -48,11 +48,11 @@ void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
 	_camType = STATIC;
 	if (_placedInScene)
 		return;
-	if (!_isInstanciated) {
+	if (!_hasNode) {
 		_camera = scene->getSceneManager()->addCameraSceneNode(
 			nullptr,position,lookat,-1,true);
 		_node = _camera;
-		_isInstanciated = true;
+		_hasNode = true;
 	}
 	else
 		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
@@ -61,16 +61,20 @@ void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
 	_placedInScene = true;
 }
 
+void Eo::Camera::insertInScene(Eo::IScene *scene)
+{
+}
+
 void Eo::Camera::removeFromScene(Eo::IScene *scene)
 {
-	if (_placedInScene) {
+	if (_placedInScene && _hasNode)
 		_node->remove();
-	}
+	_placedInScene = false;
 }
 
 void Eo::Camera::updateInScene(Eo::IScene *scene)
 {
-	if (_isInstanciated) {
+	if (_hasNode) {
 		_node->setPosition(_pos);
 		_hasPositionChanged = false;
 	}

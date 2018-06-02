@@ -17,7 +17,7 @@ namespace Eo {
 			irr::core::vector3df pos = irr::core::vector3df(
 				0, 0, 0));
 		~Floor() = default;
-		void insertFPSInScene(Eo::IScene *scene) override;
+		void insertInScene(Eo::IScene *scene) override;
 		void removeFromScene(Eo::IScene *scene) override;
 		void updateInScene(Eo::IScene *scene) override;
 

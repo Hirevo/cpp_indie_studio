@@ -12,7 +12,7 @@ Eo::Floor::Floor(size_t size, irr::core::vector3df pos)
 {
 }
 
-void Eo::Floor::insertFPSInScene(Eo::IScene *scene)
+void Eo::Floor::insertInScene(Eo::IScene *scene)
 {
 	auto manager = scene->getSceneManager();
 	auto texture = scene->getSceneManager()->getVideoDriver()->getTexture("../assets/img/damier.jpg");

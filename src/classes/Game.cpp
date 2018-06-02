@@ -18,14 +18,14 @@ Eo::Game::Game(Eo::Device &device, const std::string &mapPath)
 	auto texture = device.getDevice()->getSceneManager()->getVideoDriver()->getTexture("../assets/img/red_silk.jpg");
 	_camera.insertStaticInScene(this);
 	Eo::Floor floor((wth - 1)*(hgt - 1) - 10);
-	floor.insertFPSInScene(this);
+	floor.insertInScene(this);
 	for (irr::s32 i = 0; i < hgt; i++)
 		for (irr::s32 j = 0; j < wth; j++) {
 			obj = _map.getObject(j, i);
 			if (obj) {
 				obj->setPosition((j - (wth / 2)) * 10, 5,
 					(i - (hgt / 2)) * 10);
-				obj->insertFPSInScene(this);
+				obj->insertInScene(this);
 				obj->getSceneNode()->setMaterialFlag(irr::video::EMF_LIGHTING,
 					false);
 				obj->getSceneNode()->setMaterialTexture(0, texture);

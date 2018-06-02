@@ -10,7 +10,7 @@
 
 Eo::AObject::AObject(Eo::IObject::Type type, irr::scene::ISceneNode *node, irr::core::vector3df pos)
 	: AMovable(pos), _type(type), _node(node), _placedInScene(false),
-	  _isInstanciated(node != nullptr)
+	  _hasNode(node != nullptr)
 {
 }
 
@@ -29,12 +29,17 @@ void Eo::AObject::setSceneNode(irr::scene::ISceneNode *node)
 	_node = node;
 }
 
-void Eo::AObject::insertFPSInScene(Eo::IScene *scene)
+void Eo::AObject::deleteNode(Eo::IScene *scene)
 {
-	throw std::runtime_error("Method non implemented");
+	this->removeFromScene(scene);
+	if (_hasNode) {
+		delete _node;
+		_node = 0;
+		_hasNode = 0;
+	}
 }
 
-void Eo::AObject::insertStaticInScene(Eo::IScene *scene)
+void Eo::AObject::insertInScene(Eo::IScene *scene)
 {
 	throw std::runtime_error("Method non implemented");
 }

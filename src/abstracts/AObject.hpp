@@ -21,15 +21,15 @@ namespace Eo {
 		Eo::IObject::Type getType() const override;
 		irr::scene::ISceneNode *getSceneNode() const override;
 		void setSceneNode(irr::scene::ISceneNode *node) override;
-		void insertFPSInScene(Eo::IScene *scene) override;
-		void insertStaticInScene(Eo::IScene *scene) override;
+		void insertInScene(Eo::IScene *scene) override;
 		void removeFromScene(Eo::IScene *scene) override;
+		void deleteNode(Eo::IScene *scene) override;
 		void updateInScene(Eo::IScene *scene) override;
 
 	protected:
 		Eo::IObject::Type _type;
 		irr::scene::ISceneNode *_node;
-		bool _isInstanciated;
+		bool _hasNode;
 		bool _placedInScene;
 
 	private:

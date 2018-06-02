@@ -25,9 +25,9 @@ namespace Eo {
 		virtual Eo::IObject::Type getType() const = 0;
 		virtual irr::scene::ISceneNode *getSceneNode() const = 0;
 		virtual void setSceneNode(irr::scene::ISceneNode *node) = 0;
-		virtual void insertFPSInScene(Eo::IScene *scene) = 0;
-		virtual void insertStaticInScene(Eo::IScene *scene) = 0;
+		virtual void insertInScene(Eo::IScene *scene) = 0;
 		virtual void removeFromScene(Eo::IScene *scene) = 0;
+		virtual void deleteNode(Eo::IScene *scene) = 0;
 		virtual void updateInScene(Eo::IScene *scene) = 0;
 
 	private:

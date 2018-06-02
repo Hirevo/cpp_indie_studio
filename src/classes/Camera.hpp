@@ -23,8 +23,9 @@ namespace Eo {
 		Camera(irr::core::vector3df pos = irr::core::vector3df(0, 0,
 			0));
 		~Camera() = default;
-		void insertFPSInScene(Eo::IScene *scene) override;
-		void insertStaticInScene(Eo::IScene *scene) override;
+		void insertFPSInScene(Eo::IScene *scene);
+		void insertStaticInScene(Eo::IScene *scene);
+		void insertInScene(Eo::IScene *scene) override;
 		void removeFromScene(Eo::IScene *scene) override;
 		void updateInScene(Eo::IScene *scene) override;
 		irr::scene::ICameraSceneNode *getCameraHandle() const;

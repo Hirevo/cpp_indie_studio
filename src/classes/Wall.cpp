@@ -12,7 +12,7 @@ Eo::Wall::Wall(Eo::Wall::WallType wallType, irr::core::vector3df pos)
 {
 }
 
-void Eo::Wall::insertFPSInScene(Eo::IScene *scene)
+void Eo::Wall::insertInScene(Eo::IScene *scene)
 {
 	auto manager = scene->getSceneManager();
 	irr::f32 unitSize = 10.0f;
@@ -29,7 +29,7 @@ void Eo::Wall::insertFPSInScene(Eo::IScene *scene)
 void Eo::Wall::removeFromScene(Eo::IScene *scene)
 {
 	(void)(scene);
-	if (_placedInScene == false)
+	if (_placedInScene == false || _hasNode == false)
 		return;
 	_node->remove();
 	_hasPositionChanged = false;
@@ -38,6 +38,8 @@ void Eo::Wall::removeFromScene(Eo::IScene *scene)
 
 void Eo::Wall::updateInScene(Eo::IScene *scene)
 {
+	if (_placedInScene == false || _hasNode == false)
+		return;
 	_node->setPosition(_pos);
 	_hasPositionChanged = false;
 }
