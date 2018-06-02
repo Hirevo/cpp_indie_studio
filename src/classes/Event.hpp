@@ -13,15 +13,17 @@
 #include <functional>
 #include "Options.hpp"
 #include "Device.hpp"
+#include "Debug.hpp"
 
 namespace Eo {
 	class Event : public irr::IEventReceiver {
 	public:
-		Event(Eo::Options &, Eo::Device &device);
+		Event(Eo::Options &, Eo::Device &, Eo::Debug &);
 		virtual bool OnEvent(const irr::SEvent &event);
 	private:
 		Eo::Options &_options;
 		Eo::Device &_device;
+		Eo::Debug &_debug;
 		void keyExit();
 		void keyDebugToggle(const irr::SEvent &event);
 	};

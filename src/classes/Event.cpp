@@ -64,9 +64,10 @@ bool Eo::Event::OnEvent(const irr::SEvent &event)
 	return true;
 }
 
-Eo::Event::Event(Eo::Options &options, Eo::Device &device) :
+Eo::Event::Event(Eo::Options &options, Eo::Device &device, Eo::Debug &debug) :
 	_options(options),
-	_device(device)
+	_device(device),
+	_debug(debug)
 {
 }
 
@@ -81,8 +82,10 @@ void Eo::Event::keyDebugToggle(const irr::SEvent &event)
 		_options.isDebugMode() ?
 			_options.setDebugMode(false) :
 			_options.setDebugMode(true);
-		if (!_options.isDebugMode())
+		if (!_options.isDebugMode()) {
 			_device.setDeviceTitle(L"Eo Bombermanz");
+			_debug.clearDebugList(_device.getDevice()->getSceneManager());
+		}
 	}
 }
 

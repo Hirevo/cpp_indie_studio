@@ -42,7 +42,7 @@ void Eo::Camera::insertFPSInScene(Eo::IScene *scene)
 void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
 {
 	irr::core::vector3df position(0, 80, -80);
-	irr::core::vector3df lookat = irr::core::vector3df(0, 0, 100);
+	irr::core::vector3df lookat = irr::core::vector3df(0, 0, 0);
 
 	if (_placedInScene)
 		return;
@@ -50,6 +50,7 @@ void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
 		_camera = scene->getSceneManager()->addCameraSceneNode(
 			nullptr,position,lookat);
 		_node = _camera;
+		_node->setPosition(position);
 		_isInstanciated = true;
 	}
 	else
