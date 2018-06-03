@@ -48,4 +48,5 @@ bool Eo::Game::draw()
 					0, texture);
 			}
 		}
+	return true;
 }
