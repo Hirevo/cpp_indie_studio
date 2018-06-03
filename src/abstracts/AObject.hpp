@@ -33,5 +33,8 @@ namespace Eo {
 		bool _placedInScene;
 
 	private:
+	public:
+		bool is_hasNode() const;
+		bool is_placedInScene() const;
 	};
 };

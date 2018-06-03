@@ -27,7 +27,6 @@ Eo::Core::Core()
 	_device.getDevice()->setEventReceiver(&_event);
 	auto game = new Eo::Game(_device, "../map2.json");
 	_sceneHandler.addScene(game);
-
 	while (_device.getDevice()->run() && !_options.isExit()) {
 		if(_options.isDebugMode())
 			_debug.dumpDebug(_sceneHandler.getCurrentScene(), game);

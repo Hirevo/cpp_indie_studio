@@ -34,6 +34,7 @@ namespace Eo {
 		irr::scene::ICameraSceneNode *_camera;
 		cameraType _camType = NONE;
 	public:
+
 		cameraType getCamType() const;
 	};
 }

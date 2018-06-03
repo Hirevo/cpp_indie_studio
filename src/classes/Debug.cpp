@@ -21,7 +21,7 @@ void Eo::Debug::dumpDebug(IScene *scene, Eo::Game *game)
 {
 	dumpCameraPosTitleWindow(scene->getSceneManager());
 	dumpCameraPos(scene->getSceneManager());
-	toogleFpsCamera(scene, game);
+	toogleFpsCameraOn(game);
 }
 
 void Eo::Debug::dumpCameraPos(irr::scene::ISceneManager *scene)
@@ -79,10 +79,24 @@ void Eo::Debug::clearDebugList(irr::scene::ISceneManager *scene)
 
 #include <iostream>
 
-void Eo::Debug::toogleFpsCamera(IScene *scene, Eo::Game *game)
+void Eo::Debug::toogleFpsCameraOn(Eo::Game *game)
 {
+	auto camObj = game->get_camera();
 	if (game->get_camera().getCamType() != Eo::Camera::FPS) {
-		game->get_camera().deleteNode(scene);
+		game->get_camera().deleteNode(game);
+		//Todo IF we delete this cout, it's magicaly crass on Windows
+		std::cout << "" << camObj.is_placedInScene() << std::endl;
 		game->get_camera().insertFPSInScene(game);
+	}
+}
+
+void Eo::Debug::toogleFpsCameraOff(Eo::Game *game)
+{
+	auto camObj = game->get_camera();
+	if (game->get_camera().getCamType() == Eo::Camera::FPS) {
+		game->get_camera().deleteNode(game);
+		//Todo IF we delete this cout, it's magicaly crass on Windows
+		std::cout << "" << camObj.is_placedInScene() << std::endl;
+		game->get_camera().insertStaticInScene(game);
 	}
 }

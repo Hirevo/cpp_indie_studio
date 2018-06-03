@@ -54,3 +54,13 @@ void Eo::AObject::updateInScene(Eo::IScene *scene)
 	throw std::runtime_error("Method non implemented");
 }
 
+bool Eo::AObject::is_hasNode() const
+{
+	return _hasNode;
+}
+
+bool Eo::AObject::is_placedInScene() const
+{
+	return _placedInScene;
+}
+

@@ -48,8 +48,10 @@ void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
 	irr::core::vector3df lookat = irr::core::vector3df(0, 0, 0);
 
 	_camType = STATIC;
-	if (_placedInScene)
+	if (_placedInScene) {
+		std::cout << "Debug: isPlacedInScene (so Return)\n";
 		return;
+	}
 	if (!_hasNode) {
 		_camera = scene->getSceneManager()->addCameraSceneNode(
 			nullptr,position,lookat,-1,true);
