@@ -75,4 +75,5 @@ bool Eo::MainMenu::draw()
 	this->putSettingsButton();
 	this->putExitButton();
 	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
+	return true;
 }
