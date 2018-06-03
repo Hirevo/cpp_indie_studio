@@ -82,11 +82,7 @@ void Eo::Debug::clearDebugList(irr::scene::ISceneManager *scene)
 void Eo::Debug::toogleFpsCamera(IScene *scene, Eo::Game *game)
 {
 	if (game->get_camera().getCamType() != Eo::Camera::FPS) {
-		std::cout << "loool\n";
 		game->get_camera().deleteNode(scene);
-		std::cout << "loool2\n";
-		game->get_camera().insertFPSInScene(scene);
-		std::cout << "loool3\n";
+		game->get_camera().insertFPSInScene(game);
 	}
-//	scene->setActiveCamera()
 }

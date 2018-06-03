@@ -29,21 +29,16 @@ void Eo::Camera::insertFPSInScene(Eo::IScene *scene)
 		_keyMap[3].KeyCode = irr::KEY_KEY_D;
 		_keyMap[4].Action = irr::EKA_JUMP_UP;
 		_keyMap[4].KeyCode = irr::KEY_SPACE;
-		std::cout << "Debug 1\n";
-		auto myScene = scene;
-		std::cout << "Debug 2\n";
-		auto sceneMana = myScene->getSceneManager();
-		std::cout << "Debug 3\n";
-		auto cam = sceneMana->addCameraSceneNodeFPS(
+
+		_camera = scene->getSceneManager()->addCameraSceneNodeFPS(
 			nullptr, 200.0f, 0.1f, -1, _keyMap, 5);
-		std::cout << "Debug 4\n";
-		_camera = cam;
 		_node = _camera;
 		_hasNode = true;
 	}
 	else
 		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
 	Eo::Camera::updateInScene(scene);
+
 	_placedInScene = true;
 }
 
