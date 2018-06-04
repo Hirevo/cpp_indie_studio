@@ -2,22 +2,23 @@
 ** EPITECH PROJECT, 2018
 ** bomberman
 ** File description:
-** SettingsMenu.cpp
+** CreditsMenu.cpp
 */
 
+#include "CreditsMenu.hpp"
 #include "SettingsMenu.hpp"
 
-Eo::SettingsMenu::SettingsMenu(Eo::Device &_device) : AScene(_device)
+Eo::CreditsMenu::CreditsMenu(Eo::Device &_device) : AScene(_device)
 {
 	this->draw();
 }
 
-Eo::SettingsMenu::~SettingsMenu()
+Eo::CreditsMenu::~CreditsMenu()
 {
 
 }
 
-bool Eo::SettingsMenu::draw()
+bool Eo::CreditsMenu::draw()
 {
 	irr::gui::IGUIEnvironment *env =
 		this->_device.getDevice()->getGUIEnvironment();
@@ -32,7 +33,7 @@ bool Eo::SettingsMenu::draw()
 	return true;
 }
 
-void Eo::SettingsMenu::putBackgroundImage()
+void Eo::CreditsMenu::putBackgroundImage()
 {
 	irr::gui::IGUIEnvironment *env =
 		this->_device.getDevice()->getGUIEnvironment();
@@ -40,7 +41,7 @@ void Eo::SettingsMenu::putBackgroundImage()
 		"../assets/img/menu-background.jpg"), {0, 0});
 }
 
-void Eo::SettingsMenu::putReturnButton()
+void Eo::CreditsMenu::putReturnButton()
 {
 	auto *env = this->_device.getDevice()->getGUIEnvironment();
 	auto windowSize = this->_device.getOptions().get_windowSize();
@@ -52,6 +53,6 @@ void Eo::SettingsMenu::putReturnButton()
 			(int)(3 * w / 24),
 			(int)((h / 24) + h / 12)},
 		nullptr,
-		Eo::SettingsMenu::ButtonType::Return, L"Return",
+		Eo::CreditsMenu::ButtonType::Return, L"Return",
 		L"Return to main menu");
 }

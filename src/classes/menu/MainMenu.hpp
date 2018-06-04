@@ -16,11 +16,12 @@ namespace Eo {
 		~MainMenu() override;
 		bool draw() override;
 
-		enum ButtonType { Play = 1900, Settings, Exit };
+		enum ButtonType { Play = 1900, Settings, Credits, Exit };
 
 	private:
 		void putPlayButton();
 		void putSettingsButton();
+		void putCreditsButton();
 		void putExitButton();
 		void putBackgroundImage();
 		void putTitle();
