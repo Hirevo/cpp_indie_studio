@@ -22,7 +22,7 @@ bool Eo::SettingsMenu::draw()
 	irr::gui::IGUIEnvironment *env =
 		this->_device.getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
-	irr::gui::IGUIFont *font = env->getFont("../fonthaettenschweiler.bmp");
+	irr::gui::IGUIFont *font = env->getFont("../assets/font/fonthaettenschweiler.bmp");
 	if (font)
 		skin->setFont(font);
 	this->putBackgroundImage();
