@@ -9,6 +9,7 @@
 #include "Game.hpp"
 #include <iostream>
 #include <menu/MainMenu.hpp>
+#include <menu/SettingsMenu.hpp>
 
 static const std::map<irr::gui::EGUI_EVENT_TYPE, std::map<irr::s32,
 	std::function<void(Eo::Device &, Eo::Options &,
@@ -19,10 +20,8 @@ static const std::map<irr::gui::EGUI_EVENT_TYPE, std::map<irr::s32,
 			Eo::MainMenu::GUI_ID_MAIN_PLAY_BUTTON,
 			[](Eo::Device &device, Eo::Options &options,
 				Eo::SceneHandler &sceneHandler) {
-				std::cout << sceneHandler.getNumberScenes() << std::endl;
 				sceneHandler.loadScene(new
 					Eo::Game(device, "../map2.json"));
-				std::cout << sceneHandler.getNumberScenes() << std::endl;
 			}
 		},
 		{
@@ -30,6 +29,13 @@ static const std::map<irr::gui::EGUI_EVENT_TYPE, std::map<irr::s32,
 			[](Eo::Device &device, Eo::Options &options,
 				Eo::SceneHandler &sceneHandler) {
 				options.setExit(true);
+			}
+		},
+		{
+			Eo::MainMenu::GUI_ID_MAIN_SETTINGS_BUTTON,
+			[](Eo::Device &device, Eo::Options &options,
+				Eo::SceneHandler &sceneHandler) {
+				sceneHandler.loadScene(new Eo::SettingsMenu(device));
 			}
 		}
 	}}
