@@ -23,6 +23,7 @@ Eo::Core::Core()
 	  _sceneHandler(_device),
 	  _event(_options, _device, _sceneHandler)
 {
+	_device.getDevice()->setResizable(false);
 	_device.getDevice()->setEventReceiver(&_event);
 	_sceneHandler.loadScene(new Eo::MainMenu(_device));
 

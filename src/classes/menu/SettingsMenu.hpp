@@ -16,8 +16,13 @@ namespace Eo {
 		SettingsMenu(Eo::Device &_device);
 		~SettingsMenu();
 		bool draw() override;
+
+		enum ButtonType {
+			Return
+		};
 	private:
 		void putBackgroundImage();
+		void putReturnButton();
 	};
 }
 

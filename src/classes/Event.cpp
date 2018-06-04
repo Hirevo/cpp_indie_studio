@@ -37,7 +37,13 @@ static const std::map<std::pair<Eo::eventType, irr::s32>, Eo::eventHandler>
 				Eo::SceneHandler &sceneHandler) {
 				sceneHandler.loadScene(
 					new Eo::SettingsMenu(device));
-			}}};
+			}},
+		  {{Eo::eventType::EGET_BUTTON_CLICKED,
+			   Eo::SettingsMenu::ButtonType::Return},
+			  [](Eo::Device &device, Eo::Options &options,
+				  Eo::SceneHandler &sceneHandler) {
+				  sceneHandler.unloadCurrentScene();
+			  }},};
 
 Eo::Event::Event(Eo::Options &options, Eo::Device &device,
 	Eo::SceneHandler &sceneHandler)

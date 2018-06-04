@@ -39,6 +39,7 @@ bool Eo::SceneHandler::unloadCurrentScene()
 	if (scn != nullptr)
 		scn->clear();
 	_scenes.pop();
+	this->getCurrentScene()->draw();
 	return true;
 }
 

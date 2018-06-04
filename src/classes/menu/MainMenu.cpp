@@ -72,10 +72,10 @@ bool Eo::MainMenu::draw()
 	if (font)
 		skin->setFont(font);
 	this->putBackgroundImage();
+	this->putTitle();
 	this->putPlayButton();
 	this->putSettingsButton();
 	this->putExitButton();
-	this->putTitle();
 	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
 	return true;
 }
@@ -95,10 +95,7 @@ void Eo::MainMenu::putTitle()
 	auto *env = this->_device.getDevice()->getGUIEnvironment();
 	auto windowSize = this->_device.getOptions().get_windowSize();
 	auto w = windowSize.Width;
-	auto h = windowSize.Height;
-
-	env->addStaticText(L"Bomberman 3D", {(int)(w / 6),
-		(int)0,
-		(int)(w / 6 + 2 * w / 3),
-		(int)(h / 6)}, true);
+	auto *image = this->_device.getDriver()->getTexture(
+		"../assets/img/bomberman-title.png");
+	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
 }
