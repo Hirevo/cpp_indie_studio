@@ -70,8 +70,7 @@ void Eo::Event::handleKeyEvent(const Eo::event &event)
 	if (n == 0)
 		throw std::out_of_range("Event not registered.");
 	std::for_each(matches.first, matches.second,
-		[this, &event](
-			std::pair<Eo::keyCode, Eo::Event::keyHandle> &pair) {
+		[&event](auto &pair) {
 			pair.second.second(pair.second.first, event);
 		});
 	auto it = _events.begin();
@@ -98,16 +97,16 @@ void Eo::Event::clearKeyHandlers(const Eo::keyCode &code)
 			++it;
 }
 
-void Eo::Event::removeKeyHandler(
-	const Eo::keyCode &code, Eo::Event::keyHandle handle)
-{
-	auto it = _events.begin();
-	while (it != _events.end())
-		if (it->first == code && it->second == handle)
-			it = _events.erase(it);
-		else
-			++it;
-}
+// void Eo::Event::removeKeyHandler(
+// 	const Eo::keyCode &code, const Eo::Event::keyHandle &handle)
+// {
+// 	auto it = _events.begin();
+// 	while (it != _events.end())
+// 		if (it->first == code && it->second == handle)
+// 			it = _events.erase(it);
+// 		else
+// 			++it;
+// }
 
 void Eo::Event::keyExit(const Eo::event &event)
 {

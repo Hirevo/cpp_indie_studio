@@ -30,8 +30,8 @@ namespace Eo {
 		void addKeyHandler(
 			const Eo::keyCode &code, Eo::Event::keyHandle handle);
 		void clearKeyHandlers(const Eo::keyCode &code);
-		void removeKeyHandler(
-			const Eo::keyCode &code, Eo::Event::keyHandle handle);
+		// void removeKeyHandler(
+		// 	const Eo::keyCode &code, Eo::Event::keyHandle handle);
 
 	private:
 		Eo::Options &_options;
