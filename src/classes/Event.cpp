@@ -12,6 +12,7 @@
 #include <iostream>
 #include <map>
 #include <menu/MainMenu.hpp>
+#include <menu/SettingsMenu.hpp>
 
 static const std::map<std::pair<Eo::eventType, irr::s32>, Eo::eventHandler>
 	events = {{{Eo::eventType::EGET_BUTTON_CLICKED,
@@ -30,6 +31,12 @@ static const std::map<std::pair<Eo::eventType, irr::s32>, Eo::eventHandler>
 			[](Eo::Device &device, Eo::Options &options,
 				Eo::SceneHandler &sceneHandler) {
 				options.setExit(true);
+			}},
+		{{Eo::eventType::EGET_BUTTON_CLICKED, Eo::MainMenu::Settings},
+			[](Eo::Device &device, Eo::Options &options,
+				Eo::SceneHandler &sceneHandler) {
+				sceneHandler.loadScene(
+					new Eo::SettingsMenu(device));
 			}}};
 
 Eo::Event::Event(Eo::Options &options, Eo::Device &device,
@@ -69,10 +76,9 @@ void Eo::Event::handleKeyEvent(const Eo::event &event)
 	auto n = std::distance(matches.first, matches.second);
 	if (n == 0)
 		throw std::out_of_range("Event not registered.");
-	std::for_each(matches.first, matches.second,
-		[&event](auto &pair) {
-			pair.second.second(pair.second.first, event);
-		});
+	std::for_each(matches.first, matches.second, [&event](auto &pair) {
+		pair.second.second(pair.second.first, event);
+	});
 	auto it = _events.begin();
 	while (it != _events.end())
 		if (it->second.first)

@@ -20,60 +20,77 @@ Eo::MainMenu::~MainMenu()
 
 void Eo::MainMenu::putPlayButton()
 {
-	irr::gui::IGUIEnvironment *env = this->_device.getDevice()->getGUIEnvironment();
+	auto *env = this->_device.getDevice()->getGUIEnvironment();
 	auto windowSize = this->_device.getOptions().get_windowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 
-	env->addButton({(int)(w / 6),
-			(int)(h / 6),
-			(int)(w / 6 + 2 * w / 3),
-			(int)(h / 6 + h / 6)},
-		0,
-		Eo::MainMenu::ButtonType::Play, L"Play", L"Play the game");
+	env->addButton(
+		{(int)(w / 6), (int)((h / 6) * 2), (int)(w / 6 + 2 * w / 3),
+			(int)((h / 6) * 2 + h / 6)},
+		nullptr, Eo::MainMenu::Play, L"Play", L"Play the game");
 }
 
 void Eo::MainMenu::putSettingsButton()
 {
-	irr::gui::IGUIEnvironment *env = this->_device.getDevice()->getGUIEnvironment();
+	auto *env = this->_device.getDevice()->getGUIEnvironment();
 	auto windowSize = this->_device.getOptions().get_windowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 
-	env->addButton({(int)(w / 6),
-			(int)((h / 6) * 2),
-			(int)(w / 6 + 2 * w / 3),
-			(int)((h / 6) * 2 + h / 6)},
-		0,
-		Eo::MainMenu::ButtonType::Settings, L"Settings", L"Open the settings");
+	env->addButton(
+		{(int)(w / 6), (int)((h / 6) * 3), (int)(w / 6 + 2 * w / 3),
+			(int)((h / 6) * 3 + h / 6)},
+		nullptr, Eo::MainMenu::Settings, L"Settings",
+		L"Open the settings");
 }
 
 void Eo::MainMenu::putExitButton()
 {
-	irr::gui::IGUIEnvironment *env = this->_device.getDevice()->getGUIEnvironment();
+	auto *env = this->_device.getDevice()->getGUIEnvironment();
 	auto windowSize = this->_device.getOptions().get_windowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 
-	env->addButton({(int)(w / 6),
-			(int)((h / 6) * 3),
-			(int)(w / 6 + 2 * w / 3),
-			(int)((h / 6) * 3 + h / 6)},
-		0,
-		Eo::MainMenu::ButtonType::Exit, L"Exit", L"Exit the game");
+	env->addButton(
+		{(int)(w / 6), (int)((h / 6) * 4), (int)(w / 6 + 2 * w / 3),
+			(int)((h / 6) * 4 + h / 6)},
+		nullptr, Eo::MainMenu::Exit, L"Exit", L"Exit the game");
 }
 
 bool Eo::MainMenu::draw()
 {
-	irr::gui::IGUIEnvironment *env =
-		this->_device.getDevice()->getGUIEnvironment();
+	auto *env = this->_device.getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font = env->getFont("../fonthaettenschweiler.bmp");
 	if (font)
 		skin->setFont(font);
+	this->putBackgroundImage();
 	this->putPlayButton();
 	this->putSettingsButton();
 	this->putExitButton();
+	this->putTitle();
 	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
 	return true;
+}
+
+void Eo::MainMenu::putBackgroundImage()
+{
+	auto *env = this->_device.getDevice()->getGUIEnvironment();
+	env->addImage(this->_device.getDriver()->getTexture(
+			      "../assets/img/menu-background.jpg"),
+		{0, 0});
+}
+
+void Eo::MainMenu::putTitle()
+{
+	auto *env = this->_device.getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto w = windowSize.Width;
+	auto h = windowSize.Height;
+
+	env->addStaticText(L"Bomberman 3D",
+		{(int)(w / 6), (int)((h / 6) * 1), (int)(w / 6 + 2 * w / 3),
+			(int)((h / 6) * 1 + h / 6)},
+		true);
 }
