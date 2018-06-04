@@ -56,11 +56,9 @@ add_executable(bomberman
         src/classes/Debug.cpp
         src/classes/Wall.cpp
         src/classes/SceneHandler.cpp
-        src/abstracts/AMenu.cpp
         src/classes/Floor.cpp
         src/classes/Player.cpp
         src/abstracts/ACharacter.cpp
-        src/abstracts/AGame.cpp
         src/abstracts/AModel.cpp
         ${HEADER_FILES})
 

@@ -16,11 +16,7 @@ namespace Eo {
 		~MainMenu() override;
 		bool draw() override;
 
-		enum ButtonType {
-			GUI_ID_MAIN_PLAY_BUTTON = 1900,
-			GUI_ID_MAIN_SETTINGS_BUTTON,
-			GUI_ID_MAIN_EXIT_BUTTON
-		};
+		enum ButtonType { Play = 1900, Settings, Exit };
 
 	private:
 		void putPlayButton();

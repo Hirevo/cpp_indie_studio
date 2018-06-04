@@ -20,6 +20,7 @@ namespace Eo {
 		Eo::IObject::Type getType() const override;
 		irr::scene::ISceneNode *getSceneNode() const override;
 		void setSceneNode(irr::scene::ISceneNode *node) override;
+		void deleteNode(const Eo::IScene *scene) override;
 
 	protected:
 		Eo::IObject::Type _type;

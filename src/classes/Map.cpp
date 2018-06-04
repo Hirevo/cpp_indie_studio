@@ -6,9 +6,9 @@
 */
 
 #include "Map.hpp"
+#include "Floor.hpp"
 #include "JsonRead.hpp"
 #include "Wall.hpp"
-#include "Floor.hpp"
 
 Eo::Map::Map(size_t w, size_t h) : _w(w), _h(h)
 {
@@ -27,9 +27,8 @@ Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
 {
 	auto matrix = json.readMatrix("map");
 	const std::vector<std::function<IObject *(void)>> v = {
-		[]{ return nullptr; },
-		[]{ return new Wall(Eo::Wall::WallType::INDESTRUCTIBLE); }
-	};
+		[] { return nullptr; },
+		[] { return new Wall(Eo::Wall::WallType::INDESTRUCTIBLE); }};
 
 	Eo::Floor floor(200);
 	_w = matrix.size();

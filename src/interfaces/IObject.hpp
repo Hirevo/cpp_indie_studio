@@ -29,6 +29,7 @@ namespace Eo {
 		virtual void insertInScene(const Eo::IScene *scene) = 0;
 		virtual void removeFromScene(const Eo::IScene *scene) = 0;
 		virtual void updateInScene(const Eo::IScene *scene) = 0;
+		virtual void deleteNode(const Eo::IScene *scene) = 0;
 
 	private:
 	};

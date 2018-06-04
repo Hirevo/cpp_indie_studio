@@ -27,7 +27,7 @@ bool Eo::SceneHandler::loadScene(Eo::IScene *scene)
 {
 	auto scn = this->getCurrentScene();
 	if (scn != nullptr)
-		scn->clean();
+		scn->clear();
 	_scenes.push(scene);
 	this->getCurrentScene()->draw();
 	return true;
@@ -37,12 +37,12 @@ bool Eo::SceneHandler::unloadCurrentScene()
 {
 	auto scn = this->getCurrentScene();
 	if (scn != nullptr)
-		scn->clean();
+		scn->clear();
 	_scenes.pop();
 	return true;
 }
 
-int Eo::SceneHandler::getNumberScenes()
+std::size_t Eo::SceneHandler::getSceneCount() const
 {
-	return static_cast<int>(this->_scenes.size());
+	return this->_scenes.size();
 }

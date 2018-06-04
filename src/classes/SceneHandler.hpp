@@ -16,10 +16,10 @@ namespace Eo {
 	public:
 		explicit SceneHandler(Eo::Device &device);
 		~SceneHandler();
-		Eo::IScene *getCurrentScene() const;
 		bool loadScene(Eo::IScene *scene);
 		bool unloadCurrentScene();
-		int getNumberScenes();
+		Eo::IScene *getCurrentScene() const;
+		std::size_t getSceneCount() const;
 
 	private:
 		std::stack<Eo::IScene *> _scenes;

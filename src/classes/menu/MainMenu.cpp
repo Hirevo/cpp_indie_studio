@@ -30,7 +30,7 @@ void Eo::MainMenu::putPlayButton()
 			(int)(w / 6 + 2 * w / 3),
 			(int)(h / 6 + h / 6)},
 		0,
-		GUI_ID_MAIN_PLAY_BUTTON, L"Play", L"Play the game");
+		Eo::MainMenu::ButtonType::Play, L"Play", L"Play the game");
 }
 
 void Eo::MainMenu::putSettingsButton()
@@ -45,7 +45,7 @@ void Eo::MainMenu::putSettingsButton()
 			(int)(w / 6 + 2 * w / 3),
 			(int)((h / 6) * 2 + h / 6)},
 		0,
-		GUI_ID_MAIN_SETTINGS_BUTTON, L"Settings", L"Open the settings");
+		Eo::MainMenu::ButtonType::Settings, L"Settings", L"Open the settings");
 }
 
 void Eo::MainMenu::putExitButton()
@@ -60,7 +60,7 @@ void Eo::MainMenu::putExitButton()
 			(int)(w / 6 + 2 * w / 3),
 			(int)((h / 6) * 3 + h / 6)},
 		0,
-		GUI_ID_MAIN_EXIT_BUTTON, L"Exit", L"Exit the game");
+		Eo::MainMenu::ButtonType::Exit, L"Exit", L"Exit the game");
 }
 
 bool Eo::MainMenu::draw()

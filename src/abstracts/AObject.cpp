@@ -31,3 +31,11 @@ void Eo::AObject::setSceneNode(irr::scene::ISceneNode *node)
 {
 	_node = node;
 }
+
+void Eo::AObject::deleteNode(const Eo::IScene *scene)
+{
+	this->removeFromScene(scene);
+	if (_hasNode)
+		delete _node;
+	_hasNode = false;
+}

@@ -17,8 +17,9 @@ namespace Eo {
 		virtual ~AScene() = 0;
 		irr::scene::ISceneManager *getSceneManager() const override;
 		irr::scene::ICameraSceneNode *getCamera() const override;
-		bool clean() const override;
+		bool clear() override;
 		bool draw() override;
+		void update() override;
 
 	protected:
 		Device _device;

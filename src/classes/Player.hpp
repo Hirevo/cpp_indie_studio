@@ -1,32 +1,25 @@
-//
-// EPITECH PROJECT, 2018
-// IndieStudio
-// File description:
-// Player
-//
+/*
+** EPITECH PROJECT, 2018
+** indie_studio
+** File description:
+** Player
+*/
 
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#pragma once
 
+#include "AModel.hpp"
 #include "Core.hpp"
-#include "irrlicht.h"
 #include "Device.hpp"
+#include "irrlicht.h"
 
 namespace Eo {
-	class Player {
+	class Player : public AModel {
 	public:
-		Player(Eo::Device &device, std::string const &modelPath, 
-			std::string const &texturePath, 
-			vec3 pos = vec3(0, 0, 0));
+		Player(vec3 pos = vec3(0, 0, 0));
 		~Player();
-		irr::core::vector3df getPosition();
-		void movePlayer(irr::core::vector3df &newPos);
-		void animatePlayer(irr::scene::EMD2_ANIMATION_TYPE animation);
+		// vec3 getPosition();
+		// void movePlayer(vec3 &newPos);
 
 	private:
-		irr::scene::IAnimatedMeshMD2* _modele;
-		irr::scene::IAnimatedMeshSceneNode* _nmodele;
 	};
 }
-
-#endif
