@@ -6,11 +6,11 @@
 */
 
 #ifndef BOMBERMAN_DEVICE_HPP
-#define BOMBERMAN_DEVICE_HPP
+	#define BOMBERMAN_DEVICE_HPP
 
-#include <string>
-#include "irrlicht.h"
-#include "Options.hpp"
+	#include <string>
+	#include "irrlicht.h"
+	#include "Options.hpp"
 
 namespace Eo {
 	class Device {

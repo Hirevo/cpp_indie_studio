@@ -31,7 +31,7 @@ void Eo::MainMenu::putPlayButton()
 			(int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)},
 		nullptr,
-		Eo::MainMenu::ButtonType::Play , L"Play", L"Play the game");
+		Eo::MainMenu::ButtonType::Play, L"Play", L"Play the game");
 }
 
 void Eo::MainMenu::putSettingsButton()
@@ -64,7 +64,8 @@ void Eo::MainMenu::putCreditsButton()
 			(int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)},
 		nullptr,
-		Eo::MainMenu::ButtonType::Credits, L"Credits", L"Show the credits");
+		Eo::MainMenu::ButtonType::Credits, L"Credits",
+		L"Show the credits");
 }
 
 void Eo::MainMenu::putExitButton()
@@ -106,9 +107,6 @@ bool Eo::MainMenu::draw()
 void Eo::MainMenu::putBackgroundImage()
 {
 	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
-	auto w = windowSize.Width;
-	auto h = windowSize.Height;
 	env->addImage(this->_device.getDriver()->getTexture(
 		"../assets/img/menu-background.jpg"), {0, 0});
 }
