@@ -27,7 +27,7 @@ Eo::Core::Core()
 	  _debug(_device, _sceneHandler),
 	  _event()
 {
-	_event.addEventHandler(
+	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Play),
 		[this](bool &toRemove, const Eo::event &event) {
@@ -35,33 +35,34 @@ Eo::Core::Core()
 			std::cout << std::endl;
 			_sceneHandler.loadScene(new Eo::Game(
 				_device, "../map2.json"));
-			std::cout << _sceneHandler.getSceneCount() << std::endl;
+			std::cout << _sceneHandler.getSceneCount()
+				<< std::endl;
 		});
-	_event.addEventHandler(
+	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Exit),
 		[this](bool &toRemove, const Eo::event &event) {
 			_options.setExit(true);
 		});
-	_event.addEventHandler(
+	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Settings),
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler.loadScene(new Eo::SettingsMenu(_device));
 		});
-	_event.addEventHandler(
+	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Credits),
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler.loadScene(new Eo::CreditsMenu(_device));
 		});
-	_event.addEventHandler(
+	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::SettingsMenu::ButtonType::Return),
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler.unloadCurrentScene();
 		});
-	_event.addEventHandler(
+	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::CreditsMenu::ButtonType::Return),
 		[this](bool &toRemove, const Eo::event &event) {

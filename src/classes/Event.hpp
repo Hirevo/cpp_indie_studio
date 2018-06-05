@@ -37,8 +37,9 @@ namespace Eo {
 		virtual bool OnEvent(const Eo::event &event);
 		void addKeyHandler(
 			const Eo::keyCode &code, Eo::keyHandler handle);
-		void addEventHandler(
-			const Eo::Event::eventKey &code, Eo::eventHandler handle);
+		void addGUIHandler(
+			const Eo::Event::eventKey &code,
+			Eo::eventHandler handle);
 		void clearKeyHandlers(const Eo::keyCode &code);
 		void clearEventHandlers(const Eo::Event::eventKey &key);
 		// Todo OUech polo doit travailler dessus

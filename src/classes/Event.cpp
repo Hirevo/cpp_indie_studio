@@ -126,7 +126,7 @@ void Eo::Event::addKeyHandler(
 	_keyMap.emplace(code, Eo::Event::keyHandle(false, handle));
 }
 
-void Eo::Event::addEventHandler(
+void Eo::Event::addGUIHandler(
 	const Eo::Event::eventKey &key, Eo::eventHandler handle)
 {
 	_eventMap.emplace(key, Eo::Event::eventHandle(false, handle));
