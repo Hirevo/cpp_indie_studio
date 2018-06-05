@@ -32,7 +32,7 @@ bool Eo::Game::draw()
 	irr::s32 wth = _map.getWidth();
 	irr::s32 hgt = _map.getHeight();
 	auto texture = _sceneManager->getVideoDriver()->getTexture(
-		"../assets/img/red_silk.jpg");
+		"../assets/img/brick.png");
 	auto model = new Eo::Player();
 	model->loadModel(this, "../assets/Bomberman/character.blend.x",
 		"../assets/Bomberman/bomberboy_colors_white.png");
