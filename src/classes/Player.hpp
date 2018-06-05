@@ -17,8 +17,6 @@ namespace Eo {
 	public:
 		Player(vec3 pos = vec3(0, 0, 0));
 		~Player();
-		// vec3 getPosition();
-		// void movePlayer(vec3 &newPos);
 
 	private:
 	};
