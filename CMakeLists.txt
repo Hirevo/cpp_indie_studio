@@ -32,10 +32,11 @@ set(HEADER_FILES
         src/classes/Wall.hpp
         src/classes/SceneHandler.hpp
         src/classes/Player.hpp
-        src/classes/Game.hpp src/classes/menu/MainMenu.cpp src/classes/menu/MainMenu.hpp src/classes/Event.cpp src/classes/Event.hpp src/classes/menu/SettingsMenu.cpp src/classes/menu/SettingsMenu.cpp src/classes/menu/SettingsMenu.hpp src/classes/menu/CreditsMenu.cpp src/classes/menu/CreditsMenu.hpp)
         src/classes/Game.hpp
         src/classes/menu/MainMenu.hpp
-        src/classes/Event.hpp)
+        src/classes/Event.hpp
+        src/classes/menu/SettingsMenu.hpp
+        src/classes/menu/CreditsMenu.hpp)
 
 add_executable(bomberman
         src/main.cpp
@@ -59,6 +60,11 @@ add_executable(bomberman
         src/classes/Wall.cpp
         src/classes/SceneHandler.cpp
         src/classes/Floor.cpp
+        src/classes/menu/MainMenu.cpp
+        src/classes/Event.cpp
+        src/classes/menu/SettingsMenu.cpp
+        src/classes/menu/SettingsMenu.cpp
+        src/classes/menu/CreditsMenu.cpp
         ${HEADER_FILES})
 
 set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)

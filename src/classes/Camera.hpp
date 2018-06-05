@@ -20,8 +20,6 @@ namespace Eo {
 		enum cameraType {
 			NONE, FPS, STATIC
 		};
-		Camera(irr::core::vector3df pos = irr::core::vector3df(0, 0,
-			0));
 		Camera(vec3 pos = vec3(0, 0, 0));
 		~Camera() = default;
 		void insertFPSInScene(Eo::IScene *scene);

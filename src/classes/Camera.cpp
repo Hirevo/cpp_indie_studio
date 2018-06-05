@@ -75,7 +75,7 @@ void Eo::Camera::removeFromScene(Eo::IScene *scene)
 	_placedInScene = false;
 }
 
-void Eo::Camera::updateInScene(const Eo::IScene *scene)
+void Eo::Camera::updateInScene(Eo::IScene *scene)
 {
 	if (_hasNode) {
 		_node->setPosition(_pos);
