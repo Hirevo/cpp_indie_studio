@@ -28,12 +28,8 @@ Eo::Core::Core()
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Play),
 		[this](bool &toRemove, const Eo::event &event) {
-			std::cout << _sceneHandler.getSceneCount();
-			std::cout << std::endl;
 			_sceneHandler.loadScene(
 				new Eo::Game(_event, _device, "../map2.json"));
-			std::cout << _sceneHandler.getSceneCount();
-			std::cout << std::endl;
 		});
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
