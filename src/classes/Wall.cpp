@@ -15,7 +15,7 @@ Eo::Wall::Wall(Eo::Wall::WallType wallType, Eo::vec3 pos)
 void Eo::Wall::insertInScene(const Eo::IScene *scene)
 {
 	auto manager = scene->getSceneManager();
-	irr::f32 unitSize = 10.0f;
+	irr::f32 unitSize = 1.0f;
 
 	if (_placedInScene == true)
 		return;

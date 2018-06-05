@@ -37,17 +37,18 @@ bool Eo::Game::draw()
 	model->loadModel(this, "../assets/Bomberman/character.blend.x",
 		"../assets/Bomberman/bomberboy_colors_white.png");
 	model->animate(Eo::animType::EMAT_RUN);
-	model->getAnimatedNode()->setScale(Eo::vec3(2.5));
+	model->getAnimatedNode()->setScale(Eo::vec3(0.15));
 	this->addEvents(model);
 	_camera.insertStaticInScene(this);
-	Eo::Floor floor((wth - 1) * (hgt - 1) - 10, Eo::vec3(0, -5, 0));
+
+	Eo::Floor floor((wth - 1) - 1, Eo::vec3(0, -0.5, 0));
 	floor.insertInScene(this);
 	for (irr::s32 i = 0; i < hgt; i++)
 		for (irr::s32 j = 0; j < wth; j++) {
 			obj = _map.getObject(j, i);
 			if (obj) {
-				obj->setPosition((j - (wth / 2)) * 10, 0,
-					(i - (hgt / 2)) * 10);
+				obj->setPosition((j - wth / 2), 0,
+					(i - hgt / 2));
 				obj->insertInScene(this);
 				obj->getSceneNode()->setMaterialFlag(
 					irr::video::EMF_LIGHTING, false);
@@ -64,28 +65,28 @@ void Eo::Game::addEvents(Eo::AModel *model)
 		[this, model](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
-			model->translateZ(2);
+			model->translateZ(0.2);
 			model->updateInScene(this);
 		});
 	_event.addKeyHandler(Eo::keyCode::KEY_KEY_S,
 		[this, model](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
-			model->translateZ(-2);
+			model->translateZ(-0.2);
 			model->updateInScene(this);
 		});
 	_event.addKeyHandler(Eo::keyCode::KEY_KEY_D,
 		[this, model](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
-			model->translateX(2);
+			model->translateX(0.2);
 			model->updateInScene(this);
 		});
 	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Q,
 		[this, model](bool &toRemove, const Eo::event &ev) {
-			if (false == ev.KeyInput.PressedDown)
+			if (!ev.KeyInput.PressedDown)
 				return;
-			model->translateX(-2);
+			model->translateX(-0.2);
 			model->updateInScene(this);
 		});
 }

@@ -43,7 +43,7 @@ void Eo::Camera::insertFPSInScene(Eo::IScene *scene)
 
 void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
 {
-	irr::core::vector3df position(0, 80, -80);
+	irr::core::vector3df position(0, 8, -8);
 	irr::core::vector3df lookat = irr::core::vector3df(0, 0, 0);
 
 	_camType = STATIC;

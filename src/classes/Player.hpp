@@ -20,5 +20,6 @@ namespace Eo {
 		~Player();
 
 	private:
+
 	};
 }
