@@ -10,13 +10,9 @@
 #include "Player.hpp"
 #include <iostream>
 
-Eo::Game::Game(Eo::Event &event, Eo::Device &device,
-	const std::string &mapPath
-)
-	: AScene(event, device),
-	  _json(mapPath),
-	  _map(_json),
-	  _camera()
+Eo::Game::Game(
+	Eo::Event &event, Eo::Device &device, const std::string &mapPath)
+	: AScene(event, device), _json(mapPath), _map(_json), _camera()
 {
 }
 
@@ -43,10 +39,33 @@ bool Eo::Game::draw()
 	model->animate(Eo::animType::EMAT_RUN);
 	model->getAnimatedNode()->setScale(Eo::vec3(2.5));
 	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Z,
-		[this, &model](bool &toRemove, const Eo::event &ev) {
-		model->translateX(0.02);
-		model->updateInScene(this);
-	});
+		[this, model](bool &toRemove, const Eo::event &ev) {
+			if (ev.KeyInput.PressedDown == false)
+				return;
+			model->translateZ(2);
+			model->updateInScene(this);
+		});
+	_event.addKeyHandler(Eo::keyCode::KEY_KEY_S,
+		[this, model](bool &toRemove, const Eo::event &ev) {
+			if (ev.KeyInput.PressedDown == false)
+				return;
+			model->translateZ(-2);
+			model->updateInScene(this);
+		});
+	_event.addKeyHandler(Eo::keyCode::KEY_KEY_D,
+		[this, model](bool &toRemove, const Eo::event &ev) {
+			if (ev.KeyInput.PressedDown == false)
+				return;
+			model->translateX(2);
+			model->updateInScene(this);
+		});
+	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Q,
+		[this, model](bool &toRemove, const Eo::event &ev) {
+			if (ev.KeyInput.PressedDown == false)
+				return;
+			model->translateX(-2);
+			model->updateInScene(this);
+		});
 	_camera.insertStaticInScene(this);
 	Eo::Floor floor((wth - 1) * (hgt - 1) - 10, Eo::vec3(0, -5, 0));
 	floor.insertInScene(this);
@@ -59,8 +78,8 @@ bool Eo::Game::draw()
 				obj->insertInScene(this);
 				obj->getSceneNode()->setMaterialFlag(
 					irr::video::EMF_LIGHTING, false);
-				obj->getSceneNode()->setMaterialTexture(0,
-					texture);
+				obj->getSceneNode()->setMaterialTexture(
+					0, texture);
 			}
 		}
 	return true;

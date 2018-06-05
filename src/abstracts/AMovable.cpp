@@ -26,47 +26,66 @@ void Eo::AMovable::setPosition(const Eo::vec3 &pos)
 	}
 }
 
-void Eo::AMovable::setPosition(float x, float y, float z)
+void Eo::AMovable::setPosition(Eo::f32 x, Eo::f32 y, Eo::f32 z)
 {
 	Eo::AMovable::setPosition(Eo::vec3(x, y, z));
 }
 
-void Eo::AMovable::setPosition(float v)
+void Eo::AMovable::setPosition(Eo::f32 v)
 {
 	Eo::AMovable::setPosition(Eo::vec3(v, v, v));
 }
 
 void Eo::AMovable::translate(const Eo::vec3 &v)
 {
-	if (v.X != 0 || v.Y != 0 || v.Z != 0) {
+	if (v.X || v.Y || v.Z) {
 		_pos += v;
 		_hasPositionChanged = true;
 	}
 }
 
-void Eo::AMovable::translate(float v)
+void Eo::AMovable::translate(Eo::f32 v)
 {
-	Eo::AMovable::translate(Eo::vec3(v, v, v));
+	if (v) {
+		_pos.X += v;
+		_pos.Y += v;
+		_pos.Z += v;
+		_hasPositionChanged = true;
+	}
 }
 
-void Eo::AMovable::translate(float x, float y, float z)
+void Eo::AMovable::translate(Eo::f32 x, Eo::f32 y, Eo::f32 z)
 {
-	Eo::AMovable::translate(Eo::vec3(x, y, z));
+	if (x || y || z) {
+		_pos.X += x;
+		_pos.Y += y;
+		_pos.Z += z;
+		_hasPositionChanged = true;
+	}
 }
 
-void Eo::AMovable::translateX(float x)
+void Eo::AMovable::translateX(Eo::f32 x)
 {
-	Eo::AMovable::translate(Eo::vec3(x, 0, 0));
+	if (x) {
+		_pos.X += x;
+		_hasPositionChanged = true;
+	}
 }
 
-void Eo::AMovable::translateY(float y)
+void Eo::AMovable::translateY(Eo::f32 y)
 {
-	Eo::AMovable::translate(Eo::vec3(0, y, 0));
+	if (y) {
+		_pos.Y += y;
+		_hasPositionChanged = true;
+	}
 }
 
-void Eo::AMovable::translateZ(float z)
+void Eo::AMovable::translateZ(Eo::f32 z)
 {
-	Eo::AMovable::translate(Eo::vec3(0, 0, z));
+	if (z) {
+		_pos.Z += z;
+		_hasPositionChanged = true;
+	}
 }
 
 bool Eo::AMovable::hasPositionChanged() const
