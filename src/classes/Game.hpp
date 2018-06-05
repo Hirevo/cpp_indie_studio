@@ -22,8 +22,10 @@
 namespace Eo {
 	class Game : public AScene {
 	public:
-		Game(Eo::Event &event, Eo::Device &device,
-			const std::string &mapPath);
+		Game(Eo::Event &event,
+			Eo::Device &device,
+			const std::string &mapPath,
+			Eo::Options &options);
 		~Game();
 		irr::scene::ICameraSceneNode *getCamera() const override;
 		bool draw() override;
@@ -33,6 +35,7 @@ namespace Eo {
 		Eo::JsonRead _json;
 		Eo::Map _map;
 		Eo::Camera _camera;
+		Eo::Options &_options;
 	};
 }
 #endif

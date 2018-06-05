@@ -29,7 +29,7 @@ Eo::Core::Core()
 			Eo::MainMenu::ButtonType::Play),
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler.loadScene(
-				new Eo::Game(_event, _device, "../map2.json"));
+				new Eo::Game(_event, _device, "../map2.json", _options));
 		});
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,

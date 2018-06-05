@@ -23,7 +23,8 @@ const irr::core::dimension2d<irr::u32> &Eo::Options::get_windowSize() const
 	return _windowSize;
 }
 
-void Eo::Options::set_windowSize(
+void Eo::Options::
+set_windowSize(
 	const irr::core::dimension2d<irr::u32> &_windowSize
 )
 {

@@ -11,19 +11,22 @@
 #include "Core.hpp"
 #include "Device.hpp"
 #include "irrlicht.h"
+#include "Event.hpp"
 
 namespace Eo {
 	#pragma warning(disable:4250)
+
 	class Player : public AModel {
 	public:
-		Player(vec3 pos = vec3(0, 0, 0));
-		~Player();
-
+		explicit Player(Eo::Game &, Eo::Event &, const vec3 &pos = vec3(0));
+		~Player() override;
 	private:
-		Eo::vec2 pos;
-		float angle;
-		float speed;
-		int maxBomb;
-		int bombAvailable;
+		irr::f32 _angle;
+		irr::f32 _speed;
+		irr::u32 _maxBomb;
+		irr::u32 _bombAvailable;
+		Eo::Event &_event;
+	private:
+		void addEvents(Eo::Game &game);
 	};
 }

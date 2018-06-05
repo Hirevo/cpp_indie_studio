@@ -10,9 +10,14 @@
 #include "Player.hpp"
 #include <iostream>
 
-Eo::Game::Game(
-	Eo::Event &event, Eo::Device &device, const std::string &mapPath)
-	: AScene(event, device), _json(mapPath), _map(_json), _camera()
+Eo::Game::Game(Eo::Event &event, Eo::Device &device,
+	const std::string &mapPath, Eo::Options &options
+)
+	: AScene(event, device),
+	  _json(mapPath),
+	  _map(_json),
+	  _camera(),
+	  _options(options)
 {
 }
 
@@ -33,14 +38,8 @@ bool Eo::Game::draw()
 	irr::s32 hgt = _map.getHeight();
 	auto texture = _sceneManager->getVideoDriver()->getTexture(
 		"../assets/img/brick.png");
-	auto model = new Eo::Player();
-	model->loadModel(this, "../assets/Bomberman/character.blend.x",
-		"../assets/Bomberman/bomberboy_colors_white.png");
-	model->animate(Eo::animType::EMAT_RUN);
-	model->getAnimatedNode()->setScale(Eo::vec3(0.15));
-	this->addEvents(model);
+	auto model = new Eo::Player(*this, _event);
 	_camera.insertStaticInScene(this);
-
 	Eo::Floor floor((wth - 1) - 1, Eo::vec3(0, -0.5, 0));
 	floor.insertInScene(this);
 	for (irr::s32 i = 0; i < hgt; i++)
@@ -61,32 +60,6 @@ bool Eo::Game::draw()
 
 void Eo::Game::addEvents(Eo::AModel *model)
 {
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Z,
-		[this, model](bool &toRemove, const Eo::event &ev) {
-			if (!ev.KeyInput.PressedDown)
-				return;
-			model->translateZ(0.2);
-			model->updateInScene(this);
-		});
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_S,
-		[this, model](bool &toRemove, const Eo::event &ev) {
-			if (!ev.KeyInput.PressedDown)
-				return;
-			model->translateZ(-0.2);
-			model->updateInScene(this);
-		});
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_D,
-		[this, model](bool &toRemove, const Eo::event &ev) {
-			if (!ev.KeyInput.PressedDown)
-				return;
-			model->translateX(0.2);
-			model->updateInScene(this);
-		});
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Q,
-		[this, model](bool &toRemove, const Eo::event &ev) {
-			if (!ev.KeyInput.PressedDown)
-				return;
-			model->translateX(-0.2);
-			model->updateInScene(this);
-		});
+
 }
+
