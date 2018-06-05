@@ -23,8 +23,8 @@ namespace Eo {
 		void update() override;
 
 	protected:
-		Device _device;
-		Event &_event;
+		Eo::Device _device;
+		Eo::Event &_event;
  		irr::scene::ISceneManager *_sceneManager;
 	};
 };

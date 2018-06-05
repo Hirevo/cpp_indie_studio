@@ -7,11 +7,7 @@
 
 #pragma once
 
-#include "Device.hpp"
-#include "Options.hpp"
-#include "SceneHandler.hpp"
 #include "Types.hpp"
-#include "Debug.hpp"
 #include <functional>
 #include <irrlicht.h>
 #include <unordered_map>
