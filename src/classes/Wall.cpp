@@ -29,7 +29,7 @@ void Eo::Wall::insertInScene(const Eo::IScene *scene)
 void Eo::Wall::removeFromScene(const Eo::IScene *scene)
 {
 	(void)(scene);
-	if (_placedInScene == false)
+	if (_placedInScene == false || _hasNode == false)
 		return;
 	_node->remove();
 	_hasPositionChanged = false;
@@ -38,6 +38,8 @@ void Eo::Wall::removeFromScene(const Eo::IScene *scene)
 
 void Eo::Wall::updateInScene(const Eo::IScene *scene)
 {
+	if (_placedInScene == false || _hasNode == false)
+		return;
 	_node->setPosition(_pos);
 	_hasPositionChanged = false;
 }

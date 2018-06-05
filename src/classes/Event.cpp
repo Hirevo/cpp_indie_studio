@@ -82,8 +82,8 @@ bool Eo::Event::OnEvent(const Eo::event &event)
 			callback(_device, _options, _sceneHandler);
 		} else
 			return false;
-	}
-	catch (const std::exception &execption) {
+	} catch (const std::exception &execption) {
+		//std::cout << execption.what() << std::endl;
 		return false;
 	}
 	return true;
@@ -142,8 +142,12 @@ void Eo::Event::keyExit(const Eo::event &event)
 void Eo::Event::keyDebugToggle(const Eo::event &event)
 {
 	if (event.KeyInput.PressedDown) {
-		_options.setDebugMode(!_options.isDebugMode());
+		_options.isDebugMode() ?
+			_options.setDebugMode(false) :
+			_options.setDebugMode(true);
 		if (!_options.isDebugMode())
 			_device.setDeviceTitle(L"Eo Bombermanz");
+			_debug.clearDebugList(_device.getDevice()->getSceneManager());
+		}
 	}
 }

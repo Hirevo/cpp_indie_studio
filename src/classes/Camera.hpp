@@ -17,17 +17,25 @@
 namespace Eo {
 	class Camera : public AObject {
 	public:
-		Camera(vec3 pos = vec3(0, 0, 0));
+		enum cameraType {
+			NONE, FPS, STATIC
+		};
+		Camera(irr::core::vector3df pos = irr::core::vector3df(0, 0,
+			0));
 		~Camera() = default;
-		void insertInScene(const Eo::IScene *scene) override;
-		void removeFromScene(const Eo::IScene *scene) override;
-		void updateInScene(const Eo::IScene *scene) override;
+		void insertFPSInScene(Eo::IScene *scene);
+		void insertStaticInScene(Eo::IScene *scene);
+		void insertInScene(Eo::IScene *scene) override;
+		void removeFromScene(Eo::IScene *scene) override;
+		void updateInScene(Eo::IScene *scene) override;
 		irr::scene::ICameraSceneNode *getCameraHandle() const;
-
 	private:
 		irr::SKeyMap _keyMap[5];
 		irr::scene::ICameraSceneNode *_camera;
+		cameraType _camType = NONE;
+	public:
+
+		cameraType getCamType() const;
 	};
 }
-
 #endif

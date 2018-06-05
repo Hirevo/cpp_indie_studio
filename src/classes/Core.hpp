@@ -28,6 +28,7 @@ namespace Eo {
 		Eo::Options _options;
 		Eo::Device _device;
 		Eo::SceneHandler _sceneHandler;
+		Eo::Debug _debug;
 		Eo::Event _event;
 	public:
 
