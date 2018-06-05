@@ -13,7 +13,8 @@ Eo::Options::Options()
 	  _exit(false),
 	  _debugMode(false),
 	  _keyExit(irr::EKEY_CODE::KEY_F4),
-	  _keyDebugMode(irr::EKEY_CODE::KEY_F2)
+	  _keyDebugMode(irr::EKEY_CODE::KEY_F2),
+	  _nbPlayer(1)
 {
 }
 
@@ -67,4 +68,14 @@ bool Eo::Options::isDebugMode() const
 void Eo::Options::setDebugMode(bool _debugMode)
 {
 	Options::_debugMode = _debugMode;
+}
+
+size_t Eo::Options::getNbPlayer() const
+{
+	return _nbPlayer;
+}
+
+void Eo::Options::setNbPlayer(size_t _nbPlayer)
+{
+	Options::_nbPlayer = _nbPlayer;
 }
