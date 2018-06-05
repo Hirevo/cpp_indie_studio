@@ -12,7 +12,7 @@
 namespace Eo {
 	class MainMenu : public AScene {
 	public:
-		MainMenu(Eo::Device &_device);
+		MainMenu(Eo::Event &event, Eo::Device &device);
 		~MainMenu() override;
 		bool draw() override;
 

@@ -41,7 +41,7 @@ namespace Eo {
 			const Eo::Event::eventKey &code, Eo::eventHandler handle);
 		void clearKeyHandlers(const Eo::keyCode &code);
 		void clearEventHandlers(const Eo::Event::eventKey &key);
-		// Todo OUech polo doit travailler dessus
+		//TODO: OUech polo doit travailler dessus
 		// void removeKeyHandler();
 		// void removeEventHandler();
 

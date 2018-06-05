@@ -10,8 +10,8 @@
 #include "Player.hpp"
 #include <iostream>
 
-Eo::Game::Game(Eo::Device &device, const std::string &mapPath)
-	: AScene(device), _json(mapPath), _map(_json), _camera()
+Eo::Game::Game(Eo::Event &event, Eo::Device &device, const std::string &mapPath)
+	: AScene(event, device), _json(mapPath), _map(_json), _camera()
 {
 }
 

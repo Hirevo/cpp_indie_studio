@@ -7,7 +7,7 @@
 
 #include "SettingsMenu.hpp"
 
-Eo::SettingsMenu::SettingsMenu(Eo::Device &_device) : AScene(_device)
+Eo::SettingsMenu::SettingsMenu(Eo::Event &event, Eo::Device &device) : AScene(event, device)
 {
 	this->draw();
 }

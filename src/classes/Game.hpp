@@ -8,20 +8,21 @@
 #ifndef BOMBERMAN_SCENE_HPP
 #define BOMBERMAN_SCENE_HPP
 
+#include "AScene.hpp"
+#include "Camera.hpp"
 #include "Device.hpp"
+#include "IScene.hpp"
 #include "JsonRead.hpp"
 #include "Map.hpp"
-#include "Camera.hpp"
-#include "IScene.hpp"
 #include "irrlicht.h"
-#include "AScene.hpp"
 #include <memory>
 #include <stack>
 
 namespace Eo {
 	class Game : public AScene {
 	public:
-		Game(Eo::Device &device, const std::string &mapPath);
+		Game(Eo::Event &event, Eo::Device &device,
+			const std::string &mapPath);
 		~Game();
 		irr::scene::ICameraSceneNode *getCamera() const override;
 		bool draw() override;

@@ -13,7 +13,7 @@
 namespace Eo {
 	class CreditsMenu : public Eo::AScene {
 	public:
-		CreditsMenu(Eo::Device &_device);
+		CreditsMenu(Eo::Event &event, Eo::Device &device);
 		~CreditsMenu();
 		bool draw() override;
 

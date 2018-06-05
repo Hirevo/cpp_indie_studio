@@ -9,11 +9,12 @@
 
 #include "IScene.hpp"
 #include "Device.hpp"
+#include "Event.hpp"
 
 namespace Eo {
 	class AScene : public IScene {
 	public:
-		AScene(Eo::Device &_device);
+		AScene(Eo::Event &event, Eo::Device &device);
 		virtual ~AScene() = 0;
 		irr::scene::ISceneManager *getSceneManager() const override;
 		irr::scene::ICameraSceneNode *getCamera() const override;
@@ -23,6 +24,7 @@ namespace Eo {
 
 	protected:
 		Device _device;
+		Event &_event;
  		irr::scene::ISceneManager *_sceneManager;
 	};
 };

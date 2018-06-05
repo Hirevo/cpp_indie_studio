@@ -8,8 +8,9 @@
 
 #include "AScene.hpp"
 
-Eo::AScene::AScene(Eo::Device &device) : _device(device),
-	_sceneManager(_device.getDevice()->getSceneManager())
+Eo::AScene::AScene(Eo::Event &event, Eo::Device &device)
+	: _device(device), _event(event),
+	  _sceneManager(_device.getDevice()->getSceneManager())
 {
 }
 

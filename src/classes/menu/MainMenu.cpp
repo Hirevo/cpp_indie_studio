@@ -6,10 +6,12 @@
 */
 
 #include "MainMenu.hpp"
+#include "Event.hpp"
 #include <Device.hpp>
 #include <iostream>
 
-Eo::MainMenu::MainMenu(Eo::Device &device) : AScene(device)
+Eo::MainMenu::MainMenu(Eo::Event &event, Eo::Device &device)
+	: AScene(event, device)
 {
 	this->draw();
 }
@@ -26,12 +28,11 @@ void Eo::MainMenu::putPlayButton()
 	auto h = windowSize.Height;
 	auto pos = 3;
 
-	env->addButton({(int)(w / 6),
-			(int)((h / 8) * pos),
-			(int)(w / 6 + 2 * w / 3),
+	env->addButton(
+		{(int)(w / 6), (int)((h / 8) * pos), (int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)},
-		nullptr,
-		Eo::MainMenu::ButtonType::Play, L"Play", L"Play the game");
+		nullptr, Eo::MainMenu::ButtonType::Play, L"Play",
+		L"Play the game");
 }
 
 void Eo::MainMenu::putSettingsButton()
@@ -42,13 +43,11 @@ void Eo::MainMenu::putSettingsButton()
 	auto h = windowSize.Height;
 	auto pos = 4;
 
-	env->addButton({(int)(w / 6),
-			(int)((h / 8) * pos),
-			(int)(w / 6 + 2 * w / 3),
+	env->addButton(
+		{(int)(w / 6), (int)((h / 8) * pos), (int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)},
-		nullptr,
-		Eo::MainMenu::ButtonType::Settings,
-		L"Settings", L"Open the settings");
+		nullptr, Eo::MainMenu::ButtonType::Settings, L"Settings",
+		L"Open the settings");
 }
 
 void Eo::MainMenu::putCreditsButton()
@@ -59,12 +58,10 @@ void Eo::MainMenu::putCreditsButton()
 	auto h = windowSize.Height;
 	auto pos = 5;
 
-	env->addButton({(int)(w / 6),
-			(int)((h / 8) * pos),
-			(int)(w / 6 + 2 * w / 3),
+	env->addButton(
+		{(int)(w / 6), (int)((h / 8) * pos), (int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)},
-		nullptr,
-		Eo::MainMenu::ButtonType::Credits, L"Credits",
+		nullptr, Eo::MainMenu::ButtonType::Credits, L"Credits",
 		L"Show the credits");
 }
 
@@ -76,12 +73,11 @@ void Eo::MainMenu::putExitButton()
 	auto h = windowSize.Height;
 	auto pos = 6;
 
-	env->addButton({(int)(w / 6),
-			(int)((h / 8) * pos),
-			(int)(w / 6 + 2 * w / 3),
+	env->addButton(
+		{(int)(w / 6), (int)((h / 8) * pos), (int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)},
-		nullptr,
-		Eo::MainMenu::ButtonType::Exit, L"Exit", L"Exit the game");
+		nullptr, Eo::MainMenu::ButtonType::Exit, L"Exit",
+		L"Exit the game");
 }
 
 static const irr::io::path FONT_PATH =
@@ -108,7 +104,8 @@ void Eo::MainMenu::putBackgroundImage()
 {
 	auto *env = this->_device.getDevice()->getGUIEnvironment();
 	env->addImage(this->_device.getDriver()->getTexture(
-		"../assets/img/menu-background.jpg"), {0, 0});
+			      "../assets/img/menu-background.jpg"),
+		{0, 0});
 }
 
 void Eo::MainMenu::putTitle()
