@@ -16,12 +16,13 @@ void Eo::Floor::insertInScene(const Eo::IScene *scene)
 {
 	auto manager = scene->getSceneManager();
 	auto texture = scene->getSceneManager()->getVideoDriver()
-		->getTexture("../assets/img/damier.jpg");
+		->getTexture("../assets/img/floor.png");
 
 	if (_placedInScene)
 		return;
 	auto mesh = manager->getGeometryCreator()->createPlaneMesh(
-		irr::core::dimension2df(_size, _size));
+		irr::core::dimension2df(_size, _size), {1, 1}, nullptr,
+		{_size, _size});
 	_node = manager->addMeshSceneNode(mesh);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	Eo::Floor::updateInScene(scene);

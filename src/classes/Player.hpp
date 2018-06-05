@@ -20,5 +20,10 @@ namespace Eo {
 		~Player();
 
 	private:
+		Eo::vec2 pos;
+		float angle;
+		float speed;
+		int maxBomb;
+		int bombAvailable;
 	};
 }

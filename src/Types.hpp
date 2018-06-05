@@ -15,6 +15,7 @@ namespace Eo {
 	class Options;
 	class SceneHandler;
 	using vec3 = irr::core::vector3df;
+	using vec2 = irr::core::vector2df;
 	using event = irr::SEvent;
 	using eventType = irr::gui::EGUI_EVENT_TYPE;
 	using eventHandler = std::function<void(bool &, const Eo::event &)>;
