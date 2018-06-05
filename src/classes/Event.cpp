@@ -60,8 +60,11 @@ static const std::map<std::pair<Eo::eventType, irr::s32>, Eo::eventHandler>
 			  }},};
 
 Eo::Event::Event(Eo::Options &options, Eo::Device &device,
-	Eo::SceneHandler &sceneHandler)
-	: _options(options), _device(device), _sceneHandler(sceneHandler)
+	Eo::SceneHandler &sceneHandler, Eo::Debug &debug)
+	: _options(options),
+	  _device(device),
+	  _sceneHandler(sceneHandler),
+	  _debug(debug)
 {
 }
 
@@ -82,8 +85,8 @@ bool Eo::Event::OnEvent(const Eo::event &event)
 			callback(_device, _options, _sceneHandler);
 		} else
 			return false;
-	}
-	catch (const std::exception &execption) {
+	} catch (const std::exception &execption) {
+		//std::cout << execption.what() << std::endl;
 		return false;
 	}
 	return true;
@@ -142,8 +145,12 @@ void Eo::Event::keyExit(const Eo::event &event)
 void Eo::Event::keyDebugToggle(const Eo::event &event)
 {
 	if (event.KeyInput.PressedDown) {
-		_options.setDebugMode(!_options.isDebugMode());
-		if (!_options.isDebugMode())
+		_options.isDebugMode() ?
+			_options.setDebugMode(false) :
+			_options.setDebugMode(true);
+		if (!_options.isDebugMode()) {
 			_device.setDeviceTitle(L"Eo Bombermanz");
+			_debug.clearDebugList(_device.getDevice()->getSceneManager());
+		}
 	}
 }

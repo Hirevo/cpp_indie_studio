@@ -38,7 +38,7 @@ bool Eo::Game::draw()
 		"../assets/model-test/sydney.bmp");
 	model->animate(Eo::animType::EMAT_RUN);
 	model->getAnimatedNode()->setScale(Eo::vec3(0.25));
-	_camera.insertInScene(this);
+	_camera.insertStaticInScene(this);
 	Eo::Floor floor((wth - 1) * (hgt - 1) - 10, Eo::vec3(0, -5, 0));
 	floor.insertInScene(this);
 

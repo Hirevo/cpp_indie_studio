@@ -11,6 +11,7 @@
 #include "Options.hpp"
 #include "SceneHandler.hpp"
 #include "Types.hpp"
+#include "Debug.hpp"
 #include <functional>
 #include <irrlicht.h>
 #include <unordered_map>
@@ -23,21 +24,23 @@ namespace Eo {
 			Eo::Event::keyHandle>;
 
 	public:
-		Event(Eo::Options &, Eo::Device &device, Eo::SceneHandler &);
+		Event(Eo::Options &, Eo::Device &device, Eo::SceneHandler &, Eo::Debug &);
 		~Event() = default;
 		virtual bool OnEvent(const Eo::event &event);
-		void handleKeyEvent(const Eo::event &event);
 		void addKeyHandler(
 			const Eo::keyCode &code, Eo::Event::keyHandle handle);
 		void clearKeyHandlers(const Eo::keyCode &code);
+		// Todo OUech polo doit travailler dessus
 		// void removeKeyHandler(
 		// 	const Eo::keyCode &code, Eo::Event::keyHandle handle);
 
 	private:
+		void handleKeyEvent(const Eo::event &event);
 		Eo::Options &_options;
 		Eo::Device &_device;
 		Eo::SceneHandler &_sceneHandler;
 		Eo::Event::keyMap _events;
+		Eo::Debug &_debug;
 		void keyExit(const Eo::event &event);
 		void keyDebugToggle(const Eo::event &event);
 	};

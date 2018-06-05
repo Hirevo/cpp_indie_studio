@@ -35,7 +35,38 @@ void Eo::AObject::setSceneNode(irr::scene::ISceneNode *node)
 void Eo::AObject::deleteNode(const Eo::IScene *scene)
 {
 	this->removeFromScene(scene);
+	if (_hasNode) {
+		delete _node;
+		_node = 0;
+		_hasNode = 0;
+	}
+}
+
+void Eo::AObject::insertInScene(const Eo::IScene *scene)
+{
+	this->removeFromScene(scene);
 	if (_hasNode)
 		delete _node;
 	_hasNode = false;
 }
+
+void Eo::AObject::removeFromScene(const Eo::IScene *scene)
+{
+	throw std::runtime_error("Method non implemented");
+}
+
+void Eo::AObject::updateInScene(const Eo::IScene *scene)
+{
+	throw std::runtime_error("Method non implemented");
+}
+
+bool Eo::AObject::is_hasNode() const
+{
+	return _hasNode;
+}
+
+bool Eo::AObject::is_placedInScene() const
+{
+	return _placedInScene;
+}
+
