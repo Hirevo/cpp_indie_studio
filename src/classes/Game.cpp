@@ -39,6 +39,7 @@ bool Eo::Game::draw()
 	auto texture = _sceneManager->getVideoDriver()->getTexture(
 		"../assets/img/brick.png");
 	auto model = new Eo::Player(*this, _event, _options);
+	Eo::Game::addEvents(model);
 	_camera.insertStaticInScene(this);
 	Eo::Floor floor((wth - 1) - 1, Eo::vec3(0, -0.5, 0));
 	floor.insertInScene(this);
@@ -60,6 +61,11 @@ bool Eo::Game::draw()
 
 void Eo::Game::addEvents(Eo::AModel *model)
 {
-
+	_event.addKeyHandler(_options.getKeyExit(),
+		[this](bool &toRemove, const Eo::event &ev) {
+			if (!ev.KeyInput.PressedDown)
+				return;
+			_options.setExit(true);
+		});
 }
 
