@@ -38,34 +38,7 @@ bool Eo::Game::draw()
 		"../assets/Bomberman/bomberboy_colors_white.png");
 	model->animate(Eo::animType::EMAT_RUN);
 	model->getAnimatedNode()->setScale(Eo::vec3(2.5));
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Z,
-		[this, model](bool &toRemove, const Eo::event &ev) {
-			if (ev.KeyInput.PressedDown == false)
-				return;
-			model->translateZ(2);
-			model->updateInScene(this);
-		});
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_S,
-		[this, model](bool &toRemove, const Eo::event &ev) {
-			if (ev.KeyInput.PressedDown == false)
-				return;
-			model->translateZ(-2);
-			model->updateInScene(this);
-		});
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_D,
-		[this, model](bool &toRemove, const Eo::event &ev) {
-			if (ev.KeyInput.PressedDown == false)
-				return;
-			model->translateX(2);
-			model->updateInScene(this);
-		});
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Q,
-		[this, model](bool &toRemove, const Eo::event &ev) {
-			if (ev.KeyInput.PressedDown == false)
-				return;
-			model->translateX(-2);
-			model->updateInScene(this);
-		});
+	this->addEvents(model);
 	_camera.insertStaticInScene(this);
 	Eo::Floor floor((wth - 1) * (hgt - 1) - 10, Eo::vec3(0, -5, 0));
 	floor.insertInScene(this);
@@ -78,9 +51,41 @@ bool Eo::Game::draw()
 				obj->insertInScene(this);
 				obj->getSceneNode()->setMaterialFlag(
 					irr::video::EMF_LIGHTING, false);
-				obj->getSceneNode()->setMaterialTexture(
-					0, texture);
+				obj->getSceneNode()->setMaterialTexture(0,
+					texture);
 			}
 		}
 	return true;
+}
+
+void Eo::Game::addEvents(Eo::AModel *model)
+{
+	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Z,
+		[this, model](bool &toRemove, const Eo::event &ev) {
+			if (!ev.KeyInput.PressedDown)
+				return;
+			model->translateZ(2);
+			model->updateInScene(this);
+		});
+	_event.addKeyHandler(Eo::keyCode::KEY_KEY_S,
+		[this, model](bool &toRemove, const Eo::event &ev) {
+			if (!ev.KeyInput.PressedDown)
+				return;
+			model->translateZ(-2);
+			model->updateInScene(this);
+		});
+	_event.addKeyHandler(Eo::keyCode::KEY_KEY_D,
+		[this, model](bool &toRemove, const Eo::event &ev) {
+			if (!ev.KeyInput.PressedDown)
+				return;
+			model->translateX(2);
+			model->updateInScene(this);
+		});
+	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Q,
+		[this, model](bool &toRemove, const Eo::event &ev) {
+			if (false == ev.KeyInput.PressedDown)
+				return;
+			model->translateX(-2);
+			model->updateInScene(this);
+		});
 }

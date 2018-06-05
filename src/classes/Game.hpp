@@ -17,6 +17,7 @@
 #include "irrlicht.h"
 #include <memory>
 #include <stack>
+#include <AModel.hpp>
 
 namespace Eo {
 	class Game : public AScene {
@@ -26,6 +27,7 @@ namespace Eo {
 		~Game();
 		irr::scene::ICameraSceneNode *getCamera() const override;
 		bool draw() override;
+		void addEvents(Eo::AModel *model);
 
 	private:
 		Eo::JsonRead _json;
