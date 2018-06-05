@@ -8,6 +8,9 @@
 #include "Core.hpp"
 #include "Game.hpp"
 #include "JsonRead.hpp"
+#include "menu/MainMenu.hpp"
+#include "menu/CreditsMenu.hpp"
+#include "menu/SettingsMenu.hpp"
 #include "Wall.hpp"
 #include "Floor.hpp"
 #include <iostream>
@@ -22,8 +25,48 @@ Eo::Core::Core()
 	  _device(_options),
 	  _sceneHandler(_device),
 	  _debug(_device, _sceneHandler),
-	  _event(_options, _device, _sceneHandler, _debug)
+	  _event()
 {
+	_event.addEventHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Play),
+		[this](bool &toRemove, const Eo::event &event) {
+			std::cout << _sceneHandler.getSceneCount();
+			std::cout << std::endl;
+			_sceneHandler.loadScene(new Eo::Game(
+				_device, "../map2.json"));
+			std::cout << _sceneHandler.getSceneCount() << std::endl;
+		});
+	_event.addEventHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Exit),
+		[this](bool &toRemove, const Eo::event &event) {
+			_options.setExit(true);
+		});
+	_event.addEventHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Settings),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sceneHandler.loadScene(new Eo::SettingsMenu(_device));
+		});
+	_event.addEventHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Credits),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sceneHandler.loadScene(new Eo::CreditsMenu(_device));
+		});
+	_event.addEventHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::SettingsMenu::ButtonType::Return),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sceneHandler.unloadCurrentScene();
+		});
+	_event.addEventHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::CreditsMenu::ButtonType::Return),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sceneHandler.unloadCurrentScene();
+		});
 	_device.getDevice()->setResizable(false);
 	_device.getDevice()->setEventReceiver(&_event);
 	_sceneHandler.loadScene(new Eo::MainMenu(_device));

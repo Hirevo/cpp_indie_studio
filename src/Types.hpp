@@ -17,13 +17,22 @@ namespace Eo {
 	using vec3 = irr::core::vector3df;
 	using event = irr::SEvent;
 	using eventType = irr::gui::EGUI_EVENT_TYPE;
-	using eventHandler = std::function<void(
-		Eo::Device &, Eo::Options &, Eo::SceneHandler &)>;
+	using eventHandler = std::function<void(bool &, const Eo::event &)>;
 	using keyCode = irr::EKEY_CODE;
-	using keyHandler = std::function<void(bool &, const irr::SEvent &)>;
+	using keyHandler = std::function<void(bool &, const Eo::event &)>;
 	using animType = irr::scene::EMD2_ANIMATION_TYPE;
 	using node = irr::scene::ISceneNode;
 	using cameraNode = irr::scene::ICameraSceneNode;
 	using animatedNode = irr::scene::IAnimatedMeshSceneNode;
 	using animatedMesh = irr::scene::IAnimatedMesh;
+	using u8 = std::uint8_t;
+	using u16 = std::uint16_t;
+	using u32 = std::uint32_t;
+	using u64 = std::uint64_t;
+	using i8 = std::int8_t;
+	using i16 = std::int16_t;
+	using i32 = std::int32_t;
+	using i64 = std::int64_t;
+	using f32 = float;
+	using f64 = double;
 };
