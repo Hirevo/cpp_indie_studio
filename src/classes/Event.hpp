@@ -17,15 +17,14 @@
 #include <unordered_map>
 
 namespace Eo {
-	struct pairHash {
-	    template <class T1, class T2>
-	    std::size_t operator () (const std::pair<T1,T2> &p) const {
-	        return std::hash<T1>{}(p.first) ^ std::hash<T2>{}(p.second);
-	    }
-	};
-
 	class Event : public irr::IEventReceiver {
 	public:
+		struct pairHash {
+			template <class T1, class T2>
+			std::size_t operator () (const std::pair<T1,T2> &p) const {
+				return std::hash<T1>{}(p.first) ^ std::hash<T2>{}(p.second);
+			}
+		};
 		using keyHandle = std::pair<bool, Eo::keyHandler>;
 		using keyMap = std::unordered_multimap<Eo::keyCode,
 			Eo::Event::keyHandle>;
@@ -47,6 +46,7 @@ namespace Eo {
 		// void removeEventHandler();
 
 	private:
+
 		void handleKeyEvent(const Eo::event &event);
 		void handleEvent(const Eo::event &event);
 		// void keyExit(const Eo::event &event);

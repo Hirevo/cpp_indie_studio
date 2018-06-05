@@ -18,7 +18,7 @@ namespace Eo {
 		bool draw() override;
 
 		enum ButtonType {
-			Return
+			Return = 120
 		};
 	private:
 		void putBackgroundImage();

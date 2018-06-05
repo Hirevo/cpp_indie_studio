@@ -34,11 +34,12 @@ bool Eo::Game::draw()
 		"../assets/img/red_silk.jpg");
 	auto model = new Eo::Player();
 
-	model->loadModel(this, "../assets/model-test/sydney.md2",
-		"../assets/model-test/sydney.bmp");
+	model->loadModel(this, "../assets/Bomberman/character.blend.x",
+		"../assets/Bomberman/bomberboy_colors_white.png");
 	model->animate(Eo::animType::EMAT_RUN);
-	model->getAnimatedNode()->setScale(Eo::vec3(0.25));
+	model->getAnimatedNode()->setScale(Eo::vec3(1.5));
 	_camera.insertStaticInScene(this);
+//	_camera.insertFPSInScene(this);
 	Eo::Floor floor((wth - 1) * (hgt - 1) - 10, Eo::vec3(0, -5, 0));
 	floor.insertInScene(this);
 
