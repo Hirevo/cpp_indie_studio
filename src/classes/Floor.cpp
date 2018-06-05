@@ -7,7 +7,7 @@
 
 #include "Floor.hpp"
 
-Eo::Floor::Floor(size_t size, vec3 pos)
+Eo::Floor::Floor(irr::f32 size, vec3 pos)
 	: AObject(Eo::IObject::FLOOR, 0, pos), _size(size)
 {
 }
