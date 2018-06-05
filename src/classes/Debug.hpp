@@ -31,7 +31,7 @@ namespace Eo {
 		void clearDebugList(irr::scene::ISceneManager *scene);
 		bool isCameraPosTitleWindow() const;
 		void setCameraPosTitleWindow(bool _cameraPosTitleWindow);
-		void toogleFpsCameraOff(Game *game);
+		void toogleFpsCameraOff(Game *);
 	};
 }
 

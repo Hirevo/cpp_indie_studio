@@ -85,7 +85,6 @@ void Eo::Event::keyDebugToggle(const irr::SEvent &event)
 		if (!_options.isDebugMode()) {
 			_device.setDeviceTitle(L"Eo Bombermanz");
 			_debug.clearDebugList(_device.getDevice()->getSceneManager());
-			_debug.toogleFpsCameraOff(_device.getDevice()->getSceneManager());
 		}
 	}
 }

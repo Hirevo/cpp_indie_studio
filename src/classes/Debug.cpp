@@ -84,19 +84,21 @@ void Eo::Debug::toogleFpsCameraOn(Eo::Game *game)
 	auto camObj = game->get_camera();
 	if (game->get_camera().getCamType() != Eo::Camera::FPS) {
 		game->get_camera().deleteNode(game);
-		//Todo IF we delete this cout, it's magicaly crass on Windows
-		std::cout << "" << camObj.is_placedInScene() << std::endl;
+		//Todo IF we delete this cout, it's magicaly crash on Windows
+		std::cout << "Debug camFPS ON" << camObj.is_placedInScene() << std::endl;
 		game->get_camera().insertFPSInScene(game);
 	}
 }
 
 void Eo::Debug::toogleFpsCameraOff(Eo::Game *game)
 {
-	auto camObj = game->get_camera();
 	if (game->get_camera().getCamType() == Eo::Camera::FPS) {
-		game->get_camera().deleteNode(game);
-		//Todo IF we delete this cout, it's magicaly crass on Windows
-		std::cout << "" << camObj.is_placedInScene() << std::endl;
+		auto camObj = game->get_camera();
+		std::cout << "inf func\n";
+		//game->get_camera().deleteNode(game);
+		std::cout << "after getter\n";
+		//Todo IF we delete this cout, it's magicaly crash on Windows
+		std::cout << "Debug camFPS OFF" << camObj.is_placedInScene() << std::endl;
 		game->get_camera().insertStaticInScene(game);
 	}
 }
