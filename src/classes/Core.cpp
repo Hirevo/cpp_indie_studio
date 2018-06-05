@@ -21,7 +21,8 @@ Eo::Core::Core()
 	: _options(),
 	  _device(_options),
 	  _sceneHandler(_device),
-	  _event(_options, _device, _sceneHandler)
+	  _debug(_device, _sceneHandler),
+	  _event(_options, _device, _debug)
 {
 	_device.getDevice()->setResizable(false);
 	_device.getDevice()->setEventReceiver(&_event);
@@ -30,7 +31,7 @@ Eo::Core::Core()
 	while (_device.getDevice()->run() && !_options.isExit()) {
 		Eo::Debug debug(_device, _sceneHandler.getCurrentScene());
 		if(_options.isDebugMode())
-			debug.dumpDebug();
+			_debug.dumpDebug(_sceneHandler.getCurrentScene(), game);
 		_device.getDriver()->beginScene();
 		_sceneHandler.getCurrentScene()->getSceneManager()->drawAll();
 		_device.getDevice()->getGUIEnvironment()->drawAll();

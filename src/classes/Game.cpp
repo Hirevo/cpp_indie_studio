@@ -57,3 +57,13 @@ bool Eo::Game::draw()
 		}
 	return true;
 }
+
+Eo::Game::~Game()
+{
+}
+
+irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
+{
+	return dynamic_cast<irr::scene::ICameraSceneNode *>(
+		_camera.getSceneNode());
+}

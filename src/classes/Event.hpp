@@ -36,9 +36,8 @@ namespace Eo {
 	private:
 		Eo::Options &_options;
 		Eo::Device &_device;
-		Eo::SceneHandler &_sceneHandler;
-		Eo::Event::keyMap _events;
-		void keyExit(const Eo::event &event);
-		void keyDebugToggle(const Eo::event &event);
+		Eo::Debug &_debug;
+		void keyExit();
+		void keyDebugToggle(const irr::SEvent &event);
 	};
 }
