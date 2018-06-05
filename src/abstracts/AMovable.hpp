@@ -11,6 +11,7 @@
 #include "Types.hpp"
 
 namespace Eo {
+	#pragma warning(disable:4250)
 	class AMovable : public virtual IMovable {
 	public:
 		AMovable(vec3 pos = vec3(0, 0, 0));

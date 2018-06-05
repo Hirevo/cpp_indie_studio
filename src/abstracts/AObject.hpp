@@ -11,6 +11,7 @@
 #include "IObject.hpp"
 
 namespace Eo {
+	#pragma warning(disable:4250)
 	class AObject : public IObject, public AMovable {
 	public:
 		AObject(Eo::IObject::Type type,

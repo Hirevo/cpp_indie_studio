@@ -15,6 +15,7 @@
 #include <SKeyMap.h>
 
 namespace Eo {
+	#pragma warning(disable:4250)
 	class Camera : public AObject {
 	public:
 		enum cameraType {

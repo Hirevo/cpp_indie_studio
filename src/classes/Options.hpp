@@ -20,6 +20,7 @@ namespace Eo {
 		bool _debugMode;
 		irr::EKEY_CODE _keyExit;
 		irr::EKEY_CODE _keyDebugMode;
+		size_t _nbPlayer;
 	public:
 		const irr::core::dimension2d<irr::u32> &get_windowSize() const;
 		void set_windowSize(
@@ -33,6 +34,8 @@ namespace Eo {
 		void setKeyDebugMode(irr::EKEY_CODE _keyDebugMode);
 		bool isDebugMode() const;
 		void setDebugMode(bool _debugMode);
+		size_t getNbPlayer() const;
+		void setNbPlayer(size_t _nbPlayer);
 	};
 }
 

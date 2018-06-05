@@ -13,6 +13,7 @@
 #include <string>
 
 namespace Eo {
+	#pragma warning(disable:4250)
 	class AModel : public IModel, public AObject {
 	public:
 		AModel(IObject::Type type, Eo::vec3 pos = Eo::vec3(0, 0, 0));

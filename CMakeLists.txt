@@ -42,6 +42,7 @@ set(HEADER_FILES
         src/classes/menu/SettingsMenu.cpp
         src/classes/menu/SettingsMenu.hpp
         src/classes/menu/CreditsMenu.cpp
+        src/Types.hpp
         src/classes/menu/CreditsMenu.hpp)
 
 add_executable(bomberman

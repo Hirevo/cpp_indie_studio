@@ -65,6 +65,7 @@ Eo::Event::Event()
 
 bool Eo::Event::OnEvent(const Eo::event &event)
 {
+	// Todo For polo memories
 	// std::map<Eo::keyCode, void (*)(const Eo::event &)> keyHandler{
 	// 	{_options.getKeyExit(), &Eo::Event::keyExit},
 	// 	{_options.getKeyDebugMode(), &Eo::Event::keyDebugToggle}};
@@ -151,6 +152,7 @@ void Eo::Event::clearEventHandlers(const Eo::Event::eventKey &key)
 			++it;
 }
 
+// Todo not working actually
 // void Eo::Event::removeKeyHandler(
 // 	const Eo::keyCode &code, const Eo::Event::keyHandle &handle)
 // {
