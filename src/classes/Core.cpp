@@ -22,16 +22,16 @@ Eo::Core::Core()
 	  _device(_options),
 	  _sceneHandler(_device),
 	  _debug(_device, _sceneHandler),
-	  _event(_options, _device, _debug)
+	  _event(_options, _device, _sceneHandler, _debug)
 {
 	_device.getDevice()->setResizable(false);
 	_device.getDevice()->setEventReceiver(&_event);
 	_sceneHandler.loadScene(new Eo::MainMenu(_device));
 
 	while (_device.getDevice()->run() && !_options.isExit()) {
-		Eo::Debug debug(_device, _sceneHandler.getCurrentScene());
+		Eo::Debug debug(_device, _sceneHandler);
 		if(_options.isDebugMode())
-			_debug.dumpDebug(_sceneHandler.getCurrentScene(), game);
+			_debug.dumpDebug(_sceneHandler.getCurrentScene());
 		_device.getDriver()->beginScene();
 		_sceneHandler.getCurrentScene()->getSceneManager()->drawAll();
 		_device.getDevice()->getGUIEnvironment()->drawAll();

@@ -60,8 +60,11 @@ static const std::map<std::pair<Eo::eventType, irr::s32>, Eo::eventHandler>
 			  }},};
 
 Eo::Event::Event(Eo::Options &options, Eo::Device &device,
-	Eo::SceneHandler &sceneHandler)
-	: _options(options), _device(device), _sceneHandler(sceneHandler)
+	Eo::SceneHandler &sceneHandler, Eo::Debug &debug)
+	: _options(options),
+	  _device(device),
+	  _sceneHandler(sceneHandler),
+	  _debug(debug)
 {
 }
 
@@ -145,7 +148,7 @@ void Eo::Event::keyDebugToggle(const Eo::event &event)
 		_options.isDebugMode() ?
 			_options.setDebugMode(false) :
 			_options.setDebugMode(true);
-		if (!_options.isDebugMode())
+		if (!_options.isDebugMode()) {
 			_device.setDeviceTitle(L"Eo Bombermanz");
 			_debug.clearDebugList(_device.getDevice()->getSceneManager());
 		}

@@ -30,8 +30,6 @@ namespace Eo {
 		Eo::JsonRead _json;
 		Eo::Map _map;
 		Eo::Camera _camera;
-	public:
-		Camera &get_camera();
 	};
 }
 #endif

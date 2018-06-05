@@ -25,13 +25,13 @@ namespace Eo {
 		bool _cameraPos = true;
 		void dumpCameraPosTitleWindow(irr::scene::ISceneManager *scene);
 		void dumpCameraPos(irr::scene::ISceneManager *scene);
-		void toogleFpsCameraOn(Eo::Game *);
+		//void toogleFpsCameraOn(Eo::Game *);
 	public:
-		void dumpDebug(IScene *scene, Eo::Game *);
+		void dumpDebug(IScene *scene);
 		void clearDebugList(irr::scene::ISceneManager *scene);
 		bool isCameraPosTitleWindow() const;
 		void setCameraPosTitleWindow(bool _cameraPosTitleWindow);
-		void toogleFpsCameraOff(Game *);
+		//void toogleFpsCameraOff(Game *);
 	};
 }
 

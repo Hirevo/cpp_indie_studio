@@ -32,7 +32,7 @@ void Eo::AObject::setSceneNode(irr::scene::ISceneNode *node)
 	_node = node;
 }
 
-void Eo::AObject::deleteNode(Eo::IScene *scene)
+void Eo::AObject::deleteNode(const Eo::IScene *scene)
 {
 	this->removeFromScene(scene);
 	if (_hasNode) {
@@ -42,7 +42,7 @@ void Eo::AObject::deleteNode(Eo::IScene *scene)
 	}
 }
 
-void Eo::AObject::insertInScene(Eo::IScene *scene)
+void Eo::AObject::insertInScene(const Eo::IScene *scene)
 {
 	this->removeFromScene(scene);
 	if (_hasNode)
@@ -50,12 +50,12 @@ void Eo::AObject::insertInScene(Eo::IScene *scene)
 	_hasNode = false;
 }
 
-void Eo::AObject::removeFromScene(Eo::IScene *scene)
+void Eo::AObject::removeFromScene(const Eo::IScene *scene)
 {
 	throw std::runtime_error("Method non implemented");
 }
 
-void Eo::AObject::updateInScene(Eo::IScene *scene)
+void Eo::AObject::updateInScene(const Eo::IScene *scene)
 {
 	throw std::runtime_error("Method non implemented");
 }

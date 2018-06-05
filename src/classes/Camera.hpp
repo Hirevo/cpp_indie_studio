@@ -25,9 +25,9 @@ namespace Eo {
 		~Camera() = default;
 		void insertFPSInScene(Eo::IScene *scene);
 		void insertStaticInScene(Eo::IScene *scene);
-		void insertInScene(Eo::IScene *scene) override;
-		void removeFromScene(Eo::IScene *scene) override;
-		void updateInScene(Eo::IScene *scene) override;
+		void insertInScene(const Eo::IScene *scene) override;
+		void removeFromScene(const Eo::IScene *scene) override;
+		void updateInScene(const Eo::IScene *scene) override;
 		irr::scene::ICameraSceneNode *getCameraHandle() const;
 	private:
 		irr::SKeyMap _keyMap[5];

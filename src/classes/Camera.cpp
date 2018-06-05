@@ -64,11 +64,11 @@ void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
 	_placedInScene = true;
 }
 
-void Eo::Camera::insertInScene(Eo::IScene *scene)
+void Eo::Camera::insertInScene(const Eo::IScene *scene)
 {
 }
 
-void Eo::Camera::removeFromScene(Eo::IScene *scene)
+void Eo::Camera::removeFromScene(const Eo::IScene *scene)
 {
 	if (_placedInScene && _hasNode)
 		_node->remove();

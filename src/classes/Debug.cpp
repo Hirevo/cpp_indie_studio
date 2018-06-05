@@ -5,6 +5,7 @@
 ** Created by Benjamin
 */
 
+#include <iostream>
 #include "Debug.hpp"
 
 Eo::Debug::Debug(Eo::Device &device, Eo::SceneHandler &sceneHandler)
@@ -17,7 +18,7 @@ Eo::Debug::~Debug()
 {
 }
 
-void Eo::Debug::dumpDebug(IScene *scene, Eo::Game *game)
+void Eo::Debug::dumpDebug(IScene *scene)
 {
 	dumpCameraPosTitleWindow(scene->getSceneManager());
 	dumpCameraPos(scene->getSceneManager());
@@ -78,28 +79,26 @@ void Eo::Debug::clearDebugList(irr::scene::ISceneManager *scene)
 	scene->getGUIEnvironment()->clear();
 }
 
-#include <iostream>
-
-void Eo::Debug::toogleFpsCameraOn(Eo::Game *game)
-{
-	auto camObj = game->get_camera();
-	if (game->get_camera().getCamType() != Eo::Camera::FPS) {
-		game->get_camera().deleteNode(game);
-		//Todo IF we delete this cout, it's magicaly crash on Windows
-		std::cout << "Debug camFPS ON" << camObj.is_placedInScene() << std::endl;
-		game->get_camera().insertFPSInScene(game);
-	}
-}
-
-void Eo::Debug::toogleFpsCameraOff(Eo::Game *game)
-{
-	if (game->get_camera().getCamType() == Eo::Camera::FPS) {
-		auto camObj = game->get_camera();
-		std::cout << "inf func\n";
-		//game->get_camera().deleteNode(game);
-		std::cout << "after getter\n";
-		//Todo IF we delete this cout, it's magicaly crash on Windows
-		std::cout << "Debug camFPS OFF" << camObj.is_placedInScene() << std::endl;
-		game->get_camera().insertStaticInScene(game);
-	}
-}
+//void Eo::Debug::toogleFpsCameraOn(Eo::Game *game)
+//{
+//	auto camObj = game->get_camera();
+//	if (game->get_camera().getCamType() != Eo::Camera::FPS) {
+//		game->get_camera().deleteNode(game);
+//		//Todo IF we delete this cout, it's magicaly crash on Windows
+//		std::cout << "Debug camFPS ON" << camObj.is_placedInScene() << std::endl;
+//		game->get_camera().insertFPSInScene(game);
+//	}
+//}
+//
+//void Eo::Debug::toogleFpsCameraOff(Eo::Game *game)
+//{
+//	if (game->get_camera().getCamType() == Eo::Camera::FPS) {
+//		auto camObj = game->get_camera();
+//		std::cout << "inf func\n";
+//		//game->get_camera().deleteNode(game);
+//		std::cout << "after getter\n";
+//		//Todo IF we delete this cout, it's magicaly crash on Windows
+//		std::cout << "Debug camFPS OFF" << camObj.is_placedInScene() << std::endl;
+//		game->get_camera().insertStaticInScene(game);
+//	}
+//}
