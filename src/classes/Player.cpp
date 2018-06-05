@@ -5,12 +5,16 @@
 ** Created by Benjamin
 */
 
+#include <iostream>
 #include "Player.hpp"
 
-Eo::Player::Player(Eo::Game &game, Eo::Event &event, const vec3 &pos) :
+Eo::Player::Player(Eo::Game &game, Eo::Event &event, Eo::Options &options, const vec3 &pos, Eo::u64 id) :
 	AModel(Eo::IObject::Type::CHARACTER, pos),
-	_event(event)
+	_event(event),
+	_options(options),
+	_playerId(id)
 {
+	std::cout << "helo: " << _playerId << std::endl;
 	this->loadModel(&game, "../assets/Bomberman/character.blend.x",
 		"../assets/Bomberman/bomberboy_colors_white.png");
 	this->animate(Eo::animType::EMAT_RUN);
@@ -20,28 +24,28 @@ Eo::Player::Player(Eo::Game &game, Eo::Event &event, const vec3 &pos) :
 
 void Eo::Player::addEvents(Eo::Game &game)
 {
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Z,
+	_event.addKeyHandler(_options.getPlayerKeys().at(_playerId)._up,
 		[this, &game](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
 			this->translateZ(0.2);
 			this->updateInScene(&game);
 		});
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_S,
+	_event.addKeyHandler(_options.getPlayerKeys().at(_playerId)._down,
 		[this, &game](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
 			this->translateZ(-0.2);
 			this->updateInScene(&game);
 		});
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_D,
+	_event.addKeyHandler(_options.getPlayerKeys().at(_playerId)._right,
 		[this, &game](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
 			this->translateX(0.2);
 			this->updateInScene(&game);
 		});
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Q,
+	_event.addKeyHandler(_options.getPlayerKeys().at(_playerId)._left,
 		[this, &game](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;

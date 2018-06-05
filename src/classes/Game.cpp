@@ -38,7 +38,7 @@ bool Eo::Game::draw()
 	irr::s32 hgt = _map.getHeight();
 	auto texture = _sceneManager->getVideoDriver()->getTexture(
 		"../assets/img/brick.png");
-	auto model = new Eo::Player(*this, _event);
+	auto model = new Eo::Player(*this, _event, _options);
 	_camera.insertStaticInScene(this);
 	Eo::Floor floor((wth - 1) - 1, Eo::vec3(0, -0.5, 0));
 	floor.insertInScene(this);

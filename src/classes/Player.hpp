@@ -18,14 +18,16 @@ namespace Eo {
 
 	class Player : public AModel {
 	public:
-		explicit Player(Eo::Game &, Eo::Event &, const vec3 &pos = vec3(0));
+		explicit Player(Eo::Game &, Eo::Event &, Eo::Options &, const vec3 &pos = vec3(0), Eo::u64 id = 0);
 		~Player() override;
 	private:
 		irr::f32 _angle;
 		irr::f32 _speed;
 		irr::u32 _maxBomb;
 		irr::u32 _bombAvailable;
+		irr::u64 _playerId;
 		Eo::Event &_event;
+		Eo::Options &_options;
 	private:
 		void addEvents(Eo::Game &game);
 	};
