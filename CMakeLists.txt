@@ -37,7 +37,7 @@ set(HEADER_FILES
         src/classes/menu/MainMenu.hpp
         src/classes/Event.cpp 
         src/classes/Event.hpp
-        src/classes/map.hpp
+        src/classes/Map.hpp
         src/classes/menu/SettingsMenu.cpp 
         src/classes/menu/SettingsMenu.cpp
         src/classes/menu/SettingsMenu.hpp
