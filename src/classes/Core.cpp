@@ -30,8 +30,6 @@ Eo::Core::Core()
 	while (_device.getDevice()->run() && !_options.isExit()) {
 		if(_options.isDebugMode())
 			_debug.dumpDebug(_sceneHandler.getCurrentScene(), game);
-		else
-			_debug.toogleFpsCameraOff(game);
 		_device.getDriver()->beginScene();
 		_sceneHandler.getCurrentScene()->getSceneManager()->drawAll();
 		_device.getDevice()->getGUIEnvironment()->drawAll();

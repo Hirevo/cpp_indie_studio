@@ -21,7 +21,8 @@ void Eo::Debug::dumpDebug(IScene *scene, Eo::Game *game)
 {
 	dumpCameraPosTitleWindow(scene->getSceneManager());
 	dumpCameraPos(scene->getSceneManager());
-	toogleFpsCameraOn(game);
+	//Todo when switch between both camera it crashed so desactivated
+	//toogleFpsCameraOn(game);
 }
 
 void Eo::Debug::dumpCameraPos(irr::scene::ISceneManager *scene)
