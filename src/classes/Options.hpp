@@ -8,6 +8,7 @@
 #ifndef BOMBERMAN_OPTIONS_HPP
 #define BOMBERMAN_OPTIONS_HPP
 
+#include <Types.hpp>
 #include "irrlicht.h"
 
 namespace Eo {
@@ -15,14 +16,14 @@ namespace Eo {
 	public:
 		Options();
 	private:
-		struct PlayerKeys {
+		typedef struct PlayerKeys_s {
 			Eo::keyCode _up;
 			Eo::keyCode _left;
 			Eo::keyCode _down;
 			Eo::keyCode _right;
 			Eo::keyCode _bomb;
-		};
-		std::array<PlayerKeys,2> _playerKeys;
+		} PlayerKey_t;
+		std::array<PlayerKeys_s,2> _playerKeys;
 		irr::core::dimension2d<irr::u32> _windowSize;
 		bool _exit;
 		bool _debugMode;
