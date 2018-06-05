@@ -27,14 +27,15 @@ namespace Eo {
 		Event(Eo::Options &, Eo::Device &device, Eo::SceneHandler &, Eo::Debug &);
 		~Event() = default;
 		virtual bool OnEvent(const Eo::event &event);
-		void handleKeyEvent(const Eo::event &event);
 		void addKeyHandler(
 			const Eo::keyCode &code, Eo::Event::keyHandle handle);
 		void clearKeyHandlers(const Eo::keyCode &code);
+		// Todo OUech polo doit travailler dessus
 		// void removeKeyHandler(
 		// 	const Eo::keyCode &code, Eo::Event::keyHandle handle);
 
 	private:
+		void handleKeyEvent(const Eo::event &event);
 		Eo::Options &_options;
 		Eo::Device &_device;
 		Eo::SceneHandler &_sceneHandler;
