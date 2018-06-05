@@ -70,6 +70,7 @@ Eo::Event::Event(Eo::Options &options, Eo::Device &device,
 
 bool Eo::Event::OnEvent(const Eo::event &event)
 {
+	// Todo For polo memories
 	// std::map<Eo::keyCode, void (*)(const Eo::event &)> keyHandler{
 	// 	{_options.getKeyExit(), &Eo::Event::keyExit},
 	// 	{_options.getKeyDebugMode(), &Eo::Event::keyDebugToggle}};
@@ -86,6 +87,7 @@ bool Eo::Event::OnEvent(const Eo::event &event)
 		} else
 			return false;
 	} catch (const std::exception &execption) {
+		// Todo Display the exeption throwing by Event type, not needed
 		//std::cout << execption.what() << std::endl;
 		return false;
 	}
@@ -125,6 +127,7 @@ void Eo::Event::clearKeyHandlers(const Eo::keyCode &code)
 			++it;
 }
 
+// Todo not working actually
 // void Eo::Event::removeKeyHandler(
 // 	const Eo::keyCode &code, const Eo::Event::keyHandle &handle)
 // {

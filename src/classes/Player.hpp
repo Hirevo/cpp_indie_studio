@@ -13,6 +13,7 @@
 #include "irrlicht.h"
 
 namespace Eo {
+	#pragma warning(disable:4250)
 	class Player : public AModel {
 	public:
 		Player(vec3 pos = vec3(0, 0, 0));
