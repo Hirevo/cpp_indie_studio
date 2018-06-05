@@ -15,6 +15,14 @@ namespace Eo {
 	public:
 		Options();
 	private:
+		struct PlayerKeys {
+			Eo::keyCode _up;
+			Eo::keyCode _left;
+			Eo::keyCode _down;
+			Eo::keyCode _right;
+			Eo::keyCode _bomb;
+		};
+		std::array<PlayerKeys,2> _playerKeys;
 		irr::core::dimension2d<irr::u32> _windowSize;
 		bool _exit;
 		bool _debugMode;
