@@ -25,6 +25,7 @@ namespace Eo {
 			Right = 1 << 3
 		};
 		enum Facing {
+			//Todo Change direction logique
 			North = Eo::Player::Motion::Forward,
 			South = Eo::Player::Motion::Backward,
 			West = Eo::Player::Motion::Right,
@@ -52,7 +53,7 @@ namespace Eo {
 		void addEvents(Eo::IScene &game);
 		Eo::u8 _flags;
 		irr::f32 _angle;
-		irr::f32 _speed = 0.03;
+		irr::f32 _speed = 0.03f;
 		irr::u32 _maxBomb;
 		irr::u32 _bombAvailable;
 		irr::u64 _playerId;

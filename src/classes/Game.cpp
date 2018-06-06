@@ -151,5 +151,5 @@ bool Eo::Game::isValidMove(Eo::vec3 newPos, irr::u64 id)
 	if (!object)
 		return true;
 	auto type = object->getType();
-	return !(type == IObject::WALL);
+	return !(type == IObject::WALL || type == IObject::DEST_WALL);
 }
