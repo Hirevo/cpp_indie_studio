@@ -39,6 +39,7 @@ void Eo::AModel::updateInScene(const Eo::IScene *scene)
 {
 	if (_hasNode) {
 		_node->setPosition(_pos);
+		_node->setRotation(vec3(0, _rotation, 0));
 		_hasPositionChanged = false;
 	}
 }

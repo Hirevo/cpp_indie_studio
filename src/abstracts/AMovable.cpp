@@ -36,6 +36,16 @@ void Eo::AMovable::setPosition(Eo::f32 v)
 	Eo::AMovable::setPosition(Eo::vec3(v, v, v));
 }
 
+Eo::f32 Eo::AMovable::getRotation() const
+{
+	return _rotation;
+}
+
+void Eo::AMovable::setRotation(Eo::f32 rotation)
+{
+	_rotation = rotation;
+}
+
 void Eo::AMovable::translate(const Eo::vec3 &v)
 {
 	if (v.X || v.Y || v.Z) {
