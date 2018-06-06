@@ -21,7 +21,7 @@ Eo::Player::Player(Eo::IScene &game, Eo::Event &event, Eo::Options &options,
 	  _options(options),
 	  _playerId(id)
 {
-	this->loadModel(&game, "../assets/Bomberman/character.blend.x",
+	this->loadModel(&game, "../assets/Bomberman/Character.x",
 		"../assets/Bomberman/bomberboy_colors_white.png");
 	this->animate(Eo::animType::EMAT_RUN);
 	this->getAnimatedNode()->setScale(Eo::vec3(0.15f));
