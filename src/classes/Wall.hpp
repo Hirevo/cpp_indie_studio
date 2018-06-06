@@ -22,7 +22,6 @@ namespace Eo {
 		void insertInScene(const Eo::IScene *scene) override;
 		void removeFromScene(const Eo::IScene *scene) override;
 		void updateInScene(const Eo::IScene *scene) override;
-
 	private:
 		WallType _wallType;
 	};

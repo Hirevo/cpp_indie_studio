@@ -21,7 +21,8 @@ namespace Eo {
 			FLOOR,
 			WALL,
 			DEST_WALL,
-			BOMB
+			BOMB,
+			BOOSTER
 		};
 		virtual ~IObject() = default;
 		virtual Eo::IObject::Type getType() const = 0;
