@@ -28,7 +28,8 @@ Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
 	auto matrix = json.readMatrix("map");
 	const std::vector<std::function<IObject *(void)>> v = {
 		[] { return nullptr; },
-		[] { return new Wall(Eo::Wall::WallType::INDESTRUCTIBLE); }};
+		[] { return new Wall(Eo::Wall::WallType::INDESTRUCTIBLE); },
+		[] { return new Wall(Eo::Wall::WallType::DESTRUCTIBLE); }};
 
 	Eo::Floor floor(200);
 	_w = matrix.size();

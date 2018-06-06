@@ -8,7 +8,7 @@
 #include "Wall.hpp"
 
 const std::unordered_map<Eo::Wall::WallType, std::string> Eo::Wall::_textures{
-	{Eo::Wall::WallType::DESTRUCTIBLE, "../assets/img/bricks.png"},
+	{Eo::Wall::WallType::DESTRUCTIBLE, "../assets/img/brick.png"},
 	{Eo::Wall::WallType::INDESTRUCTIBLE, "../assets/img/block.png"}};
 
 Eo::Wall::Wall(Eo::Wall::WallType wallType, Eo::vec3 pos)
