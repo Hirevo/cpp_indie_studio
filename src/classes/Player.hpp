@@ -25,7 +25,7 @@ namespace Eo {
 		void unsetFlag(Eo::u8 flags);
 		Eo::u8 getFlag() const;
 		void update();
-
+		u64 getPlayerId() const;
 	private:
 		void addEvents(Eo::IScene &game);
 		Eo::u8 _flags;
