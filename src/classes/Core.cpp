@@ -69,10 +69,12 @@ Eo::Core::Core()
 
 	while (_device.getDevice()->run() && !_options.isExit()) {
 		Eo::Debug debug(_device, _sceneHandler);
+		auto scene = _sceneHandler.getCurrentScene();
 		if (_options.isDebugMode())
-			_debug.dumpDebug(_sceneHandler.getCurrentScene());
+			_debug.dumpDebug(scene);
 		_device.getDriver()->beginScene();
-		_sceneHandler.getCurrentScene()->getSceneManager()->drawAll();
+		scene->update();
+		scene->getSceneManager()->drawAll();
 		_device.getDevice()->getGUIEnvironment()->drawAll();
 		_device.getDriver()->endScene();
 	}

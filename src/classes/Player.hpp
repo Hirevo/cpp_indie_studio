@@ -8,25 +8,33 @@
 #pragma once
 
 #include "AModel.hpp"
-#include "Core.hpp"
 #include "Device.hpp"
-#include "irrlicht.h"
 #include "Event.hpp"
+#include "IScene.hpp"
+#include "irrlicht.h"
 
 namespace Eo {
-	#pragma warning(disable:4250)
-
+#pragma warning(disable : 4250)
+	class Game;
 	class Player : public AModel {
 	public:
-		explicit Player(Eo::Game &, Eo::Event &, const vec3 &pos = vec3(0));
+		enum Motion { Forward = 1, Backward = 2, Left = 4, Right = 8 };
+		Player(Eo::IScene &game, Eo::Event &event,
+			const Eo::vec3 &pos = Eo::vec3(0));
 		~Player() override;
+		void setFlag(Eo::u8 flags);
+		void unsetFlag(Eo::u8 flags);
+		Eo::u8 getFlag() const;
+		void update();
+
 	private:
-		irr::f32 _angle;
-		irr::f32 _speed;
-		irr::u32 _maxBomb;
-		irr::u32 _bombAvailable;
+		void addEvents(Eo::IScene &game);
+		Eo::vec2 pos;
+		Eo::f32 _angle;
+		Eo::f32 _speed;
+		Eo::u32 _maxBomb;
+		Eo::u32 _bombAvailable;
 		Eo::Event &_event;
-	private:
-		void addEvents(Eo::Game &game);
+		Eo::u8 _flags;
 	};
 }

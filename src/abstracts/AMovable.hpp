@@ -33,6 +33,7 @@ namespace Eo {
 	protected:
 		vec3 _pos;
 		bool _hasPositionChanged;
+		
 
 	private:
 	};
