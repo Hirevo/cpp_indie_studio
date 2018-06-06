@@ -124,6 +124,16 @@ void Eo::Game::update()
 			dir.X += (rgt ? player->getSpeed() : 0);
 			dir.X += (lft ? -player->getSpeed() : 0);
 			if (isValidMove(player->getPosition() + dir, player->getPlayerId())) {
+				try {
+					player->setRotation(
+						Eo::Player::_dirs.at(
+							static_cast<
+								Eo::Player::
+									Facing>(
+								flags)));
+				}
+				catch (std::exception &e) {
+				}
 				player->translate(dir);
 				player->updateInScene(this);
 			}

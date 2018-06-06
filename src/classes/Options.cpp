@@ -5,17 +5,14 @@
 ** Created by Benjamin
 */
 
-#include <iostream>
 #include "Options.hpp"
 #include "Types.hpp"
+#include <iostream>
 
 Eo::Options::Options()
-	: _windowSize(1280, 720),
-	  _exit(false),
-	  _debugMode(false),
+	: _windowSize(1280, 720), _exit(false), _debugMode(false),
 	  _keyExit(irr::EKEY_CODE::KEY_F4),
-	  _keyDebugMode(irr::EKEY_CODE::KEY_F2),
-	  _nbPlayer(1)
+	  _keyDebugMode(irr::EKEY_CODE::KEY_F2), _nbPlayer(1)
 {
 	_playerKeys.at(0)._bomb = Eo::keyCode::KEY_KEY_A;
 	_playerKeys.at(0)._up = Eo::keyCode::KEY_KEY_Z;
@@ -27,7 +24,6 @@ Eo::Options::Options()
 	_playerKeys.at(1)._left = Eo::keyCode::KEY_KEY_J;
 	_playerKeys.at(1)._down = Eo::keyCode::KEY_KEY_K;
 	_playerKeys.at(1)._right = Eo::keyCode::KEY_KEY_L;
-
 }
 
 const irr::core::dimension2d<irr::u32> &Eo::Options::get_windowSize() const
@@ -35,10 +31,8 @@ const irr::core::dimension2d<irr::u32> &Eo::Options::get_windowSize() const
 	return _windowSize;
 }
 
-void Eo::Options::
-set_windowSize(
-	const irr::core::dimension2d<irr::u32> &_windowSize
-)
+void Eo::Options::set_windowSize(
+	const irr::core::dimension2d<irr::u32> &_windowSize)
 {
 	Options::_windowSize = _windowSize;
 }
@@ -93,14 +87,14 @@ void Eo::Options::setNbPlayer(size_t nbPlayer)
 	_nbPlayer = nbPlayer;
 }
 
-const std::array<Eo::Options::PlayerKeys_s, 2> &Eo::Options::getPlayerKeys() const
+const std::array<Eo::Options::PlayerKeys, 2> &
+Eo::Options::getPlayerKeys() const
 {
 	return _playerKeys;
 }
 
 void Eo::Options::setPlayerKeys(
-	const std::array<Eo::Options::PlayerKeys_s, 2> &_playerKeys
-)
+	const std::array<Eo::Options::PlayerKeys, 2> &_playerKeys)
 {
 	Options::_playerKeys = _playerKeys;
 }

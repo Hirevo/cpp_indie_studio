@@ -37,23 +37,20 @@ void Eo::Camera::insertFPSInScene(Eo::IScene *scene)
 	else
 		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
 	Eo::Camera::updateInScene(scene);
-
 	_placedInScene = true;
 }
 
 void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
 {
-	irr::core::vector3df position(0, 8, -8);
+	irr::core::vector3df position(0, 6, -6);
 	irr::core::vector3df lookat = irr::core::vector3df(0, 0, 0);
 
 	_camType = STATIC;
-	if (_placedInScene) {
-		std::cout << "Debug: isPlacedInScene (so Return)\n";
+	if (_placedInScene)
 		return;
-	}
 	if (!_hasNode) {
 		_camera = scene->getSceneManager()->addCameraSceneNode(
-			nullptr,position,lookat,-1,true);
+			nullptr, position, lookat, -1, true);
 		_node = _camera;
 		_hasNode = true;
 	}

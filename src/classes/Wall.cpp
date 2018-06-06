@@ -8,7 +8,8 @@
 #include "Wall.hpp"
 
 Eo::Wall::Wall(Eo::Wall::WallType wallType, Eo::vec3 pos)
-	: AObject(Eo::IObject::WALL), _wallType(wallType)
+	: AObject(static_cast<Eo::IObject::Type>(wallType)),
+	  _wallType(wallType)
 {
 }
 
