@@ -9,6 +9,7 @@
 
 #include "AMovable.hpp"
 #include "AObject.hpp"
+#include <unordered_map>
 
 namespace Eo {
 	class Wall : public AObject {
@@ -22,7 +23,10 @@ namespace Eo {
 		void insertInScene(const Eo::IScene *scene) override;
 		void removeFromScene(const Eo::IScene *scene) override;
 		void updateInScene(const Eo::IScene *scene) override;
+
 	private:
 		WallType _wallType;
+		static const std::unordered_map<WallType, std::string>
+			_textures;
 	};
 }

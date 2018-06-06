@@ -33,16 +33,16 @@ namespace Eo {
 		void update();
 
 	private:
-		void insertMap(irr::video::ITexture *texture, irr::s32 wth,
-			irr::s32 hgt);
+		void insertMap(Eo::vec2 v);
+		void placeObject(Eo::vec2 size, Eo::vec2 cur);
 		Eo::keyHandler getPlayerEventFunc(
 			Eo::Player *player, Eo::Player::Motion flag);
+		bool isValidMove(vec3, irr::u64);
 		std::array<Eo::Player *, 2> _players;
 		std::list<Eo::IObject *> _objects;
 		Eo::JsonRead _json;
 		Eo::Map _map;
 		Eo::Camera _camera;
 		Eo::Options &_options;
-		bool isValidMove(vec3, irr::u64);
 	};
 }

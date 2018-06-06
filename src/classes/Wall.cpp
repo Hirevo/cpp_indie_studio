@@ -7,6 +7,10 @@
 
 #include "Wall.hpp"
 
+const std::unordered_map<Eo::Wall::WallType, std::string> Eo::Wall::_textures{
+	{Eo::Wall::WallType::DESTRUCTIBLE, "../assets/img/bricks.png"},
+	{Eo::Wall::WallType::INDESTRUCTIBLE, "../assets/img/block.png"}};
+
 Eo::Wall::Wall(Eo::Wall::WallType wallType, Eo::vec3 pos)
 	: AObject(static_cast<Eo::IObject::Type>(wallType)),
 	  _wallType(wallType)
@@ -22,6 +26,9 @@ void Eo::Wall::insertInScene(const Eo::IScene *scene)
 		return;
 	_node = manager->addCubeSceneNode(unitSize, nullptr, -1, _pos);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	_node->setMaterialTexture(0,
+		manager->getVideoDriver()->getTexture(
+			_textures.at(_wallType).c_str()));
 	Eo::Wall::updateInScene(scene);
 	_hasPositionChanged = false;
 	_placedInScene = true;
