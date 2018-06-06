@@ -26,11 +26,13 @@ namespace Eo {
 		Eo::u8 getFlag() const;
 		void update();
 		u64 getPlayerId() const;
+		f32 getSpeed() const;
+		void setSpeed(f32 _speed);
 	private:
 		void addEvents(Eo::IScene &game);
 		Eo::u8 _flags;
 		irr::f32 _angle;
-		irr::f32 _speed;
+		irr::f32 _speed = 0.03;
 		irr::u32 _maxBomb;
 		irr::u32 _bombAvailable;
 		irr::u64 _playerId;
