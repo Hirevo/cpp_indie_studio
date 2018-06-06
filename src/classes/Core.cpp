@@ -7,12 +7,11 @@
 
 #include "Core.hpp"
 #include "Floor.hpp"
-#include "Game.hpp"
-#include "JsonRead.hpp"
 #include "Wall.hpp"
 #include "menu/CreditsMenu.hpp"
 #include "menu/MainMenu.hpp"
 #include "menu/SettingsMenu.hpp"
+#include "menu/PlayMenu.hpp"
 #include <iostream>
 #include <menu/MainMenu.hpp>
 
@@ -42,10 +41,10 @@ Eo::Core::Core()
 		});
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-			Eo::MainMenu::ButtonType::Play),
+		                    Eo::MainMenu::ButtonType::Play),
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler.loadScene(
-				new Eo::Game(_event, _device, "../map2.json", _options));
+				new Eo::PlayMenu(_event, _device));
 		});
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
