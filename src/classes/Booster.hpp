@@ -13,7 +13,7 @@
 namespace Eo {
 	class Booster : public AObject {
 	public:
-		enum BoosterType {ROLLER, SUPERBOMB};
+		enum BoosterType {ROLLER, SUPERBOMB, NBBOMB};
 		Booster(Booster::BoosterType type, vec3 pos = vec3(0, 0, 0));
 		~Booster() = default;
 		void insertInScene(const Eo::IScene *scene) override;

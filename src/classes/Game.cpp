@@ -29,38 +29,37 @@ irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
 
 bool Eo::Game::draw()
 {
-	irr::s32 wth = _map.getWidth();
-	irr::s32 hgt = _map.getHeight();
-	auto texture = _sceneManager->getVideoDriver()->getTexture(
-		"../assets/img/brick.png");
+	Eo::vec2i v(_map.getWidth(), _map.getHeight());
 	_players.fill(nullptr);
 	for (Eo::u32 i = 0; i < _options.getNbPlayer(); i++)
 		_players.at(i) = new Eo::Player(*this, _event, _options);
 	_camera.insertStaticInScene(this);
-	auto floor = new Eo::Floor((wth - 1) - 1, Eo::vec3(0, -0.5, 0));
+	auto floor = new Eo::Floor((v.X - 1), Eo::vec3(0, -0.5, 0));
 	floor->insertInScene(this);
 	_objects.push_back(floor);
-	Eo::Game::insertMap(texture, wth, hgt);
+	Eo::Game::insertMap(v);
 	Eo::Game::addEvents();
 	return true;
 }
 
-void Eo::Game::insertMap(
-	irr::video::ITexture *texture, irr::s32 wth, irr::s32 hgt)
+void Eo::Game::insertMap(Eo::vec2i v)
 {
-	for (irr::s32 i = 0; i < hgt; i++)
-		for (irr::s32 j = 0; j < wth; j++) {
-			auto obj = _map.getObject(j, i);
-			if (obj) {
-				obj->setPosition(
-					(j - wth / 2), 0, (i - hgt / 2));
-				obj->insertInScene(this);
-				obj->getSceneNode()->setMaterialFlag(
-					irr::video::EMF_LIGHTING, false);
-				obj->getSceneNode()->setMaterialTexture(
-					0, texture);
-			}
+	for (Eo::f32 i = 0; i < v.Y; i++)
+		for (Eo::f32 j = 0; j < v.X; j++) {
+			Eo::Game::placeObject(v, Eo::vec2i(j, i));
 		}
+}
+
+void Eo::Game::placeObject(Eo::vec2i size, Eo::vec2i cur)
+{
+	auto obj = _map.getObject(cur.X, cur.Y);
+	if (obj) {
+		obj->setPosition(
+			(cur.X - size.X / 2), 0, (cur.Y - size.Y / 2));
+		obj->insertInScene(this);
+		obj->getSceneNode()->setMaterialFlag(
+			irr::video::EMF_LIGHTING, false);
+	}
 }
 
 Eo::keyHandler Eo::Game::getPlayerEventFunc(
@@ -115,15 +114,18 @@ void Eo::Game::update()
 				return;
 			auto flags = player->getFlag();
 			auto dir = Eo::vec3(0);
-			auto fwd = ((flags & Eo::Player::Motion::Forward) != 0);
-			auto bwd = ((flags & Eo::Player::Motion::Backward) != 0);
+			auto fwd =
+				((flags & Eo::Player::Motion::Forward) != 0);
+			auto bwd =
+				((flags & Eo::Player::Motion::Backward) != 0);
 			auto rgt = ((flags & Eo::Player::Motion::Right) != 0);
 			auto lft = ((flags & Eo::Player::Motion::Left) != 0);
 			dir.Z += (fwd ? player->getSpeed() : 0);
 			dir.Z += (bwd ? -player->getSpeed() : 0);
 			dir.X += (rgt ? player->getSpeed() : 0);
 			dir.X += (lft ? -player->getSpeed() : 0);
-			if (isValidMove(player->getPosition() + dir, player->getPlayerId())) {
+			if (isValidMove(player->getPosition() + dir,
+				    player->getPlayerId())) {
 				try {
 					player->setRotation(
 						Eo::Player::_dirs.at(
