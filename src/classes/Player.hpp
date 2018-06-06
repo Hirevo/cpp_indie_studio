@@ -25,6 +25,7 @@ namespace Eo {
 			Right = 1 << 3
 		};
 		enum Facing {
+			//Todo Change direction logique
 			North = Eo::Player::Motion::Forward,
 			South = Eo::Player::Motion::Backward,
 			West = Eo::Player::Motion::Right,
