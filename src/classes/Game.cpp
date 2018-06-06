@@ -112,16 +112,20 @@ void Eo::Game::update()
 			if (player == nullptr)
 				return;
 			auto flags = player->getFlag();
+			auto dir = Eo::vec3(0);
 			auto fwd =
 				((flags & Eo::Player::Motion::Forward) != 0);
 			auto bwd =
 				((flags & Eo::Player::Motion::Backward) != 0);
 			auto rgt = ((flags & Eo::Player::Motion::Right) != 0);
 			auto lft = ((flags & Eo::Player::Motion::Left) != 0);
-			player->translateZ(fwd ? 0.05 : 0);
-			player->translateZ(bwd ? -0.05 : 0);
-			player->translateX(rgt ? 0.05 : 0);
-			player->translateX(lft ? -0.05 : 0);
-			player->updateInScene(this);
+			dir.Z += (fwd ? 0.05 : 0);
+			dir.Z += (bwd ? -0.05 : 0);
+			dir.X += (rgt ? 0.05 : 0);
+			dir.X += (lft ? -0.05 : 0);
+			if (isValidMove(player->getPosition() + dir)) {
+				player->translate(dir):
+				player->updateInScene(this);
+			}
 		});
 }
