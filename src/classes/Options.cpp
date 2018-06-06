@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Options.hpp"
+#include "Types.hpp"
 
 Eo::Options::Options()
 	: _windowSize(1280, 720),
@@ -16,6 +17,17 @@ Eo::Options::Options()
 	  _keyDebugMode(irr::EKEY_CODE::KEY_F2),
 	  _nbPlayer(1)
 {
+	_playerKeys.at(0)._bomb = Eo::keyCode::KEY_KEY_A;
+	_playerKeys.at(0)._up = Eo::keyCode::KEY_KEY_Z;
+	_playerKeys.at(0)._left = Eo::keyCode::KEY_KEY_Q;
+	_playerKeys.at(0)._down = Eo::keyCode::KEY_KEY_S;
+	_playerKeys.at(0)._right = Eo::keyCode::KEY_KEY_D;
+	_playerKeys.at(1)._bomb = Eo::keyCode::KEY_KEY_U;
+	_playerKeys.at(1)._up = Eo::keyCode::KEY_KEY_I;
+	_playerKeys.at(1)._left = Eo::keyCode::KEY_KEY_J;
+	_playerKeys.at(1)._down = Eo::keyCode::KEY_KEY_K;
+	_playerKeys.at(1)._right = Eo::keyCode::KEY_KEY_L;
+
 }
 
 const irr::core::dimension2d<irr::u32> &Eo::Options::get_windowSize() const
@@ -79,4 +91,16 @@ size_t Eo::Options::getNbPlayer() const
 void Eo::Options::setNbPlayer(size_t _nbPlayer)
 {
 	Options::_nbPlayer = _nbPlayer;
+}
+
+const std::array<Eo::Options::PlayerKeys_s, 2> &Eo::Options::getPlayerKeys() const
+{
+	return _playerKeys;
+}
+
+void Eo::Options::setPlayerKeys(
+	const std::array<Eo::Options::PlayerKeys_s, 2> &_playerKeys
+)
+{
+	Options::_playerKeys = _playerKeys;
 }

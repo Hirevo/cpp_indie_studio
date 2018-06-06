@@ -19,8 +19,7 @@ namespace Eo {
 	class Player : public AModel {
 	public:
 		enum Motion { Forward = 1, Backward = 2, Left = 4, Right = 8 };
-		Player(Eo::IScene &game, Eo::Event &event,
-			const Eo::vec3 &pos = Eo::vec3(0));
+		explicit Player(Eo::IScene &, Eo::Event &, Eo::Options &, const vec3 &pos = vec3(0), Eo::u64 id = 0);
 		~Player() override;
 		void setFlag(Eo::u8 flags);
 		void unsetFlag(Eo::u8 flags);
@@ -29,12 +28,13 @@ namespace Eo {
 
 	private:
 		void addEvents(Eo::IScene &game);
-		Eo::vec2 pos;
-		Eo::f32 _angle;
-		Eo::f32 _speed;
-		Eo::u32 _maxBomb;
-		Eo::u32 _bombAvailable;
-		Eo::Event &_event;
 		Eo::u8 _flags;
+		irr::f32 _angle;
+		irr::f32 _speed;
+		irr::u32 _maxBomb;
+		irr::u32 _bombAvailable;
+		irr::u64 _playerId;
+		Eo::Event &_event;
+		Eo::Options &_options;
 	};
 }

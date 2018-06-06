@@ -28,6 +28,7 @@ namespace Eo {
 		~Game();
 		irr::scene::ICameraSceneNode *getCamera() const override;
 		bool draw() override;
+		void addEvents();
 		void addPlayerEvents(Eo::Player *player);
 		void update();
 

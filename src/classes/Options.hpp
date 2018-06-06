@@ -45,6 +45,10 @@ namespace Eo {
 		void setDebugMode(bool _debugMode);
 		size_t getNbPlayer() const;
 		void setNbPlayer(size_t _nbPlayer);
+		const std::array<PlayerKeys_s, 2> &getPlayerKeys() const;
+		void setPlayerKeys(
+			const std::array<PlayerKeys_s, 2> &_playerKeys
+		);
 	};
 }
 

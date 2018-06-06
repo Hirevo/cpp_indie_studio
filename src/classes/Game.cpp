@@ -35,17 +35,13 @@ bool Eo::Game::draw()
 		"../assets/img/brick.png");
 	_players.fill(nullptr);
 	for (Eo::u32 i = 0; i < _options.getNbPlayer(); i++)
-		_players.at(i) = new Eo::Player(*this, _event);
+		_players.at(i) = new Eo::Player(*this, _event, _options);
 	_camera.insertStaticInScene(this);
 	auto floor = new Eo::Floor((wth - 1) - 1, Eo::vec3(0, -0.5, 0));
 	floor->insertInScene(this);
 	_objects.push_back(floor);
 	Eo::Game::insertMap(texture, wth, hgt);
-	std::for_each(
-		_players.begin(), _players.end(), [this](Eo::Player *player) {
-			if (player)
-				Eo::Game::addPlayerEvents(player);
-		});
+	Eo::Game::addEvents();
 	return true;
 }
 
@@ -92,6 +88,21 @@ void Eo::Game::addPlayerEvents(Eo::Player *player)
 	_event.addKeyHandler(Eo::keyCode::KEY_KEY_D,
 		Eo::Game::getPlayerEventFunc(
 			player, Eo::Player::Motion::Right));
+}
+
+void Eo::Game::addEvents()
+{
+	std::for_each(
+		_players.begin(), _players.end(), [this](Eo::Player *player) {
+			if (player)
+				Eo::Game::addPlayerEvents(player);
+		});
+	_event.addKeyHandler(_options.getKeyExit(),
+		[this](bool &toRemove, const Eo::event &ev) {
+			if (!ev.KeyInput.PressedDown)
+				return;
+			_options.setExit(true);
+		});
 }
 
 void Eo::Game::update()
