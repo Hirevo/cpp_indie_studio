@@ -1,19 +1,18 @@
 /*
 ** EPITECH PROJECT, 2018
-** cpp_indie_studio
+** bomberman
 ** File description:
-** Wall
+** Booster.cpp
 */
 
-#include "Wall.hpp"
+#include "Booster.hpp"
 
-Eo::Wall::Wall(Eo::Wall::WallType wallType, Eo::vec3 pos)
-	: AObject(static_cast<Eo::IObject::Type>(wallType)),
-	  _wallType(wallType)
+Eo::Booster::Booster(Eo::Booster::BoosterType boosterType, Eo::vec3 pos)
+	: AObject(Eo::IObject::BOOSTER), _boosterType(boosterType)
 {
 }
 
-void Eo::Wall::insertInScene(const Eo::IScene *scene)
+void Eo::Booster::insertInScene(const Eo::IScene *scene)
 {
 	auto manager = scene->getSceneManager();
 	irr::f32 unitSize = 1.0f;
@@ -22,12 +21,12 @@ void Eo::Wall::insertInScene(const Eo::IScene *scene)
 		return;
 	_node = manager->addCubeSceneNode(unitSize, nullptr, -1, _pos);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	Eo::Wall::updateInScene(scene);
+	Eo::Booster::updateInScene(scene);
 	_hasPositionChanged = false;
 	_placedInScene = true;
 }
 
-void Eo::Wall::removeFromScene(const Eo::IScene *scene)
+void Eo::Booster::removeFromScene(const Eo::IScene *scene)
 {
 	(void)(scene);
 	if (_placedInScene == false || _hasNode == false)
@@ -37,7 +36,7 @@ void Eo::Wall::removeFromScene(const Eo::IScene *scene)
 	_placedInScene = false;
 }
 
-void Eo::Wall::updateInScene(const Eo::IScene *scene)
+void Eo::Booster::updateInScene(const Eo::IScene *scene)
 {
 	if (_placedInScene == false || _hasNode == false)
 		return;

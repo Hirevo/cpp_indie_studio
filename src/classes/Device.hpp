@@ -18,14 +18,14 @@ namespace Eo {
 		Device(Eo::Options &options);
 	private:
 		irr::IrrlichtDevice* _device;
-		Eo::Options _options;
+		Eo::Options &_options;
 		irr::video::IVideoDriver *_driver;
 		irr::gui::IGUIEnvironment *_env;
 	public:
 		irr::IrrlichtDevice *getDevice() const;
 		irr::video::IVideoDriver *getDriver() const;
 		void setDeviceTitle(const wchar_t *title);
-		const Options &getOptions() const;
+		Options &getOptions();
 	};
 }
 

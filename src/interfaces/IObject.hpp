@@ -20,7 +20,9 @@ namespace Eo {
 			CAMERA,
 			FLOOR,
 			WALL,
-			BOMB
+			DEST_WALL,
+			BOMB,
+			BOOSTER
 		};
 		virtual ~IObject() = default;
 		virtual Eo::IObject::Type getType() const = 0;

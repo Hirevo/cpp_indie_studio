@@ -72,11 +72,11 @@ void Eo::Map::generateMap(const std::string &mapPath)
 	_h = json.readMatrix("map").at(0).size();
 
 	for (size_t l = 0; l < _h; ++l) {
-		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), 0, l);
-		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), _h, l);
+		putObject(new Eo::Wall(Eo::Wall::INDESTRUCTIBLE), 0, l);
+		putObject(new Eo::Wall(Eo::Wall::INDESTRUCTIBLE), _h, l);
 	}
 	for (size_t l = 1; l < _w - 1; ++l) {
-		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), 0, 1);
-		putObject(new Wall(Eo::Wall::INDESTRUCTIBLE), l, _h - 1);
+		putObject(new Eo::Wall(Eo::Wall::INDESTRUCTIBLE), 0, 1);
+		putObject(new Eo::Wall(Eo::Wall::INDESTRUCTIBLE), l, _h - 1);
 	}
 }

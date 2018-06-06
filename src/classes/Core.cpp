@@ -7,12 +7,11 @@
 
 #include "Core.hpp"
 #include "Floor.hpp"
-#include "Game.hpp"
-#include "JsonRead.hpp"
 #include "Wall.hpp"
 #include "menu/CreditsMenu.hpp"
 #include "menu/MainMenu.hpp"
 #include "menu/SettingsMenu.hpp"
+#include "menu/PlayMenu.hpp"
 #include <iostream>
 #include <menu/MainMenu.hpp>
 
@@ -26,10 +25,26 @@ Eo::Core::Core()
 {
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-			Eo::MainMenu::ButtonType::Play),
+		                    Eo::MainMenu::ButtonType::PlayGamePlayer),
+		[this](bool &toRemove, const Eo::event &event) {
+			_options.setNbPlayer(1);
+			_sceneHandler.loadScene(
+				new Eo::Game(_event, _device, "../map2.json", _options));
+		});
+	_event.addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::MainMenu::ButtonType::PlayGamePlayers),
+		[this](bool &toRemove, const Eo::event &event) {
+			_options.setNbPlayer(2);
+			_sceneHandler.loadScene(
+				new Eo::Game(_event, _device, "../map2.json", _options));
+		});
+	_event.addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::MainMenu::ButtonType::Play),
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler.loadScene(
-				new Eo::Game(_event, _device, "../map2.json"));
+				new Eo::PlayMenu(_event, _device));
 		});
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
@@ -69,10 +84,12 @@ Eo::Core::Core()
 
 	while (_device.getDevice()->run() && !_options.isExit()) {
 		Eo::Debug debug(_device, _sceneHandler);
+		auto scene = _sceneHandler.getCurrentScene();
 		if (_options.isDebugMode())
-			_debug.dumpDebug(_sceneHandler.getCurrentScene());
+			_debug.dumpDebug(scene);
 		_device.getDriver()->beginScene();
-		_sceneHandler.getCurrentScene()->getSceneManager()->drawAll();
+		scene->update();
+		scene->getSceneManager()->drawAll();
 		_device.getDevice()->getGUIEnvironment()->drawAll();
 		_device.getDriver()->endScene();
 	}

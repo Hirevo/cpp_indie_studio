@@ -18,6 +18,8 @@ namespace Eo {
 		virtual void setPosition(const vec3 &pos) = 0;
 		virtual void setPosition(float x, float y, float z) = 0;
 		virtual void setPosition(float v) = 0;
+		virtual Eo::f32 getRotation() const = 0;
+		virtual void setRotation(Eo::f32 rotation) = 0;
 		virtual void translate(const vec3 &v) = 0;
 		virtual void translate(float v) = 0;
 		virtual void translate(float x, float y, float z) = 0;

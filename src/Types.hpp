@@ -9,11 +9,14 @@
 
 #include <functional>
 #include <irrlicht.h>
+#include <memory>
 
 namespace Eo {
 	class Device;
 	class Options;
 	class SceneHandler;
+	template <typename T>
+	using Rc = std::shared_ptr<T>;
 	using vec3 = irr::core::vector3df;
 	using vec2 = irr::core::vector2df;
 	using event = irr::SEvent;

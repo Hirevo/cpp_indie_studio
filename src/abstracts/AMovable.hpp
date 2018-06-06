@@ -20,6 +20,8 @@ namespace Eo {
 		void setPosition(const vec3 &pos) final;
 		void setPosition(Eo::f32 x, Eo::f32 y, Eo::f32 z) final;
 		void setPosition(Eo::f32 v) final;
+		Eo::f32 getRotation() const final;
+		void setRotation(Eo::f32 rotation) final;
 		void translate(const vec3 &v) final;
 		void translate(Eo::f32 v) final;
 		void translate(Eo::f32 x, Eo::f32 y, Eo::f32 z) final;
@@ -32,7 +34,9 @@ namespace Eo {
 
 	protected:
 		vec3 _pos;
+		Eo::f32 _rotation;
 		bool _hasPositionChanged;
+		
 
 	private:
 	};

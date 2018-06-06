@@ -120,8 +120,7 @@ void Eo::Event::handleEvent(const Eo::event &event)
 			++it;
 }
 
-void Eo::Event::addKeyHandler(
-	const Eo::keyCode &code, Eo::keyHandler handle)
+void Eo::Event::addKeyHandler(const Eo::keyCode &code, Eo::keyHandler handle)
 {
 	_keyMap.emplace(code, Eo::Event::keyHandle(false, handle));
 }
@@ -152,7 +151,7 @@ void Eo::Event::clearEventHandlers(const Eo::Event::eventKey &key)
 			++it;
 }
 
-// Todo not working actually
+// Todo not working currently
 // void Eo::Event::removeKeyHandler(
 // 	const Eo::keyCode &code, const Eo::Event::keyHandle &handle)
 // {
