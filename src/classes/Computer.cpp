@@ -6,8 +6,9 @@
 */
 
 #include "Computer.hpp"
-
+/*
 Eo::Computer::Computer()
 {
 
 }
+*/

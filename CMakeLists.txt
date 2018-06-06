@@ -17,7 +17,6 @@ set(HEADER_FILES
         src/interfaces/IScene.hpp
         src/interfaces/ICharacter.hpp
         src/interfaces/IMap.hpp
-        src/interfaces/INpc.hpp
         src/interfaces/IObject.hpp
         src/abstracts/ABomb.hpp
         src/abstracts/ACollectible.hpp

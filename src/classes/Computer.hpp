@@ -8,12 +8,12 @@
 #ifndef BOMBERMAN_ACOMPUTER_HPP
 #define BOMBERMAN_ACOMPUTER_HPP
 
-#include "INpc.hpp"
+#include "AModel.hpp"
 
 namespace Eo {
-	class Computer : INpc {
+	class Computer : public AModel {
 	public:
-		Computer();
+		//Computer();
 	private:
 	};
 }
