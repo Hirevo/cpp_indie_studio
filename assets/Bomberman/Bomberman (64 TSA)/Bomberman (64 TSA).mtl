@@ -1,0 +1,167 @@
+# Blender3D MTL File: Bomberman (64 TSA).blend
+# Material Count: 15
+newmtl Material.029_Ball_Bal_Balls.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.300800 0.321600 0.216000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd Balls.png
+
+
+newmtl Material.010_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.214400 0.232000 0.163200
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.028_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.206400 0.224000 0.156800
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.032_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.176000 0.192000 0.139200
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.030_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.286400 0.305600 0.206400
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.023_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.176000 0.192000 0.139200
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.025_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.264000 0.281600 0.192000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.026_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.176000 0.192000 0.139200
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.027_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.304000 0.323200 0.216000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.002_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.288000 0.307200 0.206400
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.031_Ball_Bal_Balls.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.176000 0.192000 0.139200
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd Balls.png
+
+
+newmtl Material.011_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.176000 0.192000 0.139200
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.024_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.352000 0.374400 0.246400
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.001_Body_Bod_Body.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.176000 0.192000 0.139200
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Body.png
+
+
+newmtl Material.033_Ball_Bal_Balls.png
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.176000 0.192000 0.139200
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 2
+map_Kd Balls.png
+
+
