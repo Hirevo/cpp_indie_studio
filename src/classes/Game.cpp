@@ -29,12 +29,12 @@ irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
 
 bool Eo::Game::draw()
 {
-	Eo::vec2 v(_map.getWidth(), _map.getHeight());
+	Eo::vec2i v(_map.getWidth(), _map.getHeight());
 	_players.fill(nullptr);
 	for (Eo::u32 i = 0; i < _options.getNbPlayer(); i++)
 		_players.at(i) = new Eo::Player(*this, _event, _options);
 	_camera.insertStaticInScene(this);
-	auto floor = new Eo::Floor((v.X - 1) - 1, Eo::vec3(0, -0.5, 0));
+	auto floor = new Eo::Floor((v.X - 1), Eo::vec3(0, -0.5, 0));
 	floor->insertInScene(this);
 	_objects.push_back(floor);
 	Eo::Game::insertMap(v);
@@ -42,15 +42,15 @@ bool Eo::Game::draw()
 	return true;
 }
 
-void Eo::Game::insertMap(Eo::vec2 v)
+void Eo::Game::insertMap(Eo::vec2i v)
 {
 	for (Eo::f32 i = 0; i < v.Y; i++)
 		for (Eo::f32 j = 0; j < v.X; j++) {
-			Eo::Game::placeObject(v, Eo::vec2(j, i));
+			Eo::Game::placeObject(v, Eo::vec2i(j, i));
 		}
 }
 
-void Eo::Game::placeObject(Eo::vec2 size, Eo::vec2 cur)
+void Eo::Game::placeObject(Eo::vec2i size, Eo::vec2i cur)
 {
 	auto obj = _map.getObject(cur.X, cur.Y);
 	if (obj) {

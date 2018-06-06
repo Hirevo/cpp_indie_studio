@@ -33,8 +33,8 @@ namespace Eo {
 		void update();
 
 	private:
-		void insertMap(Eo::vec2 v);
-		void placeObject(Eo::vec2 size, Eo::vec2 cur);
+		void insertMap(Eo::vec2i v);
+		void placeObject(Eo::vec2i size, Eo::vec2i cur);
 		Eo::keyHandler getPlayerEventFunc(
 			Eo::Player *player, Eo::Player::Motion flag);
 		bool isValidMove(vec3, irr::u64);
