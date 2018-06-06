@@ -43,5 +43,6 @@ namespace Eo {
 		Eo::Map _map;
 		Eo::Camera _camera;
 		Eo::Options &_options;
+		bool isValidMove(vec3, irr::u64);
 	};
 }

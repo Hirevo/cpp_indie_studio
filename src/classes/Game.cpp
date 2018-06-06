@@ -76,16 +76,18 @@ Eo::keyHandler Eo::Game::getPlayerEventFunc(
 
 void Eo::Game::addPlayerEvents(Eo::Player *player)
 {
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Z,
+	auto id = _options.getPlayerKeys().at(player->getPlayerId());
+
+	_event.addKeyHandler(id._up,
 		Eo::Game::getPlayerEventFunc(
 			player, Eo::Player::Motion::Forward));
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_Q,
+	_event.addKeyHandler(id._left,
 		Eo::Game::getPlayerEventFunc(
 			player, Eo::Player::Motion::Left));
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_S,
+	_event.addKeyHandler(id._down,
 		Eo::Game::getPlayerEventFunc(
 			player, Eo::Player::Motion::Backward));
-	_event.addKeyHandler(Eo::keyCode::KEY_KEY_D,
+	_event.addKeyHandler(id._right,
 		Eo::Game::getPlayerEventFunc(
 			player, Eo::Player::Motion::Right));
 }
@@ -113,19 +115,29 @@ void Eo::Game::update()
 				return;
 			auto flags = player->getFlag();
 			auto dir = Eo::vec3(0);
-			auto fwd =
-				((flags & Eo::Player::Motion::Forward) != 0);
-			auto bwd =
-				((flags & Eo::Player::Motion::Backward) != 0);
+			auto fwd = ((flags & Eo::Player::Motion::Forward) != 0);
+			auto bwd = ((flags & Eo::Player::Motion::Backward) != 0);
 			auto rgt = ((flags & Eo::Player::Motion::Right) != 0);
 			auto lft = ((flags & Eo::Player::Motion::Left) != 0);
 			dir.Z += (fwd ? 0.05 : 0);
 			dir.Z += (bwd ? -0.05 : 0);
 			dir.X += (rgt ? 0.05 : 0);
 			dir.X += (lft ? -0.05 : 0);
-			if (isValidMove(player->getPosition() + dir)) {
-				player->translate(dir):
+			if (isValidMove(player->getPosition() + dir, player->getPlayerId())) {
+				player->translate(dir);
 				player->updateInScene(this);
 			}
 		});
+}
+
+bool Eo::Game::isValidMove(Eo::vec3 newPos, irr::u64 id)
+{
+	auto posX = roundf(newPos.X) + _map.getWidth() / 2;
+	auto posY = roundf(newPos.Z) + _map.getHeight() / 2;
+	Eo::vec2 pos(posX, posY);
+	auto object = _map.getObject(pos.X, pos.Y);
+	if (!object)
+		return true;
+	auto type = object->getType();
+	return !(type == IObject::WALL);
 }

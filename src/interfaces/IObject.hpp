@@ -20,6 +20,7 @@ namespace Eo {
 			CAMERA,
 			FLOOR,
 			WALL,
+			DEST_WALL,
 			BOMB
 		};
 		virtual ~IObject() = default;
