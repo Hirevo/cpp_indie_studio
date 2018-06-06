@@ -71,3 +71,8 @@ Eo::u8 Eo::Player::getFlag() const
 {
 	return _flags;
 }
+
+irr::u64 Eo::Player::getPlayerId() const
+{
+	return _playerId;
+}
