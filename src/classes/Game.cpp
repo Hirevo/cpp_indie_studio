@@ -119,10 +119,10 @@ void Eo::Game::update()
 			auto bwd = ((flags & Eo::Player::Motion::Backward) != 0);
 			auto rgt = ((flags & Eo::Player::Motion::Right) != 0);
 			auto lft = ((flags & Eo::Player::Motion::Left) != 0);
-			dir.Z += (fwd ? 0.05 : 0);
-			dir.Z += (bwd ? -0.05 : 0);
-			dir.X += (rgt ? 0.05 : 0);
-			dir.X += (lft ? -0.05 : 0);
+			dir.Z += (fwd ? player->getSpeed() : 0);
+			dir.Z += (bwd ? -player->getSpeed() : 0);
+			dir.X += (rgt ? player->getSpeed() : 0);
+			dir.X += (lft ? -player->getSpeed() : 0);
 			if (isValidMove(player->getPosition() + dir, player->getPlayerId())) {
 				player->translate(dir);
 				player->updateInScene(this);

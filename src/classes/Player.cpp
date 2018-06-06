@@ -76,3 +76,13 @@ irr::u64 Eo::Player::getPlayerId() const
 {
 	return _playerId;
 }
+
+irr::f32 Eo::Player::getSpeed() const
+{
+	return _speed;
+}
+
+void Eo::Player::setSpeed(irr::f32 _speed)
+{
+	Player::_speed = _speed;
+}
