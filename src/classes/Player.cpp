@@ -10,6 +10,7 @@
 
 Eo::Player::Player(Eo::IScene &game, Eo::Event &event, Eo::Options &options, const vec3 &pos, Eo::u64 id) :
 	AModel(Eo::IObject::Type::CHARACTER, pos),
+	_flags(0),
 	_event(event),
 	_options(options),
 	_playerId(id)
