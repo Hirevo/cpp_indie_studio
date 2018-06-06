@@ -9,13 +9,18 @@
 
 #include <functional>
 #include <irrlicht.h>
+#include <memory>
 
 namespace Eo {
 	class Device;
 	class Options;
 	class SceneHandler;
+	template <typename T>
+	using Rc = std::shared_ptr<T>;
 	using vec3 = irr::core::vector3df;
 	using vec2 = irr::core::vector2df;
+	using vec3i = irr::core::vector3di;
+	using vec2i = irr::core::vector2di;
 	using event = irr::SEvent;
 	using eventType = irr::gui::EGUI_EVENT_TYPE;
 	using eventHandler = std::function<void(bool &, const Eo::event &)>;

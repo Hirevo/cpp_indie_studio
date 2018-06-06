@@ -9,17 +9,24 @@
 
 #include "AMovable.hpp"
 #include "AObject.hpp"
+#include <unordered_map>
 
 namespace Eo {
 	class Wall : public AObject {
 	public:
-		enum WallType { DESTRUCTIBLE, INDESTRUCTIBLE };
+		enum WallType {
+			DESTRUCTIBLE = Eo::IObject::Type::DEST_WALL,
+			INDESTRUCTIBLE = Eo::IObject::Type::WALL
+		};
 		Wall(Eo::Wall::WallType type, vec3 pos = vec3(0, 0, 0));
 		~Wall() = default;
 		void insertInScene(const Eo::IScene *scene) override;
 		void removeFromScene(const Eo::IScene *scene) override;
 		void updateInScene(const Eo::IScene *scene) override;
+
 	private:
 		WallType _wallType;
+		static const std::unordered_map<WallType, std::string>
+			_textures;
 	};
 }
