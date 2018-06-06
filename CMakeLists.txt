@@ -44,7 +44,7 @@ set(HEADER_FILES
         src/classes/menu/CreditsMenu.cpp
         src/Types.hpp
         src/classes/menu/CreditsMenu.hpp
-        src/classes/menu/PlayMenu.hpp)
+        src/classes/menu/PlayMenu.hpp src/classes/Booster.cpp src/classes/Booster.hpp)
 
 add_executable(bomberman
         src/main.cpp
