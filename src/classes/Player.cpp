@@ -8,20 +8,23 @@
 #include "Player.hpp"
 #include <iostream>
 
-const Eo::Player::Directions Eo::Player::_dirs = {{North, 180}, {South, 0},
-	{East, 90}, {West, 270}, {NorthWest, 135}, {NorthEast, 225},
-	{SouthWest, 315}, {SouthEast, 45}};
+const Eo::Player::Directions Eo::Player::_dirs = {{North, 180.0f},
+	{South, 0.0f}, {East, 90.0f}, {West, 270.0f}, {NorthWest, 135.0f},
+	{NorthEast, 225.0f}, {SouthWest, 315.0f}, {SouthEast, 45.0f}};
 
 Eo::Player::Player(Eo::IScene &game, Eo::Event &event, Eo::Options &options,
-	const vec3 &pos, Eo::u64 id)
-	: AModel(Eo::IObject::Type::CHARACTER, pos), _flags(0), _event(event),
-	  _options(options), _playerId(id)
+	const vec3 &pos, Eo::u64 id
+)
+	: AModel(Eo::IObject::Type::CHARACTER, pos),
+	  _flags(0),
+	  _event(event),
+	  _options(options),
+	  _playerId(id)
 {
-	std::cout << "helo: " << _playerId << std::endl;
 	this->loadModel(&game, "../assets/Bomberman/character.blend.x",
 		"../assets/Bomberman/bomberboy_colors_white.png");
 	this->animate(Eo::animType::EMAT_RUN);
-	this->getAnimatedNode()->setScale(Eo::vec3(0.15));
+	this->getAnimatedNode()->setScale(Eo::vec3(0.15f));
 	this->addEvents(game);
 }
 

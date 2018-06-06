@@ -9,6 +9,7 @@
 #define BOMBERMAN_OPTIONS_HPP
 
 #include <Types.hpp>
+#include <array>
 #include "irrlicht.h"
 
 namespace Eo {
