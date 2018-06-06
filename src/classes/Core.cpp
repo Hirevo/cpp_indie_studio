@@ -26,6 +26,22 @@ Eo::Core::Core()
 {
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::MainMenu::ButtonType::PlayGamePlayer),
+		[this](bool &toRemove, const Eo::event &event) {
+			_options.setNbPlayer(1);
+			_sceneHandler.loadScene(
+				new Eo::Game(_event, _device, "../map2.json", _options));
+		});
+	_event.addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::MainMenu::ButtonType::PlayGamePlayers),
+		[this](bool &toRemove, const Eo::event &event) {
+			_options.setNbPlayer(2);
+			_sceneHandler.loadScene(
+				new Eo::Game(_event, _device, "../map2.json", _options));
+		});
+	_event.addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Play),
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler.loadScene(

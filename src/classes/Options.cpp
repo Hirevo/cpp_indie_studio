@@ -88,9 +88,9 @@ size_t Eo::Options::getNbPlayer() const
 	return _nbPlayer;
 }
 
-void Eo::Options::setNbPlayer(size_t _nbPlayer)
+void Eo::Options::setNbPlayer(size_t nbPlayer)
 {
-	Options::_nbPlayer = _nbPlayer;
+	_nbPlayer = nbPlayer;
 }
 
 const std::array<Eo::Options::PlayerKeys_s, 2> &Eo::Options::getPlayerKeys() const

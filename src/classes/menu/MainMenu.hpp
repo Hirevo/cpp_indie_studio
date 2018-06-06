@@ -16,7 +16,7 @@ namespace Eo {
 		~MainMenu() override;
 		bool draw() override;
 
-		enum ButtonType { Play = 1900, Settings, Credits, Exit };
+		enum ButtonType { Play = 1900, PlayGamePlayer, PlayGamePlayers, Settings, Credits, Exit };
 
 	private:
 		void putPlayButton();
