@@ -14,6 +14,7 @@
 #include "JsonRead.hpp"
 #include "Map.hpp"
 #include "Player.hpp"
+#include "Computer.hpp"
 #include "irrlicht.h"
 #include <AModel.hpp>
 #include <list>
@@ -39,6 +40,7 @@ namespace Eo {
 			Eo::Player *player, Eo::Player::Motion flag);
 		bool isValidMove(vec3, irr::u64);
 		std::array<Eo::Player *, 2> _players;
+		std::array<Eo::Computer *, 3> _computers;
 		std::list<Eo::IObject *> _objects;
 		Eo::JsonRead _json;
 		Eo::Map _map;
