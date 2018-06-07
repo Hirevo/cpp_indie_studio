@@ -31,7 +31,10 @@ Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
 		[] { return nullptr; },
 		[] { return new Wall(Eo::Wall::WallType::INDESTRUCTIBLE); },
 		[] { return new Wall(Eo::Wall::WallType::DESTRUCTIBLE); },
-		[] { return new Eo::Booster(Eo::Booster::BoosterType::SPEED); }};
+		[] { return new Eo::Booster(Eo::Booster::BoosterType::SPEED); },
+		[] { return new Eo::Booster(Eo::Booster::BoosterType::SUPERBOMB); },
+		[] { return new Eo::Booster(Eo::Booster::BoosterType::NBBOMB);
+		}};
 
 	Eo::Floor floor(200);
 	_w = matrix.size();
