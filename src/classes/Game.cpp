@@ -32,9 +32,9 @@ bool Eo::Game::draw()
 	Eo::vec2i v(_map.getWidth(), _map.getHeight());
 	_players.fill(nullptr);
 	for (Eo::u32 i = 0; i < _options.getNbPlayer(); i++)
-		_players.at(i) = new Eo::Player(*this, _event, _options);
+		_players.at(i) = new Eo::Player(*this, _event, _options,vec3(4.0f,-0.5f,4.0f));
 	_camera.insertStaticInScene(this);
-	auto floor = new Eo::Floor((v.X - 1), Eo::vec3(0, -0.5, 0));
+	auto floor = new Eo::Floor((v.X - 1), Eo::vec3(0, -0.5f, 0));
 	floor->insertInScene(this);
 	_objects.push_back(floor);
 	Eo::Game::insertMap(v);
