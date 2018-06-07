@@ -21,7 +21,7 @@ Eo::Core::~Core()
 
 Eo::Core::Core()
 	: _options(), _device(_options), _sceneHandler(_device),
-	  _debug(_device, _sceneHandler), _event()
+	  _debug(_device, _sceneHandler), _event(), _sound()
 {
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
@@ -82,6 +82,7 @@ Eo::Core::Core()
 	_device.getDevice()->setEventReceiver(&_event);
 	_sceneHandler.loadScene(new Eo::MainMenu(_event, _device));
 
+	_sound.play("../assets/sounds/BGM/main_theme.mp3", true);
 	while (_device.getDevice()->run() && !_options.isExit()) {
 		Eo::Debug debug(_device, _sceneHandler);
 		auto scene = _sceneHandler.getCurrentScene();

@@ -9,7 +9,6 @@ cmake-build-debug-mvcs/
 cmake-build-release-mvcs/
 \.vs/
 \.idea/
-libs/
 .vscode
 bomberman
 cmake-build-debug-mcvs/

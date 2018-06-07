@@ -18,6 +18,7 @@
 #include "Debug.hpp"
 #include "SceneHandler.hpp"
 #include "Event.hpp"
+#include "SoundDevice.hpp"
 
 namespace Eo {
 	class Core {
@@ -30,6 +31,7 @@ namespace Eo {
 		Eo::SceneHandler _sceneHandler;
 		Eo::Debug _debug;
 		Eo::Event _event;
+		Eo::SoundDevice _sound;
 	public:
 
 	};
