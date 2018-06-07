@@ -190,8 +190,8 @@ Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
 		return Booster::NONE;
 	}
 	auto type = object->getType();
-	if (type != Booster::SPEED && !type != Booster::NBBOMB &&
-		!type != Booster::SUPERBOMB)
+	if (type != Booster::SPEED && type != Booster::NBBOMB &&
+		type != Booster::SUPERBOMB)
 		return Booster::NONE;
 	return static_cast<Booster::BoosterType>(type);
 }
