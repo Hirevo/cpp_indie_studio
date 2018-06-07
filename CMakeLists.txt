@@ -32,18 +32,15 @@ set(HEADER_FILES
         src/classes/SceneHandler.hpp
         src/classes/Player.hpp
         src/classes/Game.hpp 
-        src/classes/menu/MainMenu.cpp 
         src/classes/menu/MainMenu.hpp
-        src/classes/Event.cpp 
         src/classes/Event.hpp
         src/classes/Map.hpp
-        src/classes/menu/SettingsMenu.cpp 
-        src/classes/menu/SettingsMenu.cpp
         src/classes/menu/SettingsMenu.hpp
-        src/classes/menu/CreditsMenu.cpp
         src/Types.hpp
         src/classes/menu/CreditsMenu.hpp
-        src/classes/menu/PlayMenu.hpp src/classes/Booster.cpp src/classes/Booster.hpp)
+        src/classes/menu/PlayMenu.hpp
+        src/classes/Booster.hpp
+        )
 
 add_executable(bomberman
         src/main.cpp
@@ -71,9 +68,14 @@ add_executable(bomberman
         src/classes/Player.cpp
         src/abstracts/AModel.cpp
         src/classes/menu/PlayMenu.cpp
+        src/classes/Event.cpp
+        src/classes/menu/MainMenu.cpp
+        src/classes/menu/SettingsMenu.cpp
+        src/classes/menu/SettingsMenu.cpp
+        src/classes/menu/CreditsMenu.cpp
+        src/classes/Booster.cpp
         ${HEADER_FILES})
 
-set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)
 find_package(Irrlicht REQUIRED)
 target_link_libraries(bomberman ${IRRLICHT_LIBRARY})
 target_include_directories(bomberman PRIVATE ${IRRLICHT_INCLUDE_DIR})
