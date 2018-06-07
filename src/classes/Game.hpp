@@ -32,6 +32,7 @@ namespace Eo {
 		void addEvents();
 		void addPlayerEvents(Eo::Player *player);
 		void update();
+		const Map &getMap() const;
 
 	private:
 		void insertMap(Eo::vec2i v);

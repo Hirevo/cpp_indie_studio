@@ -164,3 +164,8 @@ bool Eo::Game::isValidMove(Eo::vec3 newPos, irr::u64 id)
 	auto type = object->getType();
 	return !(type == IObject::WALL || type == IObject::DEST_WALL);
 }
+
+const Eo::Map &Eo::Game::getMap() const
+{
+	return _map;
+}
