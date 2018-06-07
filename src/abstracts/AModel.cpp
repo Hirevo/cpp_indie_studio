@@ -91,6 +91,7 @@ Eo::animatedNode *Eo::AModel::getAnimatedNode() const
 
 void Eo::AModel::animate(Eo::animType type) const
 {
-	if (_hasNode)
-		_animatedNode->setMD2Animation(type);
+	//todo comment because it doesn't work
+//	if (_hasNode)
+//		_animatedNode->setMD2Animation();
 }
