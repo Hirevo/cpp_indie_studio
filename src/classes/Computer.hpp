@@ -5,17 +5,14 @@
 ** Created by Benjamin
 */
 
-#ifndef BOMBERMAN_ACOMPUTER_HPP
-#define BOMBERMAN_ACOMPUTER_HPP
+#pragma once
 
 #include "AModel.hpp"
 
 namespace Eo {
 	class Computer : public AModel {
 	public:
-		//Computer();
+		Computer(Eo::IScene &game, const Eo::vec3 &pos);
 	private:
 	};
 }
-
-#endif

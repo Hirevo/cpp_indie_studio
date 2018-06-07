@@ -30,9 +30,19 @@ irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
 bool Eo::Game::draw()
 {
 	Eo::vec2i v(_map.getWidth(), _map.getHeight());
+	Eo::i32 medX = (v.X % 2 == 0) ? (v.X / 2 - 2) : (v.X / 2 - 1);
+	Eo::i32 medY = (v.Y % 2 == 0) ? (v.Y / 2 - 2) : (v.Y / 2 - 1);
+	Eo::i32 playerX[] = {-medX, medX};
+	Eo::i32 playerY[] = {-medY, medY};
+	Eo::i32 computerX[] = {-medX, medX, medX};
+	Eo::i32 computerY[] = {medY, -medY, medY};
 	_players.fill(nullptr);
 	for (Eo::u32 i = 0; i < _options.getNbPlayer(); i++)
-		_players.at(i) = new Eo::Player(*this, _event, _options,vec3(4.0f,-0.5f,4.0f));
+		_players.at(i) = new Eo::Player(*this, _event, _options, 
+			vec3(playerX[i], -0.5f, playerY[i]));
+	for (Eo::u32 i = 0; i < (4 - _options.getNbPlayer()); i++)
+		_computers.at(i) = new Eo::Computer(*this, 
+			vec3(computerX[i], 0, computerY[i]));
 	_camera.insertStaticInScene(this);
 	auto floor = new Eo::Floor((v.X - 1), Eo::vec3(0, -0.5f, 0));
 	floor->insertInScene(this);
