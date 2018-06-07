@@ -6,9 +6,11 @@
 */
 
 #include "Computer.hpp"
-/*
-Eo::Computer::Computer()
-{
 
+Eo::Computer::Computer(Eo::IScene &game, const Eo::vec3 &pos) 
+	: AModel(Eo::IObject::Type::CHARACTER, pos)
+{
+	this->loadModel(&game, "../assets/model-test/sydney.md2",
+		"../assets/model-test/sydney.bmp");
+	this->getAnimatedNode()->setScale(Eo::vec3(0.020f));
 }
-*/
