@@ -55,3 +55,8 @@ void Eo::Booster::updateInScene(const Eo::IScene *scene)
 	_node->setPosition(_pos);
 	_hasPositionChanged = false;
 }
+
+Eo::Booster::BoosterType Eo::Booster::getBoosterType() const
+{
+	return _boosterType;
+}

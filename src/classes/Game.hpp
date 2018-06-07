@@ -13,6 +13,7 @@
 #include "IScene.hpp"
 #include "JsonRead.hpp"
 #include "Map.hpp"
+#include "Booster.hpp"
 #include "Player.hpp"
 #include "Computer.hpp"
 #include "irrlicht.h"
@@ -39,7 +40,8 @@ namespace Eo {
 		void placeObject(Eo::vec2i size, Eo::vec2i cur);
 		Eo::keyHandler getPlayerEventFunc(
 			Eo::Player *player, Eo::Player::Motion flag);
-		bool isValidMove(vec3, irr::u64);
+		bool isValidMove(Eo::vec3 newPos, irr::u64 id);
+		Eo::Booster::BoosterType CollectibleMove(Eo::vec3 Pos, irr::u64 id);
 		std::array<Eo::Player *, 2> _players;
 		std::array<Eo::Computer *, 3> _computers;
 		std::list<Eo::IObject *> _objects;

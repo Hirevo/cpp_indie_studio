@@ -150,7 +150,22 @@ void Eo::Game::update()
 				player->translate(dir);
 				player->updateInScene(this);
 			}
+			Eo::Booster::BoosterType type = CollectibleMove(player->getPosition(),
+				player->getPlayerId());
+			if (type != Booster::NONE) {
+				if (type == Booster::SPEED)
+					std::cout << "It's speed" << std::endl;
+				if (type == Booster::SUPERBOMB)
+					std::cout << "It's SuperBomb" << std::endl;
+				if (type == Booster::NBBOMB)
+					std::cout << "It's NBBomb" << std::endl;
+			}
 		});
+}
+
+const Eo::Map &Eo::Game::getMap() const
+{
+	return _map;
 }
 
 bool Eo::Game::isValidMove(Eo::vec3 newPos, irr::u64 id)
@@ -165,7 +180,18 @@ bool Eo::Game::isValidMove(Eo::vec3 newPos, irr::u64 id)
 	return !(type == IObject::WALL || type == IObject::DEST_WALL);
 }
 
-const Eo::Map &Eo::Game::getMap() const
+Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
 {
-	return _map;
+	auto posX = roundf(Pos.X) + _map.getWidth() / 2;
+	auto posY = roundf(Pos.Z) + _map.getHeight() / 2;
+	Eo::vec2 pos(posX, posY);
+	auto object = _map.getObject(pos.X, pos.Y);
+	if (!object) {
+		return Booster::NONE;
+	}
+	auto type = object->getType();
+	if (type != Booster::SPEED && !type != Booster::NBBOMB &&
+		!type != Booster::SUPERBOMB)
+		return Booster::NONE;
+	return static_cast<Booster::BoosterType>(type);
 }
