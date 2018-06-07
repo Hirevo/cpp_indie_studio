@@ -39,7 +39,7 @@ bool Eo::Game::draw()
 	_players.fill(nullptr);
 	for (Eo::u32 i = 0; i < _options.getNbPlayer(); i++)
 		_players.at(i) = new Eo::Player(*this, _event, _options, 
-			vec3(playerX[i], -0.5f, playerY[i]));
+			vec3(playerX[i], -0.5f, playerY[i]), i);
 	for (Eo::u32 i = 0; i < (4 - _options.getNbPlayer()); i++)
 		_computers.at(i) = new Eo::Computer(*this, 
 			vec3(computerX[i], 0, computerY[i]));
