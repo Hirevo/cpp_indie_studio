@@ -92,6 +92,16 @@ Eo::animatedNode *Eo::AModel::getAnimatedNode() const
 void Eo::AModel::animate(Eo::animType type) const
 {
 	//todo comment because it doesn't work
-//	if (_hasNode)
-//		_animatedNode->setMD2Animation();
+	//if (_hasNode)
+	//	_animatedNode->setMD2Animation();
+}
+
+const Eo::vec3 &Eo::AModel::getScale() const
+{
+	return _scale;
+}
+
+void Eo::AModel::setScale(const Eo::vec3 &_scale)
+{
+	AModel::_scale = _scale;
 }

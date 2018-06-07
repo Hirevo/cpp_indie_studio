@@ -134,6 +134,7 @@ void Eo::Game::update()
 									Facing>(
 								flags)));
 				}
+				//todo warning C4101: 'execption': unreferenced local variable
 				catch (std::exception &e) {
 				}
 				player->translate(dir);

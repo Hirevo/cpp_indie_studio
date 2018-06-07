@@ -29,12 +29,14 @@ namespace Eo {
 		void setMesh(Eo::animatedMesh *model) override;
 		Eo::animatedNode *getAnimatedNode() const override;
 		void animate(Eo::animType animation) const override;
+		const vec3 &getScale() const;
+		void setScale(const vec3 &_scale);
 
 	protected:
 		Eo::animatedMesh *_mesh;
 		Eo::animatedNode *_animatedNode;
 		bool _hasMesh;
-
-	private:
+		Eo::vec3 _scale = vec3(0.15f);
+	public:
 	};
 };

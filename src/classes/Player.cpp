@@ -25,7 +25,7 @@ Eo::Player::Player(Eo::IScene &game, Eo::Event &event, Eo::Options &options,
 		"../assets/Bomberman/bomberboy_colors_white.png") ;
 	//todo Comment because EMAT_RUN doean't exist
 	//this->animate(Eo::animType::EMAT_RUN);
-	this->getAnimatedNode()->setScale(Eo::vec3(0.15f));
+	this->getAnimatedNode()->setScale(_scale);
 	this->addEvents(game);
 }
 
