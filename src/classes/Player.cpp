@@ -9,8 +9,8 @@
 #include <iostream>
 
 const Eo::Player::Directions Eo::Player::_dirs = {{North, 180.0f},
-	{South, 0.0f}, {East, 90.0f}, {West, 270.0f}, {NorthWest, 135.0f},
-	{NorthEast, 225.0f}, {SouthWest, 315.0f}, {SouthEast, 45.0f}};
+	{South, 0.0f}, {East, 270.0f}, {West, 90.0f}, {NorthWest, 135.0f},
+	{NorthEast, 225.0f}, {SouthWest, 45.0f}, {SouthEast, 315.0f}};
 
 Eo::Player::Player(Eo::IScene &game, Eo::Event &event, Eo::Options &options,
 	const vec3 &pos, Eo::u64 id
