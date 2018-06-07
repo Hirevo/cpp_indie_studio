@@ -30,7 +30,7 @@ void Eo::Booster::insertInScene(const Eo::IScene *scene)
 		return;
 	std::cout << "HERE I AM" << std::endl;
 	//_node = manager->addCubeSceneNode(unitSize, nullptr, -1, _pos);
-	_node = manager->addBillboardSceneNode(nullptr, Eo::vec2(0.5));
+	_node = manager->addBillboardSceneNode(nullptr, Eo::vec2(0.5), _pos);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	_node->setMaterialTexture(0, manager->getVideoDriver()->getTexture(_textures.at(_boosterType).c_str()));
 	Eo::Booster::updateInScene(scene);
