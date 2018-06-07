@@ -28,7 +28,6 @@ void Eo::Booster::insertInScene(const Eo::IScene *scene)
 
 	if (_placedInScene == true)
 		return;
-	std::cout << "HERE I AM" << std::endl;
 	//_node = manager->addCubeSceneNode(unitSize, nullptr, -1, _pos);
 	_node = manager->addBillboardSceneNode(nullptr, Eo::vec2(0.5));
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
