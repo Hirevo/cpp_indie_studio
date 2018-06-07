@@ -7,6 +7,7 @@
 
 #include "Map.hpp"
 #include "Floor.hpp"
+#include "Booster.hpp"
 #include "JsonRead.hpp"
 #include "Wall.hpp"
 
@@ -29,7 +30,8 @@ Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
 	const std::vector<std::function<IObject *(void)>> v = {
 		[] { return nullptr; },
 		[] { return new Wall(Eo::Wall::WallType::INDESTRUCTIBLE); },
-		[] { return new Wall(Eo::Wall::WallType::DESTRUCTIBLE); }};
+		[] { return new Wall(Eo::Wall::WallType::DESTRUCTIBLE); },
+		[] { return new Eo::Booster(Eo::Booster::BoosterType::SPEED); }};
 
 	Eo::Floor floor(200);
 	_w = matrix.size();

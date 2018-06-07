@@ -8,12 +8,13 @@
 #ifndef BOMBERMAN_BOOSTER_HPP
 #define BOMBERMAN_BOOSTER_HPP
 
+#include <unordered_map>
 #include "AObject.hpp"
 
 namespace Eo {
 	class Booster : public AObject {
 	public:
-		enum BoosterType {ROLLER, SUPERBOMB, NBBOMB};
+		enum BoosterType {SPEED, SUPERBOMB, NBBOMB};
 		Booster(Booster::BoosterType type, vec3 pos = vec3(0, 0, 0));
 		~Booster() = default;
 		void insertInScene(const Eo::IScene *scene) override;
@@ -22,6 +23,8 @@ namespace Eo {
 
 	private:
 		BoosterType _boosterType;
+		static const std::unordered_map<BoosterType, std::string>
+			_textures;
 	};
 }
 
