@@ -7,11 +7,11 @@
 
 #include "Device.hpp"
 
-Eo::Device::Device(Eo::Options &options) :
-	_options(options)
+Eo::Device::Device(Eo::Options &options)
+	: _options(options)
 {
-	_device = irr::createDevice(
-		irr::video::EDT_OPENGL, _options.get_windowSize(), 32);
+	_device = irr::createDevice(irr::video::EDT_OPENGL,
+		_options.get_windowSize(), 32, false, false, true, nullptr);
 	_driver = _device->getVideoDriver();
 }
 
