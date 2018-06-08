@@ -1,4 +1,5 @@
 bin
+!/libs/irrklang/bin
 build
 cmake-build-debug/
 CMakeFiles
