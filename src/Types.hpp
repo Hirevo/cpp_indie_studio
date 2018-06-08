@@ -23,6 +23,7 @@ namespace Eo {
 	using vec2 = irr::core::vector2df;
 	using vec3i = irr::core::vector3di;
 	using vec2i = irr::core::vector2di;
+	using color = irr::video::SColor;
 	using event = irr::SEvent;
 	using eventType = irr::gui::EGUI_EVENT_TYPE;
 	using eventHandler = std::function<void(bool &, const Eo::event &)>;

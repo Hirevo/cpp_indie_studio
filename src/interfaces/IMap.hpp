@@ -23,7 +23,7 @@ namespace Eo {
 		virtual Eo::Rc<Eo::IObject> putObject(
 			Eo::IObject *object, Eo::u32 x, Eo::u32 y) = 0;
 		virtual std::vector<Eo::Rc<Eo::IObject>> &getObjects() = 0;
-		virtual bool update() = 0;
+		virtual bool update(Eo::Rc<Eo::IScene> scene) = 0;
 
 	private:
 	};

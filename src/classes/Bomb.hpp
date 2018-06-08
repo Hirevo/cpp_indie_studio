@@ -20,7 +20,6 @@ namespace Eo {
 			const Eo::vec3 &pos);
 		~Bomb();
 		bool update() override;
-		void explode(Eo::Game *game);
 
 	private:
 		using ExplodeHandler = std::function<void(void)>;

@@ -9,10 +9,12 @@
 #include "Types.hpp"
 #include <iostream>
 
-Eo::Flame::Flame(Eo::vec3 pos)
+Eo::Flame::Flame(Eo::Rc<Eo::IScene> scene, Eo::vec3 pos)
 	: AModel(Eo::IObject::Type::FLAME, pos),
 	  _clock(std::chrono::high_resolution_clock::now())
 {
+	Eo::AModel::loadModel(scene, "../assets/Bomberman/Flame.x", "");
+	_node->setScale(Eo::vec3(0.25, 0.25, 0.25));
 }
 
 bool Eo::Flame::update()

@@ -82,7 +82,7 @@ void Eo::PlayMenu::putReturnButton()
 	auto windowSize = _device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
-
+ 
 	env->addButton({(int)(w / 24), (int)((h / 24)), (int)(3 * w / 24),
 	                (int)((h / 24) + h / 12)},
 	               nullptr, Eo::PlayMenu::ButtonType::Return, L"Return",

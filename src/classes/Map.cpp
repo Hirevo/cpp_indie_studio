@@ -54,12 +54,12 @@ Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
 			_map.emplace_back(v.at(matrix.at(i).at(j))());
 }
 
-Eo::u32 Eo::Map::getWidth() const
+Eo::i32 Eo::Map::getWidth() const
 {
 	return _w;
 }
 
-Eo::u32 Eo::Map::getHeight() const
+Eo::i32 Eo::Map::getHeight() const
 {
 	return _h;
 }
@@ -81,7 +81,6 @@ Eo::Rc<Eo::IObject> Eo::Map::putObject(
 {
 	auto &loc = _map.at(x + y * _w);
 	loc = Eo::Rc<Eo::IObject>(object);
-	std::cout << "PLACED: " << loc->getType() << std::endl;
 	return loc;
 }
 
@@ -106,16 +105,18 @@ void Eo::Map::generateMap(const std::string &mapPath)
 	}
 }
 
-bool Eo::Map::update()
+bool Eo::Map::update(Eo::Rc<Eo::IScene> scene)
 {
-	std::for_each(_map.begin(), _map.end(), [](Eo::Rc<Eo::IObject> &obj) {
+	std::for_each(_map.begin(), _map.end(),
+		[scene](Eo::Rc<Eo::IObject> &obj) {
 		// std::cout << "HERE !" << std::endl;
 		// if (obj.get() != nullptr)
 		// 	std::cout << obj->getType() << std::endl;
 		if (obj.get() != nullptr && obj->update() == false) {
 			auto isBomb = obj->getType() == Eo::IObject::Type::BOMB;
 			if (isBomb)
-				obj = Eo::initRc<Eo::Flame>(obj->getPosition());
+				obj = Eo::initRc<Eo::Flame>(scene,
+					obj->getPosition());
 			else
 				obj = nullptr;
 		}

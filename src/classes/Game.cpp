@@ -33,7 +33,9 @@ irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
 
 bool Eo::Game::draw()
 {
-	_device->getDevice()->getSceneManager()->addSkyDomeSceneNode(_device->getDriver()->getTexture("../assets/img/background.jpg"), 16, 8, 2, 5, 800);
+	_device->getDevice()->getSceneManager()->addSkyDomeSceneNode(
+		_device->getDriver()->getTexture(
+			"../assets/img/background.jpg"), 16, 8, 2, 5, 800);
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 	Eo::i32 medX = (v.X % 2 == 0) ? (v.X / 2 - 2) : (v.X / 2 - 1);
@@ -107,7 +109,7 @@ void Eo::Game::addPlayerEvents(Eo::Rc<Eo::Player> &player)
 		Eo::Game::getPlayerEventFunc(
 			player, Eo::Player::Motion::Right));
 	_event->addKeyHandler(id._bomb,
-		[this, ref, player](bool &toRemove, const Eo::event &ev) {
+		[this, player](bool &toRemove, const Eo::event &ev) {
 			if (ev.KeyInput.PressedDown)
 				Eo::Game::placeBomb(player);
 		});
@@ -117,7 +119,7 @@ void Eo::Game::placeBomb(Eo::Rc<Eo::Player> player)
 {
 	auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *ptr) {});
 	auto oPos = player->getPosition();
-	Eo::vec3 nPos(std::roundf(oPos.X), std::roundf(oPos.Y) + 0.1,
+	Eo::vec3 nPos(std::roundf(oPos.X), std::roundf(oPos.Y) + 1,
 		std::roundf(oPos.Z));
 	Eo::vec2i size(_map->getWidth() / 2.0f, _map->getHeight() / 2.0f);
 	Eo::vec2i inMap(nPos.X + size.X, nPos.Z + size.Y);
@@ -129,7 +131,7 @@ void Eo::Game::placeBomb(Eo::Rc<Eo::Computer> computer)
 {
 	auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *ptr) {});
 	auto oPos = computer->getPosition();
-	Eo::vec3 nPos(std::roundf(oPos.X), std::roundf(oPos.Y) + 0.1,
+	Eo::vec3 nPos(std::roundf(oPos.X), std::roundf(oPos.Y) + 1,
 		std::roundf(oPos.Z));
 	Eo::vec2i size(_map->getWidth() / 2.0f, _map->getHeight() / 2.0f);
 	Eo::vec2i inMap(nPos.X + size.X, nPos.Z + size.Y);
@@ -161,7 +163,7 @@ void Eo::Game::addEvents()
 
 void Eo::Game::update()
 {
-	_map->update();
+	_map->update(Eo::Rc<Eo::IScene>(this, [](Eo::IScene *_) {}));
 	std::for_each(_players.begin(), _players.end(),
 		[this](Eo::Rc<Eo::Player> &player) {
 			if (player.get() == nullptr)

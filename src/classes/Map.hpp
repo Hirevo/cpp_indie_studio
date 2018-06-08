@@ -17,8 +17,8 @@ namespace Eo {
 		Map(Eo::u32 w, Eo::u32 h);
 		Map(Eo::JsonRead &);
 		~Map() = default;
-		Eo::u32 getWidth() const;
-		Eo::u32 getHeight() const;
+		Eo::i32 getWidth() const;
+		Eo::i32 getHeight() const;
 		Eo::Rc<Eo::IObject> getObject(Eo::u32 x, Eo::u32 y) override;
 		Eo::Rc<Eo::IObject> putObject(
 			const Eo::Rc<Eo::IObject> &object, Eo::u32 x,
@@ -27,11 +27,11 @@ namespace Eo {
 			Eo::IObject *object, Eo::u32 x, Eo::u32 y);
 		std::vector<Eo::Rc<Eo::IObject>> &getObjects() override;
 		void generateMap(const std::string &mapPath);
-		bool update() override;
+		bool update(Eo::Rc<Eo::IScene> scene) override;
 
 	private:
-		Eo::u32 _w;
-		Eo::u32 _h;
+		Eo::i32 _w;
+		Eo::i32 _h;
 		std::vector<Eo::Rc<Eo::IObject>> _map;
 	};
 }

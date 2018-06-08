@@ -15,7 +15,8 @@
 namespace Eo {
 	class Flame : public AModel {
 	public:
-		Flame(Eo::vec3 pos = Eo::vec3(0, 0, 0));
+		Flame(Eo::Rc<Eo::IScene> scene,
+			Eo::vec3 pos = Eo::vec3(0, 0, 0));
 		~Flame() = default;
 		bool update() override;
 
