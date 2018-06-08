@@ -33,6 +33,7 @@ irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
 
 bool Eo::Game::draw()
 {
+	_device->getDevice()->getSceneManager()->addSkyDomeSceneNode(_device->getDriver()->getTexture("../assets/img/background.jpg"), 16, 8, 2, 5, 800);
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 	Eo::i32 medX = (v.X % 2 == 0) ? (v.X / 2 - 2) : (v.X / 2 - 1);
@@ -44,8 +45,8 @@ bool Eo::Game::draw()
 	_players.fill(Eo::Rc<Eo::Player>(nullptr));
 	_computers.fill(Eo::Rc<Eo::Computer>(nullptr));
 	for (Eo::u32 i = 0; i < _options->getNbPlayer(); i++)
-		_players.at(i) = Eo::initRc<Eo::Player>(ref, _event,
-			_options, vec3(playerX[i], -0.5f, playerY[i]), i);
+		_players.at(i) = Eo::initRc<Eo::Player>(ref, _event, _options,
+			vec3(playerX[i], -0.5f, playerY[i]), i);
 	for (Eo::u32 i = 0; i < (4 - _options->getNbPlayer()); i++)
 		_computers.at(i) = Eo::initRc<Eo::Computer>(
 			ref, vec3(computerX[i], 0, computerY[i]));
@@ -92,7 +93,6 @@ Eo::keyHandler Eo::Game::getPlayerEventFunc(
 void Eo::Game::addPlayerEvents(Eo::Rc<Eo::Player> &player)
 {
 	auto id = _options->getPlayerKeys().at(player->getPlayerId());
-	auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *ptr) {});
 
 	_event->addKeyHandler(id._up,
 		Eo::Game::getPlayerEventFunc(
@@ -106,22 +106,35 @@ void Eo::Game::addPlayerEvents(Eo::Rc<Eo::Player> &player)
 	_event->addKeyHandler(id._right,
 		Eo::Game::getPlayerEventFunc(
 			player, Eo::Player::Motion::Right));
-	_event->addKeyHandler(
-		id._bomb, [this, ref, player](bool &toRemove, const Eo::event &ev) {
-			if (ev.KeyInput.PressedDown) {
-				// toRemove = true;
-				auto oPos = player->getPosition();
-				Eo::vec3 nPos(std::roundf(oPos.X),
-					std::roundf(oPos.Y) + 0.1,
-					std::roundf(oPos.Z));
-				Eo::vec2i size(_map->getWidth() / 2.0f,
-					_map->getHeight() / 2.0f);
-				Eo::vec2i inMap(
-					nPos.X + size.X, nPos.Z + size.Y);
-				this->getMap()->putObject(Eo::initRc<Eo::Bomb>(
-					ref, inMap, nPos), inMap.X, inMap.Y);
-			}
+	_event->addKeyHandler(id._bomb,
+		[this, ref, player](bool &toRemove, const Eo::event &ev) {
+			if (ev.KeyInput.PressedDown)
+				Eo::Game::placeBomb(player);
 		});
+}
+
+void Eo::Game::placeBomb(Eo::Rc<Eo::Player> player)
+{
+	auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *ptr) {});
+	auto oPos = player->getPosition();
+	Eo::vec3 nPos(std::roundf(oPos.X), std::roundf(oPos.Y) + 0.1,
+		std::roundf(oPos.Z));
+	Eo::vec2i size(_map->getWidth() / 2.0f, _map->getHeight() / 2.0f);
+	Eo::vec2i inMap(nPos.X + size.X, nPos.Z + size.Y);
+	this->getMap()->putObject(
+		Eo::initRc<Eo::Bomb>(ref, inMap, nPos), inMap.X, inMap.Y);
+}
+
+void Eo::Game::placeBomb(Eo::Rc<Eo::Computer> computer)
+{
+	auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *ptr) {});
+	auto oPos = computer->getPosition();
+	Eo::vec3 nPos(std::roundf(oPos.X), std::roundf(oPos.Y) + 0.1,
+		std::roundf(oPos.Z));
+	Eo::vec2i size(_map->getWidth() / 2.0f, _map->getHeight() / 2.0f);
+	Eo::vec2i inMap(nPos.X + size.X, nPos.Z + size.Y);
+	this->getMap()->putObject(
+		Eo::initRc<Eo::Bomb>(ref, inMap, nPos), inMap.X, inMap.Y);
 }
 
 void Eo::Game::addEvents()
@@ -157,9 +170,8 @@ void Eo::Game::update()
 			player->move(ref);
 			Eo::Booster::BoosterType type = CollectibleMove(
 				player->getPosition(), player->getPlayerId());
-			if (type != Booster::NONE){
+			if (type != Booster::NONE)
 				useCollectible(type, player);
-			}
 		});
 }
 
@@ -171,8 +183,8 @@ Eo::Rc<Eo::Map> Eo::Game::getMap()
 void Eo::Game::useCollectible(Booster::BoosterType type, Rc<Player> player)
 {
 	auto pos = player->getPosition();
-	auto posX = roundf(pos.X) + _map->getWidth() / 2;
-	auto posY = roundf(pos.Z) + _map->getHeight() / 2;
+	auto posX = std::roundf(pos.X) + _map->getWidth() / 2;
+	auto posY = std::roundf(pos.Z) + _map->getHeight() / 2;
 	Eo::vec2 posf(posX, posY);
 	auto object = _map->getObject(posf.X, posf.Y);
 
@@ -186,7 +198,7 @@ void Eo::Game::useCollectible(Booster::BoosterType type, Rc<Player> player)
 		player->setBombPower(sbomb < 100 ? sbomb + 1 : sbomb);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
-	if (type == Booster::NBBOMB) {
+	else if (type == Booster::NBBOMB) {
 		auto nbomb = player->getBombPower();
 		auto abomb = player->getBombAvailable();
 		player->setBombPower(nbomb < 100 ? nbomb + 1 : nbomb);
@@ -209,16 +221,15 @@ bool Eo::Game::isValidMove(Eo::vec3 pos)
 
 Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
 {
-	auto posX = roundf(Pos.X) + _map->getWidth() / 2;
-	auto posY = roundf(Pos.Z) + _map->getHeight() / 2;
-	Eo::vec2 pos(posX, posY);
+	Eo::u32 posX = roundf(Pos.X) + _map->getWidth() / 2;
+	Eo::u32 posY = roundf(Pos.Z) + _map->getHeight() / 2;
+	Eo::vec2i pos(posX, posY);
 	auto object = _map->getObject(pos.X, pos.Y);
-	if (!object) {
+	if (!object)
 		return Booster::NONE;
-	}
 	auto type = static_cast<Booster::BoosterType>(object->getType());
-	if (type != Booster::SPEED && type != Booster::NBBOMB &&
-		type != Booster::SUPERBOMB)
-		return Booster::NONE;
+	// if (type != Booster::SPEED && type != Booster::NBBOMB &&
+	// 	type != Booster::SUPERBOMB)
+	// 	return Booster::NONE;
 	return type;
 }

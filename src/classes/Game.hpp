@@ -37,6 +37,8 @@ namespace Eo {
 		void addPlayerEvents(Eo::Rc<Eo::Player> &player);
 		void update();
 		Eo::Rc<Eo::Map> getMap();
+		void placeBomb(Eo::Rc<Eo::Player> player);
+		void placeBomb(Eo::Rc<Eo::Computer> ia);
 
 	private:
 		void insertMap(Eo::vec2i v);
@@ -45,10 +47,10 @@ namespace Eo {
 		bool isValidMove(Eo::vec3 newPos);
 		Eo::Booster::BoosterType CollectibleMove(
 			Eo::vec3 Pos, irr::u64 id);
+		void useCollectible(Booster::BoosterType, Rc<Player>);
 		std::array<Eo::Rc<Eo::Player>, 2> _players;
 		std::array<Eo::Rc<Eo::Computer>, 3> _computers;
 		Eo::Rc<Eo::IObject> _floor;
-		void useCollectible(Booster::BoosterType, Rc<Player>);
 		Eo::JsonRead _json;
 		Eo::Rc<Eo::Map> _map;
 		Eo::Camera _camera;
