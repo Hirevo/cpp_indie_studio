@@ -80,6 +80,7 @@ void Eo::Game::placeObject(Eo::vec2i size, Eo::vec2i cur)
 Eo::keyHandler Eo::Game::getPlayerEventFunc(
 	Eo::Rc<Eo::Player> &player, Eo::Player::Motion flag)
 {
+	#pragma warning(disable : 4834)
 	return [this, player, flag](bool &toRemove, const Eo::event &ev) {
 		auto state = ev.KeyInput.PressedDown;
 		auto func = (state ? &Eo::Player::setFlag :
@@ -179,21 +180,23 @@ void Eo::Game::useCollectible(Booster::BoosterType type, Rc<Player> player)
 		std::cout << "It's SpeedUP" << std::endl;
 		auto speed = player->getSpeed();
 		player->setSpeed(speed < 0.1f ? speed + 0.1f : speed);
-		_map->putObject(nullptr, posf.X, posf.Y);
+		//todo it crashed
+		//_map->putObject(nullptr, posf.X, posf.Y);
 	}
 	if (type == Booster::SUPERBOMB) {
 		std::cout << "It's SuperBomb" << std::endl;
 		auto sbomb = player->getBombPower();
 		player->setBombPower(sbomb < 100 ? sbomb + 1 : sbomb);
-		_map->putObject(nullptr, posf.X, posf.Y);
+		//todo it crashed
+		//_map->putObject(nullptr, posf.X, posf.Y);
 	}
 	if (type == Booster::NBBOMB) {
-		std::cout << "It's NBBomb" << std::endl;
 		auto nbomb = player->getBombPower();
 		auto abomb = player->getBombAvailable();
 		player->setBombPower(nbomb < 100 ? nbomb + 1 : nbomb);
 		player->setBombAvailable(nbomb < 100 ? abomb + 1 : abomb);
-		_map->putObject(nullptr, posf.X, posf.Y);
+		//todo it crashed
+		//_map->putObject(nullptr, posf.X, posf.Y);
 	}
 }
 
