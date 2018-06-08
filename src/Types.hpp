@@ -17,6 +17,8 @@ namespace Eo {
 	class SceneHandler;
 	template <typename T>
 	using Rc = std::shared_ptr<T>;
+	template <typename T>
+	using Un = std::unique_ptr<T>;
 	using vec3 = irr::core::vector3df;
 	using vec2 = irr::core::vector2df;
 	using vec3i = irr::core::vector3di;
@@ -41,4 +43,12 @@ namespace Eo {
 	using i64 = std::int64_t;
 	using f32 = float;
 	using f64 = double;
+	template<typename T, typename... Args>
+	Eo::Rc<T> initRc(Args&&... args) {
+		return std::make_shared<T>(std::forward<Args>(args)...);
+	}
+	template<typename T, typename... Args>
+	Eo::Rc<T> initUn(Args&&... args) {
+		return std::make_unique<T>(std::forward<Args>(args)...);
+	}
 };

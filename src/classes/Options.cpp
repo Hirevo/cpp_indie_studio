@@ -26,12 +26,12 @@ Eo::Options::Options()
 	_playerKeys.at(1)._right = Eo::keyCode::KEY_KEY_L;
 }
 
-const irr::core::dimension2d<irr::u32> &Eo::Options::get_windowSize() const
+const irr::core::dimension2d<irr::u32> &Eo::Options::getWindowSize() const
 {
 	return _windowSize;
 }
 
-void Eo::Options::set_windowSize(
+void Eo::Options::setWindowSize(
 	const irr::core::dimension2d<irr::u32> &_windowSize)
 {
 	Options::_windowSize = _windowSize;

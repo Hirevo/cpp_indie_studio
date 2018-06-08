@@ -19,6 +19,7 @@ namespace Eo {
 			CHARACTER,
 			CAMERA,
 			FLOOR,
+			FLAME,
 			WALL,
 			DEST_WALL,
 			BOMB,
@@ -26,12 +27,12 @@ namespace Eo {
 		};
 		virtual ~IObject() = default;
 		virtual Eo::IObject::Type getType() const = 0;
-		virtual irr::scene::ISceneNode *getSceneNode() const = 0;
-		virtual void setSceneNode(irr::scene::ISceneNode *node) = 0;
-		virtual void insertInScene(const Eo::IScene *scene) = 0;
-		virtual void removeFromScene(const Eo::IScene *scene) = 0;
-		virtual void deleteNode(const Eo::IScene *scene) = 0;
-		virtual void updateInScene(const Eo::IScene *scene) = 0;
+		virtual Eo::node *getSceneNode() const = 0;
+		virtual void setSceneNode(Eo::node *node) = 0;
+		virtual void insertInScene(const Eo::Rc<Eo::IScene> scene) = 0;
+		virtual void removeFromScene() = 0;
+		virtual void updateInScene() = 0;
+		virtual bool update() = 0;
 
 	private:
 	};

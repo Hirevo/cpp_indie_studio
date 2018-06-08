@@ -14,7 +14,7 @@ namespace Eo {
 	class IModel {
 	public:
 		virtual ~IModel() = default;
-		virtual void loadModel(const Eo::IScene *scene,
+		virtual void loadModel(const Eo::Rc<Eo::IScene> scene,
 			const std::string &modelPath,
 			const std::string &texPath) = 0;
 		virtual Eo::animatedMesh *getMesh() const = 0;

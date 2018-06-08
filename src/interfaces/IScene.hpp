@@ -8,6 +8,7 @@
 #pragma once
 
 #include "irrlicht.h"
+#include "Types.hpp"
 
 namespace Eo {
 	class IScene {

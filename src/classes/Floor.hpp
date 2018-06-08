@@ -15,9 +15,8 @@ namespace Eo {
 	public:
 		Floor(irr::f32 size, vec3 pos = vec3(0, 0, 0));
 		~Floor() = default;
-		void insertInScene(const Eo::IScene *scene) override;
-		void removeFromScene(const Eo::IScene *scene) override;
-		void updateInScene(const Eo::IScene *scene) override;
+		void insertInScene(const Eo::Rc<Eo::IScene> scene) override;
+		void updateInScene() override;
 
 	private:
 		irr::f32 _size;

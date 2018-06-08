@@ -12,7 +12,7 @@ Eo::Floor::Floor(irr::f32 size, vec3 pos)
 {
 }
 
-void Eo::Floor::insertInScene(const Eo::IScene *scene)
+void Eo::Floor::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
 	auto manager = scene->getSceneManager();
 	auto texture = scene->getSceneManager()->getVideoDriver()
@@ -25,23 +25,13 @@ void Eo::Floor::insertInScene(const Eo::IScene *scene)
 		{_size, _size});
 	_node = manager->addMeshSceneNode(mesh);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	Eo::Floor::updateInScene(scene);
+	Eo::Floor::updateInScene();
 	_node->setMaterialTexture(0, texture);
 	_hasPositionChanged = false;
 	_placedInScene = true;
 }
 
-void Eo::Floor::removeFromScene(const Eo::IScene *scene)
-{
-	(void)(scene);
-	if (_placedInScene == false)
-		return;
-	_node->remove();
-	_hasPositionChanged = false;
-	_placedInScene = false;
-}
-
-void Eo::Floor::updateInScene(const Eo::IScene *scene)
+void Eo::Floor::updateInScene()
 {
 	_node->setPosition(_pos);
 	_hasPositionChanged = false;

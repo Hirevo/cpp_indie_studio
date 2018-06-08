@@ -7,7 +7,7 @@
 
 #include "SettingsMenu.hpp"
 
-Eo::SettingsMenu::SettingsMenu(Eo::Event &event, Eo::Device &device) : AScene(event, device)
+Eo::SettingsMenu::SettingsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device) : AScene(event, device)
 {
 	this->draw();
 }
@@ -20,7 +20,7 @@ Eo::SettingsMenu::~SettingsMenu()
 bool Eo::SettingsMenu::draw()
 {
 	irr::gui::IGUIEnvironment *env =
-		this->_device.getDevice()->getGUIEnvironment();
+		this->_device->getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font = env->getFont(
 		"../assets/font/fonthaettenschweiler.bmp");
@@ -35,15 +35,15 @@ bool Eo::SettingsMenu::draw()
 void Eo::SettingsMenu::putBackgroundImage()
 {
 	irr::gui::IGUIEnvironment *env =
-		this->_device.getDevice()->getGUIEnvironment();
-	env->addImage(this->_device.getDriver()->getTexture(
+		this->_device->getDevice()->getGUIEnvironment();
+	env->addImage(this->_device->getDriver()->getTexture(
 		"../assets/img/menu-background.jpg"), {0, 0});
 }
 
 void Eo::SettingsMenu::putReturnButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 

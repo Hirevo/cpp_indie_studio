@@ -12,30 +12,25 @@ Eo::AModel::AModel(Eo::IObject::Type type, Eo::vec3 pos)
 {
 }
 
-Eo::AModel::~AModel() = default;
+Eo::AModel::~AModel() {
+}
 
-void Eo::AModel::insertInScene(const Eo::IScene *scene)
+void Eo::AModel::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
 	if (_placedInScene)
 		return;
 	if (_hasNode == false) {
 		_node = scene->getSceneManager()->addAnimatedMeshSceneNode(
 			_mesh);
-		_hasNode = true;
 	}
 	else
 		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
-	Eo::AModel::updateInScene(scene);
+	Eo::AModel::updateInScene();
+	_hasNode = true;
 	_placedInScene = true;
 }
 
-void Eo::AModel::removeFromScene(const Eo::IScene *scene)
-{
-	if (_placedInScene)
-		_node->remove();
-}
-
-void Eo::AModel::updateInScene(const Eo::IScene *scene)
+void Eo::AModel::updateInScene()
 {
 	if (_hasNode) {
 		_node->setPosition(_pos);
@@ -44,18 +39,10 @@ void Eo::AModel::updateInScene(const Eo::IScene *scene)
 	}
 }
 
-void Eo::AModel::deleteNode(const Eo::IScene *scene)
-{
-	Eo::AObject::deleteNode(scene);
-	if (_hasMesh)
-		delete _mesh;
-	_hasMesh = false;
-}
-
-void Eo::AModel::loadModel(const Eo::IScene *scene,
+void Eo::AModel::loadModel(const Eo::Rc<Eo::IScene> scene,
 	const std::string &modelPath, const std::string &texPath)
 {
-	this->deleteNode(scene);
+	removeFromScene();
 	auto sceneManager = scene->getSceneManager();
 	auto driver = sceneManager->getVideoDriver();
 	_mesh = sceneManager->getMesh(modelPath.c_str());
@@ -78,8 +65,6 @@ Eo::animatedMesh *Eo::AModel::getMesh() const
 
 void Eo::AModel::setMesh(Eo::animatedMesh *model)
 {
-	if (_hasMesh)
-		delete _mesh;
 	_mesh = model;
 	_hasMesh = true;
 }
@@ -101,7 +86,7 @@ const Eo::vec3 &Eo::AModel::getScale() const
 	return _scale;
 }
 
-void Eo::AModel::setScale(const Eo::vec3 &_scale)
+void Eo::AModel::setScale(const Eo::vec3 &scale)
 {
-	AModel::_scale = _scale;
+	_scale = scale;
 }

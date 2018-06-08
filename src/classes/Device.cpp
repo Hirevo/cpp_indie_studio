@@ -7,11 +7,11 @@
 
 #include "Device.hpp"
 
-Eo::Device::Device(Eo::Options &options)
+Eo::Device::Device(Eo::Rc<Eo::Options> options)
 	: _options(options)
 {
 	_device = irr::createDevice(irr::video::EDT_OPENGL,
-		_options.get_windowSize(), 32, false, false, true, nullptr);
+		_options->getWindowSize(), 32, false, false, true, nullptr);
 	_driver = _device->getVideoDriver();
 }
 
@@ -30,7 +30,7 @@ void Eo::Device::setDeviceTitle(const wchar_t *title)
 	this->getDevice()->setWindowCaption(title);
 }
 
-Eo::Options &Eo::Device::getOptions()
+Eo::Rc<Eo::Options> Eo::Device::getOptions()
 {
 	return _options;
 }

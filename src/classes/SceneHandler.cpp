@@ -7,8 +7,9 @@
 
 #include "SceneHandler.hpp"
 #include "Game.hpp"
+#include "Types.hpp"
 
-Eo::SceneHandler::SceneHandler(Eo::Device &device)
+Eo::SceneHandler::SceneHandler(Eo::Rc<Eo::Device> device)
 {
 }
 
@@ -18,12 +19,12 @@ Eo::SceneHandler::~SceneHandler()
 		_scenes.pop();
 }
 
-Eo::IScene *Eo::SceneHandler::getCurrentScene() const
+Eo::Rc<Eo::IScene> Eo::SceneHandler::getCurrentScene() const
 {
-	return !_scenes.empty() ? _scenes.top() : nullptr;
+	return !_scenes.empty() ? _scenes.top() : Eo::Rc<Eo::IScene>(nullptr);
 }
 
-bool Eo::SceneHandler::loadScene(Eo::IScene *scene)
+bool Eo::SceneHandler::loadScene(Eo::Rc<Eo::IScene> scene)
 {
 	auto scn = this->getCurrentScene();
 	if (scn != nullptr)
