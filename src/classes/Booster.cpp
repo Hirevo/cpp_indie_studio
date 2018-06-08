@@ -38,34 +38,6 @@ void Eo::Booster::insertInScene(const Eo::Rc<Eo::IScene> scene)
 	                                                 nullptr, -1, _pos, rotation, scale);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	_node->setMaterialTexture(0, manager->getVideoDriver()->getTexture(_textures.at(_boosterType).c_str()));
-
-	// irr::scene::IAnimatedMeshSceneNode *sphere =
-	// re
-	//	sceneManager->addAnimatedMeshSceneNode(
-	//		sceneManager->getMesh("../earth.x"), 0, -1,
-	//		irr::core::vector3df(0.0f, 0.0f,
-			    //                 50.0f),        // position de la sphere
-		//	irr::core::vector3df(0.0f, 0.0f,
-		//	                     0.0f),         // rotation
-		//	irr::core::vector3df(20.0f, 20.0f,
-		//	                     20.0f));     // echelle
-	//sphere->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	//sphere->setMaterialFlag(irr::video::EMF_FOG_ENABLE, true);
-	//sphere->setMaterialTexture(0, driver->getTexture("../earth.jpg"));
-
-
-
-/*
-	_node = manager->addBillboardSceneNode(nullptr, Eo::vec2(0.5), _pos);
-	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	_node->setMaterialTexture(0,
-		manager->getVideoDriver()->getTexture(
-			_textures.at(_boosterType).c_str()));
-	Eo::Booster::updateInScene();
-	_hasPositionChanged = false;
-	_hasNode = true;
-	_placedInScene = true; */
-
 	Eo::Booster::updateInScene();
 	_hasPositionChanged = false;
 	_hasNode = true;
