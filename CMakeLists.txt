@@ -31,7 +31,7 @@ set(HEADER_FILES
         src/classes/Wall.hpp
         src/classes/SceneHandler.hpp
         src/classes/Player.hpp
-        src/classes/Game.hpp 
+        src/classes/Game.hpp
         src/classes/menu/MainMenu.hpp
         src/classes/Event.hpp
         src/classes/Map.hpp
@@ -80,6 +80,7 @@ add_executable(bomberman
         #src/classes/menu/GameMenu.cpp
         ${HEADER_FILES})
 
+set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)
 find_package(Irrlicht REQUIRED)
 target_link_libraries(bomberman ${IRRLICHT_LIBRARY})
 target_include_directories(bomberman PRIVATE ${IRRLICHT_INCLUDE_DIR})
