@@ -33,6 +33,7 @@ irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
 
 bool Eo::Game::draw()
 {
+	_device->getDevice()->getSceneManager()->addSkyDomeSceneNode(_device->getDriver()->getTexture("../assets/img/background.jpg"), 16, 8, 2, 5, 800);
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 	Eo::i32 medX = (v.X % 2 == 0) ? (v.X / 2 - 2) : (v.X / 2 - 1);
@@ -50,7 +51,7 @@ bool Eo::Game::draw()
 		_computers.at(i) = Eo::initRc<Eo::Computer>(
 			ref, vec3(computerX[i], 0, computerY[i]));
 	_camera.insertStaticInScene(ref);
-	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0, -0.5f, 0));
+	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0.0f, -0.5f, 0.0f));
 	_floor->insertInScene(ref);
 	Eo::Game::insertMap(v);
 	Eo::Game::addEvents();
@@ -80,6 +81,7 @@ void Eo::Game::placeObject(Eo::vec2i size, Eo::vec2i cur)
 Eo::keyHandler Eo::Game::getPlayerEventFunc(
 	Eo::Rc<Eo::Player> &player, Eo::Player::Motion flag)
 {
+	#pragma warning(disable : 4834)
 	return [this, player, flag](bool &toRemove, const Eo::event &ev) {
 		auto state = ev.KeyInput.PressedDown;
 		auto func = (state ? &Eo::Player::setFlag :
@@ -200,22 +202,21 @@ void Eo::Game::useCollectible(Booster::BoosterType type, Rc<Player> player)
 	if (type == Booster::SPEED) {
 		std::cout << "It's SpeedUP" << std::endl;
 		auto speed = player->getSpeed();
-		player->setSpeed(speed < 0.1f ? speed + 0.1f : speed);
-		//todo delete object from scene
+		player->setSpeed(speed < 0.1f ? speed + 0.01f : speed);
+		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
 	if (type == Booster::SUPERBOMB) {
 		std::cout << "It's SuperBomb" << std::endl;
 		auto sbomb = player->getBombPower();
 		player->setBombPower(sbomb < 100 ? sbomb + 1 : sbomb);
-		//todo delete object from scene
+		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
 	if (type == Booster::NBBOMB) {
-		std::cout << "It's NBBomb" << std::endl;
 		auto nbomb = player->getBombPower();
 		auto abomb = player->getBombAvailable();
 		player->setBombPower(nbomb < 100 ? nbomb + 1 : nbomb);
 		player->setBombAvailable(nbomb < 100 ? abomb + 1 : abomb);
-		//todo delete object from scene
+		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
 }
 

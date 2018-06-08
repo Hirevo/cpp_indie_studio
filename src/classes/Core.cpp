@@ -98,7 +98,6 @@ Eo::Core::Core()
 		_device->getDriver()->beginScene();
 		scene->update();
 		scene->getSceneManager()->drawAll();
-		_device->getDevice()->getSceneManager()->addSkyDomeSceneNode(_device->getDriver()->getTexture("../assets/img/background.png"));
 		_device->getDevice()->getGUIEnvironment()->drawAll();
 		_device->getDriver()->endScene();
 	}
