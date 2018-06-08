@@ -13,7 +13,7 @@
 namespace Eo {
 	class CreditsMenu : public Eo::AScene {
 	public:
-		CreditsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device);
+		CreditsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler);
 		~CreditsMenu();
 		bool draw() override;
 
@@ -23,6 +23,7 @@ namespace Eo {
 	private:
 		void putBackgroundImage();
 		void putReturnButton();
+		void addEvents(Eo::Rc<Eo::Event> event);
 	};
 }
 

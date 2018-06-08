@@ -6,9 +6,13 @@
 */
 
 #include "SettingsMenu.hpp"
+#include "SceneHandler.hpp"
 
-Eo::SettingsMenu::SettingsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device) : AScene(event, device)
+Eo::SettingsMenu::SettingsMenu(Eo::Rc<Eo::Event> event,
+	Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler)
+	: AScene(event, device, sceneHandler)
 {
+	this->addEvents(event);
 	this->draw();
 }
 
@@ -54,4 +58,8 @@ void Eo::SettingsMenu::putReturnButton()
 		nullptr,
 		Eo::SettingsMenu::ButtonType::Return, L"Return",
 		L"Return to main menu");
+}
+
+void Eo::SettingsMenu::addEvents(Eo::Rc<Eo::Event> event)
+{
 }

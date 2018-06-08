@@ -55,6 +55,5 @@ namespace Eo {
 		Eo::Rc<Eo::Map> _map;
 		Eo::Camera _camera;
 		Eo::Rc<Eo::Options> _options;
-		Eo::Rc<Eo::SceneHandler> _sceneHandler;
 	};
 }

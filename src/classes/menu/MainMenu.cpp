@@ -7,12 +7,19 @@
 
 #include "MainMenu.hpp"
 #include "Event.hpp"
+#include "PlayMenu.hpp"
+#include "SettingsMenu.hpp"
+#include "CreditsMenu.hpp"
 #include <Device.hpp>
 #include <iostream>
+#include <Game.hpp>
+#include <SceneHandler.hpp>
 
-Eo::MainMenu::MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device)
-	: AScene(event, device)
+Eo::MainMenu::MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
+	Eo::Rc<Eo::SceneHandler> sceneHandler)
+	: AScene(event, device, sceneHandler)
 {
+	this->addEvents(event);
 	this->draw();
 }
 
@@ -104,7 +111,7 @@ void Eo::MainMenu::putBackgroundImage()
 {
 	auto *env = this->_device->getDevice()->getGUIEnvironment();
 	env->addImage(this->_device->getDriver()->getTexture(
-			      "../assets/img/menu-background.jpg"),
+		"../assets/img/menu-background.jpg"),
 		{0, 0});
 }
 
@@ -116,4 +123,65 @@ void Eo::MainMenu::putTitle()
 	auto *image = this->_device->getDriver()->getTexture(
 		"../assets/img/bomberman-title.png");
 	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
+}
+
+void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
+{
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::PlayGamePlayer),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto options = this->_device->getOptions();
+			options->setNbPlayer(1);
+			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
+				_event, _device, "../map2.json", options,
+				_sceneHandler));
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::PlayGamePlayers),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto options = this->_device->getOptions();
+			options->setNbPlayer(2);
+			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
+				_event, _device, "../map2.json", options,
+				_sceneHandler));
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Play),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sceneHandler->loadScene(
+				Eo::initRc<Eo::PlayMenu>(_event, _device,
+					_sceneHandler));
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Exit),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto options = this->_device->getOptions();
+			options->setExit(true);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Settings),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sceneHandler->loadScene(
+				Eo::initRc<Eo::SettingsMenu>(_event, _device,
+					_sceneHandler));
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Credits),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sceneHandler->loadScene(
+				Eo::initRc<Eo::CreditsMenu>(_event, _device,
+					_sceneHandler));
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::ButtonType::Return),
+		[this](bool &toRemove, const Eo::event &event) {
+			this->_sceneHandler->unloadCurrentScene();
+		});
 }

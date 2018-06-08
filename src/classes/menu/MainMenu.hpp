@@ -12,7 +12,7 @@
 namespace Eo {
 	class MainMenu : public AScene {
 	public:
-		MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device);
+		MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler);
 		~MainMenu() override;
 		bool draw() override;
 
@@ -25,5 +25,6 @@ namespace Eo {
 		void putExitButton();
 		void putBackgroundImage();
 		void putTitle();
+		void addEvents(Eo::Rc<Eo::Event> event);
 	};
 }

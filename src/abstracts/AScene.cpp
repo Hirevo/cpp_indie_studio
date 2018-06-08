@@ -8,10 +8,13 @@
 
 #include "AScene.hpp"
 
-Eo::AScene::AScene(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device)
-	: _device(device), _event(event),
-	  _sceneManager(_device->getDevice()->getSceneManager())
+Eo::AScene::AScene(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
+	Eo::Rc<Eo::SceneHandler> sceneHandler) :
+	_device(device), _event(event),
+	_sceneManager(_device->getDevice()->getSceneManager()),
+	_sceneHandler(sceneHandler)
 {
+
 }
 
 Eo::AScene::~AScene() = default;

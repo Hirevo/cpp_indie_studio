@@ -7,10 +7,12 @@
 
 #include "CreditsMenu.hpp"
 #include "SettingsMenu.hpp"
+#include "SceneHandler.hpp"
 
-Eo::CreditsMenu::CreditsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device)
-	: AScene(event, device)
+Eo::CreditsMenu::CreditsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler)
+	: AScene(event, device, sceneHandler)
 {
+	this->addEvents(event);
 	this->draw();
 }
 
@@ -53,4 +55,8 @@ void Eo::CreditsMenu::putReturnButton()
 			       (int)((h / 24) + h / 12)},
 		nullptr, Eo::CreditsMenu::ButtonType::Return, L"Return",
 		L"Return to main menu");
+}
+
+void Eo::CreditsMenu::addEvents(Eo::Rc<Eo::Event> event)
+{
 }

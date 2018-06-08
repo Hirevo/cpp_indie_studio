@@ -52,4 +52,7 @@ namespace Eo {
 	Eo::Rc<T> initUn(Args&&... args) {
 		return std::make_unique<T>(std::forward<Args>(args)...);
 	}
+	enum ButtonType {
+		Return = 120
+	};
 };
