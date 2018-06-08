@@ -26,6 +26,8 @@ namespace Eo {
 	private:
 		static const std::unordered_map<BoosterType, std::string>
 			_textures;
+		static const std::unordered_map<BoosterType, std::string>
+			_mesh;
 	};
 }
 
