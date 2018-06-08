@@ -87,7 +87,9 @@ Eo::Core::Core()
 	_device->getDevice()->setEventReceiver(_event.get());
 	_sceneHandler->loadScene(Eo::initRc<Eo::MainMenu>(_event, _device));
 
-	_sound->play("../assets/sounds/BGM/main_theme.mp3", true);
+	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::MENUBGM) > 0)
+		_sound->play(Eo::SoundDevice::
+		_soundPath.at(Eo::SoundDevice::MENUBGM), true);
 	while (_device->getDevice()->run() && !_options->isExit()) {
 		Eo::Debug debug(_device, _sceneHandler);
 		auto scene = _sceneHandler->getCurrentScene();
