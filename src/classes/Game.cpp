@@ -50,7 +50,7 @@ bool Eo::Game::draw()
 		_computers.at(i) = Eo::initRc<Eo::Computer>(
 			ref, vec3(computerX[i], 0, computerY[i]));
 	_camera.insertStaticInScene(ref);
-	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0, -0.5f, 0));
+	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0.0f, -0.5f, 0.0f));
 	_floor->insertInScene(ref);
 	Eo::Game::insertMap(v);
 	Eo::Game::addEvents();
@@ -179,13 +179,13 @@ void Eo::Game::useCollectible(Booster::BoosterType type, Rc<Player> player)
 		std::cout << "It's SpeedUP" << std::endl;
 		auto speed = player->getSpeed();
 		player->setSpeed(speed < 0.1f ? speed + 0.1f : speed);
-		//todo delete object from scene
+		_map->putObject(nullptr, posf.X, posf.Y);
 	}
 	if (type == Booster::SUPERBOMB) {
 		std::cout << "It's SuperBomb" << std::endl;
 		auto sbomb = player->getBombPower();
 		player->setBombPower(sbomb < 100 ? sbomb + 1 : sbomb);
-		//todo delete object from scene
+		_map->putObject(nullptr, posf.X, posf.Y);
 	}
 	if (type == Booster::NBBOMB) {
 		std::cout << "It's NBBomb" << std::endl;
@@ -193,7 +193,7 @@ void Eo::Game::useCollectible(Booster::BoosterType type, Rc<Player> player)
 		auto abomb = player->getBombAvailable();
 		player->setBombPower(nbomb < 100 ? nbomb + 1 : nbomb);
 		player->setBombAvailable(nbomb < 100 ? abomb + 1 : abomb);
-		//todo delete object from scene
+		_map->putObject(nullptr, posf.X, posf.Y);
 	}
 }
 
