@@ -31,7 +31,7 @@ set(HEADER_FILES
         src/classes/Wall.hpp
         src/classes/SceneHandler.hpp
         src/classes/Player.hpp
-        src/classes/Game.hpp 
+        src/classes/Game.hpp
         src/classes/menu/MainMenu.hpp
         src/classes/Event.hpp
         src/classes/Map.hpp
@@ -40,7 +40,9 @@ set(HEADER_FILES
         src/classes/menu/CreditsMenu.hpp
         src/classes/menu/PlayMenu.hpp
         src/classes/Booster.hpp
-        src/classes/SoundDevice.cpp src/classes/SoundDevice.hpp src/classes/menu/GameMenu.cpp src/classes/menu/GameMenu.hpp)
+        src/classes/SoundDevice.hpp
+        #src/classes/menu/GameMenu.hpp
+        )
 
 add_executable(bomberman
         src/main.cpp
@@ -74,8 +76,11 @@ add_executable(bomberman
         src/classes/menu/SettingsMenu.cpp
         src/classes/menu/CreditsMenu.cpp
         src/classes/Booster.cpp
+        src/classes/SoundDevice.cpp
+        #src/classes/menu/GameMenu.cpp
         ${HEADER_FILES})
 
+set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)
 find_package(Irrlicht REQUIRED)
 target_link_libraries(bomberman ${IRRLICHT_LIBRARY})
 target_include_directories(bomberman PRIVATE ${IRRLICHT_INCLUDE_DIR})
@@ -119,6 +124,7 @@ if(WIN32)
                 COMMAND ${CMAKE_COMMAND} -E copy
                 ${PROJECT_SOURCE_DIR}/libs/irrklang/bin/Winx64/ikpMP3.dll
                 ${PROJECT_SOURCE_DIR}/bin/ikpMP3.dll)
+        set(IRRKLANG_LIBRARY ${PROJECT_SOURCE_DIR}/libs/irrklang/lib/Winx64-visualStudio/irrKlang.lib)
     else ()
         add_custom_command(TARGET bomberman PRE_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
@@ -132,8 +138,11 @@ if(WIN32)
                 COMMAND ${CMAKE_COMMAND} -E copy
                 ${PROJECT_SOURCE_DIR}/libs/irrklang/bin/Winx32/ikpMP3.dll
                 ${PROJECT_SOURCE_DIR}/bin/ikpMP3.dll)
+        set(IRRKLANG_LIBRARY ${PROJECT_SOURCE_DIR}/libs/irrklang/lib/Winx32-visualStudio/irrKlang.lib)
     endif ()
 endif()
 
+
+message(${IRRKLANG_LIBRARY})
 target_link_libraries(bomberman ${IRRKLANG_LIBRARY})
 target_include_directories(bomberman PRIVATE ${IRRKLANG_DIR}/include)

@@ -53,8 +53,9 @@ namespace Eo {
 		Eo::u8 _flags;
 		irr::f32 _angle;
 		irr::f32 _speed = 0.03f;
-		irr::u32 _maxBomb;
-		irr::u32 _bombAvailable;
+		irr::u32 _maxBomb = 1;
+		irr::u32 _bombAvailable = 1;
+		irr::u32 _bombPower = 3;
 		irr::u64 _playerId;
 		Eo::Event &_event;
 		Eo::Options &_options;

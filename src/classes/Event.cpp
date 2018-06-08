@@ -78,8 +78,8 @@ bool Eo::Event::OnEvent(const Eo::event &event)
 		else
 			return false;
 	}
-	// todo warning C4101: 'execption': unreferenced local variable
-	catch (const std::exception &execption) {
+	catch (const std::exception &exception) {
+		static_cast<void>(exception);
 		return false;
 	}
 	return true;
