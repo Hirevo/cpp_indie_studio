@@ -32,7 +32,8 @@ Eo::Core::Core()
 		[this](bool &toRemove, const Eo::event &event) {
 			_options->setNbPlayer(1);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
-				_event, _device, "../map2.json", _options));
+				_event, _device, "../map2.json", _options,
+				_sceneHandler));
 		});
 	_event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
@@ -40,7 +41,8 @@ Eo::Core::Core()
 		[this](bool &toRemove, const Eo::event &event) {
 			_options->setNbPlayer(2);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
-				_event, _device, "../map2.json", _options));
+				_event, _device, "../map2.json", _options,
+				_sceneHandler));
 		});
 	_event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,

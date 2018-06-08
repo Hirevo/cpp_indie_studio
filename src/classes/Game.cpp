@@ -9,12 +9,16 @@
 #include "Bomb.hpp"
 #include "Floor.hpp"
 #include "Player.hpp"
+#include "SceneHandler.hpp"
 #include <iostream>
+#include <menu/GameMenu.hpp>
 
 Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
-	const std::string &mapPath, Eo::Rc<Eo::Options> options)
+	const std::string &mapPath, Eo::Rc<Eo::Options> options,
+	Eo::Rc<Eo::SceneHandler> sceneHandler)
 	: AScene(event, device), _json(mapPath),
-	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
+	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options),
+	  _sceneHandler(sceneHandler)
 {
 }
 
@@ -131,6 +135,13 @@ void Eo::Game::addEvents()
 			if (!ev.KeyInput.PressedDown)
 				return;
 			_options->setExit(true);
+		});
+	_event.addKeyHandler(Eo::keyCode::KEY_ESCAPE,
+		[this](bool &toRemove, const Eo::event &ev) {
+			if (!ev.KeyInput.PressedDown)
+				return;
+			this->_stateMachine.loadScene(
+				new Eo::GameMenu(_event, _device));
 		});
 }
 

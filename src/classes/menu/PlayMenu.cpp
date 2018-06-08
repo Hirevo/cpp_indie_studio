@@ -32,6 +32,7 @@ bool Eo::PlayMenu::draw()
 	this->putPlayButton();
 	this->putPlayButtonSecond();
 	this->putReturnButton();
+	this->putTitle();
 	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
 	return true;
 }
@@ -86,4 +87,14 @@ void Eo::PlayMenu::putReturnButton()
 	                (int)((h / 24) + h / 12)},
 	               nullptr, Eo::PlayMenu::ButtonType::Return, L"Return",
 	               L"Return to main menu");
+}
+
+void Eo::PlayMenu::putTitle()
+{
+	auto *env = this->_device.getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto w = windowSize.Width;
+	auto *image = this->_device.getDriver()->getTexture(
+		"../assets/img/bomberman-title.png");
+	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
 }
