@@ -40,7 +40,9 @@ set(HEADER_FILES
         src/classes/menu/CreditsMenu.hpp
         src/classes/menu/PlayMenu.hpp
         src/classes/Booster.hpp
-        src/classes/SoundDevice.cpp src/classes/SoundDevice.hpp src/classes/menu/GameMenu.cpp src/classes/menu/GameMenu.hpp)
+        src/classes/SoundDevice.hpp
+        #src/classes/menu/GameMenu.hpp
+        )
 
 add_executable(bomberman
         src/main.cpp
@@ -74,6 +76,8 @@ add_executable(bomberman
         src/classes/menu/SettingsMenu.cpp
         src/classes/menu/CreditsMenu.cpp
         src/classes/Booster.cpp
+        src/classes/SoundDevice.cpp
+        #src/classes/menu/GameMenu.cpp
         ${HEADER_FILES})
 
 find_package(Irrlicht REQUIRED)
