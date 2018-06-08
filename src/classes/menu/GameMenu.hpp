@@ -5,15 +5,14 @@
 ** GameMenu.hpp
 */
 
-#ifndef BOMBERMAN_GAMEMENU_HPP
-	#define BOMBERMAN_GAMEMENU_HPP
+#pragma once
 
-	#include "AScene.hpp"
+#include "AScene.hpp"
 
 namespace Eo {
 	class GameMenu : public AScene {
 	public:
-		GameMenu(Eo::Event &event, Eo::Device &device);
+		GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device);
 		~GameMenu() override;
 		bool draw() override;
 
@@ -26,5 +25,3 @@ namespace Eo {
 		void putSaveButton();
 	};
 }
-
-#endif //BOMBERMAN_GAMEMENU_HPP

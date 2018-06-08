@@ -10,8 +10,8 @@
 #include "Floor.hpp"
 #include "Player.hpp"
 #include "SceneHandler.hpp"
+#include "menu/GameMenu.hpp"
 #include <iostream>
-#include <menu/GameMenu.hpp>
 
 Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	const std::string &mapPath, Eo::Rc<Eo::Options> options,
@@ -136,12 +136,12 @@ void Eo::Game::addEvents()
 				return;
 			_options->setExit(true);
 		});
-	_event.addKeyHandler(Eo::keyCode::KEY_ESCAPE,
+	_event->addKeyHandler(Eo::keyCode::KEY_ESCAPE,
 		[this](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
-			this->_stateMachine.loadScene(
-				new Eo::GameMenu(_event, _device));
+			_sceneHandler->loadScene(
+				Eo::initRc<Eo::GameMenu>(_event, _device));
 		});
 }
 
@@ -152,7 +152,8 @@ void Eo::Game::update()
 		[this](Eo::Rc<Eo::Player> &player) {
 			if (player.get() == nullptr)
 				return;
-			player->move(Eo::Rc<Eo::Game>(this, [](Eo::Game *_) {}));
+			auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *_) {});
+			player->move(ref);
 			Eo::Booster::BoosterType type = CollectibleMove(
 				player->getPosition(), player->getPlayerId());
 			if (type != Booster::NONE) {

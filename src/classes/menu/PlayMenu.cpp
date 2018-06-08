@@ -78,8 +78,8 @@ void Eo::PlayMenu::putPlayButtonSecond()
 
 void Eo::PlayMenu::putReturnButton()
 {
-	auto *env = this->_device->getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device->getOptions()->getWindowSize();
+	auto *env = _device->getDevice()->getGUIEnvironment();
+	auto windowSize = _device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 
@@ -91,10 +91,10 @@ void Eo::PlayMenu::putReturnButton()
 
 void Eo::PlayMenu::putTitle()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = _device->getDevice()->getGUIEnvironment();
+	auto windowSize = _device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
-	auto *image = this->_device.getDriver()->getTexture(
+	auto *image = _device->getDriver()->getTexture(
 		"../assets/img/bomberman-title.png");
 	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
 }

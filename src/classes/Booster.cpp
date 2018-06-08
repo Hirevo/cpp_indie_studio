@@ -66,7 +66,7 @@ void Eo::Booster::insertInScene(const Eo::Rc<Eo::IScene> scene)
 	_hasNode = true;
 	_placedInScene = true; */
 
-	Eo::Booster::updateInScene(scene);
+	Eo::Booster::updateInScene();
 	_hasPositionChanged = false;
 	_hasNode = true;
 	_placedInScene = true;

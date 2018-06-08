@@ -10,7 +10,7 @@
 static const irr::io::path FONT_PATH =
 	"../assets/font/fonthaettenschweiler.bmp";
 
-Eo::GameMenu::GameMenu(Eo::Event &event, Eo::Device &device)
+Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device)
 	: AScene(event, device)
 {
 	this->draw();
@@ -23,7 +23,7 @@ Eo::GameMenu::~GameMenu()
 
 bool Eo::GameMenu::draw()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
+	auto *env = _device->getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font = env->getFont(FONT_PATH);
 	if (font)
@@ -38,16 +38,16 @@ bool Eo::GameMenu::draw()
 
 void Eo::GameMenu::putBackgroundImage()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	env->addImage(this->_device.getDriver()->getTexture(
+	auto *env = _device->getDevice()->getGUIEnvironment();
+	env->addImage(_device->getDriver()->getTexture(
 		"../assets/img/menu-background.jpg"),
 		{0, 0});
 }
 
 void Eo::GameMenu::putResumeButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = _device->getDevice()->getGUIEnvironment();
+	auto windowSize = _device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 	auto pos = 5;
@@ -63,8 +63,8 @@ void Eo::GameMenu::putResumeButton()
 
 void Eo::GameMenu::putQuitButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = _device->getDevice()->getGUIEnvironment();
+	auto windowSize = _device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 	auto pos = 6;
@@ -80,8 +80,8 @@ void Eo::GameMenu::putQuitButton()
 
 void Eo::GameMenu::putSaveButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = _device->getDevice()->getGUIEnvironment();
+	auto windowSize = _device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 	auto pos = 4;
