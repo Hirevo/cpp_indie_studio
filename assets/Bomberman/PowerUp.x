@@ -854,7 +854,7 @@ Frame Root {
            96.078431;
            0.000000; 0.000000; 0.000000;;
            0.000000; 0.000000; 0.000000;;
-          TextureFilename {"roller.jpg";}
+          TextureFilename {"roller.png";}
         }
         Material outline {
            0.000000; 0.000000; 0.000000; 1.000000;;

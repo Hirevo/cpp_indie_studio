@@ -33,6 +33,7 @@ irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
 
 bool Eo::Game::draw()
 {
+	_device->getDevice()->getSceneManager()->addSkyDomeSceneNode(_device->getDriver()->getTexture("../assets/img/background.jpg"), 16, 8, 2, 5, 800);
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 	Eo::i32 medX = (v.X % 2 == 0) ? (v.X / 2 - 2) : (v.X / 2 - 1);
