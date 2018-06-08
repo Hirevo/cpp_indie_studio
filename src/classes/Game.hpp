@@ -26,7 +26,8 @@ namespace Eo {
 	class Game : public AScene {
 	public:
 		Game(Eo::Event &event, Eo::Device &device,
-			const std::string &mapPath, Eo::Options &options);
+			const std::string &mapPath, Eo::Options &options,
+			Eo::SceneHandler &sceneHandler);
 		~Game();
 		irr::scene::ICameraSceneNode *getCamera() const override;
 		bool draw() override;
@@ -49,5 +50,6 @@ namespace Eo {
 		Eo::Map _map;
 		Eo::Camera _camera;
 		Eo::Options &_options;
+		Eo::SceneHandler &_stateMachine;
 	};
 }

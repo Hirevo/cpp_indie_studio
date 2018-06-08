@@ -8,16 +8,19 @@
 #include "Game.hpp"
 #include "Floor.hpp"
 #include "Player.hpp"
+#include "SceneHandler.hpp"
 #include <iostream>
+#include <menu/GameMenu.hpp>
 
 Eo::Game::Game(Eo::Event &event, Eo::Device &device,
-	const std::string &mapPath, Eo::Options &options
-)
-	: AScene(event, device),
-	  _json(mapPath),
-	  _map(_json),
-	  _camera(),
-	  _options(options)
+	const std::string &mapPath, Eo::Options &options,
+	Eo::SceneHandler &sceneHandler) :
+	AScene(event, device),
+	_json(mapPath),
+	_map(_json),
+	_camera(),
+	_options(options),
+	_stateMachine(sceneHandler)
 {
 }
 
@@ -41,10 +44,10 @@ bool Eo::Game::draw()
 	Eo::i32 computerX[] = {-medX, medX, medX};
 	Eo::i32 computerY[] = {medY, -medY, medY};
 	_players.fill(nullptr);
-	for (Eo::u32 i = 0; i < _options.getNbPlayer(); i++)
+	for (Eo::u32 i = 0 ; i < _options.getNbPlayer() ; i++)
 		_players.at(i) = new Eo::Player(*this, _event, _options,
 			vec3(playerX[i], -0.5f, playerY[i]), i);
-	for (Eo::u32 i = 0; i < (4 - _options.getNbPlayer()); i++)
+	for (Eo::u32 i = 0 ; i < (4 - _options.getNbPlayer()) ; i++)
 		_computers.at(i) = new Eo::Computer(*this,
 			vec3(computerX[i], 0, computerY[i]));
 	_camera.insertStaticInScene(this);
@@ -59,8 +62,8 @@ bool Eo::Game::draw()
 
 void Eo::Game::insertMap(Eo::vec2i v)
 {
-	for (Eo::f32 i = 0; i < v.Y; i++)
-		for (Eo::f32 j = 0; j < v.X; j++) {
+	for (Eo::f32 i = 0 ; i < v.Y ; i++)
+		for (Eo::f32 j = 0 ; j < v.X ; j++) {
 			Eo::Game::placeObject(v, Eo::vec2i(j, i));
 		}
 }
@@ -114,6 +117,13 @@ void Eo::Game::addEvents()
 			if (!ev.KeyInput.PressedDown)
 				return;
 			_options.setExit(true);
+		});
+	_event.addKeyHandler(Eo::keyCode::KEY_ESCAPE,
+		[this](bool &toRemove, const Eo::event &ev) {
+			if (!ev.KeyInput.PressedDown)
+				return;
+			this->_stateMachine.loadScene(
+				new Eo::GameMenu(_event, _device));
 		});
 }
 

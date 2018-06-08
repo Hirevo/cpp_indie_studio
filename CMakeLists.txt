@@ -41,7 +41,7 @@ set(HEADER_FILES
         src/classes/menu/PlayMenu.hpp
         src/classes/Booster.hpp
         src/classes/SoundDevice.hpp
-        #src/classes/menu/GameMenu.hpp
+        src/classes/menu/GameMenu.hpp
         )
 
 add_executable(bomberman
@@ -77,7 +77,7 @@ add_executable(bomberman
         src/classes/menu/CreditsMenu.cpp
         src/classes/Booster.cpp
         src/classes/SoundDevice.cpp
-        #src/classes/menu/GameMenu.cpp
+        src/classes/menu/GameMenu.cpp
         ${HEADER_FILES})
 
 set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)

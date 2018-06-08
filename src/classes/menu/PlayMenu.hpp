@@ -25,6 +25,7 @@ namespace Eo {
 		void putPlayButtonSecond();
 		void putBackgroundImage();
 		void putReturnButton();
+		void putTitle();
 	};
 }
 

@@ -21,27 +21,29 @@ Eo::Core::~Core()
 
 Eo::Core::Core()
 	: _options(), _device(_options), _sceneHandler(_device),
-	  _debug(_device, _sceneHandler), _event(), _sound()
+	_debug(_device, _sceneHandler), _event(), _sound()
 {
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-		                    Eo::MainMenu::ButtonType::PlayGamePlayer),
+			Eo::MainMenu::ButtonType::PlayGamePlayer),
 		[this](bool &toRemove, const Eo::event &event) {
 			_options.setNbPlayer(1);
 			_sceneHandler.loadScene(
-				new Eo::Game(_event, _device, "../map2.json", _options));
+				new Eo::Game(_event, _device, "../map2.json",
+					_options, _sceneHandler));
 		});
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-		                    Eo::MainMenu::ButtonType::PlayGamePlayers),
+			Eo::MainMenu::ButtonType::PlayGamePlayers),
 		[this](bool &toRemove, const Eo::event &event) {
 			_options.setNbPlayer(2);
 			_sceneHandler.loadScene(
-				new Eo::Game(_event, _device, "../map2.json", _options));
+				new Eo::Game(_event, _device, "../map2.json",
+					_options, _sceneHandler));
 		});
 	_event.addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-		                    Eo::MainMenu::ButtonType::Play),
+			Eo::MainMenu::ButtonType::Play),
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler.loadScene(
 				new Eo::PlayMenu(_event, _device));
