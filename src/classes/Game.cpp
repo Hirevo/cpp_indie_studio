@@ -177,13 +177,11 @@ void Eo::Game::useCollectible(Booster::BoosterType type, Rc<Player> player)
 	auto object = _map->getObject(posf.X, posf.Y);
 
 	if (type == Booster::SPEED) {
-		std::cout << "It's SpeedUP" << std::endl;
 		auto speed = player->getSpeed();
 		player->setSpeed(speed < 0.1f ? speed + 0.01f : speed);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
 	if (type == Booster::SUPERBOMB) {
-		std::cout << "It's SuperBomb" << std::endl;
 		auto sbomb = player->getBombPower();
 		player->setBombPower(sbomb < 100 ? sbomb + 1 : sbomb);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
