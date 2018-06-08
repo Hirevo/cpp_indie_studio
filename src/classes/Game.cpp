@@ -136,12 +136,11 @@ void Eo::Game::addEvents()
 				return;
 			_options->setExit(true);
 		});
-	_event.addKeyHandler(Eo::keyCode::KEY_ESCAPE,
+	_event->addKeyHandler(Eo::keyCode::KEY_ESCAPE,
 		[this](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
-			this->_stateMachine.loadScene(
-				new Eo::GameMenu(_event, _device));
+//			this->_sceneHandler->loadScene(Eo::GameMenu(_event, _device));
 		});
 }
 

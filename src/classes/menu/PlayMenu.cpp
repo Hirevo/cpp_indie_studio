@@ -91,10 +91,10 @@ void Eo::PlayMenu::putReturnButton()
 
 void Eo::PlayMenu::putTitle()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
-	auto *image = this->_device.getDriver()->getTexture(
+	auto *image = this->_device->getDriver()->getTexture(
 		"../assets/img/bomberman-title.png");
 	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
 }
