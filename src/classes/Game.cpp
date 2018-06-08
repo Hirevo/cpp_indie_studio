@@ -52,6 +52,7 @@ bool Eo::Game::draw()
 	return true;
 }
 
+
 void Eo::Game::insertMap(Eo::vec2i v)
 {
 	for (Eo::f32 i = 0; i < v.Y; i++)
