@@ -40,7 +40,7 @@ set(HEADER_FILES
         src/classes/menu/CreditsMenu.hpp
         src/classes/menu/PlayMenu.hpp
         src/classes/Booster.hpp
-        src/classes/SoundDevice.cpp src/classes/SoundDevice.hpp)
+        src/classes/SoundDevice.cpp src/classes/SoundDevice.hpp src/classes/menu/GameMenu.cpp src/classes/menu/GameMenu.hpp)
 
 add_executable(bomberman
         src/main.cpp

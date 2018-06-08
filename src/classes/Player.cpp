@@ -26,6 +26,7 @@ Eo::Player::Player(Eo::IScene &game, Eo::Event &event, Eo::Options &options,
 	//todo Comment because EMAT_RUN doean't exist
 	//this->animate(Eo::animType::EMAT_RUN);
 	this->getAnimatedNode()->setScale(_scale);
+	this->getAnimatedNode()->setAnimationSpeed(2000.f);
 	this->addEvents(game);
 }
 
