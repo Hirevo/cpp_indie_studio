@@ -15,17 +15,17 @@
 namespace Eo {
 	class Device {
 	public:
-		Device(Eo::Options &options);
+		Device(Eo::Rc<Eo::Options> options);
 	private:
-		irr::IrrlichtDevice* _device;
-		Eo::Options &_options;
+		irr::IrrlichtDevice *_device;
+		Eo::Rc<Eo::Options> _options;
 		irr::video::IVideoDriver *_driver;
 		irr::gui::IGUIEnvironment *_env;
 	public:
 		irr::IrrlichtDevice *getDevice() const;
 		irr::video::IVideoDriver *getDriver() const;
 		void setDeviceTitle(const wchar_t *title);
-		Options &getOptions();
+		Eo::Rc<Options> getOptions();
 	};
 }
 

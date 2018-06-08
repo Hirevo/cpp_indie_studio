@@ -7,27 +7,31 @@
 
 #pragma once
 
-#include <string>
 #include "JsonRead.hpp"
 #include "interfaces/IMap.hpp"
+#include <string>
 
 namespace Eo {
 	class Map : public IMap {
 	public:
-		Map(size_t w, size_t h);
+		Map(Eo::u32 w, Eo::u32 h);
 		Map(Eo::JsonRead &);
 		~Map() = default;
-		size_t getWidth() const;
-		size_t getHeight() const;
-		Eo::IObject *getObject(size_t x, size_t y) override;
-		Eo::IObject *putObject(
-			Eo::IObject *object, size_t x, size_t y) override;
-		std::vector<Eo::IObject *> &getObjects() override;
+		Eo::u32 getWidth() const;
+		Eo::u32 getHeight() const;
+		Eo::Rc<Eo::IObject> getObject(Eo::u32 x, Eo::u32 y) override;
+		Eo::Rc<Eo::IObject> putObject(
+			const Eo::Rc<Eo::IObject> &object, Eo::u32 x,
+			Eo::u32 y) override;
+		Eo::Rc<Eo::IObject> putObject(
+			Eo::IObject *object, Eo::u32 x, Eo::u32 y);
+		std::vector<Eo::Rc<Eo::IObject>> &getObjects() override;
 		void generateMap(const std::string &mapPath);
+		bool update() override;
 
 	private:
-		size_t _w;
-		size_t _h;
-		std::vector<Eo::IObject *> _map;
+		Eo::u32 _w;
+		Eo::u32 _h;
+		std::vector<Eo::Rc<Eo::IObject>> _map;
 	};
 }

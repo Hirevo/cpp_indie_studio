@@ -1,12 +1,11 @@
-//
-// EPITECH PROJECT, 2018
-// IndieStudio
-// File description:
-// Enum MapWall
-//
+/*
+** EPITECH PROJECT, 2018
+** indie-studio
+** File description:
+** MapWall
+*/
 
-#ifndef MAPWALL_HPP
-#define MAPWALL_HPP
+#pragma once
 
 namespace Eo
 {
@@ -14,6 +13,4 @@ namespace Eo
 		DESTRUCTIBLE,
 		INDESTRUCTIBLE
 	};
-}
-
-#endif
+};

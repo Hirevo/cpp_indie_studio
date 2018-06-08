@@ -20,7 +20,7 @@ namespace Eo {
 		virtual ~ACharacter() = 0;
 
 	protected:
-		irr::scene::IAnimatedMesh *_model;
+		Eo::Rc<Eo::animatedMesh> _model;
 
 	private:
 	};

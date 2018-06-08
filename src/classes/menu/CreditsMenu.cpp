@@ -8,7 +8,7 @@
 #include "CreditsMenu.hpp"
 #include "SettingsMenu.hpp"
 
-Eo::CreditsMenu::CreditsMenu(Eo::Event &event, Eo::Device &device)
+Eo::CreditsMenu::CreditsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device)
 	: AScene(event, device)
 {
 	this->draw();
@@ -21,7 +21,7 @@ Eo::CreditsMenu::~CreditsMenu()
 bool Eo::CreditsMenu::draw()
 {
 	irr::gui::IGUIEnvironment *env =
-		this->_device.getDevice()->getGUIEnvironment();
+		this->_device->getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font =
 		env->getFont("../assets/font/fonthaettenschweiler.bmp");
@@ -36,16 +36,16 @@ bool Eo::CreditsMenu::draw()
 void Eo::CreditsMenu::putBackgroundImage()
 {
 	irr::gui::IGUIEnvironment *env =
-		this->_device.getDevice()->getGUIEnvironment();
-	env->addImage(this->_device.getDriver()->getTexture(
+		this->_device->getDevice()->getGUIEnvironment();
+	env->addImage(this->_device->getDriver()->getTexture(
 			      "../assets/img/menu-background.jpg"),
 		{0, 0});
 }
 
 void Eo::CreditsMenu::putReturnButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 

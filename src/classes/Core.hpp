@@ -26,12 +26,12 @@ namespace Eo {
 		Core();
 		virtual ~Core();
 	private:
-		Eo::Options _options;
-		Eo::Device _device;
-		Eo::SceneHandler _sceneHandler;
-		Eo::Debug _debug;
-		Eo::Event _event;
-		Eo::SoundDevice _sound;
+		Eo::Rc<Eo::Options> _options;
+		Eo::Rc<Eo::Device> _device;
+		Eo::Rc<Eo::SceneHandler> _sceneHandler;
+		Eo::Rc<Eo::Debug> _debug;
+		Eo::Rc<Eo::Event> _event;
+		Eo::Rc<Eo::SoundDevice> _sound;
 	public:
 
 	};

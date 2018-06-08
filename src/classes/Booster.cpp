@@ -20,11 +20,12 @@ const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_te
 	{Eo::Booster::BoosterType::NBBOMB, "../assets/Bomberman/BG.png"}};
 
 Eo::Booster::Booster(Eo::Booster::BoosterType boosterType, Eo::vec3 pos)
-	: AObject(static_cast<Eo::IObject::Type>(boosterType)), _boosterType(boosterType)
+	: AObject(static_cast<Eo::IObject::Type>(boosterType)),
+	  _boosterType(boosterType)
 {
 }
 
-void Eo::Booster::insertInScene(const Eo::IScene *scene)
+void Eo::Booster::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
 	auto manager = scene->getSceneManager();
 	irr::f32 unitSize = 1.0f;
@@ -57,8 +58,10 @@ void Eo::Booster::insertInScene(const Eo::IScene *scene)
 /*
 	_node = manager->addBillboardSceneNode(nullptr, Eo::vec2(0.5), _pos);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	_node->setMaterialTexture(0, manager->getVideoDriver()->getTexture(_textures.at(_boosterType).c_str()));
-	Eo::Booster::updateInScene(scene);
+	_node->setMaterialTexture(0,
+		manager->getVideoDriver()->getTexture(
+			_textures.at(_boosterType).c_str()));
+	Eo::Booster::updateInScene();
 	_hasPositionChanged = false;
 	_hasNode = true;
 	_placedInScene = true; */
@@ -69,9 +72,8 @@ void Eo::Booster::insertInScene(const Eo::IScene *scene)
 	_placedInScene = true;
 }
 
-void Eo::Booster::removeFromScene(const Eo::IScene *scene)
+void Eo::Booster::removeFromScene()
 {
-	(void)(scene);
 	if (_placedInScene == false || _hasNode == false)
 		return;
 	_node->remove();
@@ -79,7 +81,7 @@ void Eo::Booster::removeFromScene(const Eo::IScene *scene)
 	_placedInScene = false;
 }
 
-void Eo::Booster::updateInScene(const Eo::IScene *scene)
+void Eo::Booster::updateInScene()
 {
 	if (_placedInScene == false || _hasNode == false)
 		return;

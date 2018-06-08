@@ -9,7 +9,7 @@
 #include "menu/MainMenu.hpp"
 #include "PlayMenu.hpp"
 
-Eo::PlayMenu::PlayMenu(Eo::Event &event, Eo::Device &device)
+Eo::PlayMenu::PlayMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device)
 	: AScene(event, device)
 {
 	this->draw();
@@ -22,7 +22,7 @@ Eo::PlayMenu::~PlayMenu()
 bool Eo::PlayMenu::draw()
 {
 	irr::gui::IGUIEnvironment *env =
-		this->_device.getDevice()->getGUIEnvironment();
+		_device->getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font =
 		env->getFont("../assets/font/fonthaettenschweiler.bmp");
@@ -32,6 +32,7 @@ bool Eo::PlayMenu::draw()
 	this->putPlayButton();
 	this->putPlayButtonSecond();
 	this->putReturnButton();
+	this->putTitle();
 	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
 	return true;
 }
@@ -39,16 +40,16 @@ bool Eo::PlayMenu::draw()
 void Eo::PlayMenu::putBackgroundImage()
 {
 	irr::gui::IGUIEnvironment *env =
-		this->_device.getDevice()->getGUIEnvironment();
-	env->addImage(this->_device.getDriver()->getTexture(
+		this->_device->getDevice()->getGUIEnvironment();
+	env->addImage(this->_device->getDriver()->getTexture(
 		"../assets/img/menu-background.jpg"),
 	              {0, 0});
 }
 
 void Eo::PlayMenu::putPlayButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 	auto pos = 3;
@@ -62,8 +63,8 @@ void Eo::PlayMenu::putPlayButton()
 
 void Eo::PlayMenu::putPlayButtonSecond()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 	auto pos = 4;
@@ -77,8 +78,8 @@ void Eo::PlayMenu::putPlayButtonSecond()
 
 void Eo::PlayMenu::putReturnButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 
@@ -86,4 +87,14 @@ void Eo::PlayMenu::putReturnButton()
 	                (int)((h / 24) + h / 12)},
 	               nullptr, Eo::PlayMenu::ButtonType::Return, L"Return",
 	               L"Return to main menu");
+}
+
+void Eo::PlayMenu::putTitle()
+{
+	auto *env = this->_device.getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto w = windowSize.Width;
+	auto *image = this->_device.getDriver()->getTexture(
+		"../assets/img/bomberman-title.png");
+	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
 }

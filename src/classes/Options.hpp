@@ -33,10 +33,9 @@ namespace Eo {
 		size_t _nbPlayer;
 
 	public:
-		const irr::core::dimension2d<irr::u32> &get_windowSize() const;
-		void set_windowSize(
-			const irr::core::dimension2d<irr::u32> &_windowSize
-		);
+		const irr::core::dimension2d<irr::u32> &getWindowSize() const;
+		void setWindowSize(
+			const irr::core::dimension2d<irr::u32> &_windowSize);
 		bool isExit() const;
 		void setExit(bool _exit);
 		irr::EKEY_CODE getKeyExit() const;

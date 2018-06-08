@@ -4,6 +4,7 @@ project(bomberman)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 set(CMAKE_CXX_STANDARD 17)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -g)
 
 include_directories(
         src/interfaces
@@ -18,11 +19,11 @@ set(HEADER_FILES
         src/interfaces/ICharacter.hpp
         src/interfaces/IMap.hpp
         src/interfaces/IObject.hpp
-        src/abstracts/ABomb.hpp
         src/abstracts/ACollectible.hpp
         src/abstracts/AScene.hpp
         src/abstracts/AMonster.hpp
         src/abstracts/APlayer.hpp
+        src/classes/Bomb.hpp
         src/classes/Camera.hpp
         src/classes/Device.hpp
         src/classes/JsonRead.hpp
@@ -41,7 +42,7 @@ set(HEADER_FILES
         src/classes/menu/PlayMenu.hpp
         src/classes/Booster.hpp
         src/classes/SoundDevice.hpp
-        #src/classes/menu/GameMenu.hpp
+        src/classes/menu/GameMenu.hpp
         )
 
 add_executable(bomberman
@@ -51,11 +52,12 @@ add_executable(bomberman
         src/classes/Keymap.cpp
         src/classes/Camera.cpp
         src/abstracts/AScene.cpp
+        src/classes/Bomb.cpp
+        src/classes/Flame.cpp
         src/classes/Computer.cpp
         src/abstracts/AObject.cpp
         src/abstracts/AMovable.cpp
         src/abstracts/AMonster.cpp
-        src/abstracts/ABomb.cpp
         src/abstracts/ACollectible.cpp
         src/classes/Game.cpp
         src/classes/Device.cpp
@@ -77,7 +79,7 @@ add_executable(bomberman
         src/classes/menu/CreditsMenu.cpp
         src/classes/Booster.cpp
         src/classes/SoundDevice.cpp
-        #src/classes/menu/GameMenu.cpp
+        src/classes/menu/GameMenu.cpp
         ${HEADER_FILES})
 
 set(IRRLICHT_SOURCE_DIR ./libs/irrlicht)

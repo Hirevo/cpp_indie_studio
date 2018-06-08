@@ -12,7 +12,7 @@
 namespace Eo {
 	class Computer : public AModel {
 	public:
-		Computer(Eo::IScene &game, const Eo::vec3 &pos);
+		Computer(Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos);
 	private:
 	};
 }
