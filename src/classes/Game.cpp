@@ -123,6 +123,28 @@ void Eo::Game::addPlayerEvents(Eo::Rc<Eo::Player> &player)
 		});
 }
 
+void Eo::Game::placeBomb(Eo::Rc<Eo::Player> player)
+{
+	auto oPos = player->getPosition();
+	Eo::vec3 nPos(std::roundf(oPos.X), std::roundf(oPos.Y) + 0.1,
+		std::roundf(oPos.Z));
+	Eo::vec2i size(_map->getWidth() / 2.0f, _map->getHeight() / 2.0f);
+	Eo::vec2i inMap(nPos.X + size.X, nPos.Z + size.Y);
+	this->getMap()->putObject(
+		Eo::initRc<Eo::Bomb>(ref, inMap, nPos), inMap.X, inMap.Y);
+}
+
+void Eo::Game::placeBomb(Eo::Rc<Eo::Computer> computer)
+{
+	auto oPos = computer->getPosition();
+	Eo::vec3 nPos(std::roundf(oPos.X), std::roundf(oPos.Y) + 0.1,
+		std::roundf(oPos.Z));
+	Eo::vec2i size(_map->getWidth() / 2.0f, _map->getHeight() / 2.0f);
+	Eo::vec2i inMap(nPos.X + size.X, nPos.Z + size.Y);
+	this->getMap()->putObject(
+		Eo::initRc<Eo::Bomb>(ref, inMap, nPos), inMap.X, inMap.Y);
+}
+
 void Eo::Game::addEvents()
 {
 	std::for_each(_players.begin(), _players.end(),
