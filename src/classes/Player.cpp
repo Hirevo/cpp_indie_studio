@@ -108,7 +108,8 @@ void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 			Eo::Player::setRotation(Eo::Player::_dirs.at(
 				static_cast<Eo::Player::Facing>(flags)));
 		}
-		catch (std::exception &e) {
+		catch (std::exception &exception) {
+			static_cast<void>(exception);
 		}
 		Eo::Player::translate(dir);
 		Eo::Player::updateInScene();

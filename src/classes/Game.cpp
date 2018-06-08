@@ -167,13 +167,13 @@ Eo::Rc<Eo::Map> Eo::Game::getMap()
 	return _map;
 }
 
-void Eo::Game::useCollectible(Booster::BoosterType type, Player *player)
+void Eo::Game::useCollectible(Booster::BoosterType type, Rc<Player> player)
 {
 	auto pos = player->getPosition();
-	auto posX = roundf(pos.X) + _map.getWidth() / 2;
-	auto posY = roundf(pos.Z) + _map.getHeight() / 2;
+	auto posX = roundf(pos.X) + _map->getWidth() / 2;
+	auto posY = roundf(pos.Z) + _map->getHeight() / 2;
 	Eo::vec2 posf(posX, posY);
-	auto object = _map.getObject(posf.X, posf.Y);
+	auto object = _map->getObject(posf.X, posf.Y);
 
 	if (type == Booster::SPEED) {
 		std::cout << "It's SpeedUP" << std::endl;
@@ -197,26 +197,12 @@ void Eo::Game::useCollectible(Booster::BoosterType type, Player *player)
 	}
 }
 
-const Eo::Map &Eo::Game::getMap() const
-
-bool Eo::Game::isValidMove(Eo::vec3 newPos, irr::u64 id)
-{
-	auto posX = roundf(newPos.X) + _map.getWidth() / 2;
-	auto posY = roundf(newPos.Z) + _map.getHeight() / 2;
-	Eo::vec2 pos(posX, posY);
-	auto object = _map.getObject(pos.X, pos.Y);
-	if (!object)
-		return true;
-	auto type = object->getType();
-	return !(type == IObject::WALL || type == IObject::DEST_WALL);
-}
-
 bool Eo::Game::isValidMove(Eo::vec3 pos)
 {
-	auto posX = roundf(pos.X) + _map.getWidth() / 2;
-	auto posY = roundf(pos.Z) + _map.getHeight() / 2;
+	auto posX = roundf(pos.X) + _map->getWidth() / 2;
+	auto posY = roundf(pos.Z) + _map->getHeight() / 2;
 	Eo::vec2 posf(posX, posY);
-	auto object = _map.getObject(posf.X, posf.Y);
+	auto object = _map->getObject(posf.X, posf.Y);
 	if (!object)
 		return true;
 	auto type = object->getType();
