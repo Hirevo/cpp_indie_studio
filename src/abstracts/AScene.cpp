@@ -8,9 +8,9 @@
 
 #include "AScene.hpp"
 
-Eo::AScene::AScene(Eo::Event &event, Eo::Device &device)
+Eo::AScene::AScene(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device)
 	: _device(device), _event(event),
-	  _sceneManager(_device.getDevice()->getSceneManager())
+	  _sceneManager(_device->getDevice()->getSceneManager())
 {
 }
 
@@ -28,8 +28,8 @@ irr::scene::ICameraSceneNode *Eo::AScene::getCamera() const
 
 bool Eo::AScene::clear()
 {
-	this->_sceneManager->clear();
-	this->_device.getDevice()->getGUIEnvironment()->clear();
+	_sceneManager->clear();
+	_device->getDevice()->getGUIEnvironment()->clear();
 	return true;
 }
 

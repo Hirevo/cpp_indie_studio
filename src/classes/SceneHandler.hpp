@@ -14,14 +14,14 @@
 namespace Eo {
 	class SceneHandler {
 	public:
-		explicit SceneHandler(Eo::Device &device);
+		explicit SceneHandler(Eo::Rc<Eo::Device> device);
 		~SceneHandler();
-		bool loadScene(Eo::IScene *scene);
+		bool loadScene(Eo::Rc<Eo::IScene> scene);
 		bool unloadCurrentScene();
-		Eo::IScene *getCurrentScene() const;
+		Eo::Rc<Eo::IScene> getCurrentScene() const;
 		std::size_t getSceneCount() const;
 
 	private:
-		std::stack<Eo::IScene *> _scenes;
+		std::stack<Eo::Rc<Eo::IScene>> _scenes;
 	};
 }

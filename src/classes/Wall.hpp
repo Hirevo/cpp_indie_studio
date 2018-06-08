@@ -19,10 +19,9 @@ namespace Eo {
 			INDESTRUCTIBLE = Eo::IObject::Type::WALL
 		};
 		Wall(Eo::Wall::WallType type, vec3 pos = vec3(0, 0, 0));
-		~Wall() = default;
-		void insertInScene(const Eo::IScene *scene) override;
-		void removeFromScene(const Eo::IScene *scene) override;
-		void updateInScene(const Eo::IScene *scene) override;
+		~Wall();
+		void insertInScene(const Eo::Rc<Eo::IScene> scene) override;
+		void updateInScene() override;
 
 	private:
 		WallType _wallType;

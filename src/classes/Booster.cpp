@@ -9,39 +9,71 @@
 #include "AObject.hpp"
 #include "Booster.hpp"
 
-const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_textures {
-	{Eo::Booster::BoosterType::SPEED, "../assets/img/roller.jpg"},
-	{Eo::Booster::BoosterType::SUPERBOMB, "../assets/img/superbomb.jpg"},
-	{Eo::Booster::BoosterType::NBBOMB, "../assets/img/bomb.png"}
-};
+const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_mesh{
+	{Eo::Booster::BoosterType::SPEED, "../assets/Bomberman/PowerUp.x"},
+	{Eo::Booster::BoosterType::SUPERBOMB, "../assets/Bomberman/PowerUp.x"},
+	{Eo::Booster::BoosterType::NBBOMB, "../assets/Bomberman/PowerUp.x"}};
+
+const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_textures{
+	{Eo::Booster::BoosterType::SPEED, "../assets/img/roller.png"},
+	{Eo::Booster::BoosterType::SUPERBOMB, "../assets/img/superbomb.png"},
+	{Eo::Booster::BoosterType::NBBOMB, "../assets/img/bomb.png"}};
 
 Eo::Booster::Booster(Eo::Booster::BoosterType boosterType, Eo::vec3 pos)
-	: AObject(static_cast<Eo::IObject::Type>(boosterType)), _boosterType(boosterType)
+	: AObject(static_cast<Eo::IObject::Type>(boosterType)),
+	  _boosterType(boosterType)
 {
 }
 
-#include <iostream>
-
-void Eo::Booster::insertInScene(const Eo::IScene *scene)
+void Eo::Booster::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
 	auto manager = scene->getSceneManager();
 	irr::f32 unitSize = 1.0f;
+	irr::core::vector3df rotation(0.0f, 0.0f, 0.0f);
+	irr::core::vector3df scale(0.2f, 0.2f, 0.2f);
 
 	if (_placedInScene == true)
 		return;
-	//_node = manager->addCubeSceneNode(unitSize, nullptr, -1, _pos);
-	_node = manager->addBillboardSceneNode(nullptr, Eo::vec2(0.5), _pos);
+	_node =	manager->addAnimatedMeshSceneNode(manager->getMesh(_mesh.at(_boosterType).c_str()),
+	                                                 nullptr, -1, _pos, rotation, scale);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	_node->setMaterialTexture(0, manager->getVideoDriver()->getTexture(_textures.at(_boosterType).c_str()));
-	Eo::Booster::updateInScene(scene);
+
+	// irr::scene::IAnimatedMeshSceneNode *sphere =
+	// re
+	//	sceneManager->addAnimatedMeshSceneNode(
+	//		sceneManager->getMesh("../earth.x"), 0, -1,
+	//		irr::core::vector3df(0.0f, 0.0f,
+			    //                 50.0f),        // position de la sphere
+		//	irr::core::vector3df(0.0f, 0.0f,
+		//	                     0.0f),         // rotation
+		//	irr::core::vector3df(20.0f, 20.0f,
+		//	                     20.0f));     // echelle
+	//sphere->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	//sphere->setMaterialFlag(irr::video::EMF_FOG_ENABLE, true);
+	//sphere->setMaterialTexture(0, driver->getTexture("../earth.jpg"));
+
+
+
+/*
+	_node = manager->addBillboardSceneNode(nullptr, Eo::vec2(0.5), _pos);
+	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	_node->setMaterialTexture(0,
+		manager->getVideoDriver()->getTexture(
+			_textures.at(_boosterType).c_str()));
+	Eo::Booster::updateInScene();
+	_hasPositionChanged = false;
+	_hasNode = true;
+	_placedInScene = true; */
+
+	Eo::Booster::updateInScene();
 	_hasPositionChanged = false;
 	_hasNode = true;
 	_placedInScene = true;
 }
 
-void Eo::Booster::removeFromScene(const Eo::IScene *scene)
+void Eo::Booster::removeFromScene()
 {
-	(void)(scene);
 	if (_placedInScene == false || _hasNode == false)
 		return;
 	_node->remove();
@@ -49,7 +81,7 @@ void Eo::Booster::removeFromScene(const Eo::IScene *scene)
 	_placedInScene = false;
 }
 
-void Eo::Booster::updateInScene(const Eo::IScene *scene)
+void Eo::Booster::updateInScene()
 {
 	if (_placedInScene == false || _hasNode == false)
 		return;

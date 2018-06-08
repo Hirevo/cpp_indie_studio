@@ -10,7 +10,7 @@
 #include <Device.hpp>
 #include <iostream>
 
-Eo::MainMenu::MainMenu(Eo::Event &event, Eo::Device &device)
+Eo::MainMenu::MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device)
 	: AScene(event, device)
 {
 	this->draw();
@@ -22,8 +22,8 @@ Eo::MainMenu::~MainMenu()
 
 void Eo::MainMenu::putPlayButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 	auto pos = 3;
@@ -37,8 +37,8 @@ void Eo::MainMenu::putPlayButton()
 
 void Eo::MainMenu::putSettingsButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 	auto pos = 4;
@@ -52,8 +52,8 @@ void Eo::MainMenu::putSettingsButton()
 
 void Eo::MainMenu::putCreditsButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 	auto pos = 5;
@@ -67,8 +67,8 @@ void Eo::MainMenu::putCreditsButton()
 
 void Eo::MainMenu::putExitButton()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 	auto pos = 6;
@@ -85,7 +85,7 @@ static const irr::io::path FONT_PATH =
 
 bool Eo::MainMenu::draw()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font = env->getFont(FONT_PATH);
 	if (font)
@@ -102,18 +102,18 @@ bool Eo::MainMenu::draw()
 
 void Eo::MainMenu::putBackgroundImage()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	env->addImage(this->_device.getDriver()->getTexture(
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	env->addImage(this->_device->getDriver()->getTexture(
 			      "../assets/img/menu-background.jpg"),
 		{0, 0});
 }
 
 void Eo::MainMenu::putTitle()
 {
-	auto *env = this->_device.getDevice()->getGUIEnvironment();
-	auto windowSize = this->_device.getOptions().get_windowSize();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
-	auto *image = this->_device.getDriver()->getTexture(
+	auto *image = this->_device->getDriver()->getTexture(
 		"../assets/img/bomberman-title.png");
 	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
 }

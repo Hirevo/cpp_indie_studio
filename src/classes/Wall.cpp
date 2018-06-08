@@ -17,7 +17,11 @@ Eo::Wall::Wall(Eo::Wall::WallType wallType, Eo::vec3 pos)
 {
 }
 
-void Eo::Wall::insertInScene(const Eo::IScene *scene)
+Eo::Wall::~Wall()
+{
+}
+
+void Eo::Wall::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
 	auto manager = scene->getSceneManager();
 	irr::f32 unitSize = 1.0f;
@@ -29,22 +33,13 @@ void Eo::Wall::insertInScene(const Eo::IScene *scene)
 	_node->setMaterialTexture(0,
 		manager->getVideoDriver()->getTexture(
 			_textures.at(_wallType).c_str()));
-	Eo::Wall::updateInScene(scene);
+	Eo::Wall::updateInScene();
 	_hasPositionChanged = false;
+	_hasNode = true;
 	_placedInScene = true;
 }
 
-void Eo::Wall::removeFromScene(const Eo::IScene *scene)
-{
-	(void)(scene);
-	if (_placedInScene == false || _hasNode == false)
-		return;
-	_node->remove();
-	_hasPositionChanged = false;
-	_placedInScene = false;
-}
-
-void Eo::Wall::updateInScene(const Eo::IScene *scene)
+void Eo::Wall::updateInScene()
 {
 	if (_placedInScene == false || _hasNode == false)
 		return;

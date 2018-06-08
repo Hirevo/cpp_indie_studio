@@ -5,14 +5,18 @@
 ** Created by Benjamin
 */
 
-#include <iostream>
 #include "Camera.hpp"
+#include <iostream>
 
 Eo::Camera::Camera(vec3 pos) : AObject(Eo::IObject::Type::CAMERA, nullptr, pos)
 {
 }
 
-void Eo::Camera::insertFPSInScene(Eo::IScene *scene)
+Eo::Camera::~Camera()
+{
+}
+
+void Eo::Camera::insertFPSInScene(Eo::Rc<Eo::IScene> scene)
 {
 	_camType = FPS;
 	if (_placedInScene)
@@ -32,15 +36,15 @@ void Eo::Camera::insertFPSInScene(Eo::IScene *scene)
 		_camera = scene->getSceneManager()->addCameraSceneNodeFPS(
 			nullptr, 200.0f, 0.1f, -1, _keyMap, 5);
 		_node = _camera;
-		_hasNode = true;
 	}
 	else
 		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
-	Eo::Camera::updateInScene(scene);
+	Eo::Camera::updateInScene();
+	_hasNode = true;
 	_placedInScene = true;
 }
 
-void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
+void Eo::Camera::insertStaticInScene(Eo::Rc<Eo::IScene> scene)
 {
 	irr::core::vector3df position(0, 42, -25);
 	irr::core::vector3df lookat = irr::core::vector3df(0, 0, 0);
@@ -53,27 +57,24 @@ void Eo::Camera::insertStaticInScene(Eo::IScene *scene)
 			nullptr, position, lookat, -1, true);
 		_camera->setFOV(0.25f);
 		_node = _camera;
-		_hasNode = true;
 	}
 	else
 		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
 	_pos = position;
-	Eo::Camera::updateInScene(scene);
+	Eo::Camera::updateInScene();
+	_hasNode = true;
 	_placedInScene = true;
 }
 
-void Eo::Camera::insertInScene(const Eo::IScene *scene)
+void Eo::Camera::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
 }
 
-void Eo::Camera::removeFromScene(const Eo::IScene *scene)
+void Eo::Camera::removeFromScene()
 {
-	if (_placedInScene && _hasNode)
-		_node->remove();
-	_placedInScene = false;
 }
 
-void Eo::Camera::updateInScene(const Eo::IScene *scene)
+void Eo::Camera::updateInScene()
 {
 	if (_hasNode) {
 		_node->setPosition(_pos);
@@ -90,4 +91,3 @@ Eo::Camera::cameraType Eo::Camera::getCamType() const
 {
 	return _camType;
 }
-

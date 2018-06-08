@@ -8,16 +8,22 @@
 #pragma once
 
 #include "IObject.hpp"
+#include "Types.hpp"
 #include <vector>
 
 namespace Eo {
 	class IMap {
 	public:
 		virtual ~IMap() = default;
-		virtual Eo::IObject *getObject(size_t x, size_t y) = 0;
-		virtual Eo::IObject *putObject(
-			Eo::IObject *object, size_t x, size_t y) = 0;
-		virtual std::vector<Eo::IObject *> &getObjects() = 0;
+		virtual Eo::Rc<Eo::IObject> getObject(
+			Eo::u32 x, Eo::u32 y) = 0;
+		virtual Eo::Rc<Eo::IObject> putObject(
+			const Eo::Rc<Eo::IObject> &object, Eo::u32 x,
+			Eo::u32 y) = 0;
+		virtual Eo::Rc<Eo::IObject> putObject(
+			Eo::IObject *object, Eo::u32 x, Eo::u32 y) = 0;
+		virtual std::vector<Eo::Rc<Eo::IObject>> &getObjects() = 0;
+		virtual bool update() = 0;
 
 	private:
 	};

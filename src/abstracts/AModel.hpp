@@ -18,11 +18,9 @@ namespace Eo {
 	public:
 		AModel(IObject::Type type, Eo::vec3 pos = Eo::vec3(0, 0, 0));
 		virtual ~AModel() = 0;
-		void insertInScene(const Eo::IScene *scene) override;
-		void removeFromScene(const Eo::IScene *scene) override;
-		void updateInScene(const Eo::IScene *scene) override;
-		void deleteNode(const Eo::IScene *scene) override;
-		void loadModel(const Eo::IScene *scene,
+		void insertInScene(const Eo::Rc<Eo::IScene> scene) override;
+		void updateInScene() override;
+		void loadModel(const Eo::Rc<Eo::IScene> scene,
 			const std::string &modelPath,
 			const std::string &texPath) override;
 		Eo::animatedMesh *getMesh() const override;
