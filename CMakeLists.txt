@@ -142,7 +142,5 @@ if(WIN32)
     endif ()
 endif()
 
-
-message(${IRRKLANG_LIBRARY})
 target_link_libraries(bomberman ${IRRKLANG_LIBRARY})
 target_include_directories(bomberman PRIVATE ${IRRKLANG_DIR}/include)

@@ -5,14 +5,15 @@
 ** Booster.cpp
 */
 
-#include "AObject.hpp"
 #include <unordered_map>
+#include "AObject.hpp"
 #include "Booster.hpp"
 
-const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_textures{
+const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_textures {
 	{Eo::Booster::BoosterType::SPEED, "../assets/img/roller.jpg"},
 	{Eo::Booster::BoosterType::SUPERBOMB, "../assets/img/superbomb.jpg"},
-	{Eo::Booster::BoosterType::NBBOMB, "../assets/img/bomb.png"}};
+	{Eo::Booster::BoosterType::NBBOMB, "../assets/img/bomb.png"}
+};
 
 Eo::Booster::Booster(Eo::Booster::BoosterType boosterType, Eo::vec3 pos)
 	: AObject(static_cast<Eo::IObject::Type>(boosterType)), _boosterType(boosterType)

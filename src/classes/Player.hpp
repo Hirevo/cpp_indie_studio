@@ -54,6 +54,14 @@ namespace Eo {
 		irr::f32 _angle;
 		irr::f32 _speed = 0.03f;
 		irr::u32 _maxBomb = 1;
+	public:
+		u32 getMaxBomb() const;
+		void setMaxBomb(u32 _maxBomb);
+		u32 getBombAvailable() const;
+		void setBombAvailable(u32 _bombAvailable);
+		u32 getBombPower() const;
+		void setBombPower(u32 _bombPower);
+	private:
 		irr::u32 _bombAvailable = 1;
 		irr::u32 _bombPower = 3;
 		irr::u64 _playerId;

@@ -93,3 +93,33 @@ void Eo::Player::setSpeed(irr::f32 _speed)
 {
 	Player::_speed = _speed;
 }
+
+irr::u32 Eo::Player::getMaxBomb() const
+{
+	return _maxBomb;
+}
+
+void Eo::Player::setMaxBomb(irr::u32 _maxBomb)
+{
+	Player::_maxBomb = _maxBomb;
+}
+
+irr::u32 Eo::Player::getBombAvailable() const
+{
+	return _bombAvailable;
+}
+
+void Eo::Player::setBombAvailable(irr::u32 _bombAvailable)
+{
+	Player::_bombAvailable = _bombAvailable;
+}
+
+irr::u32 Eo::Player::getBombPower() const
+{
+	return _bombPower;
+}
+
+void Eo::Player::setBombPower(irr::u32 _bombPower)
+{
+	Player::_bombPower = _bombPower;
+}

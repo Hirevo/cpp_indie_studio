@@ -135,8 +135,7 @@ void Eo::Game::update()
 			dir.Z += (bwd ? -player->getSpeed() : 0);
 			dir.X += (rgt ? player->getSpeed() : 0);
 			dir.X += (lft ? -player->getSpeed() : 0);
-			if (isValidMove(player->getPosition() + dir,
-				player->getPlayerId())) {
+			if (isValidMove(player->getPosition() + dir)) {
 				try {
 					player->setRotation(
 						Eo::Player::_dirs.at(
@@ -151,17 +150,40 @@ void Eo::Game::update()
 			}
 			Eo::Booster::BoosterType type = CollectibleMove(
 				player->getPosition(), player->getPlayerId());
-			if (type != Booster::NONE) {
-				if (type == Booster::SPEED)
-					std::cout << "It's speed" << std::endl;
-				if (type == Booster::SUPERBOMB)
-					std::cout << "It's SuperBomb"
-						<< std::endl;
-				if (type == Booster::NBBOMB)
-					std::cout << "It's NBBomb"
-						<< std::endl;
+			if (type != Booster::NONE){
+				useCollectible(type, player);
 			}
 		});
+}
+
+void Eo::Game::useCollectible(Booster::BoosterType type, Player *player)
+{
+	auto pos = player->getPosition();
+	auto posX = roundf(pos.X) + _map.getWidth() / 2;
+	auto posY = roundf(pos.Z) + _map.getHeight() / 2;
+	Eo::vec2 posf(posX, posY);
+	auto object = _map.getObject(posf.X, posf.Y);
+
+	if (type == Booster::SPEED) {
+		std::cout << "It's SpeedUP" << std::endl;
+		auto speed = player->getSpeed();
+		player->setSpeed(speed < 0.1f ? speed + 0.1f : speed);
+		//todo delete object from scene
+	}
+	if (type == Booster::SUPERBOMB) {
+		std::cout << "It's SuperBomb" << std::endl;
+		auto sbomb = player->getBombPower();
+		player->setBombPower(sbomb < 100 ? sbomb + 1 : sbomb);
+		//todo delete object from scene
+	}
+	if (type == Booster::NBBOMB) {
+		std::cout << "It's NBBomb" << std::endl;
+		auto nbomb = player->getBombPower();
+		auto abomb = player->getBombAvailable();
+		player->setBombPower(nbomb < 100 ? nbomb + 1 : nbomb);
+		player->setBombAvailable(nbomb < 100 ? abomb + 1 : abomb);
+		//todo delete object from scene
+	}
 }
 
 const Eo::Map &Eo::Game::getMap() const
@@ -169,12 +191,12 @@ const Eo::Map &Eo::Game::getMap() const
 	return _map;
 }
 
-bool Eo::Game::isValidMove(Eo::vec3 newPos, irr::u64 id)
+bool Eo::Game::isValidMove(Eo::vec3 pos)
 {
-	auto posX = roundf(newPos.X) + _map.getWidth() / 2;
-	auto posY = roundf(newPos.Z) + _map.getHeight() / 2;
-	Eo::vec2 pos(posX, posY);
-	auto object = _map.getObject(pos.X, pos.Y);
+	auto posX = roundf(pos.X) + _map.getWidth() / 2;
+	auto posY = roundf(pos.Z) + _map.getHeight() / 2;
+	Eo::vec2 posf(posX, posY);
+	auto object = _map.getObject(posf.X, posf.Y);
 	if (!object)
 		return true;
 	auto type = object->getType();
