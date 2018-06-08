@@ -4,7 +4,7 @@ project(bomberman)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 set(CMAKE_CXX_STANDARD 17)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -g)
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
 
 include_directories(
         src/interfaces
@@ -144,7 +144,5 @@ if(WIN32)
     endif ()
 endif()
 
-
-message(${IRRKLANG_LIBRARY})
 target_link_libraries(bomberman ${IRRKLANG_LIBRARY})
 target_include_directories(bomberman PRIVATE ${IRRKLANG_DIR}/include)

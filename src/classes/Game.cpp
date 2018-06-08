@@ -156,15 +156,8 @@ void Eo::Game::update()
 			player->move(ref);
 			Eo::Booster::BoosterType type = CollectibleMove(
 				player->getPosition(), player->getPlayerId());
-			if (type != Booster::NONE) {
-				if (type == Booster::SPEED)
-					std::cout << "It's speed" << std::endl;
-				if (type == Booster::SUPERBOMB)
-					std::cout << "It's SuperBomb"
-						  << std::endl;
-				if (type == Booster::NBBOMB)
-					std::cout << "It's NBBomb"
-						  << std::endl;
+			if (type != Booster::NONE){
+				useCollectible(type, player);
 			}
 		});
 }
@@ -172,6 +165,48 @@ void Eo::Game::update()
 Eo::Rc<Eo::Map> Eo::Game::getMap()
 {
 	return _map;
+}
+
+void Eo::Game::useCollectible(Booster::BoosterType type, Rc<Player> player)
+{
+	auto pos = player->getPosition();
+	auto posX = roundf(pos.X) + _map->getWidth() / 2;
+	auto posY = roundf(pos.Z) + _map->getHeight() / 2;
+	Eo::vec2 posf(posX, posY);
+	auto object = _map->getObject(posf.X, posf.Y);
+
+	if (type == Booster::SPEED) {
+		std::cout << "It's SpeedUP" << std::endl;
+		auto speed = player->getSpeed();
+		player->setSpeed(speed < 0.1f ? speed + 0.1f : speed);
+		//todo delete object from scene
+	}
+	if (type == Booster::SUPERBOMB) {
+		std::cout << "It's SuperBomb" << std::endl;
+		auto sbomb = player->getBombPower();
+		player->setBombPower(sbomb < 100 ? sbomb + 1 : sbomb);
+		//todo delete object from scene
+	}
+	if (type == Booster::NBBOMB) {
+		std::cout << "It's NBBomb" << std::endl;
+		auto nbomb = player->getBombPower();
+		auto abomb = player->getBombAvailable();
+		player->setBombPower(nbomb < 100 ? nbomb + 1 : nbomb);
+		player->setBombAvailable(nbomb < 100 ? abomb + 1 : abomb);
+		//todo delete object from scene
+	}
+}
+
+bool Eo::Game::isValidMove(Eo::vec3 pos)
+{
+	auto posX = roundf(pos.X) + _map->getWidth() / 2;
+	auto posY = roundf(pos.Z) + _map->getHeight() / 2;
+	Eo::vec2 posf(posX, posY);
+	auto object = _map->getObject(posf.X, posf.Y);
+	if (!object)
+		return true;
+	auto type = object->getType();
+	return !(type == IObject::WALL || type == IObject::DEST_WALL);
 }
 
 Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)

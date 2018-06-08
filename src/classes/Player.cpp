@@ -20,6 +20,7 @@ Eo::Player::Player(Eo::Rc<Eo::IScene> game, Eo::Rc<Eo::Event> event,
 {
 	this->loadModel(game, "../assets/Bomberman/Character.x",
 		"../assets/Bomberman/bomberboy_colors_white.png");
+	_scale = vec3(0.28f);
 	this->getAnimatedNode()->setScale(_scale);
 	this->getAnimatedNode()->setAnimationSpeed(2000.f);
 	this->addEvents(game);
@@ -107,7 +108,8 @@ void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 			Eo::Player::setRotation(Eo::Player::_dirs.at(
 				static_cast<Eo::Player::Facing>(flags)));
 		}
-		catch (std::exception &e) {
+		catch (std::exception &exception) {
+			static_cast<void>(exception);
 		}
 		Eo::Player::translate(dir);
 		Eo::Player::updateInScene();
@@ -124,4 +126,34 @@ bool Eo::Player::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 newPos, irr::u64 id)
 		return true;
 	auto type = object->getType();
 	return !(type == IObject::WALL || type == IObject::DEST_WALL);
+}
+
+irr::u32 Eo::Player::getMaxBomb() const
+{
+	return _maxBomb;
+}
+
+void Eo::Player::setMaxBomb(irr::u32 _maxBomb)
+{
+	Player::_maxBomb = _maxBomb;
+}
+
+irr::u32 Eo::Player::getBombAvailable() const
+{
+	return _bombAvailable;
+}
+
+void Eo::Player::setBombAvailable(irr::u32 _bombAvailable)
+{
+	Player::_bombAvailable = _bombAvailable;
+}
+
+irr::u32 Eo::Player::getBombPower() const
+{
+	return _bombPower;
+}
+
+void Eo::Player::setBombPower(irr::u32 _bombPower)
+{
+	Player::_bombPower = _bombPower;
 }

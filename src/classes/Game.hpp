@@ -42,12 +42,13 @@ namespace Eo {
 		void insertMap(Eo::vec2i v);
 		Eo::keyHandler getPlayerEventFunc(
 			Eo::Rc<Eo::Player> &player, Eo::Player::Motion flag);
-		bool isValidMove(Eo::vec3 newPos, irr::u64 id);
+		bool isValidMove(Eo::vec3 newPos);
 		Eo::Booster::BoosterType CollectibleMove(
 			Eo::vec3 Pos, irr::u64 id);
 		std::array<Eo::Rc<Eo::Player>, 2> _players;
 		std::array<Eo::Rc<Eo::Computer>, 3> _computers;
 		Eo::Rc<Eo::IObject> _floor;
+		void useCollectible(Booster::BoosterType, Rc<Player>);
 		Eo::JsonRead _json;
 		Eo::Rc<Eo::Map> _map;
 		Eo::Camera _camera;
