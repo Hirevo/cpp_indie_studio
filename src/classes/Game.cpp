@@ -21,16 +21,9 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	: AScene(event, device, sceneHandler, sound), _json(mapPath),
 	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
 {
-
-	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::MENUBGM) > 0) {
-		sound->stop();
-		sound->play(Eo::SoundDevice::
-		_soundPath.at(Eo::SoundDevice::GAMEBGM), true);
-	}
-	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::PLAY) > 0) {
-		sound->play(Eo::SoundDevice::
-		_soundPath.at(Eo::SoundDevice::PLAY));
-	}
+	_sound->stopMusic();
+	_sound->play(Eo::SoundDevice::GAMEBGM, true);
+	_sound->play(Eo::SoundDevice::PLAY);
 	_playersPos = _json.readPlayersPos("player_pos");
 	_sceneHandler = sceneHandler;
 }
@@ -125,9 +118,6 @@ void Eo::Game::addPlayerEvents(Eo::Rc<Eo::ICharacter> player)
 			auto posX = std::roundf(pos.X) + _map->getWidth() / 2;
 			auto posY = std::roundf(pos.Z) + _map->getHeight() / 2;
 			auto obj = _map->getObject(posX, posY);
-			// auto character =
-			// 	std::static_pointer_cast<Eo::ICharacter>(
-			// 		player);
 			if (obj == nullptr)
 				Eo::Game::placeBomb(player, bombs);
 		});
@@ -235,9 +225,6 @@ Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
 	if (!object)
 		return Booster::NONE;
 	auto type = static_cast<Booster::BoosterType>(object->getType());
-	// if (type != Booster::SPEED && type != Booster::NBBOMB &&
-	// 	type != Booster::SUPERBOMB)
-	// 	return Booster::NONE;
 	return type;
 }
 

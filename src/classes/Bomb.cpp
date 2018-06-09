@@ -26,10 +26,7 @@ Eo::Bomb::Bomb(
 		"../assets/img/bomb_border.png");
 	_node->setScale(Eo::vec3(0.25, 0.25, 0.25));
 	prepareExplosion(mapPos, scene);
-	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::SETBOMB) > 0) {
-		sound->play(Eo::SoundDevice::
-		_soundPath.at(Eo::SoundDevice::SETBOMB));
-	}
+	_sound->play(Eo::SoundDevice::SETBOMB);
 
 }
 
@@ -37,10 +34,7 @@ Eo::Bomb::~Bomb()
 {
 	auto bombSize = this->getBombSize();
 	if (_soundPath.count(bombSize) > 0)
-		if (Eo::SoundDevice::_soundPath.count(_soundPath.at(bombSize)) > 0) {
-			_sound->play(Eo::SoundDevice::
-			_soundPath.at(_soundPath.at(bombSize)));
-		}
+		_sound->play(_soundPath.at(bombSize));
 	_explode();
 }
 

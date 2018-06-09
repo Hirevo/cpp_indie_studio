@@ -86,7 +86,7 @@ void Eo::SettingsMenu::putSetVolumeSoundMus()
 	env->addButton(
 		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
 		 (int)(((h / 8) * pos + h / 8) / 2)},
-		nullptr, Eo::SettingsMenu::ButtonType::SoundLess, L"Sound Musique -",
+		nullptr, Eo::SettingsMenu::ButtonType::SoundLessMus, L"Sound Musique -",
 		L"Sound -");
 }
 
