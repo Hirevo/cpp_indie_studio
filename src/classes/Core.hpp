@@ -23,8 +23,9 @@
 namespace Eo {
 	class Core {
 	public:
-		Core();
-		virtual ~Core();
+		Core(Eo::Rc<Eo::Options> options, Eo::Rc<Eo::Device> device);
+		~Core();
+
 	private:
 		Eo::Rc<Eo::Options> _options;
 		Eo::Rc<Eo::Device> _device;

@@ -106,7 +106,13 @@ void Eo::Game::addPlayerEvents(Eo::Rc<Eo::Player> &player)
 			player, Eo::Player::Motion::Right));
 	_event->addKeyHandler(id._bomb,
 		[this, player](bool &toRemove, const Eo::event &ev) {
-			if (ev.KeyInput.PressedDown)
+			if (!ev.KeyInput.PressedDown)
+				return;
+			auto pos = player->getPosition();
+			auto posX = std::roundf(pos.X) + _map->getWidth() / 2;
+			auto posY = std::roundf(pos.Z) + _map->getHeight() / 2;
+			auto obj = _map->getObject(posX, posY);
+			if (obj == nullptr)
 				Eo::Game::placeBomb(player);
 		});
 }

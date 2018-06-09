@@ -8,11 +8,15 @@
 #include "Wall.hpp"
 
 const std::unordered_map<Eo::Wall::WallType, std::string> Eo::Wall::_textures{
-	{Eo::Wall::WallType::DESTRUCTIBLE, "../assets/img/brick.png"},
-	{Eo::Wall::WallType::INDESTRUCTIBLE, "../assets/img/block.png"}};
+	{Eo::Wall::WallType::DESTRUCTIBLE, "../assets/img/BG.png"},
+	{Eo::Wall::WallType::INDESTRUCTIBLE, "../assets/img/BG.png"}};
+
+const std::unordered_map<Eo::Wall::WallType, std::string> Eo::Wall::_models{
+	{Eo::Wall::WallType::DESTRUCTIBLE, "../assets/Bomberman/Brick.ms3d"},
+	{Eo::Wall::WallType::INDESTRUCTIBLE, "../assets/Bomberman/Block.ms3d"}};
 
 Eo::Wall::Wall(Eo::Wall::WallType wallType, Eo::vec3 pos)
-	: AObject(static_cast<Eo::IObject::Type>(wallType)),
+	: AModel(static_cast<Eo::IObject::Type>(wallType), pos),
 	  _wallType(wallType)
 {
 }
@@ -23,20 +27,9 @@ Eo::Wall::~Wall()
 
 void Eo::Wall::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
-	auto manager = scene->getSceneManager();
-	irr::f32 unitSize = 1.0f;
-
-	if (_placedInScene == true)
-		return;
-	_node = manager->addCubeSceneNode(unitSize, nullptr, -1, _pos);
-	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	_node->setMaterialTexture(0,
-		manager->getVideoDriver()->getTexture(
-			_textures.at(_wallType).c_str()));
-	Eo::Wall::updateInScene();
-	_hasPositionChanged = false;
-	_hasNode = true;
-	_placedInScene = true;
+	Eo::AModel::loadModel(scene, _models.at(_wallType),
+		_textures.at(_wallType));
+	_node->setScale(Eo::vec3(0.25, 0.25, 0.25));
 }
 
 void Eo::Wall::updateInScene()
