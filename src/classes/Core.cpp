@@ -36,8 +36,8 @@ Eo::Core::Core(Eo::Rc<Eo::Options> options, Eo::Rc<Eo::Device> device)
 		_device->getDevice()->getGUIEnvironment()->drawAll();
 		_device->getDriver()->endScene();
 	}
-	// while (_sceneHandler->getSceneCount())
-	// 	_sceneHandler->unloadCurrentScene();
+	while (_sceneHandler->getSceneCount())
+		_sceneHandler->unloadCurrentScene();
 	_device->getDevice()->drop();
 	_sound->deleteSoundDevice();
 }
