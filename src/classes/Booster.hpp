@@ -14,8 +14,9 @@
 namespace Eo {
 	class Booster : public AObject {
 	public:
-		enum BoosterType : Eo::u8 {NONE, SPEED, SUPERBOMB, NBBOMB,
-			BONUSCOUNT};
+		enum BoosterType : Eo::u8 {NONE =
+			Eo::IObject::Type::BOOSTER_NONE, SPEED, SUPERBOMB,
+			NBBOMB, BONUSCOUNT};
 		Booster(Booster::BoosterType type, vec3 pos = vec3(0, 0, 0));
 		~Booster() = default;
 		void insertInScene(const Eo::Rc<Eo::IScene> scene) override;

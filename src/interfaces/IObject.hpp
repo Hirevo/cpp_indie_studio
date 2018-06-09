@@ -24,7 +24,11 @@ namespace Eo {
 			WALL,
 			DEST_WALL,
 			BOMB,
-			BOOSTER
+			BOOSTER_NONE,
+			BOOSTER_SPEED,
+			BOOSTER_SUPERBOMB,
+			BOOSTER_NBBOMB,
+			BOOSTER_WALLPASS
 		};
 		virtual ~IObject() = default;
 		virtual Eo::IObject::Type getType() const = 0;
