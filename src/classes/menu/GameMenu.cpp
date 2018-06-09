@@ -46,7 +46,7 @@ bool Eo::GameMenu::draw()
 	if (font)
 		skin->setFont(font);
 	this->putBackgroundImage();
-	// this->putSaveButton();
+	this->putSettingsMenu();
 	this->putResumeButton();
 	this->putQuitButton();
 	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
@@ -95,7 +95,7 @@ void Eo::GameMenu::putQuitButton()
 		L"Return to main menu");
 }
 
-void Eo::GameMenu::putSaveButton()
+void Eo::GameMenu::putSettingsMenu()
 {
 	auto *env = _device->getDevice()->getGUIEnvironment();
 	auto windowSize = _device->getOptions()->getWindowSize();
@@ -108,8 +108,8 @@ void Eo::GameMenu::putSaveButton()
 			(int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)},
 		nullptr,
-		Eo::GameMenu::ButtonType::Quit, L"Save",
-		L"Save the game");
+		Eo::GameMenu::ButtonType::Settings, L"Settings",
+		L"Open the Settings");
 }
 
 void Eo::GameMenu::addEvents(Eo::Rc<Eo::Event> event)
@@ -118,6 +118,8 @@ void Eo::GameMenu::addEvents(Eo::Rc<Eo::Event> event)
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::GameMenu::ButtonType::Quit),
 		[this](bool &toRemove, const Eo::event &event) {
+			_sound->stopMusic();
+			_sound->play(Eo::SoundDevice::MENUBGM, true);
 			this->_sceneHandler->unloadCurrentScene();
 			this->_sceneHandler->unloadCurrentScene();
 			this->_sceneHandler->unloadCurrentScene();

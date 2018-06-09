@@ -24,6 +24,7 @@ namespace Eo {
 		void putBackgroundImage();
 		void putReturnButton();
 		void addEvents(Eo::Rc<Eo::Event> event);
+		void putCredits();
 	};
 }
 

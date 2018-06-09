@@ -30,6 +30,7 @@ bool Eo::CreditsMenu::draw()
 	if (font)
 		skin->setFont(font);
 	this->putBackgroundImage();
+	this->putCredits();
 	this->putReturnButton();
 	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
 	return true;
@@ -59,4 +60,15 @@ void Eo::CreditsMenu::putReturnButton()
 
 void Eo::CreditsMenu::addEvents(Eo::Rc<Eo::Event> event)
 {
+}
+
+void Eo::CreditsMenu::putCredits()
+{
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
+	auto w = windowSize.Width;
+	auto h = windowSize.Height;
+	env->addImage(this->_device->getDriver()->getTexture(
+		"../assets/img/credits.png"),
+		{w / 2 - 512, h / 2 - 512});
 }
