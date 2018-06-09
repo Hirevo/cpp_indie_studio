@@ -35,7 +35,16 @@ namespace Eo {
 			EFFECT,
 			MUSIC
 		};
+		enum FileLine {
+			GVOLUME,
+			EVOLUME,
+			MVOLUME,
+			GISMUTE,
+			EISMUTE,
+			MISMUTE
+		};
 		SoundDevice();
+		void deleteSoundDevice();
 		~SoundDevice();
 		void play(const Eo::SoundDevice::SoundPath, bool loop = false);
 		void playMusic(const std::string &path, bool loop = false);

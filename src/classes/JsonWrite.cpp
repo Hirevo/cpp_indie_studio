@@ -5,6 +5,7 @@
 // JsonWrite
 //
 
+#include <cmath>
 #include "JsonWrite.hpp"
 
 Eo::JsonWrite::JsonWrite()
@@ -40,8 +41,6 @@ void Eo::JsonWrite::writeMatrix(std::string const &name,
 	}
 	this->_root.add_child(name, matrix_node);
 }
-
-#include <cmath>
 
 void Eo::JsonWrite::writePlayersPos(std::string const &name,
 				    std::vector<std::vector<Eo::f32>>

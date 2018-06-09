@@ -10,11 +10,19 @@
 
 Eo::JsonRead::JsonRead(std::string const &filename)
 {
-	boost::property_tree::read_json(filename, this->_root);
+	std::ifstream file(filename);
+	_good = file.good();
+	if (_good)
+		boost::property_tree::read_json(filename, this->_root);
 }
 
 Eo::JsonRead::~JsonRead()
 {
+}
+
+bool Eo::JsonRead::good()
+{
+	return _good;
 }
 
 std::string Eo::JsonRead::readSingleValue(std::string const &name) const

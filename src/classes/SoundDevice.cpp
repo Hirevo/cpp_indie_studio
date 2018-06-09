@@ -6,7 +6,10 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include "SoundDevice.hpp"
+#include "JsonWrite.hpp"
+#include "JsonRead.hpp"
 
 const std::unordered_map<Eo::SoundDevice::SoundPath, std::string> Eo::SoundDevice::_soundPath = {
 	{MENUBGM, "../assets/sounds/BGM/main_theme.mp3"},
@@ -51,11 +54,42 @@ Eo::SoundDevice::SoundDevice()
 	  _mVolume(_music->getSoundVolume()),
 	  _gIsMute(false), _eIsMute(false), _mIsMute(false)
 {
+	Eo::JsonRead file(".soundSettings");
+	if (file.good()) {
+		auto mat = file.readMatrix("sound_settings");
+		_gVolume = static_cast<float>(mat.at(0).at(0)) / 100.0f;
+		_eVolume = static_cast<float>(mat.at(0).at(1)) / 100.0f;
+		_mVolume = static_cast<float>(mat.at(0).at(2)) / 100.0f;
+		_effects->setSoundVolume(_gVolume * _eVolume);
+		_music->setSoundVolume(_gVolume * _mVolume);
+		_gIsMute = mat.at(1).at(0) != 0;
+		if (_gIsMute)
+			this->mute();
+		_eIsMute = mat.at(1).at(1) != 0;
+		if (_eIsMute)
+			this->muteEffects();
+		_mIsMute = mat.at(1).at(2) != 0;
+		if (_mIsMute)
+			this->muteMusic();
+	}
+}
+
+void Eo::SoundDevice::deleteSoundDevice()
+{
+	std::vector<std::vector<Eo::i32>> v;
+	v.push_back({static_cast<int>(_gVolume * 100),
+		static_cast<int>(_eVolume * 100),
+		static_cast<int>(_mVolume * 100)});
+	v.push_back({_gIsMute, _eIsMute, _mIsMute});
+	Eo::JsonWrite file;
+	file.writeMatrix("sound_settings", v);
+	file.generateJson(".soundSettings");
 }
 
 Eo::SoundDevice::~SoundDevice()
 {
 	_music->drop();
+	_effects->drop();
 }
 
 void Eo::SoundDevice::stop()
