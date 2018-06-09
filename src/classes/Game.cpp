@@ -21,16 +21,9 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	: AScene(event, device, sceneHandler, sound), _json(mapPath),
 	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
 {
-
-	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::MENUBGM) > 0) {
-		sound->stop();
-		sound->play(Eo::SoundDevice::
-		_soundPath.at(Eo::SoundDevice::GAMEBGM), true);
-	}
-	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::PLAY) > 0) {
-		sound->play(Eo::SoundDevice::
-		_soundPath.at(Eo::SoundDevice::PLAY));
-	}
+	_sound->stopMusic();
+	_sound->play(Eo::SoundDevice::GAMEBGM, true);
+	_sound->play(Eo::SoundDevice::PLAY);
 	_playersPos = _json.readPlayersPos("player_pos");
 	_sceneHandler = sceneHandler;
 }
