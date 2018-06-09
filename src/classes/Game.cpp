@@ -18,7 +18,8 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	const std::string &mapPath, Eo::Rc<Eo::Options> options,
 	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
 	: AScene(event, device, sceneHandler, sound), _json(mapPath),
-	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
+	 // _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
+	_map(Eo::initRc<Eo::Map>(11, 11)), _camera(), _options(options)
 {
 	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::MENUBGM) > 0) {
 		sound->stop();
