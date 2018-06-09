@@ -192,16 +192,13 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 		                    Eo::SettingsMenu::ButtonType::SoundMore),
 		[this](bool &toRemove, const Eo::event &event) {
-			_sound->setVolume(_sound->getVolume() + 5);
+			_sound->setVolume(_sound->getVolume() + 0.1);
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 		                    Eo::SettingsMenu::ButtonType::SoundLess),
 		[this](bool &toRemove, const Eo::event &event) {
-			int volume = _sound->getVolume();
-			std::cout << volume << std::endl;
-			_sound->setVolume(volume - 5);
-			std::cout << _sound->getVolume() << std::endl;
+			_sound->setVolume(_sound->getVolume() - 0.1);
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
