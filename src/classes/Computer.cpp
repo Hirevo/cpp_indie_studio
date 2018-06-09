@@ -77,9 +77,9 @@ bool Eo::Computer::checkPoseBomb(Eo::Rc<Eo::Map> map)
 
 	if (type != IObject::BOMB) {
 		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, 0.8)), map));
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, -0.8)), map));
+		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, -0.8f)), map));
 		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0.8, 0, 0)), map));
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(-0.8, 0, 0)), map));
+		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(-0.8f, 0, 0)), map));
 		if (std::find(outline.begin(), outline.end(), Eo::IObject::DEST_WALL) != outline.end()) {
 			ret = true;
 		}

@@ -12,12 +12,14 @@
 const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_mesh{
 	{Eo::Booster::BoosterType::SPEED, "../assets/Bomberman/PowerUp.x"},
 	{Eo::Booster::BoosterType::SUPERBOMB, "../assets/Bomberman/PowerUp.x"},
-	{Eo::Booster::BoosterType::NBBOMB, "../assets/Bomberman/PowerUp.x"}};
+	{Eo::Booster::BoosterType::NBBOMB, "../assets/Bomberman/PowerUp.x"},
+	{Eo::Booster::BoosterType::WALLPASS, "../assets/Bomberman/PowerUp.x"}};
 
 const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_textures{
 	{Eo::Booster::BoosterType::SPEED, "../assets/img/roller.png"},
 	{Eo::Booster::BoosterType::SUPERBOMB, "../assets/img/superbomb.png"},
-	{Eo::Booster::BoosterType::NBBOMB, "../assets/img/bomb.png"}};
+	{Eo::Booster::BoosterType::NBBOMB, "../assets/img/bomb.png"},
+	{Eo::Booster::BoosterType::WALLPASS, "../assets/img/wall_pass.png"}};
 
 Eo::Booster::Booster(Eo::Booster::BoosterType boosterType, Eo::vec3 pos)
 	: AObject(static_cast<Eo::IObject::Type>(boosterType), nullptr, pos),

@@ -99,3 +99,13 @@ bool Eo::ACharacter::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 myPos,
 			newObject->getType() != IObject::DEST_WALL));
 }
 
+bool Eo::ACharacter::isWallPass() const
+{
+	return _wallPass;
+}
+
+void Eo::ACharacter::setWallPass(bool _wallPass)
+{
+	ACharacter::_wallPass = _wallPass;
+}
+

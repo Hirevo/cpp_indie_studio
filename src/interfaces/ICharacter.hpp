@@ -16,6 +16,8 @@ namespace Eo {
 		virtual ~ICharacter() = default;
 		virtual Eo::u32 getMaxBombs() const = 0;
 		virtual void setMaxBombs(Eo::u32 bombs) = 0;
+		virtual bool isWallPass() const = 0;
+		virtual void setWallPass(bool _wallPass) = 0;
 		virtual Eo::u32 getAvailableBombs() const = 0;
 		virtual void setAvailableBombs(Eo::u32 bombs) = 0;
 		virtual Eo::u32 getBombRadius() const = 0;

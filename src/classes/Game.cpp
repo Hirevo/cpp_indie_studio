@@ -210,9 +210,9 @@ void Eo::Game::update()
 				return;
 			auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *_) {});
 			player->move(ref);
-			Eo::Booster::BoosterType type = CollectibleMove(
+			Eo::IObject::Type type = CollectibleMove(
 				player->getPosition(), player->getPlayerID());
-			if (type != Booster::NONE)
+			if (type != Eo::IObject::NONE)
 				useCollectible(type, player);
 		});
 	std::for_each(_computers.begin(), _computers.end(), 
@@ -233,7 +233,7 @@ Eo::Rc<Eo::Map> Eo::Game::getMap()
 	return _map;
 }
 
-void Eo::Game::useCollectible(Eo::Booster::BoosterType type,
+void Eo::Game::useCollectible(Eo::IObject::Type type,
 	Eo::Rc<Eo::ICharacter> player)
 {
 	auto pos = player->getPosition();
@@ -243,33 +243,41 @@ void Eo::Game::useCollectible(Eo::Booster::BoosterType type,
 	auto object = _map->getObject(posf.X, posf.Y);
 
 	if (type == Booster::SPEED) {
+		std::cout << "Speed\n";
 		auto speed = player->getSpeed();
 		player->setSpeed(speed < 0.1f ? speed + 0.01f : speed);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
-	if (type == Booster::SUPERBOMB) {
+	else if (type == Booster::SUPERBOMB) {
+		std::cout << "Supbomb\n";
 		auto sbomb = player->getBombRadius();
 		player->setBombRadius(sbomb < 100 ? sbomb + 1 : sbomb);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
 	else if (type == Booster::NBBOMB) {
+		std::cout << "NBbomb\n";
 		auto nbomb = player->getBombRadius();
 		auto abomb = player->getAvailableBombs();
 		player->setBombRadius(nbomb < 100 ? nbomb + 1 : nbomb);
 		player->setAvailableBombs(nbomb < 100 ? abomb + 1 : abomb);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
+	else if (type == Booster::BONUSCOUNT) {
+		std::cout << "Bonus\n";
+		player->setWallPass(true);
+		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
+	}
 }
 
-Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
+Eo::IObject::Type Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
 {
 	Eo::u32 posX = roundf(Pos.X) + _map->getWidth() / 2;
 	Eo::u32 posY = roundf(Pos.Z) + _map->getHeight() / 2;
 	Eo::vec2i pos(posX, posY);
 	auto object = _map->getObject(pos.X, pos.Y);
 	if (!object)
-		return Booster::NONE;
-	auto type = static_cast<Booster::BoosterType>(object->getType());
+		return Eo::IObject::Type::NONE;
+	auto type = object->getType();
 	return type;
 }
 

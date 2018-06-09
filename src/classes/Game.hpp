@@ -46,9 +46,9 @@ namespace Eo {
 		Eo::keyHandler getPlayerEventFunc(
 			Eo::Rc<Eo::ICharacter> &player,
 			Eo::Player::Motion flag);
-		Eo::Booster::BoosterType CollectibleMove(
+		Eo::IObject::Type CollectibleMove(
 			Eo::vec3 pos, Eo::u64 id);
-		void useCollectible(Eo::Booster::BoosterType,
+		void useCollectible(Eo::IObject::Type,
 			Eo::Rc<Eo::ICharacter>);
 		std::array<Eo::Rc<Eo::Player>, 2> _players;
 		std::array<Eo::Rc<Eo::Computer>, 3> _computers;
