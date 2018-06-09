@@ -19,6 +19,7 @@ namespace Eo {
 	public:
 		Computer(Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos,
 			Eo::u32 playerID);
+		~Computer() = default;
 		Eo::vec3 getDirection() const;
 		Eo::i32 getCounter() const;
 		void searchDirection(Eo::Rc<Eo::Map> map);
