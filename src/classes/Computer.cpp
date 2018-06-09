@@ -77,7 +77,7 @@ bool Eo::Computer::checkPoseBomb(Eo::Rc<Eo::Map> map)
 
 Eo::IObject::Type Eo::Computer::getObjectType(Eo::vec3 pos, Eo::Rc<Eo::Map> map)
 {
-	IObject::Type type;
+	IObject::Type type = NONE;
 
 	auto posX = roundf(pos.X) + map->getWidth() / 2;
 	auto posY = roundf(pos.Z) + map->getHeight() / 2;
