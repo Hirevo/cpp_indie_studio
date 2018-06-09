@@ -22,8 +22,30 @@ void Eo::JsonWrite::writeSingleValue(std::string const &name,
 }
 
 void Eo::JsonWrite::writeMatrix(std::string const &name,
-				std::vector<std::vector<Eo::MapWall>>
+				std::vector<std::vector<Eo::i32>>
 				const &value)
+{
+	boost::property_tree::ptree matrix_node;
+
+	for (int i = 0; i < value.size(); i++) {
+		boost::property_tree::ptree row;
+
+		for (int j = 0; j < value.at(i).size(); j++) {
+			boost::property_tree::ptree cell;
+
+			cell.put_value(value.at(i).at(j));
+			row.push_back(std::make_pair("", cell));
+		}
+		matrix_node.push_back(std::make_pair("", row));
+	}
+	this->_root.add_child(name, matrix_node);
+}
+
+#include <cmath>
+
+void Eo::JsonWrite::writePlayersPos(std::string const &name,
+				    std::vector<std::vector<Eo::f32>>
+				    const &value)
 {
 	boost::property_tree::ptree matrix_node;
 

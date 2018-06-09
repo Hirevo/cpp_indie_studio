@@ -22,10 +22,10 @@ std::string Eo::JsonRead::readSingleValue(std::string const &name) const
 	return this->_root.get<std::string>(name);
 }
 
-std::vector<std::vector<Eo::MapWall>> Eo::JsonRead::readMatrix(
+std::vector<std::vector<Eo::i32>> Eo::JsonRead::readMatrix(
 	std::string const &name)
 {
-	std::vector<std::vector<Eo::MapWall>> matrix;
+	std::vector<std::vector<Eo::i32>> matrix;
 	int x = 0;
 
 	for (auto &row : this->_root.get_child(name)) {
@@ -33,7 +33,7 @@ std::vector<std::vector<Eo::MapWall>> Eo::JsonRead::readMatrix(
 
 		matrix.emplace_back();
 		for (auto &cell : row.second) {
-			matrix.at(x).emplace_back(static_cast<Eo::MapWall>(
+			matrix.at(x).emplace_back(static_cast<Eo::i32>(
 				cell.second.get_value<int>()));
 			y++;
 		}
@@ -42,9 +42,9 @@ std::vector<std::vector<Eo::MapWall>> Eo::JsonRead::readMatrix(
 	return matrix;
 }
 
-std::vector<std::vector<float>> Eo::JsonRead::readPlayersPos(std::string const &name)
+std::vector<std::vector<Eo::f32>> Eo::JsonRead::readPlayersPos(std::string const &name)
 {
-	std::vector<std::vector<float>> matrix;
+	std::vector<std::vector<Eo::f32>> matrix;
 	int x = 0;
 
 	for (auto &row : this->_root.get_child(name)) {
@@ -52,7 +52,7 @@ std::vector<std::vector<float>> Eo::JsonRead::readPlayersPos(std::string const &
 
 		matrix.emplace_back();
 		for (auto &cell : row.second) {
-			matrix.at(x).emplace_back(static_cast<float>(
+			matrix.at(x).emplace_back(static_cast<Eo::f32>(
 				cell.second.get_value<float>()));
 			y++;
 		}

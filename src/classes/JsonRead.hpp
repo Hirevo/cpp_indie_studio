@@ -8,8 +8,7 @@
 #ifndef JSONREAD_HPP
 #define JSONREAD_HPP
 
-#include "MapWall.hpp"
-#include <Types.hpp>
+#include "Types.hpp"
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <string>
@@ -21,9 +20,8 @@ namespace Eo {
 		JsonRead(std::string const &filename);
 		~JsonRead();
 		std::string readSingleValue(std::string const &name) const;
-		std::vector<std::vector<Eo::MapWall>> readMatrix(
-			std::string const &name);
-		std::vector<std::vector<float>> readPlayersPos(std::string const &);
+		std::vector<std::vector<Eo::i32>> readMatrix(std::string const &name);
+		std::vector<std::vector<Eo::f32>> readPlayersPos(std::string const &);
 
 	private:
 		boost::property_tree::ptree _root;
