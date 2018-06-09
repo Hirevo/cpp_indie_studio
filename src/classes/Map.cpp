@@ -16,7 +16,7 @@
 Eo::Map::Map(Eo::u32 w, Eo::u32 h) : _w(w), _h(h)
 {
 	_map.reserve(_w * _h);
-	std::fill(_map.begin(), _map.end(), Eo::Rc<Eo::IObject>(nullptr));
+	// std::fill(_map.begin(), _map.end(), Eo::Rc<Eo::IObject>(nullptr));
 	for (Eo::u32 i = 0; i < _h; i++)
 		for (Eo::u32 j = 0; j < _w; j++) {
 			auto isWall = i == 0 || j == 0 || i == (_h - 1) ||
@@ -56,7 +56,7 @@ Eo::Map::Map(Eo::JsonRead &json, bool randomize) : _w(0), _h(0)
 	_w = matrix.size();
 	_h = matrix.at(0).size();
 	_map.reserve(_w * _h);
-	std::fill(_map.begin(), _map.end(), Eo::Rc<Eo::IObject>(nullptr));
+	// std::fill(_map.begin(), _map.end(), Eo::Rc<Eo::IObject>(nullptr));
 	for (Eo::u32 i = 0; i < _h; i++)
 		for (Eo::u32 j = 0; j < _w; j++) {
 			auto empty = !(((i > 0 && i <= 2) && (j > 0 && j <= 2)) ||
