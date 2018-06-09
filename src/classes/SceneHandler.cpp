@@ -5,6 +5,7 @@
 ** SceneHandler.cpp
 */
 
+#include <iostream>
 #include "SceneHandler.hpp"
 #include "Game.hpp"
 #include "Types.hpp"

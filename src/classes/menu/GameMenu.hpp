@@ -12,7 +12,7 @@
 namespace Eo {
 	class GameMenu : public AScene {
 	public:
-		GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler);
+		GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound);
 		~GameMenu() override;
 		bool draw() override;
 

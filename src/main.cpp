@@ -10,12 +10,18 @@
 #include "Device.hpp"
 #include "Options.hpp"
 #include "Core.hpp"
-#include <time.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include <ctime>
+#ifdef _WIN32
+	#include <process.h>
+	#define GETPID _getpid
+#elif __linux__
+	#include <unistd.h>
+	#define GETPID getpid
+#endif
+#include <cstdlib>
 
 int main() {
-	srand(getpid() * time(0));
+	srand(GETPID() * time(0));
 	Eo::Rc<Eo::Options> options = Eo::initRc<Eo::Options>();
 	Eo::Rc<Eo::Device> device = Eo::initRc<Eo::Device>(options);
 	Eo::Core core(options, device);

@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "SoundDevice.hpp"
 #include "Device.hpp"
 #include "Event.hpp"
 #include "IScene.hpp"
@@ -15,7 +16,7 @@ namespace Eo {
 	class AScene : public IScene {
 	public:
 		AScene(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
-			Eo::Rc<Eo::SceneHandler> _sceneHandler);
+			Eo::Rc<Eo::SceneHandler> _sceneHandler, Eo::Rc<Eo::SoundDevice> sound);
 
 		virtual ~AScene() = 0;
 		irr::scene::ISceneManager *getSceneManager() const override;
@@ -29,5 +30,6 @@ namespace Eo {
 		Eo::Rc<Eo::Event> _event;
 		irr::scene::ISceneManager *_sceneManager;
 		Eo::Rc<Eo::SceneHandler> _sceneHandler;
+		Eo::Rc<Eo::SoundDevice> _sound;
 	};
 };

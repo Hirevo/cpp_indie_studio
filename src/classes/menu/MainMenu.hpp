@@ -7,12 +7,13 @@
 
 #pragma once
 
+#include "SoundDevice.hpp"
 #include "AScene.hpp"
 
 namespace Eo {
 	class MainMenu : public AScene {
 	public:
-		MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler);
+		MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound);
 		~MainMenu() override;
 		bool draw() override;
 

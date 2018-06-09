@@ -10,8 +10,8 @@
 static const irr::io::path FONT_PATH =
 	"../assets/font/fonthaettenschweiler.bmp";
 
-Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler)
-	: AScene(event, device, sceneHandler)
+Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
+	: AScene(event, device, sceneHandler, sound)
 {
 	this->draw();
 }

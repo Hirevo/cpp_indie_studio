@@ -11,19 +11,29 @@
 
 Eo::Bomb::Bomb(
 	Eo::Rc<Eo::Game> scene, Eo::Rc<Eo::ICharacter> player,
-		const Eo::vec2i &mapPos, const Eo::vec3 &pos)
+		const Eo::vec2i &mapPos, const Eo::vec3 &pos, Eo::Rc<Eo::SoundDevice> sound)
 	: AModel(Eo::IObject::Type::BOMB, pos),
 	  _clock(std::chrono::high_resolution_clock::now()), _scene(scene),
-	  _map(scene->getMap()), _player(player)
+	  _map(scene->getMap()), _player(player), _sound(sound)
 {
 	Eo::AModel::loadModel(scene, "../assets/Bomberman/Bomb.x",
 		"../assets/img/bomb_border.png");
 	_node->setScale(Eo::vec3(0.25, 0.25, 0.25));
 	prepareExplosion(mapPos, scene);
+	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::SETBOMB) > 0) {
+		sound->stop();
+		sound->play(Eo::SoundDevice::
+		_soundPath.at(Eo::SoundDevice::SETBOMB));
+	}
+
 }
 
 Eo::Bomb::~Bomb()
 {
+	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::BOMBM) > 0) {
+		_sound->play(Eo::SoundDevice::
+		_soundPath.at(Eo::SoundDevice::BOMBM));
+	}
 	_explode();
 }
 

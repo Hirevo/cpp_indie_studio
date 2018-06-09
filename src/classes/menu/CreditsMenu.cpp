@@ -9,8 +9,8 @@
 #include "SettingsMenu.hpp"
 #include "SceneHandler.hpp"
 
-Eo::CreditsMenu::CreditsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler)
-	: AScene(event, device, sceneHandler)
+Eo::CreditsMenu::CreditsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
+	: AScene(event, device, sceneHandler, sound)
 {
 	this->addEvents(event);
 	this->draw();

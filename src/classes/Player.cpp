@@ -18,8 +18,12 @@ Eo::Player::Player(Eo::Rc<Eo::IScene> game, Eo::Rc<Eo::Event> event,
 	: AModel(Eo::IObject::Type::CHARACTER, pos), ACharacter(id),
 	  _event(event), _options(options)
 {
+	std::stringstream path;
+	path << "../assets/img/bomberboy_";
+	path << id + 1;
+	path << ".png";
 	this->loadModel(game, "../assets/Bomberman/Character.x",
-		"../assets/img/bomberboy_colors_white.png");
+		path.str().c_str());
 	_scale = vec3(0.28f);
 	this->getAnimatedNode()->setScale(_scale);
 	this->addEvents(game);
