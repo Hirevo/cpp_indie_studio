@@ -8,7 +8,7 @@
 #include "AModel.hpp"
 
 Eo::AModel::AModel(Eo::IObject::Type type, Eo::vec3 pos)
-	: AObject(type, 0, pos), _mesh(0), _hasMesh(false)
+	: AObject(type, nullptr, pos), _mesh(0), _hasMesh(false)
 {
 }
 
@@ -24,7 +24,8 @@ void Eo::AModel::insertInScene(const Eo::Rc<Eo::IScene> scene)
 			_mesh);
 	}
 	else
-		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
+		scene->getSceneManager()->addAnimatedMeshSceneNode(nullptr,
+			_node);
 	Eo::AModel::updateInScene();
 	_hasNode = true;
 	_placedInScene = true;

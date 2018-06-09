@@ -42,7 +42,7 @@ void Eo::AObject::insertInScene(const Eo::Rc<Eo::IScene> scene)
 
 void Eo::AObject::removeFromScene()
 {
-	if (_hasNode && _node && _node->getParent())
+	if (_hasNode && _node)
 		_node->remove();
 	_hasNode = false;
 	_placedInScene = false;
