@@ -9,12 +9,11 @@
 #include "AScene.hpp"
 
 Eo::AScene::AScene(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
-	Eo::Rc<Eo::SceneHandler> sceneHandler) :
+	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound) :
 	_device(device), _event(event),
 	_sceneManager(_device->getDevice()->getSceneManager()),
-	_sceneHandler(sceneHandler)
+	_sceneHandler(sceneHandler), _sound(sound)
 {
-
 }
 
 Eo::AScene::~AScene() = default;

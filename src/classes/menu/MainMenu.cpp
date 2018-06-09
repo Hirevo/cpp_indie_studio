@@ -16,9 +16,15 @@
 #include <SceneHandler.hpp>
 
 Eo::MainMenu::MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
-	Eo::Rc<Eo::SceneHandler> sceneHandler)
-	: AScene(event, device, sceneHandler)
+	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
+	: AScene(event, device, sceneHandler, sound)
 {
+
+	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::MENUBGM) > 0) {
+		sound->stop();
+		sound->play(Eo::SoundDevice::
+		_soundPath.at(Eo::SoundDevice::MENUBGM), true);
+	}
 	this->addEvents(event);
 	this->draw();
 }
@@ -135,7 +141,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			options->setNbPlayer(1);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
 				_event, _device, "../map2.json", options,
-				_sceneHandler));
+				_sceneHandler, _sound));
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
@@ -145,7 +151,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			options->setNbPlayer(2);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
 				_event, _device, "../map2.json", options,
-				_sceneHandler));
+				_sceneHandler, _sound));
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
@@ -153,7 +159,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler->loadScene(
 				Eo::initRc<Eo::PlayMenu>(_event, _device,
-					_sceneHandler));
+					_sceneHandler, _sound));
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
@@ -168,7 +174,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler->loadScene(
 				Eo::initRc<Eo::SettingsMenu>(_event, _device,
-					_sceneHandler));
+					_sceneHandler, _sound));
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
@@ -176,7 +182,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		[this](bool &toRemove, const Eo::event &event) {
 			_sceneHandler->loadScene(
 				Eo::initRc<Eo::CreditsMenu>(_event, _device,
-					_sceneHandler));
+					_sceneHandler, _sound));
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,

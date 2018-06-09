@@ -28,7 +28,7 @@ namespace Eo {
 	public:
 		Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 			const std::string &mapPath, Eo::Rc<Eo::Options> options,
-			Eo::Rc<Eo::SceneHandler> sceneHandler);
+			Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound);
 		~Game();
 		irr::scene::ICameraSceneNode *getCamera() const override;
 		bool draw() override;
