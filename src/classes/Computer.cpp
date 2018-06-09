@@ -73,7 +73,7 @@ bool Eo::Computer::checkPoseBomb(Eo::Rc<Eo::Map> map)
 		}
 	}
 	return ret;
-}	
+}
 
 Eo::IObject::Type Eo::Computer::getObjectType(Eo::vec3 pos, Eo::Rc<Eo::Map> map)
 {
