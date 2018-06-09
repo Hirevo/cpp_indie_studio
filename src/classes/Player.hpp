@@ -47,8 +47,6 @@ namespace Eo {
 
 	private:
 		void addEvents(Eo::Rc<Eo::IScene> game);
-		bool isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 newPos,
-			Eo::u64 id);
 		Eo::f32 _angle;
 		Eo::Rc<Eo::Event> _event;
 		Eo::Rc<Eo::Options> _options;

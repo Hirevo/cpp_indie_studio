@@ -225,18 +225,6 @@ void Eo::Game::useCollectible(Eo::Booster::BoosterType type,
 	}
 }
 
-bool Eo::Game::isValidMove(Eo::vec3 pos)
-{
-	auto posX = roundf(pos.X) + _map->getWidth() / 2;
-	auto posY = roundf(pos.Z) + _map->getHeight() / 2;
-	Eo::vec2 posf(posX, posY);
-	auto object = _map->getObject(posf.X, posf.Y);
-	if (!object)
-		return true;
-	auto type = object->getType();
-	return !(type == IObject::WALL || type == IObject::DEST_WALL);
-}
-
 Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
 {
 	Eo::u32 posX = roundf(Pos.X) + _map->getWidth() / 2;
