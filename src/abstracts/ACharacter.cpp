@@ -77,8 +77,7 @@ Eo::u64 Eo::ACharacter::getPlayerID() const
 }
 
 bool Eo::ACharacter::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 myPos,
-	Eo::vec3 newDir
-)
+	Eo::vec3 newDir)
 {
 	auto posX = roundf(myPos.X + newDir.X) + map->getWidth() / 2;
 	auto posY = roundf(myPos.Z + newDir.Z) + map->getHeight() / 2;

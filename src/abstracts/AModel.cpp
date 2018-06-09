@@ -16,14 +16,18 @@ Eo::AModel::AModel(Eo::IObject::Type type, Eo::vec3 pos)
 Eo::AModel::~AModel() {
 }
 
+void Eo::AModel::setHasMesh(bool b)
+{
+	_hasMesh = b;
+}
+
 void Eo::AModel::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
 	if (_placedInScene)
 		return;
-	if (_hasNode == false) {
+	if (_hasNode == false)
 		_node = scene->getSceneManager()->addAnimatedMeshSceneNode(
 			_mesh);
-	}
 	else
 		scene->getSceneManager()->addAnimatedMeshSceneNode(nullptr,
 			_node);
@@ -44,7 +48,7 @@ void Eo::AModel::updateInScene()
 void Eo::AModel::loadModel(const Eo::Rc<Eo::IScene> scene,
 	const std::string &modelPath, const std::string &texPath)
 {
-	removeFromScene();
+	// removeFromScene();
 	auto sceneManager = scene->getSceneManager();
 	auto driver = sceneManager->getVideoDriver();
 	_mesh = sceneManager->getMesh(modelPath.c_str());
@@ -63,7 +67,7 @@ void Eo::AModel::loadModel(const Eo::Rc<Eo::IScene> scene,
 void Eo::AModel::loadModel(const Eo::Rc<Eo::IScene> scene,
 	const std::string &modelPath)
 {
-	removeFromScene();
+	// removeFromScene();
 	auto sceneManager = scene->getSceneManager();
 	auto driver = sceneManager->getVideoDriver();
 	_mesh = sceneManager->getMesh(modelPath.c_str());

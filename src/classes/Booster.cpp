@@ -20,8 +20,7 @@ const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_te
 	{Eo::Booster::BoosterType::NBBOMB, "../assets/img/bomb.png"}};
 
 Eo::Booster::Booster(Eo::Booster::BoosterType boosterType, Eo::vec3 pos)
-	: AObject(static_cast<Eo::IObject::Type>(boosterType), nullptr,
-		pos),
+	: AObject(Eo::IObject::Type::BOOSTER, nullptr, pos),
 	  _boosterType(boosterType)
 {
 }
@@ -32,9 +31,6 @@ void Eo::Booster::insertInScene(const Eo::Rc<Eo::IScene> scene)
 	irr::f32 unitSize = 1.0f;
 	irr::core::vector3df rotation(0.0f, 0.0f, 0.0f);
 	irr::core::vector3df scale(0.2f, 0.2f, 0.2f);
-
-	if (_placedInScene == true)
-		return;
 	_node =	manager->addAnimatedMeshSceneNode(manager->getMesh(
 		_mesh.at(_boosterType).c_str()), nullptr, -1, _pos,
 		rotation, scale);

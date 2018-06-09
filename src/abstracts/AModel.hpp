@@ -31,6 +31,7 @@ namespace Eo {
 		void animate(Eo::animType animation) const override;
 		const vec3 &getScale() const;
 		void setScale(const vec3 &_scale);
+		void setHasMesh(bool b) override;
 
 	protected:
 		Eo::animatedMesh *_mesh;

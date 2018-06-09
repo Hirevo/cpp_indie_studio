@@ -23,6 +23,7 @@ namespace Eo {
 		virtual void setMesh(Eo::animatedMesh *model) = 0;
 		virtual Eo::animatedNode *getAnimatedNode() const = 0;
 		virtual void animate(Eo::animType animation) const = 0;
+		virtual void setHasMesh(bool b) = 0;
 
 	protected:
 	private:

@@ -39,6 +39,7 @@ namespace Eo {
 		Eo::Rc<Eo::Map> getMap();
 		void placeBomb(Eo::Rc<Eo::ICharacter> player, Eo::u32 bombs);
 		const std::string &getMapName() const;
+		bool clear() override;
 
 	private:
 		void insertMap(Eo::vec2i v);

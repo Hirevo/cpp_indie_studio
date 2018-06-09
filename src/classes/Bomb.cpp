@@ -22,11 +22,9 @@ Eo::Bomb::Bomb(
 	  _clock(std::chrono::high_resolution_clock::now()), _scene(scene),
 	  _map(scene->getMap()), _player(player), _sound(sound)
 {
-	Eo::AModel::loadModel(scene, "../assets/Bomberman/Bomb.x",
-		"../assets/img/bomb_border.png");
-	_node->setScale(Eo::vec3(0.25, 0.25, 0.25));
 	prepareExplosion(mapPos, scene);
 	_sound->play(Eo::SoundDevice::SETBOMB);
+	Eo::Bomb::insertInScene(scene);
 
 }
 
@@ -36,6 +34,13 @@ Eo::Bomb::~Bomb()
 	if (_soundPath.count(bombSize) > 0)
 		_sound->play(_soundPath.at(bombSize));
 	_explode();
+}
+
+void Eo::Bomb::insertInScene(const Eo::Rc<Eo::IScene> scene)
+{
+	Eo::AModel::loadModel(scene, "../assets/Bomberman/Bomb.x",
+		"../assets/img/bomb_border.png");
+	_node->setScale(Eo::vec3(0.25, 0.25, 0.25));
 }
 
 Eo::Bomb::BombSize Eo::Bomb::getBombSize() const

@@ -26,6 +26,10 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	_sound->play(Eo::SoundDevice::PLAY);
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
+	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::PLAY) > 0) {
+		sound->play(Eo::SoundDevice::
+		_soundPath.at(Eo::SoundDevice::PLAY));
+	}
 	_playersPos = _json.readPlayersPos("player_pos");
 	_sceneHandler = sceneHandler;
 	_players.fill(Eo::Rc<Eo::Player>(nullptr));
@@ -42,6 +46,36 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 
 Eo::Game::~Game()
 {
+}
+
+bool Eo::Game::clear()
+{
+	_sceneManager->clear();
+	_device->getDevice()->getGUIEnvironment()->clear();
+	std::for_each(_players.begin(), _players.end(),
+		[](Eo::Rc<Eo::Player> &player) {
+			if (player.get()) {
+				player->setHasNode(false);
+				player->setPlacedInScene(false);
+				player->setHasMesh(false);
+			}
+		});
+	std::for_each(_computers.begin(), _computers.end(),
+		[](Eo::Rc<Eo::Computer> &player) {
+			if (player.get()) {
+				player->setHasNode(false);
+				player->setPlacedInScene(false);
+				player->setHasMesh(false);
+			}
+		});
+	auto map = _map->getObjects();
+	std::for_each(map.begin(), map.end(), [](Eo::Rc<Eo::IObject> obj) {
+		if (obj.get()) {
+			obj->setHasNode(false);
+			obj->setPlacedInScene(false);
+		}
+	});
+	return true;
 }
 
 irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
@@ -165,7 +199,9 @@ void Eo::Game::addEvents()
 		[this](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
-			_sceneHandler->loadScene(Eo::initRc<Eo::GameMenu>(_event, _device, _sceneHandler, _sound));
+			_sceneHandler->loadScene(
+				Eo::initRc<Eo::GameMenu>(_event, _device,
+					_sceneHandler, _sound));
 		});
 }
 
@@ -185,6 +221,8 @@ void Eo::Game::update()
 		});
 	std::for_each(_computers.begin(), _computers.end(), 
 		[this](Eo::Rc<Eo::Computer> &computer) {
+		if (computer.get() == nullptr)
+			return;
 		computer->updatePosition(_map);
 		if (computer->checkPoseBomb(_map)) {
 			auto bombs = computer->getAvailableBombs();

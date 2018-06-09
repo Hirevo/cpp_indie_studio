@@ -40,6 +40,16 @@ void Eo::AObject::insertInScene(const Eo::Rc<Eo::IScene> scene)
 	_hasNode = false;
 }
 
+void Eo::AObject::setHasNode(bool b)
+{
+	_hasNode = b;
+}
+
+void Eo::AObject::setPlacedInScene(bool b)
+{
+	_placedInScene = b;
+}
+
 void Eo::AObject::removeFromScene()
 {
 	if (_hasNode && _node)

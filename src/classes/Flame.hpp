@@ -19,6 +19,7 @@ namespace Eo {
 			Eo::vec3 pos = Eo::vec3(0, 0, 0));
 		~Flame() = default;
 		bool update() override;
+		void insertInScene(const Eo::Rc<Eo::IScene> scene) override;
 
 	protected:
 	private:

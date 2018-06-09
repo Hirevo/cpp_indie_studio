@@ -24,6 +24,8 @@ namespace Eo {
 		void removeFromScene() override;
 		void updateInScene() override;
 		bool update() override;
+		void setHasNode(bool b) override;
+		void setPlacedInScene(bool b) override;
 
 	protected:
 		Eo::IObject::Type _type;

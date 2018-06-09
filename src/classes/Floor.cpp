@@ -17,9 +17,6 @@ void Eo::Floor::insertInScene(const Eo::Rc<Eo::IScene> scene)
 	auto manager = scene->getSceneManager();
 	auto texture = scene->getSceneManager()->getVideoDriver()
 		->getTexture("../assets/img/floor.png");
-
-	if (_placedInScene)
-		return;
 	auto mesh = manager->getGeometryCreator()->createPlaneMesh(
 		irr::core::dimension2df(_size, _size), {1, 1}, nullptr,
 		{_size, _size});

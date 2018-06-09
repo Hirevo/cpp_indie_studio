@@ -34,6 +34,8 @@ namespace Eo {
 		virtual void removeFromScene() = 0;
 		virtual void updateInScene() = 0;
 		virtual bool update() = 0;
+		virtual void setHasNode(bool b) = 0;
+		virtual void setPlacedInScene(bool b) = 0;
 
 	private:
 	};
