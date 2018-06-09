@@ -45,12 +45,12 @@ void Eo::SoundDevice::play(const std::string &path, bool loop)
 	_device->play2D(path.c_str(), loop);
 }
 
-int Eo::SoundDevice::getVolume() const
+float Eo::SoundDevice::getVolume() const
 {
-	return static_cast<int>(_device->getSoundVolume() * 100);
+	return _device->getSoundVolume();
 }
 
-void Eo::SoundDevice::setVolume(const int volume)
+void Eo::SoundDevice::setVolume(const float volume)
 {
-	_device->setSoundVolume(static_cast<irrklang::ik_f32>(volume / 100));
+	_device->setSoundVolume(volume);
 }
