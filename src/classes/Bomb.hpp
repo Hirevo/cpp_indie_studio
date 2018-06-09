@@ -16,8 +16,8 @@
 namespace Eo {
 	class Bomb : public AModel {
 	public:
-		Bomb(Eo::Rc<Eo::Game> scene, const Eo::vec2i &mapPos,
-			const Eo::vec3 &pos);
+		Bomb(Eo::Rc<Eo::Game> scene, Eo::Rc<Eo::ICharacter> player,
+			const Eo::vec2i &mapPos, const Eo::vec3 &pos);
 		~Bomb();
 		bool update() override;
 
@@ -32,5 +32,6 @@ namespace Eo {
 			_clock;
 		Eo::Rc<Eo::Game> _scene;
 		Eo::Rc<Eo::Map> _map;
+		Eo::Rc<Eo::ICharacter> _player;
 	};
 }

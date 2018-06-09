@@ -7,20 +7,15 @@
 
 #include "Computer.hpp"
 
-Eo::Computer::Computer(Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos) 
-	: AModel(Eo::IObject::Type::CHARACTER, pos)
+Eo::Computer::Computer(Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos,
+	Eo::u32 playerID)
+	: AModel(Eo::IObject::Type::CHARACTER, pos), ACharacter(playerID)
 {
 	this->loadModel(game, "../assets/model-test/sydney.md2",
 		"../assets/model-test/sydney.bmp");
 	this->getAnimatedNode()->setScale(Eo::vec3(0.020f));
 	_counter = 0;
-	_speed = 0.03f;
 	_dir = Eo::vec3(0);
-}
-
-Eo::f32 Eo::Computer::getSpeed() const
-{
-	return _speed;
 }
 
 Eo::vec3 Eo::Computer::getDirection() const
@@ -50,8 +45,6 @@ void Eo::Computer::searchDirection(Eo::Rc<Eo::Map> map)
 	dist = std::uniform_real_distribution<>(10, 150);
 	_counter = dist(mt);
 }
-
-#include <iostream>
 
 void Eo::Computer::updatePosition(Eo::Rc<Eo::Map> map)
 {

@@ -20,7 +20,8 @@ const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_te
 	{Eo::Booster::BoosterType::NBBOMB, "../assets/img/bomb.png"}};
 
 Eo::Booster::Booster(Eo::Booster::BoosterType boosterType, Eo::vec3 pos)
-	: AObject(static_cast<Eo::IObject::Type>(boosterType)),
+	: AObject(static_cast<Eo::IObject::Type>(boosterType), nullptr,
+		pos),
 	  _boosterType(boosterType)
 {
 }

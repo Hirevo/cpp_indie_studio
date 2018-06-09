@@ -8,6 +8,7 @@
 #pragma once
 
 #include "AModel.hpp"
+#include "ACharacter.hpp"
 #include "Device.hpp"
 #include "Event.hpp"
 #include "IScene.hpp"
@@ -17,7 +18,7 @@
 namespace Eo {
 #pragma warning(disable : 4250)
 	class Game;
-	class Player : public AModel {
+	class Player : public AModel, public ACharacter {
 	public:
 		enum Motion {
 			Forward = 1 << 0,
@@ -42,33 +43,13 @@ namespace Eo {
 			Eo::Rc<Eo::Options>, const vec3 &pos = vec3(0),
 			Eo::u64 id = 0);
 		~Player() override;
-		void setFlag(Eo::u8 flags);
-		void unsetFlag(Eo::u8 flags);
-		Eo::u8 getFlag() const;
-		u64 getPlayerId() const;
-		f32 getSpeed() const;
-		void setSpeed(f32 _speed);
 		void move(Eo::Rc<Eo::Game> scene);
 
 	private:
 		void addEvents(Eo::Rc<Eo::IScene> game);
 		bool isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 newPos,
-			irr::u64 id);
-		Eo::u8 _flags;
-		irr::f32 _angle;
-		irr::f32 _speed = 0.03f;
-		irr::u32 _maxBomb = 1;
-	public:
-		u32 getMaxBomb() const;
-		void setMaxBomb(u32 _maxBomb);
-		u32 getBombAvailable() const;
-		void setBombAvailable(u32 _bombAvailable);
-		u32 getBombPower() const;
-		void setBombPower(u32 _bombPower);
-	private:
-		irr::u32 _bombAvailable = 1;
-		irr::u32 _bombPower = 3;
-		irr::u64 _playerId;
+			Eo::u64 id);
+		Eo::f32 _angle;
 		Eo::Rc<Eo::Event> _event;
 		Eo::Rc<Eo::Options> _options;
 	};

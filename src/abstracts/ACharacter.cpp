@@ -8,9 +8,71 @@
 #include "ACharacter.hpp"
 #include <irrlicht.h>
 
-Eo::ACharacter::ACharacter(vec3 pos)
-	: AModel(Eo::IObject::Type::CHARACTER, pos), _model(0)
+Eo::ACharacter::ACharacter(Eo::u32 playerID)
+	: _playerID(playerID)
 {
 }
 
 Eo::ACharacter::~ACharacter() = default;
+
+
+Eo::u32 Eo::ACharacter::getMaxBombs() const
+{
+	return _maxBombs;
+}
+
+void Eo::ACharacter::setMaxBombs(Eo::u32 bombs)
+{
+	_maxBombs = bombs;
+}
+
+Eo::u32 Eo::ACharacter::getAvailableBombs() const
+{
+	return _availableBombs;
+}
+
+void Eo::ACharacter::setAvailableBombs(Eo::u32 bombs)
+{
+	_availableBombs = bombs;
+}
+
+Eo::u32 Eo::ACharacter::getBombRadius() const
+{
+	return _bombRadius;
+}
+
+void Eo::ACharacter::setBombRadius(Eo::u32 radius)
+{
+	_bombRadius = radius;
+}
+
+Eo::f32 Eo::ACharacter::getSpeed() const
+{
+	return _speed;
+}
+
+void Eo::ACharacter::setSpeed(Eo::f32 speed)
+{
+	_speed = speed;
+}
+
+
+void Eo::ACharacter::setFlag(Eo::u8 flags)
+{
+	_flags |= flags;
+}
+
+void Eo::ACharacter::unsetFlag(Eo::u8 flags)
+{
+	_flags &= ~flags;
+}
+
+Eo::u8 Eo::ACharacter::getFlag() const
+{
+	return _flags;
+}
+
+Eo::u64 Eo::ACharacter::getPlayerID() const
+{
+	return _playerID;
+}
