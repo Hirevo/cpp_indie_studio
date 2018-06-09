@@ -8,7 +8,6 @@
 #include "Bomb.hpp"
 #include "Flame.hpp"
 #include <chrono>
-#include <iostream>
 
 Eo::Bomb::Bomb(
 	Eo::Rc<Eo::Game> scene, Eo::Rc<Eo::ICharacter> player,
