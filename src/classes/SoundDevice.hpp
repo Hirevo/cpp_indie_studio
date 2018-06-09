@@ -34,10 +34,10 @@ namespace Eo {
 		SoundDevice();
 		~SoundDevice();
 		void play(const std::string &path, bool loop = false);
-		// Get Sound volume in percentage.
-		int getVolume() const;
-		// Set Sound Volume in percentage.
-		void setVolume(const int volume);
+		// Get Sound volume from 0 to 1.
+		float getVolume() const;
+		// Set Sound Volume from 0 to 1.
+		void setVolume(const float volume);
 		void stop();
 		static const std::unordered_map<SoundPath, std::string> _soundPath;
 	private:

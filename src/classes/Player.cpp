@@ -75,8 +75,7 @@ void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 	dir.Z += (bwd ? -Eo::ACharacter::getSpeed() : 0);
 	dir.X += (rgt ? Eo::ACharacter::getSpeed() : 0);
 	dir.X += (lft ? -Eo::ACharacter::getSpeed() : 0);
-	if (isValidMove(scene->getMap(), Eo::Player::getPosition() + dir,
-		    Eo::Player::getPlayerID())) {
+	if (isValidMove(scene->getMap(), Eo::Player::getPosition() + dir)) {
 		try {
 			Eo::Player::setRotation(Eo::Player::_dirs.at(
 				static_cast<Eo::Player::Facing>(flags)));
@@ -87,16 +86,4 @@ void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 		Eo::Player::translate(dir);
 		Eo::Player::updateInScene();
 	}
-}
-
-bool Eo::Player::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 newPos, irr::u64 id)
-{
-	auto posX = roundf(newPos.X) + map->getWidth() / 2;
-	auto posY = roundf(newPos.Z) + map->getHeight() / 2;
-	Eo::vec2 pos(posX, posY);
-	auto object = map->getObject(pos.X, pos.Y);
-	if (!object)
-		return true;
-	auto type = object->getType();
-	return !(type == IObject::WALL || type == IObject::DEST_WALL);
 }
