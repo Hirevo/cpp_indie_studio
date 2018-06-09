@@ -35,10 +35,12 @@ void Eo::Booster::insertInScene(const Eo::Rc<Eo::IScene> scene)
 
 	if (_placedInScene == true)
 		return;
-	_node =	manager->addAnimatedMeshSceneNode(manager->getMesh(_mesh.at(_boosterType).c_str()),
-	                                                 nullptr, -1, _pos, rotation, scale);
+	_node =	manager->addAnimatedMeshSceneNode(manager->getMesh(
+		_mesh.at(_boosterType).c_str()), nullptr, -1, _pos,
+		rotation, scale);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-	_node->setMaterialTexture(0, manager->getVideoDriver()->getTexture(_textures.at(_boosterType).c_str()));
+	_node->setMaterialTexture(0, manager->getVideoDriver()->getTexture(
+		_textures.at(_boosterType).c_str()));
 	Eo::Booster::updateInScene();
 	_hasPositionChanged = false;
 	_hasNode = true;

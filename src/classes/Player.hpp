@@ -44,12 +44,14 @@ namespace Eo {
 			Eo::u64 id = 0);
 		~Player() override;
 		void move(Eo::Rc<Eo::Game> scene);
+		void draw(Eo::Rc<Eo::IScene> scene) override;
 
 	private:
 		void addEvents(Eo::Rc<Eo::IScene> game);
 		bool isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 newPos,
 			Eo::u64 id);
 		Eo::f32 _angle;
+		std::string _path;
 		Eo::Rc<Eo::Event> _event;
 		Eo::Rc<Eo::Options> _options;
 	};

@@ -19,6 +19,7 @@ namespace Eo {
 	public:
 		Computer(Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos,
 			Eo::u32 playerID);
+		~Computer();
 		Eo::vec3 getDirection() const;
 		Eo::i32 getCounter() const;
 		void searchDirection(Eo::Rc<Eo::Map> map);
@@ -26,7 +27,10 @@ namespace Eo {
 		bool checkPoseBomb(Eo::Rc<Eo::Map> map);
 		Eo::IObject::Type getObjectType(Eo::vec3 pos, Eo::Rc<Eo::Map> map);
 		bool isValidDirection(Eo::vec3 pos, Eo::Rc<Eo::Map> map);
-	public:
+		void draw(Eo::Rc<Eo::IScene> game) override;
+
+	private:
+		std::string _path;
 		Eo::vec3 _dir;
 		Eo::i32 _counter;
 	};

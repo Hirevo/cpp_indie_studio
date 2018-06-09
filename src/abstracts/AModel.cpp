@@ -8,7 +8,8 @@
 #include "AModel.hpp"
 
 Eo::AModel::AModel(Eo::IObject::Type type, Eo::vec3 pos)
-	: AObject(type, nullptr, pos), _mesh(0), _hasMesh(false)
+	: AObject(type, nullptr, pos), _mesh(0), _animatedNode(0),
+	  _hasMesh(false)
 {
 }
 
