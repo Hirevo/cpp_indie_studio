@@ -18,14 +18,15 @@ Eo::Map::Map(Eo::u32 w, Eo::u32 h) : _w(w), _h(h)
 	_map.reserve(_w * _h);
 	for (Eo::u32 i = 0; i < _h; i++)
 		for (Eo::u32 j = 0; j < _w; j++) {
-			auto isWall = i == 0 || j == 0 || i == (_w - 1) ||
-				j == (_h - 1) || (i % 2 == 0 && j % 2 == 0);
-			auto empty = (!((i > 0 && i <= 2) && (j > 0 && j <= 2)) ||
-				((j < _w - 1 && j >= _w - 3) &&
-				(i < _h - 1 && i >= _h - 3)));
+			auto isWall = i == 0 || j == 0 || i == (_h - 1) ||
+				j == (_w - 1) || (i % 2 == 0 && j % 2 == 0);
+			auto empty = !(((i > 0 && i <= 2) && (j > 0 && j <= 2)) ||
+				((j < _w - 1 && j >= _w - 3) && (i < _h - 1 && i >= _h - 3)) ||
+				((j < _w - 1 && j >= _w - 3) && (i > 0 && i <= 2)) ||
+				((j > 0 && j <= 2) && (i < _h - 1 && i >= _h - 3)));
 			_map.emplace_back(isWall ?
 					new Wall(Eo::Wall::INDESTRUCTIBLE) :
-				(empty ? new Wall(Eo::Wall::DESTRUCTIBLE) :
+				(empty && rand() % 5 != 1? new Wall(Eo::Wall::DESTRUCTIBLE) :
 					nullptr));
 		}
 }
