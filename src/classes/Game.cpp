@@ -241,6 +241,7 @@ void Eo::Game::useCollectible(Eo::IObject::Type type,
 	auto posY = std::roundf(pos.Z) + _map->getHeight() / 2;
 	Eo::vec2 posf(posX, posY);
 	auto object = _map->getObject(posf.X, posf.Y);
+	auto boosterType = static_cast<Eo::Booster::BoosterType>(type);
 
 	if (type == Booster::SPEED) {
 		std::cout << "Speed\n";
@@ -262,7 +263,7 @@ void Eo::Game::useCollectible(Eo::IObject::Type type,
 		player->setAvailableBombs(nbomb < 100 ? abomb + 1 : abomb);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
-	else if (type == Booster::BONUSCOUNT) {
+	else if (type == Booster::WALLPASS) {
 		std::cout << "Bonus\n";
 		player->setWallPass(true);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
