@@ -40,10 +40,10 @@ void Eo::Computer::searchDirection(Eo::Rc<Eo::Map> map)
 	std::mt19937 mt(rd());
 	std::vector<std::pair<Eo::vec3, Eo::i32>> directions;
 
-	directions.push_back(std::make_pair(vec3(0, 0, _speed), 270));
-	directions.push_back(std::make_pair(vec3(0, 0, -_speed), 90));
-	directions.push_back(std::make_pair(vec3(_speed, 0, 0), 0));
-	directions.push_back(std::make_pair(vec3(-_speed, 0, 0), 180));
+	directions.push_back(std::make_pair(vec3(0, 0, _speed), 180));
+	directions.push_back(std::make_pair(vec3(0, 0, -_speed), 0));
+	directions.push_back(std::make_pair(vec3(_speed, 0, 0), 270));
+	directions.push_back(std::make_pair(vec3(-_speed, 0, 0), 90));
 	std::uniform_real_distribution<> dist(0, directions.size());
 	Eo::i32 rand = dist(mt);
 	_dir = directions.at(rand).first;
@@ -70,10 +70,10 @@ bool Eo::Computer::checkPoseBomb(Eo::Rc<Eo::Map> map)
 	auto type = getObjectType(this->getPosition(), map);
 
 	if (type != IObject::BOMB) {
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, 0.5)), map));
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, -0.5)), map));
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0.5, 0, 0)), map));
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(-0.5, 0, 0)), map));
+		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, 0.8)), map));
+		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, -0.8)), map));
+		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0.8, 0, 0)), map));
+		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(-0.8, 0, 0)), map));
 		if (std::find(outline.begin(), outline.end(), Eo::IObject::DEST_WALL) != outline.end()) {
 			ret = true;
 		}
