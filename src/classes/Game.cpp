@@ -178,6 +178,15 @@ void Eo::Game::update()
 			if (type != Booster::NONE)
 				useCollectible(type, player);
 		});
+	std::for_each(_computers.begin(), _computers.end(), 
+		[this](Eo::Rc<Eo::Computer> &computer) {
+		computer->updatePosition(_map);
+		if (computer->checkPoseBomb(_map)) {
+			auto bombs = computer->getAvailableBombs();
+			placeBomb(computer, bombs);
+		}
+		computer->updateInScene();
+	});
 }
 
 Eo::Rc<Eo::Map> Eo::Game::getMap()
