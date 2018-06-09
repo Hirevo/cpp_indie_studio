@@ -17,6 +17,8 @@ namespace Eo {
 		virtual void loadModel(const Eo::Rc<Eo::IScene> scene,
 			const std::string &modelPath,
 			const std::string &texPath) = 0;
+		virtual void loadModel(const Eo::Rc<Eo::IScene> scene,
+			const std::string &modelPath) = 0;
 		virtual Eo::animatedMesh *getMesh() const = 0;
 		virtual void setMesh(Eo::animatedMesh *model) = 0;
 		virtual Eo::animatedNode *getAnimatedNode() const = 0;

@@ -22,7 +22,6 @@ Eo::Player::Player(Eo::Rc<Eo::IScene> game, Eo::Rc<Eo::Event> event,
 		"../assets/img/bomberboy_colors_white.png");
 	_scale = vec3(0.28f);
 	this->getAnimatedNode()->setScale(_scale);
-	this->getAnimatedNode()->setAnimationSpeed(2000.f);
 	this->addEvents(game);
 }
 

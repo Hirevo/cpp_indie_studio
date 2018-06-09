@@ -52,8 +52,25 @@ void Eo::AModel::loadModel(const Eo::Rc<Eo::IScene> scene,
 	_animatedNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 	_animatedNode->setMaterialTexture(
 		0, driver->getTexture(texPath.c_str()));
-	_animatedNode->setFrameLoop(0, 0);
 	_animatedNode->setPosition(_pos);
+	_animatedNode->setAnimationSpeed(42.f);
+	_hasMesh = true;
+	_hasNode = true;
+	_placedInScene = true;
+}
+
+void Eo::AModel::loadModel(const Eo::Rc<Eo::IScene> scene,
+	const std::string &modelPath)
+{
+	removeFromScene();
+	auto sceneManager = scene->getSceneManager();
+	auto driver = sceneManager->getVideoDriver();
+	_mesh = sceneManager->getMesh(modelPath.c_str());
+	_animatedNode = sceneManager->addAnimatedMeshSceneNode(_mesh);
+	_node = _animatedNode;
+	_animatedNode->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	_animatedNode->setPosition(_pos);
+	_animatedNode->setAnimationSpeed(42.f);
 	_hasMesh = true;
 	_hasNode = true;
 	_placedInScene = true;

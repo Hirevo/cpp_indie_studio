@@ -23,6 +23,8 @@ namespace Eo {
 		void loadModel(const Eo::Rc<Eo::IScene> scene,
 			const std::string &modelPath,
 			const std::string &texPath) override;
+		void loadModel(const Eo::Rc<Eo::IScene> scene,
+			const std::string &modelPath) override;
 		Eo::animatedMesh *getMesh() const override;
 		void setMesh(Eo::animatedMesh *model) override;
 		Eo::animatedNode *getAnimatedNode() const override;
