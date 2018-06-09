@@ -202,6 +202,30 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::SettingsMenu::ButtonType::SoundMoreMus),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->setVolume(_sound->getVolume() + 0.1);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::SettingsMenu::ButtonType::SoundLessMus),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->setVolume(_sound->getVolume() - 0.1);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::SettingsMenu::ButtonType::SoundMoreEffect),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->setVolume(_sound->getVolume() + 0.1);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::SettingsMenu::ButtonType::SoundLessEffect),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->setVolume(_sound->getVolume() - 0.1);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Credits),
 		[this](bool &toRemove, const Eo::event &event) {
 			playButtonClickedSound(_sound);

@@ -20,12 +20,18 @@ namespace Eo {
 		enum ButtonType {
 			Return = 120,
 			SoundMore,
-			SoundLess
+			SoundLess,
+			SoundMoreMus,
+			SoundLessMus,
+			SoundMoreEffect,
+			SoundLessEffect
 		};
 	private:
 		void putSetVolumeSound();
 		void putBackgroundImage();
 		void putReturnButton();
+		void putSetVolumeSoundMus();
+		void putSetVolumeSoundEffect();
 		void addEvents(Eo::Rc<Eo::Event> event);
 	};
 }

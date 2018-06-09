@@ -34,6 +34,8 @@ bool Eo::SettingsMenu::draw()
 	this->putBackgroundImage();
 	this->putReturnButton();
 	this->putSetVolumeSound();
+	this->putSetVolumeSoundMus();
+	this->putSetVolumeSoundEffect();
 	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
 	return true;
 }
@@ -65,7 +67,48 @@ void Eo::SettingsMenu::putSetVolumeSound()
 		 (int)(((h / 8) * pos + h / 8) / 2)},
 		nullptr, Eo::SettingsMenu::ButtonType::SoundLess, L"Sound -",
 		L"Sound -");
+}
 
+void Eo::SettingsMenu::putSetVolumeSoundMus()
+{
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
+	auto w = windowSize.Width;
+	auto h = windowSize.Height;
+	auto pos = 7;
+
+	env->addButton(
+		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
+		 (int)(((h / 8) * pos + h / 8) / 2)},
+		nullptr, Eo::SettingsMenu::ButtonType::SoundMoreMus, L"Sound Musique +",
+		L"Sound +");
+	pos = 8;
+	env->addButton(
+		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
+		 (int)(((h / 8) * pos + h / 8) / 2)},
+		nullptr, Eo::SettingsMenu::ButtonType::SoundLess, L"Sound Musique -",
+		L"Sound -");
+}
+
+void Eo::SettingsMenu::putSetVolumeSoundEffect()
+{
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
+	auto w = windowSize.Width;
+	auto h = windowSize.Height;
+	auto pos = 10;
+
+	env->addButton(
+		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
+		 (int)(((h / 8) * pos + h / 8) / 2)},
+		nullptr, Eo::SettingsMenu::ButtonType::SoundMoreEffect, L"Sound Effect +",
+		L"Sound +");
+	pos = 11;
+	env->addButton(
+		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
+		 (int)(((h / 8) * pos + h / 8) / 2)},
+		nullptr, Eo::SettingsMenu::ButtonType::SoundLessEffect, L"Sound Effect -",
+		L"Sound -");
 }
 
 void Eo::SettingsMenu::putReturnButton()
