@@ -9,8 +9,8 @@
 #include "menu/MainMenu.hpp"
 #include "PlayMenu.hpp"
 
-Eo::PlayMenu::PlayMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device)
-	: AScene(event, device)
+Eo::PlayMenu::PlayMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler)
+	: AScene(event, device, sceneHandler)
 {
 	this->draw();
 }

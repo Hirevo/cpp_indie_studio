@@ -16,9 +16,8 @@
 Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	const std::string &mapPath, Eo::Rc<Eo::Options> options,
 	Eo::Rc<Eo::SceneHandler> sceneHandler)
-	: AScene(event, device), _json(mapPath),
-	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options),
-	  _sceneHandler(sceneHandler)
+	: AScene(event, device, sceneHandler), _json(mapPath),
+	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
 {
 }
 
@@ -163,7 +162,7 @@ void Eo::Game::addEvents()
 			if (!ev.KeyInput.PressedDown)
 				return;
 			_sceneHandler->loadScene(
-				Eo::initRc<Eo::GameMenu>(_event, _device));
+				Eo::initRc<Eo::GameMenu>(_event, _device, _sceneHandler));
 		});
 }
 

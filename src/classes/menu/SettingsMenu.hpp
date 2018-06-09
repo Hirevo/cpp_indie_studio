@@ -13,16 +13,17 @@
 namespace Eo {
 	class SettingsMenu : public Eo::AScene {
 	public:
-		SettingsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device);
+		SettingsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler);
 		~SettingsMenu();
 		bool draw() override;
 
 		enum ButtonType {
-			Return
+			Return = 120
 		};
 	private:
 		void putBackgroundImage();
 		void putReturnButton();
+		void addEvents(Eo::Rc<Eo::Event> event);
 	};
 }
 
