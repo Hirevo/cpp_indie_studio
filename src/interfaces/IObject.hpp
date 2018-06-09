@@ -16,6 +16,7 @@ namespace Eo {
 	class IObject : public virtual IMovable {
 	public:
 		enum Type {
+			NONE,
 			CHARACTER,
 			CAMERA,
 			FLOOR,
