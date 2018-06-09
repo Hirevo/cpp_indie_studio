@@ -9,6 +9,7 @@
 #include "Bomb.hpp"
 #include "Floor.hpp"
 #include "Player.hpp"
+#include "SoundDevice.hpp"
 #include "SceneHandler.hpp"
 #include "menu/GameMenu.hpp"
 #include "JsonRead.hpp"
@@ -26,6 +27,7 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 		_soundPath.at(Eo::SoundDevice::GAMEBGM), true);
 	}
 	_playersPos = _json.readPlayersPos("player_pos");
+	_sceneHandler = sceneHandler;
 }
 
 Eo::Game::~Game()
@@ -136,7 +138,7 @@ void Eo::Game::placeBomb(Eo::Rc<Eo::ICharacter> player, Eo::u32 bombs)
 	Eo::vec2i size(_map->getWidth() / 2.0f, _map->getHeight() / 2.0f);
 	Eo::vec2i inMap(nPos.X + size.X, nPos.Z + size.Y);
 	this->getMap()->putObject(
-		Eo::initRc<Eo::Bomb>(ref, player, inMap, nPos),
+		Eo::initRc<Eo::Bomb>(ref, player, inMap, nPos, _sound),
 		inMap.X, inMap.Y);
 }
 
@@ -157,9 +159,7 @@ void Eo::Game::addEvents()
 		[this](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
-			_sceneHandler->loadScene(
-				Eo::initRc<Eo::GameMenu>(_event, _device,
-				_sceneHandler, _sound));
+			_sceneHandler->loadScene(Eo::initRc<Eo::GameMenu>(_event, _device, _sceneHandler, _sound));
 		});
 }
 
