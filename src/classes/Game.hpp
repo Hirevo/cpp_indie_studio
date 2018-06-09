@@ -39,6 +39,7 @@ namespace Eo {
 		Eo::Rc<Eo::Map> getMap();
 		void placeBomb(Eo::Rc<Eo::Player> player);
 		void placeBomb(Eo::Rc<Eo::Computer> ia);
+		const std::string &getMapName() const;
 
 	private:
 		void insertMap(Eo::vec2i v);
@@ -55,5 +56,9 @@ namespace Eo {
 		Eo::Rc<Eo::Map> _map;
 		Eo::Camera _camera;
 		Eo::Rc<Eo::Options> _options;
+		Eo::Rc<Eo::SceneHandler> _sceneHandler;
+		std::string _mapName = "map2.json";
+		std::vector<std::vector<float>> _playersPos;
+		Eo::vec2 getPlayerPos(size_t playerId);
 	};
 }

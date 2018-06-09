@@ -11,6 +11,7 @@
 #include "Player.hpp"
 #include "SceneHandler.hpp"
 #include "menu/GameMenu.hpp"
+#include "JsonRead.hpp"
 #include <iostream>
 
 Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
@@ -19,6 +20,7 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	: AScene(event, device, sceneHandler), _json(mapPath),
 	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
 {
+	_playersPos = _json.readPlayersPos("player_pos");
 }
 
 Eo::Game::~Game()
@@ -37,20 +39,15 @@ bool Eo::Game::draw()
 			"../assets/img/background.jpg"), 16, 8, 2, 5, 800);
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
-	Eo::i32 medX = (v.X % 2 == 0) ? (v.X / 2 - 2) : (v.X / 2 - 1);
-	Eo::i32 medY = (v.Y % 2 == 0) ? (v.Y / 2 - 2) : (v.Y / 2 - 1);
-	Eo::i32 playerX[] = {-medX, medX};
-	Eo::i32 playerY[] = {-medY, medY};
-	Eo::i32 computerX[] = {-medX, medX, medX};
-	Eo::i32 computerY[] = {medY, -medY, medY};
+
 	_players.fill(Eo::Rc<Eo::Player>(nullptr));
 	_computers.fill(Eo::Rc<Eo::Computer>(nullptr));
 	for (Eo::u32 i = 0; i < _options->getNbPlayer(); i++)
 		_players.at(i) = Eo::initRc<Eo::Player>(ref, _event, _options,
-			vec3(playerX[i], -0.5f, playerY[i]), i);
-	for (Eo::u32 i = 0; i < (4 - _options->getNbPlayer()); i++)
-		_computers.at(i) = Eo::initRc<Eo::Computer>(
-			ref, vec3(computerX[i], 0, computerY[i]));
+			vec3(getPlayerPos(i).X, -0.5f, getPlayerPos(i).Y), i);
+	for (Eo::u32 i = 3; i >= _options->getNbPlayer(); i--)
+		_computers.at(i - 1) = Eo::initRc<Eo::Computer>(
+			ref, vec3(getPlayerPos(i).X, 0, getPlayerPos(i).Y));
 	_camera.insertStaticInScene(ref);
 	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0.0f, -0.5f, 0.0f));
 	_floor->insertInScene(ref);
@@ -233,4 +230,18 @@ Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
 	// 	type != Booster::SUPERBOMB)
 	// 	return Booster::NONE;
 	return type;
+}
+
+const std::string &Eo::Game::getMapName() const
+{
+	return _mapName;
+}
+
+Eo::vec2 Eo::Game::getPlayerPos(size_t playerId)
+{
+	Eo::vec2 player;
+
+	player.X = _playersPos.at(playerId).at(0) - _map->getWidth() / 2;
+	player.Y = _playersPos.at(playerId).at(1) - _map->getHeight() / 2;
+	return player;
 }

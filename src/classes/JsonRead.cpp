@@ -5,6 +5,7 @@
 // JsonRead
 //
 
+#include <iostream>
 #include "JsonRead.hpp"
 
 Eo::JsonRead::JsonRead(std::string const &filename)
@@ -34,6 +35,25 @@ std::vector<std::vector<Eo::MapWall>> Eo::JsonRead::readMatrix(
 		for (auto &cell : row.second) {
 			matrix.at(x).emplace_back(static_cast<Eo::MapWall>(
 				cell.second.get_value<int>()));
+			y++;
+		}
+		x++;
+	}
+	return matrix;
+}
+
+std::vector<std::vector<float>> Eo::JsonRead::readPlayersPos(std::string const &name)
+{
+	std::vector<std::vector<float>> matrix;
+	int x = 0;
+
+	for (auto &row : this->_root.get_child(name)) {
+		int y = 0;
+
+		matrix.emplace_back();
+		for (auto &cell : row.second) {
+			matrix.at(x).emplace_back(static_cast<float>(
+				cell.second.get_value<float>()));
 			y++;
 		}
 		x++;

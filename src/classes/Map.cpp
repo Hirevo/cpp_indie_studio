@@ -109,10 +109,7 @@ bool Eo::Map::update(Eo::Rc<Eo::IScene> scene)
 {
 	std::for_each(_map.begin(), _map.end(),
 		[scene](Eo::Rc<Eo::IObject> &obj) {
-		// std::cout << "HERE !" << std::endl;
-		// if (obj.get() != nullptr)
-		// 	std::cout << obj->getType() << std::endl;
-		if (obj.get() != nullptr && obj->update() == false) {
+		if (obj.get() != nullptr && !obj->update()) {
 			auto isBomb = obj->getType() == Eo::IObject::Type::BOMB;
 			if (isBomb)
 				obj = Eo::initRc<Eo::Flame>(scene,
