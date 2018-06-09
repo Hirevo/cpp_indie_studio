@@ -136,7 +136,7 @@ void Eo::Game::placeBomb(Eo::Rc<Eo::ICharacter> player, Eo::u32 bombs)
 	Eo::vec2i size(_map->getWidth() / 2.0f, _map->getHeight() / 2.0f);
 	Eo::vec2i inMap(nPos.X + size.X, nPos.Z + size.Y);
 	this->getMap()->putObject(
-		Eo::initRc<Eo::Bomb>(ref, player, inMap, nPos),
+		Eo::initRc<Eo::Bomb>(ref, player, inMap, nPos, _sound),
 		inMap.X, inMap.Y);
 }
 
