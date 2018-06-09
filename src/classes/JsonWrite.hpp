@@ -8,7 +8,7 @@
 #ifndef JSONWRITE_HPP
 #define JSONWRITE_HPP
 
-#include "MapWall.hpp"
+#include "Types.hpp"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <string>
@@ -25,8 +25,11 @@ namespace Eo
 		void writeSingleValue(std::string const &name,
 				      std::string const &value);
 		void writeMatrix(std::string const &name,
-				 std::vector<std::vector<Eo::MapWall>>
+				 std::vector<std::vector<Eo::i32>>
 				 const &value);
+		void writePlayersPos(std::string const &name, 
+				     std::vector<std::vector<Eo::f32>>
+				     const &value);
 		void generateJson(std::string const &filename);
 
 	private:
