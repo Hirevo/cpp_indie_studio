@@ -9,6 +9,7 @@
 
 #include "ICharacter.hpp"
 #include "Types.hpp"
+#include "Map.hpp"
 
 namespace Eo {
 	class ACharacter : public ICharacter {
@@ -27,6 +28,7 @@ namespace Eo {
 		void unsetFlag(Eo::u8 flags) override;
 		Eo::u8 getFlag() const override;
 		Eo::u64 getPlayerID() const override;
+		bool isValidMove(Rc <Eo::Map> map, vec3 newPos);
 
 	protected:
 		Eo::u32 _availableBombs = 1;
@@ -35,7 +37,5 @@ namespace Eo {
 		Eo::f32 _speed = 0.03f;
 		Eo::u8 _flags = 0;
 		Eo::u64 _playerID;
-
-	private:
 	};
 };

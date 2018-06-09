@@ -14,11 +14,18 @@ Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::R
 	: AScene(event, device, sceneHandler, sound)
 {
 	this->draw();
+	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::PAUSE) > 0) {
+		_sound->play(Eo::SoundDevice::
+		_soundPath.at(Eo::SoundDevice::PAUSE));
+	}
 }
 
 Eo::GameMenu::~GameMenu()
 {
-
+	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::PAUSE) > 0) {
+		_sound->play(Eo::SoundDevice::
+		_soundPath.at(Eo::SoundDevice::PAUSE));
+	}
 }
 
 bool Eo::GameMenu::draw()

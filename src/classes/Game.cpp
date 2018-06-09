@@ -28,6 +28,10 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 		sound->play(Eo::SoundDevice::
 		_soundPath.at(Eo::SoundDevice::GAMEBGM), true);
 	}
+	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::PLAY) > 0) {
+		sound->play(Eo::SoundDevice::
+		_soundPath.at(Eo::SoundDevice::PLAY));
+	}
 	_playersPos = _json.readPlayersPos("player_pos");
 	_sceneHandler = sceneHandler;
 	_players.fill(Eo::Rc<Eo::Player>(nullptr));
@@ -221,18 +225,6 @@ void Eo::Game::useCollectible(Eo::Booster::BoosterType type,
 		player->setAvailableBombs(nbomb < 100 ? abomb + 1 : abomb);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
-}
-
-bool Eo::Game::isValidMove(Eo::vec3 pos)
-{
-	auto posX = roundf(pos.X) + _map->getWidth() / 2;
-	auto posY = roundf(pos.Z) + _map->getHeight() / 2;
-	Eo::vec2 posf(posX, posY);
-	auto object = _map->getObject(posf.X, posf.Y);
-	if (!object)
-		return true;
-	auto type = object->getType();
-	return !(type == IObject::WALL || type == IObject::DEST_WALL);
 }
 
 Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
