@@ -26,6 +26,10 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 		sound->play(Eo::SoundDevice::
 		_soundPath.at(Eo::SoundDevice::GAMEBGM), true);
 	}
+	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::PLAY) > 0) {
+		sound->play(Eo::SoundDevice::
+		_soundPath.at(Eo::SoundDevice::PLAY));
+	}
 	_playersPos = _json.readPlayersPos("player_pos");
 	_sceneHandler = sceneHandler;
 }
