@@ -24,7 +24,11 @@ namespace Eo {
 			WALL,
 			DEST_WALL,
 			BOMB,
-			BOOSTER
+			BOOSTER_NONE,
+			BOOSTER_SPEED,
+			BOOSTER_SUPERBOMB,
+			BOOSTER_NBBOMB,
+			BOOSTER_WALLPASS
 		};
 		virtual ~IObject() = default;
 		virtual Eo::IObject::Type getType() const = 0;
@@ -34,6 +38,8 @@ namespace Eo {
 		virtual void removeFromScene() = 0;
 		virtual void updateInScene() = 0;
 		virtual bool update() = 0;
+		virtual void setHasNode(bool b) = 0;
+		virtual void setPlacedInScene(bool b) = 0;
 
 	private:
 	};

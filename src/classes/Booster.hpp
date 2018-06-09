@@ -11,11 +11,14 @@
 #include <unordered_map>
 #include "AObject.hpp"
 
+#define NB_BOOSTERS 4
+
 namespace Eo {
 	class Booster : public AObject {
 	public:
-		enum BoosterType : Eo::u8 {NONE, SPEED, SUPERBOMB, NBBOMB,
-			BONUSCOUNT};
+		enum BoosterType : Eo::u8 {NONE =
+			Eo::IObject::Type::BOOSTER_NONE, SPEED, SUPERBOMB,
+			NBBOMB, WALLPASS};
 		Booster(Booster::BoosterType type, vec3 pos = vec3(0, 0, 0));
 		~Booster() = default;
 		void insertInScene(const Eo::Rc<Eo::IScene> scene) override;
@@ -24,7 +27,6 @@ namespace Eo {
 		BoosterType getBoosterType() const;
 	private:
 		BoosterType _boosterType;
-	private:
 		static const std::unordered_map<BoosterType, std::string>
 			_textures;
 		static const std::unordered_map<BoosterType, std::string>

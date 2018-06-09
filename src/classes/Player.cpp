@@ -22,14 +22,19 @@ Eo::Player::Player(Eo::Rc<Eo::IScene> game, Eo::Rc<Eo::Event> event,
 	path << "../assets/img/bomberboy_";
 	path << id + 1;
 	path << ".png";
-	this->loadModel(game, "../assets/Bomberman/Character.x",
-		path.str().c_str());
-	_scale = vec3(0.28f);
-	this->getAnimatedNode()->setScale(_scale);
+	_path = path.str();
 	this->addEvents(game);
 }
 
 Eo::Player::~Player() = default;
+
+void Eo::Player::draw(Eo::Rc<Eo::IScene> game)
+{
+	this->loadModel(game, "../assets/Bomberman/Character.x",
+		_path.c_str());
+	_scale = vec3(0.28f);
+	this->getAnimatedNode()->setScale(_scale);
+}
 
 void Eo::Player::addEvents(Eo::Rc<Eo::IScene> game)
 {
@@ -75,6 +80,12 @@ void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 	newDir.Z += (bwd ? -Eo::ACharacter::getSpeed() : 0);
 	newDir.X += (rgt ? Eo::ACharacter::getSpeed() : 0);
 	newDir.X += (lft ? -Eo::ACharacter::getSpeed() : 0);
+	if (newDir.X || newDir.Y || newDir.Z)
+		this->getAnimatedNode()->setAnimationSpeed(42.f);
+	else {
+		this->getAnimatedNode()->setAnimationSpeed(0.00001f);
+		this->getAnimatedNode()->setCurrentFrame(16);
+	}
 	if (isValidMove(scene->getMap(), Eo::Player::getPosition(), newDir)) {
 		try {
 			Eo::Player::setRotation(Eo::Player::_dirs.at(

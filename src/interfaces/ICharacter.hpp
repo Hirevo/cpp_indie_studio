@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "AObject.hpp"
-#include <string>
+#include "IObject.hpp"
+#include "IScene.hpp"
 
 namespace Eo {
 	class ICharacter : public virtual IMovable {
@@ -16,6 +16,8 @@ namespace Eo {
 		virtual ~ICharacter() = default;
 		virtual Eo::u32 getMaxBombs() const = 0;
 		virtual void setMaxBombs(Eo::u32 bombs) = 0;
+		virtual bool isWallPass() const = 0;
+		virtual void setWallPass(bool _wallPass) = 0;
 		virtual Eo::u32 getAvailableBombs() const = 0;
 		virtual void setAvailableBombs(Eo::u32 bombs) = 0;
 		virtual Eo::u32 getBombRadius() const = 0;
@@ -26,6 +28,7 @@ namespace Eo {
 		virtual void unsetFlag(Eo::u8 flags) = 0;
 		virtual Eo::u8 getFlag() const = 0;
 		virtual Eo::u64 getPlayerID() const = 0;
+		virtual void draw(Eo::Rc<Eo::IScene> game) = 0;
 
 	private:
 	};

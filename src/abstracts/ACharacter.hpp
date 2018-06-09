@@ -29,6 +29,8 @@ namespace Eo {
 		Eo::u8 getFlag() const override;
 		Eo::u64 getPlayerID() const override;
 		bool isValidMove(Rc <Eo::Map> map, vec3 myPos, vec3 newDir);
+		bool isWallPass() const;
+		void setWallPass(bool _wallPass);
 
 	protected:
 		Eo::u32 _availableBombs = 1;
@@ -36,6 +38,8 @@ namespace Eo {
 		Eo::u32 _bombRadius = 2;
 		Eo::f32 _speed = 0.03f;
 		Eo::u8 _flags = 0;
+		bool _wallPass = false;
+	protected:
 		Eo::u64 _playerID;
 	};
 };

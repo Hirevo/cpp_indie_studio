@@ -16,6 +16,18 @@ Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
 	: AScene(event, device, sceneHandler, sound)
 {
+	_event->clearEventHandlers(Eo::Event::eventKey(
+		Eo::eventType::EGET_BUTTON_CLICKED,
+		Eo::GameMenu::ButtonType::Quit));
+	// _event->clearEventHandlers(Eo::Event::eventKey(
+	// 	Eo::eventType::EGET_BUTTON_CLICKED,
+	// 	Eo::GameMenu::ButtonType::Save));
+	_event->clearEventHandlers(Eo::Event::eventKey(
+		Eo::eventType::EGET_BUTTON_CLICKED,
+		Eo::GameMenu::ButtonType::Resume));
+	_event->clearEventHandlers(Eo::Event::eventKey(
+		Eo::eventType::EGET_BUTTON_CLICKED,
+		Eo::GameMenu::ButtonType::Settings));
 	this->addEvents(event);
 	this->draw();
 	_sound->play(Eo::SoundDevice::PAUSE);
@@ -34,7 +46,7 @@ bool Eo::GameMenu::draw()
 	if (font)
 		skin->setFont(font);
 	this->putBackgroundImage();
-	this->putSaveButton();
+	// this->putSaveButton();
 	this->putResumeButton();
 	this->putQuitButton();
 	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);

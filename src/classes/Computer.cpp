@@ -15,13 +15,19 @@ Eo::Computer::Computer(Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos,
 	path << "../assets/img/bomberboy_";
 	path << playerID + 1;
 	path << ".png";
-	this->loadModel(game, "../assets/Bomberman/Character.x",
-		path.str().c_str());
-	_scale = vec3(0.28f);
-	this->getAnimatedNode()->setScale(_scale);
-	this->getAnimatedNode()->setAnimationSpeed(2000.f);
+	_path = path.str();
 	_counter = 0;
 	_dir = Eo::vec3(0);
+}
+
+Eo::Computer::~Computer() = default;
+
+void Eo::Computer::draw(Eo::Rc<Eo::IScene> game)
+{
+	this->loadModel(game, "../assets/Bomberman/Character.x",
+		_path.c_str());
+	_scale = vec3(0.28f);
+	this->getAnimatedNode()->setScale(_scale);
 }
 
 Eo::vec3 Eo::Computer::getDirection() const
@@ -71,9 +77,9 @@ bool Eo::Computer::checkPoseBomb(Eo::Rc<Eo::Map> map)
 
 	if (type != IObject::BOMB) {
 		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, 0.8)), map));
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, -0.8)), map));
+		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, -0.8f)), map));
 		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0.8, 0, 0)), map));
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(-0.8, 0, 0)), map));
+		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(-0.8f, 0, 0)), map));
 		if (std::find(outline.begin(), outline.end(), Eo::IObject::DEST_WALL) != outline.end()) {
 			ret = true;
 		}

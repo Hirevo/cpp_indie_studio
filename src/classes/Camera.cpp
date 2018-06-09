@@ -49,18 +49,11 @@ void Eo::Camera::insertStaticInScene(Eo::Rc<Eo::IScene> scene)
 {
 	irr::core::vector3df position(0, 42, -25);
 	irr::core::vector3df lookat = irr::core::vector3df(0, 0, 0);
-
 	_camType = STATIC;
-	if (_placedInScene)
-		return;
-	if (!_hasNode) {
-		_camera = scene->getSceneManager()->addCameraSceneNode(
-			nullptr, position, lookat, -1, true);
-		_camera->setFOV(0.25f);
-		_node = _camera;
-	}
-	else
-		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
+	_camera = scene->getSceneManager()->addCameraSceneNode(
+		nullptr, position, lookat, -1, true);
+	_camera->setFOV(0.25f);
+	_node = _camera;
 	_pos = position;
 	Eo::Camera::updateInScene();
 	_hasNode = true;
@@ -69,6 +62,7 @@ void Eo::Camera::insertStaticInScene(Eo::Rc<Eo::IScene> scene)
 
 void Eo::Camera::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
+	Eo::Camera::insertStaticInScene(scene);
 }
 
 void Eo::Camera::removeFromScene()

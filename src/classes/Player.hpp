@@ -44,10 +44,12 @@ namespace Eo {
 			Eo::u64 id = 0);
 		~Player() override;
 		void move(Eo::Rc<Eo::Game> scene);
+		void draw(Eo::Rc<Eo::IScene> scene) override;
 
 	private:
 		void addEvents(Eo::Rc<Eo::IScene> game);
 		Eo::f32 _angle;
+		std::string _path;
 		Eo::Rc<Eo::Event> _event;
 		Eo::Rc<Eo::Options> _options;
 	};

@@ -77,8 +77,7 @@ Eo::u64 Eo::ACharacter::getPlayerID() const
 }
 
 bool Eo::ACharacter::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 myPos,
-	Eo::vec3 newDir
-)
+	Eo::vec3 newDir)
 {
 	auto posX = roundf(myPos.X + newDir.X) + map->getWidth() / 2;
 	auto posY = roundf(myPos.Z + newDir.Z) + map->getHeight() / 2;
@@ -98,5 +97,15 @@ bool Eo::ACharacter::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 myPos,
 		(currObjType == IObject::BOMB &&
 			newObject->getType() != IObject::WALL &&
 			newObject->getType() != IObject::DEST_WALL));
+}
+
+bool Eo::ACharacter::isWallPass() const
+{
+	return _wallPass;
+}
+
+void Eo::ACharacter::setWallPass(bool _wallPass)
+{
+	ACharacter::_wallPass = _wallPass;
 }
 

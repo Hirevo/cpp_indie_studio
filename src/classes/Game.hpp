@@ -39,15 +39,16 @@ namespace Eo {
 		Eo::Rc<Eo::Map> getMap();
 		void placeBomb(Eo::Rc<Eo::ICharacter> player, Eo::u32 bombs);
 		const std::string &getMapName() const;
+		bool clear() override;
 
 	private:
 		void insertMap(Eo::vec2i v);
 		Eo::keyHandler getPlayerEventFunc(
 			Eo::Rc<Eo::ICharacter> &player,
 			Eo::Player::Motion flag);
-		Eo::Booster::BoosterType CollectibleMove(
+		Eo::IObject::Type CollectibleMove(
 			Eo::vec3 pos, Eo::u64 id);
-		void useCollectible(Eo::Booster::BoosterType,
+		void useCollectible(Eo::IObject::Type,
 			Eo::Rc<Eo::ICharacter>);
 		std::array<Eo::Rc<Eo::Player>, 2> _players;
 		std::array<Eo::Rc<Eo::Computer>, 3> _computers;

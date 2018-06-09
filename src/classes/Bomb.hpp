@@ -20,6 +20,7 @@ namespace Eo {
 			const Eo::vec2i &mapPos, const Eo::vec3 &pos, Eo::Rc<Eo::SoundDevice> sound);
 		~Bomb();
 		bool update() override;
+		void insertInScene(const Eo::Rc<Eo::IScene> scene) override;
 
 	private:
 		enum BombSize {
@@ -40,6 +41,7 @@ namespace Eo {
 		Eo::Rc<Eo::Map> _map;
 		Eo::Rc<Eo::ICharacter> _player;
 		Eo::Rc<Eo::SoundDevice> _sound;
-		static const std::unordered_map<BombSize, Eo::SoundDevice::SoundPath> _soundPath;
+		static const std::unordered_map<BombSize,
+			Eo::SoundDevice::SoundPath> _soundPath;
 	};
 }
