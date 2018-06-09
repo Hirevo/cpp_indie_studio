@@ -21,7 +21,6 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	: AScene(event, device, sceneHandler, sound), _json(mapPath),
 	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
 {
-	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
 
 	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::MENUBGM) > 0) {
 		sound->stop();
@@ -34,14 +33,6 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	}
 	_playersPos = _json.readPlayersPos("player_pos");
 	_sceneHandler = sceneHandler;
-	_players.fill(Eo::Rc<Eo::Player>(nullptr));
-	_computers.fill(Eo::Rc<Eo::Computer>(nullptr));
-	for (Eo::u32 i = 0; i < _options->getNbPlayer(); i++)
-		_players.at(i) = Eo::initRc<Eo::Player>(ref, _event, _options,
-			vec3(getPlayerPos(i).X, -0.5f, getPlayerPos(i).Y), i);
-	for (Eo::u32 i = 3; i >= _options->getNbPlayer(); i--)
-		_computers.at(i - 1) = Eo::initRc<Eo::Computer>(
-			ref, vec3(getPlayerPos(i).X, 0, getPlayerPos(i).Y), i);
 }
 
 Eo::Game::~Game()
@@ -61,6 +52,14 @@ bool Eo::Game::draw()
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 
+	_players.fill(Eo::Rc<Eo::Player>(nullptr));
+	_computers.fill(Eo::Rc<Eo::Computer>(nullptr));
+	for (Eo::u32 i = 0; i < _options->getNbPlayer(); i++)
+		_players.at(i) = Eo::initRc<Eo::Player>(ref, _event, _options,
+			vec3(getPlayerPos(i).X, -0.5f, getPlayerPos(i).Y), i);
+	for (Eo::u32 i = 3; i >= _options->getNbPlayer(); i--)
+		_computers.at(i - 1) = Eo::initRc<Eo::Computer>(
+			ref, vec3(getPlayerPos(i).X, 0, getPlayerPos(i).Y), i);
 	_camera.insertStaticInScene(ref);
 	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0.0f, -0.5f, 0.0f));
 	_floor->insertInScene(ref);

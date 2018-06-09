@@ -6,13 +6,17 @@
 */
 
 #include "GameMenu.hpp"
+#include "SceneHandler.hpp"
+#include "SettingsMenu.hpp"
 
 static const irr::io::path FONT_PATH =
 	"../assets/font/fonthaettenschweiler.bmp";
 
-Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
+Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
+	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
 	: AScene(event, device, sceneHandler, sound)
 {
+	this->addEvents(event);
 	this->draw();
 	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::PAUSE) > 0) {
 		_sound->play(Eo::SoundDevice::
@@ -100,4 +104,30 @@ void Eo::GameMenu::putSaveButton()
 		nullptr,
 		Eo::GameMenu::ButtonType::Quit, L"Save",
 		L"Save the game");
+}
+
+void Eo::GameMenu::addEvents(Eo::Rc<Eo::Event> event)
+{
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::GameMenu::ButtonType::Quit),
+		[this](bool &toRemove, const Eo::event &event) {
+			this->_sceneHandler->unloadCurrentScene();
+			this->_sceneHandler->unloadCurrentScene();
+			this->_sceneHandler->unloadCurrentScene();
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::GameMenu::ButtonType::Resume),
+		[this](bool &toRemove, const Eo::event &event) {
+			this->_sceneHandler->unloadCurrentScene();
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::GameMenu::ButtonType::Settings),
+		[this](bool &toRemove, const Eo::event &event) {
+			this->_sceneHandler->loadScene(
+				Eo::initRc<Eo::SettingsMenu>(_event, _device,
+					_sceneHandler, _sound));
+		});
 }

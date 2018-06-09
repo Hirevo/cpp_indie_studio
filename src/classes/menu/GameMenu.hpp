@@ -16,12 +16,13 @@ namespace Eo {
 		~GameMenu() override;
 		bool draw() override;
 
-		enum ButtonType { Resume = 150, Settings, Quit };
+		enum ButtonType { Resume = 167, Settings, Quit };
 
 	private:
 		void putBackgroundImage();
 		void putResumeButton();
 		void putQuitButton();
 		void putSaveButton();
+		void addEvents(Eo::Rc<Eo::Event> event);
 	};
 }
