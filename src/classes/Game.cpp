@@ -16,10 +16,15 @@
 
 Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	const std::string &mapPath, Eo::Rc<Eo::Options> options,
-	Eo::Rc<Eo::SceneHandler> sceneHandler)
-	: AScene(event, device, sceneHandler), _json(mapPath),
+	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
+	: AScene(event, device, sceneHandler, sound), _json(mapPath),
 	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
 {
+	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::MENUBGM) > 0) {
+		sound->stop();
+		sound->play(Eo::SoundDevice::
+		_soundPath.at(Eo::SoundDevice::GAMEBGM), true);
+	}
 	_playersPos = _json.readPlayersPos("player_pos");
 }
 
@@ -154,7 +159,7 @@ void Eo::Game::addEvents()
 				return;
 			_sceneHandler->loadScene(
 				Eo::initRc<Eo::GameMenu>(_event, _device,
-				_sceneHandler));
+				_sceneHandler, _sound));
 		});
 }
 
@@ -172,6 +177,15 @@ void Eo::Game::update()
 			if (type != Booster::NONE)
 				useCollectible(type, player);
 		});
+	std::for_each(_computers.begin(), _computers.end(), 
+		[this](Eo::Rc<Eo::Computer> &computer) {
+		computer->updatePosition(_map);
+		if (computer->checkPoseBomb(_map)) {
+			auto bombs = computer->getAvailableBombs();
+			placeBomb(computer, bombs);
+		}
+		computer->updateInScene();
+	});
 }
 
 Eo::Rc<Eo::Map> Eo::Game::getMap()

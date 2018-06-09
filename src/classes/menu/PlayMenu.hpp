@@ -13,7 +13,7 @@
 namespace Eo {
 	class PlayMenu : public Eo::AScene {
 	public:
-		PlayMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler);
+		PlayMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound);
 		~PlayMenu();
 		bool draw() override;
 

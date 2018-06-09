@@ -13,7 +13,7 @@
 namespace Eo {
 	class SettingsMenu : public Eo::AScene {
 	public:
-		SettingsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler);
+		SettingsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound);
 		~SettingsMenu();
 		bool draw() override;
 
