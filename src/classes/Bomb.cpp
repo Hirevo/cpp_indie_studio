@@ -17,7 +17,7 @@ Eo::Bomb::Bomb(
 	  _map(scene->getMap())
 {
 	Eo::AModel::loadModel(scene, "../assets/Bomberman/Bomb.x",
-		"../assets/Bomberman/bomb.png");
+		"../assets/img/bomb_border.png");
 	_node->setScale(Eo::vec3(0.25, 0.25, 0.25));
 	prepareExplosion(mapPos, scene);
 }

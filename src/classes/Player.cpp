@@ -19,7 +19,7 @@ Eo::Player::Player(Eo::Rc<Eo::IScene> game, Eo::Rc<Eo::Event> event,
 	  _options(options), _playerId(id)
 {
 	this->loadModel(game, "../assets/Bomberman/Character.x",
-		"../assets/Bomberman/bomberboy_colors_white.png");
+		"../assets/img/bomberboy_colors_white.png");
 	_scale = vec3(0.28f);
 	this->getAnimatedNode()->setScale(_scale);
 	this->getAnimatedNode()->setAnimationSpeed(2000.f);
