@@ -35621,7 +35621,6 @@ Frame Root {
            96.078431;
            0.041667; 0.041667; 0.041667;;
            0.000000; 0.000000; 0.000000;;
-          TextureFilename {"bomberboy_colors_white.png";}
         }
         Material outline {
            0.000000; 0.000000; 0.000000; 1.000000;;

@@ -21,11 +21,9 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	: AScene(event, device, sceneHandler, sound), _json(mapPath),
 	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
 {
-	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::MENUBGM) > 0) {
-		sound->stop();
-		sound->play(Eo::SoundDevice::
-		_soundPath.at(Eo::SoundDevice::GAMEBGM), true);
-	}
+	_sound->stopMusic();
+	_sound->play(Eo::SoundDevice::GAMEBGM, true);
+	_sound->play(Eo::SoundDevice::PLAY);
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
 	_playersPos = _json.readPlayersPos("player_pos");
@@ -131,9 +129,6 @@ void Eo::Game::addPlayerEvents(Eo::Rc<Eo::ICharacter> player)
 			auto posX = std::roundf(pos.X) + _map->getWidth() / 2;
 			auto posY = std::roundf(pos.Z) + _map->getHeight() / 2;
 			auto obj = _map->getObject(posX, posY);
-			// auto character =
-			// 	std::static_pointer_cast<Eo::ICharacter>(
-			// 		player);
 			if (obj == nullptr)
 				Eo::Game::placeBomb(player, bombs);
 		});
@@ -232,18 +227,6 @@ void Eo::Game::useCollectible(Eo::Booster::BoosterType type,
 	}
 }
 
-bool Eo::Game::isValidMove(Eo::vec3 pos)
-{
-	auto posX = roundf(pos.X) + _map->getWidth() / 2;
-	auto posY = roundf(pos.Z) + _map->getHeight() / 2;
-	Eo::vec2 posf(posX, posY);
-	auto object = _map->getObject(posf.X, posf.Y);
-	if (!object)
-		return true;
-	auto type = object->getType();
-	return !(type == IObject::WALL || type == IObject::DEST_WALL);
-}
-
 Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
 {
 	Eo::u32 posX = roundf(Pos.X) + _map->getWidth() / 2;
@@ -253,9 +236,6 @@ Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
 	if (!object)
 		return Booster::NONE;
 	auto type = static_cast<Booster::BoosterType>(object->getType());
-	// if (type != Booster::SPEED && type != Booster::NBBOMB &&
-	// 	type != Booster::SUPERBOMB)
-	// 	return Booster::NONE;
 	return type;
 }
 

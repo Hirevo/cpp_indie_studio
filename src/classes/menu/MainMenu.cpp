@@ -19,12 +19,8 @@ Eo::MainMenu::MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
 	: AScene(event, device, sceneHandler, sound)
 {
-
-	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::MENUBGM) > 0) {
-		sound->stop();
-		sound->play(Eo::SoundDevice::
-		_soundPath.at(Eo::SoundDevice::MENUBGM), true);
-	}
+	_sound->stopMusic();
+	_sound->play(Eo::SoundDevice::MENUBGM, true);
 	this->addEvents(event);
 	this->draw();
 }
@@ -131,12 +127,18 @@ void Eo::MainMenu::putTitle()
 	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
 }
 
+static void playButtonClickedSound(Eo::Rc<Eo::SoundDevice> sound)
+{
+	sound->play(Eo::SoundDevice::CONFIRM);
+}
+
 void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 {
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::PlayGamePlayer),
 		[this](bool &toRemove, const Eo::event &event) {
+			playButtonClickedSound(_sound);
 			auto options = this->_device->getOptions();
 			options->setNbPlayer(1);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
@@ -147,6 +149,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::PlayGamePlayers),
 		[this](bool &toRemove, const Eo::event &event) {
+			playButtonClickedSound(_sound);
 			auto options = this->_device->getOptions();
 			options->setNbPlayer(2);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
@@ -157,6 +160,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Play),
 		[this](bool &toRemove, const Eo::event &event) {
+			playButtonClickedSound(_sound);
 			_sceneHandler->loadScene(
 				Eo::initRc<Eo::PlayMenu>(_event, _device,
 					_sceneHandler, _sound));
@@ -165,6 +169,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Exit),
 		[this](bool &toRemove, const Eo::event &event) {
+			playButtonClickedSound(_sound);
 			auto options = this->_device->getOptions();
 			options->setExit(true);
 		});
@@ -172,14 +177,54 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Settings),
 		[this](bool &toRemove, const Eo::event &event) {
+			playButtonClickedSound(_sound);
 			_sceneHandler->loadScene(
 				Eo::initRc<Eo::SettingsMenu>(_event, _device,
 					_sceneHandler, _sound));
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::SettingsMenu::ButtonType::SoundMore),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->setGeneralVolume(_sound->getGeneralVolume() + 0.1f);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::SettingsMenu::ButtonType::SoundLess),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->setGeneralVolume(_sound->getGeneralVolume() - 0.1f);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::SettingsMenu::ButtonType::SoundMoreMus),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->setMusicVolume(_sound->getMusicVolume() + 0.1f);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::SettingsMenu::ButtonType::SoundLessMus),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->setMusicVolume(_sound->getMusicVolume() - 0.1f);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::SettingsMenu::ButtonType::SoundMoreEffect),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->setEffectsVolume(_sound->getEffectsVolume() + 0.1f);
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::SettingsMenu::ButtonType::SoundLessEffect),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->setEffectsVolume(_sound->getEffectsVolume() - 0.1f);
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Credits),
 		[this](bool &toRemove, const Eo::event &event) {
+			playButtonClickedSound(_sound);
 			_sceneHandler->loadScene(
 				Eo::initRc<Eo::CreditsMenu>(_event, _device,
 					_sceneHandler, _sound));
@@ -188,6 +233,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::ButtonType::Return),
 		[this](bool &toRemove, const Eo::event &event) {
+			playButtonClickedSound(_sound);
 			this->_sceneHandler->unloadCurrentScene();
 		});
 }

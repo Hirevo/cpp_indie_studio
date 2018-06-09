@@ -9,6 +9,12 @@
 #include "Flame.hpp"
 #include <chrono>
 
+const std::unordered_map<Eo::Bomb::BombSize, Eo::SoundDevice::SoundPath> Eo::Bomb::_soundPath = {
+	{SMALL, Eo::SoundDevice::BOMBS},
+	{MEDIUM, Eo::SoundDevice::BOMBM},
+	{LARGE, Eo::SoundDevice::BOMBL},
+};
+
 Eo::Bomb::Bomb(
 	Eo::Rc<Eo::Game> scene, Eo::Rc<Eo::ICharacter> player,
 		const Eo::vec2i &mapPos, const Eo::vec3 &pos, Eo::Rc<Eo::SoundDevice> sound)
@@ -20,21 +26,27 @@ Eo::Bomb::Bomb(
 		"../assets/img/bomb_border.png");
 	_node->setScale(Eo::vec3(0.25, 0.25, 0.25));
 	prepareExplosion(mapPos, scene);
-	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::SETBOMB) > 0) {
-		sound->stop();
-		sound->play(Eo::SoundDevice::
-		_soundPath.at(Eo::SoundDevice::SETBOMB));
-	}
+	_sound->play(Eo::SoundDevice::SETBOMB);
 
 }
 
 Eo::Bomb::~Bomb()
 {
-	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::BOMBM) > 0) {
-		_sound->play(Eo::SoundDevice::
-		_soundPath.at(Eo::SoundDevice::BOMBM));
-	}
+	auto bombSize = this->getBombSize();
+	if (_soundPath.count(bombSize) > 0)
+		_sound->play(_soundPath.at(bombSize));
 	_explode();
+}
+
+Eo::Bomb::BombSize Eo::Bomb::getBombSize() const
+{
+	auto radius = _player->getBombRadius();
+	if (radius <= 2)
+		return Eo::Bomb::SMALL;
+	else if (radius <= 5)
+		return Eo::Bomb::MEDIUM;
+	else
+		return Eo::Bomb::LARGE;
 }
 
 void Eo::Bomb::propagateExplosion(

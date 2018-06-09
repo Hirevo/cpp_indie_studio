@@ -5,11 +5,12 @@
 // SoundDevice.cpp
 //
 
+#include <iostream>
 #include "SoundDevice.hpp"
 
 const std::unordered_map<Eo::SoundDevice::SoundPath, std::string> Eo::SoundDevice::_soundPath = {
 	{MENUBGM, "../assets/sounds/BGM/main_theme.mp3"},
-	{GAMEBGM, "../assets/sounds/BGM/main_theme.mp3"},
+	{GAMEBGM, "../assets/sounds/BGM/game_theme.mp3"},
 	{PAUSE, "../assets/sounds/effects/buttons/PAUSE.wav"},
 	{CONFIRM, "../assets/sounds/effects/buttons/confirm.wav"},
 	{RESET, "../assets/sounds/effects/buttons/reset.wav"},
@@ -24,33 +25,185 @@ const std::unordered_map<Eo::SoundDevice::SoundPath, std::string> Eo::SoundDevic
 	{HURRY, "../assets/sounds/effects/inGame/hurry.wav"}
 };
 
+const std::unordered_map<Eo::SoundDevice::SoundPath, Eo::SoundDevice::SoundType> Eo::SoundDevice::_soundType = {
+	{MENUBGM, MUSIC},
+	{GAMEBGM, MUSIC},
+	{PAUSE, EFFECT},
+	{CONFIRM, EFFECT},
+	{RESET, EFFECT},
+	{SELECT, EFFECT},
+	{BOMBS, EFFECT},
+	{BOMBM, EFFECT},
+	{BOMBL, EFFECT},
+	{PLAY, EFFECT},
+	{SETBOMB, EFFECT},
+	{DEATH, EFFECT},
+	{GETITEM, EFFECT},
+	{HURRY, EFFECT}
+};
+
 Eo::SoundDevice::SoundDevice()
-	: _device(irrklang::createIrrKlangDevice(irrklang::ESOD_AUTO_DETECT,
-	irrklang::ESEO_DEFAULT_OPTIONS - irrklang::ESEO_PRINT_DEBUG_INFO_TO_STDOUT))
+	: _music(irrklang::createIrrKlangDevice(irrklang::ESOD_AUTO_DETECT,
+	irrklang::ESEO_DEFAULT_OPTIONS /*- irrklang::ESEO_PRINT_DEBUG_INFO_TO_STDOUT*/)),
+	  _effects(irrklang::createIrrKlangDevice(irrklang::ESOD_AUTO_DETECT,
+		  irrklang::ESEO_DEFAULT_OPTIONS /*- irrklang::ESEO_PRINT_DEBUG_INFO_TO_STDOUT*/)),
+	  _gVolume(1.0f), _eVolume(_effects->getSoundVolume()),
+	  _mVolume(_music->getSoundVolume()),
+	  _gIsMute(false), _eIsMute(false), _mIsMute(false)
 {
 }
 
 Eo::SoundDevice::~SoundDevice()
 {
-	_device->drop();
+	_music->drop();
 }
 
 void Eo::SoundDevice::stop()
 {
-	_device->stopAllSounds();
+	_music->stopAllSounds();
+	_effects->stopAllSounds();
 }
 
-void Eo::SoundDevice::play(const std::string &path, bool loop)
+void Eo::SoundDevice::stopMusic()
 {
-	_device->play2D(path.c_str(), loop);
+	_music->stopAllSounds();
 }
 
-int Eo::SoundDevice::getVolume() const
+void Eo::SoundDevice::stopEffects()
 {
-	return static_cast<int>(_device->getSoundVolume() * 100);
+	_music->stopAllSounds();
 }
 
-void Eo::SoundDevice::setVolume(const int volume)
+void Eo::SoundDevice::playEffects(const std::string &path, bool loop)
 {
-	_device->setSoundVolume(static_cast<irrklang::ik_f32>(volume / 100));
+	_effects->play2D(path.c_str(), loop);
+}
+
+void Eo::SoundDevice::playMusic(const std::string &path, bool loop)
+{
+	_music->play2D(path.c_str(), loop);
+}
+
+void Eo::SoundDevice::play(const Eo::SoundDevice::SoundPath path, bool loop)
+{
+	auto exists = _soundType.count(path) > 0 && _soundPath.count(path) > 0;
+	if (exists) {
+		if (_soundType.at(path) == MUSIC) {
+			this->playMusic(_soundPath.at(path), loop);
+		} else {
+			this->playEffects(_soundPath.at(path), loop);
+		}
+	}
+}
+
+float Eo::SoundDevice::getGeneralVolume() const
+{
+	return _gVolume;
+}
+
+void Eo::SoundDevice::setGeneralVolume(const float volume)
+{
+	if (_gIsMute)
+		this->unMute();
+	auto newVol = volume;
+	if (newVol < 0.0f)
+		newVol = 0.0f;
+	else if (newVol > 1.0f)
+		newVol = 1.0f;
+	_gVolume = newVol;
+	_effects->setSoundVolume(_eVolume * newVol);
+	_music->setSoundVolume(_mVolume * newVol);
+}
+
+float Eo::SoundDevice::getMusicVolume() const
+{
+	return _mVolume;
+}
+
+void Eo::SoundDevice::setMusicVolume(const float volume)
+{
+	if (_mIsMute)
+		this->unMuteMusic();
+	auto newVol = volume;
+	if (newVol < 0.0f)
+		newVol = 0.0f;
+	else if (newVol > 1.0f)
+		newVol = 1.0f;
+	_mVolume = newVol * _gVolume;
+	_music->setSoundVolume(_mVolume);
+}
+
+float Eo::SoundDevice::getEffectsVolume() const
+{
+	return _eVolume;
+}
+
+void Eo::SoundDevice::setEffectsVolume(const float volume)
+{
+	if (_eIsMute)
+		this->unMuteEffects();
+	auto newVol = volume;
+	if (newVol < 0.0f)
+		newVol = 0.0f;
+	else if (newVol > 1.0f)
+		newVol = 1.0f;
+	_eVolume = newVol * _gVolume;
+	_effects->setSoundVolume(_eVolume);
+}
+
+void Eo::SoundDevice::muteEffects()
+{
+	_effects->setSoundVolume(0.0f);
+	_eIsMute = true;
+}
+
+void Eo::SoundDevice::muteMusic()
+{
+	_music->setSoundVolume(0.0f);
+	_mIsMute = true;
+}
+
+void Eo::SoundDevice::mute()
+{
+	_gIsMute = true;
+	_music->setSoundVolume(0.0f);
+	_effects->setSoundVolume(0.0f);
+}
+
+void Eo::SoundDevice::unMute()
+{
+	_gIsMute = false;
+	if (!_mIsMute)
+		_music->setSoundVolume(_mVolume * _gVolume);
+	if (!_eIsMute)
+		_effects->setSoundVolume(_eVolume * _gVolume);
+}
+
+void Eo::SoundDevice::unMuteEffects()
+{
+	_eIsMute = false;
+	_gIsMute = false;
+	_effects->setSoundVolume(_eVolume * _gVolume);
+}
+
+void Eo::SoundDevice::unMuteMusic()
+{
+	_mIsMute = false;
+	_gIsMute = false;
+	_effects->setSoundVolume(_mVolume * _gVolume);
+}
+
+bool Eo::SoundDevice::generalIsMute() const
+{
+	return _gIsMute;
+}
+
+bool Eo::SoundDevice::musicIsMute() const
+{
+	return _mIsMute;
+}
+
+bool Eo::SoundDevice::effectsIsMute() const
+{
+	return _eIsMute;
 }

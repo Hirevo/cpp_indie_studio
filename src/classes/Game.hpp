@@ -45,7 +45,6 @@ namespace Eo {
 		Eo::keyHandler getPlayerEventFunc(
 			Eo::Rc<Eo::ICharacter> &player,
 			Eo::Player::Motion flag);
-		bool isValidMove(Eo::vec3 newPos);
 		Eo::Booster::BoosterType CollectibleMove(
 			Eo::vec3 pos, Eo::u64 id);
 		void useCollectible(Eo::Booster::BoosterType,

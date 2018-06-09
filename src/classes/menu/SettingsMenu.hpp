@@ -18,11 +18,20 @@ namespace Eo {
 		bool draw() override;
 
 		enum ButtonType {
-			Return = 120
+			Return = 120,
+			SoundMore,
+			SoundLess,
+			SoundMoreMus,
+			SoundLessMus,
+			SoundMoreEffect,
+			SoundLessEffect
 		};
 	private:
+		void putSetVolumeSound();
 		void putBackgroundImage();
 		void putReturnButton();
+		void putSetVolumeSoundMus();
+		void putSetVolumeSoundEffect();
 		void addEvents(Eo::Rc<Eo::Event> event);
 	};
 }

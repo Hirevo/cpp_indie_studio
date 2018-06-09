@@ -28,6 +28,7 @@ set(HEADER_FILES
         src/classes/Event.hpp
         src/classes/Game.hpp
         src/classes/JsonRead.hpp
+        src/classes/JsonWrite.hpp
         src/classes/Map.hpp
         src/classes/MapWall.hpp
         src/classes/menu/CreditsMenu.hpp
@@ -68,6 +69,7 @@ add_executable(bomberman
         src/classes/Floor.cpp
         src/classes/Game.cpp
         src/classes/JsonRead.cpp
+        src/classes/JsonWrite.cpp
         src/classes/Keymap.cpp
         src/classes/Map.cpp
         src/classes/menu/CreditsMenu.cpp
