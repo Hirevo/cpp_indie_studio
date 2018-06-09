@@ -44,14 +44,19 @@ Eo::Map::Map(Eo::JsonRead &json) : _w(0), _h(0)
 		[] {
 			return new Eo::Booster(
 				Eo::Booster::BoosterType::NBBOMB);
-		}};
+		},
+		[] { return new Wall(Eo::Wall::WallType::BOUNDS); }};
 
 	_w = matrix.size();
 	_h = matrix.at(0).size();
 	_map.reserve(_w * _h);
 	for (Eo::u32 i = 0; i < _h; i++)
 		for (Eo::u32 j = 0; j < _w; j++)
-			_map.emplace_back(v.at(matrix.at(i).at(j))());
+			if ((i == 0 || j == 0 || i == (_w - 1) || j == (_h - 1))
+				&& matrix.at(i).at(j) == 1)
+				_map.emplace_back(v.at(6)());
+			else
+				_map.emplace_back(v.at(matrix.at(i).at(j))());
 }
 
 Eo::i32 Eo::Map::getWidth() const

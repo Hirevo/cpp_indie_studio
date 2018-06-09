@@ -15,8 +15,8 @@ const Eo::Player::Directions Eo::Player::_dirs = {{North, 180.0f},
 
 Eo::Player::Player(Eo::Rc<Eo::IScene> game, Eo::Rc<Eo::Event> event,
 	Eo::Rc<Eo::Options> options, const vec3 &pos, Eo::u64 id)
-	: AModel(Eo::IObject::Type::CHARACTER, pos), _flags(0), _event(event),
-	  _options(options), _playerId(id)
+	: AModel(Eo::IObject::Type::CHARACTER, pos), ACharacter(id),
+	  _event(event), _options(options)
 {
 	this->loadModel(game, "../assets/Bomberman/Character.x",
 		"../assets/img/bomberboy_colors_white.png");
@@ -60,36 +60,6 @@ void Eo::Player::addEvents(Eo::Rc<Eo::IScene> game)
 	// 	});
 }
 
-void Eo::Player::setFlag(Eo::u8 flags)
-{
-	_flags |= flags;
-}
-
-void Eo::Player::unsetFlag(Eo::u8 flags)
-{
-	_flags &= ~flags;
-}
-
-Eo::u8 Eo::Player::getFlag() const
-{
-	return _flags;
-}
-
-irr::u64 Eo::Player::getPlayerId() const
-{
-	return _playerId;
-}
-
-irr::f32 Eo::Player::getSpeed() const
-{
-	return _speed;
-}
-
-void Eo::Player::setSpeed(irr::f32 _speed)
-{
-	Player::_speed = _speed;
-}
-
 void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 {
 	auto flags = Eo::Player::getFlag();
@@ -98,12 +68,12 @@ void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 	auto bwd = ((flags & Eo::Player::Motion::Backward) != 0);
 	auto rgt = ((flags & Eo::Player::Motion::Right) != 0);
 	auto lft = ((flags & Eo::Player::Motion::Left) != 0);
-	dir.Z += (fwd ? Eo::Player::getSpeed() : 0);
-	dir.Z += (bwd ? -Eo::Player::getSpeed() : 0);
-	dir.X += (rgt ? Eo::Player::getSpeed() : 0);
-	dir.X += (lft ? -Eo::Player::getSpeed() : 0);
+	dir.Z += (fwd ? Eo::ACharacter::getSpeed() : 0);
+	dir.Z += (bwd ? -Eo::ACharacter::getSpeed() : 0);
+	dir.X += (rgt ? Eo::ACharacter::getSpeed() : 0);
+	dir.X += (lft ? -Eo::ACharacter::getSpeed() : 0);
 	if (isValidMove(scene->getMap(), Eo::Player::getPosition() + dir,
-		    Eo::Player::getPlayerId())) {
+		    Eo::Player::getPlayerID())) {
 		try {
 			Eo::Player::setRotation(Eo::Player::_dirs.at(
 				static_cast<Eo::Player::Facing>(flags)));
@@ -126,34 +96,4 @@ bool Eo::Player::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 newPos, irr::u64 id)
 		return true;
 	auto type = object->getType();
 	return !(type == IObject::WALL || type == IObject::DEST_WALL);
-}
-
-irr::u32 Eo::Player::getMaxBomb() const
-{
-	return _maxBomb;
-}
-
-void Eo::Player::setMaxBomb(irr::u32 _maxBomb)
-{
-	Player::_maxBomb = _maxBomb;
-}
-
-irr::u32 Eo::Player::getBombAvailable() const
-{
-	return _bombAvailable;
-}
-
-void Eo::Player::setBombAvailable(irr::u32 _bombAvailable)
-{
-	Player::_bombAvailable = _bombAvailable;
-}
-
-irr::u32 Eo::Player::getBombPower() const
-{
-	return _bombPower;
-}
-
-void Eo::Player::setBombPower(irr::u32 _bombPower)
-{
-	Player::_bombPower = _bombPower;
 }

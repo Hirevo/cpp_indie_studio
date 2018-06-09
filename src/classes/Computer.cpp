@@ -7,8 +7,9 @@
 
 #include "Computer.hpp"
 
-Eo::Computer::Computer(Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos) 
-	: AModel(Eo::IObject::Type::CHARACTER, pos)
+Eo::Computer::Computer(Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos,
+	Eo::u32 playerID) 
+	: AModel(Eo::IObject::Type::CHARACTER, pos), ACharacter(playerID)
 {
 	this->loadModel(game, "../assets/model-test/sydney.md2",
 		"../assets/model-test/sydney.bmp");

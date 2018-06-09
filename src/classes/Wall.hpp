@@ -16,7 +16,9 @@ namespace Eo {
 	public:
 		enum WallType {
 			DESTRUCTIBLE = Eo::IObject::Type::DEST_WALL,
-			INDESTRUCTIBLE = Eo::IObject::Type::WALL
+			INDESTRUCTIBLE = Eo::IObject::Type::WALL,
+			BOUNDS = Eo::IObject::Type::WALL
+				+ Eo::IObject::Type::DEST_WALL
 		};
 		Wall(Eo::Wall::WallType type, vec3 pos = vec3(0, 0, 0));
 		~Wall();

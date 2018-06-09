@@ -34,21 +34,22 @@ namespace Eo {
 		bool draw() override;
 		void addEvents();
 		void placeObject(Eo::vec2i size, Eo::vec2i cur);
-		void addPlayerEvents(Eo::Rc<Eo::Player> &player);
+		void addPlayerEvents(Eo::Rc<Eo::ICharacter> player);
 		void update();
 		Eo::Rc<Eo::Map> getMap();
-		void placeBomb(Eo::Rc<Eo::Player> player);
-		void placeBomb(Eo::Rc<Eo::Computer> ia);
+		void placeBomb(Eo::Rc<Eo::ICharacter> player, Eo::u32 bombs);
 		const std::string &getMapName() const;
 
 	private:
 		void insertMap(Eo::vec2i v);
 		Eo::keyHandler getPlayerEventFunc(
-			Eo::Rc<Eo::Player> &player, Eo::Player::Motion flag);
+			Eo::Rc<Eo::ICharacter> &player,
+			Eo::Player::Motion flag);
 		bool isValidMove(Eo::vec3 newPos);
 		Eo::Booster::BoosterType CollectibleMove(
-			Eo::vec3 Pos, irr::u64 id);
-		void useCollectible(Booster::BoosterType, Rc<Player>);
+			Eo::vec3 pos, Eo::u64 id);
+		void useCollectible(Eo::Booster::BoosterType,
+			Eo::Rc<Eo::ICharacter>);
 		std::array<Eo::Rc<Eo::Player>, 2> _players;
 		std::array<Eo::Rc<Eo::Computer>, 3> _computers;
 		Eo::Rc<Eo::IObject> _floor;

@@ -14,6 +14,7 @@ Eo::Camera::Camera(vec3 pos) : AObject(Eo::IObject::Type::CAMERA, nullptr, pos)
 
 Eo::Camera::~Camera()
 {
+	_hasNode = false;
 }
 
 void Eo::Camera::insertFPSInScene(Eo::Rc<Eo::IScene> scene)

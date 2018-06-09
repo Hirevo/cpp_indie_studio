@@ -7,17 +7,19 @@
 
 #include "Wall.hpp"
 
-const std::unordered_map<Eo::Wall::WallType, std::string> Eo::Wall::_textures{
-	{Eo::Wall::WallType::DESTRUCTIBLE, "../assets/img/BG.png"},
-	{Eo::Wall::WallType::INDESTRUCTIBLE, "../assets/img/BG.png"}};
-
 const std::unordered_map<Eo::Wall::WallType, std::string> Eo::Wall::_models{
-	{Eo::Wall::WallType::DESTRUCTIBLE, "../assets/Bomberman/Brick.ms3d"},
-	{Eo::Wall::WallType::INDESTRUCTIBLE, "../assets/Bomberman/Block.ms3d"}};
+	{Eo::Wall::WallType::DESTRUCTIBLE, "../assets/Bomberman/Brick.x"},
+	{Eo::Wall::WallType::INDESTRUCTIBLE, "../assets/Bomberman/Block.x"},
+	{Eo::Wall::WallType::BOUNDS, "../assets/Bomberman/Block.x"}};
+
+const std::unordered_map<Eo::Wall::WallType, std::string> Eo::Wall::_textures{
+	{Eo::Wall::WallType::DESTRUCTIBLE, "../assets/img/brick.png"},
+	{Eo::Wall::WallType::INDESTRUCTIBLE, "../assets/img/pylone.png"},
+	{Eo::Wall::WallType::BOUNDS, "../assets/img/pylone.png"}};
 
 Eo::Wall::Wall(Eo::Wall::WallType wallType, Eo::vec3 pos)
-	: AModel(static_cast<Eo::IObject::Type>(wallType), pos),
-	  _wallType(wallType)
+	: AModel(static_cast<Eo::IObject::Type>((wallType == BOUNDS)
+		? INDESTRUCTIBLE : wallType), pos), _wallType(wallType)
 {
 }
 
