@@ -66,16 +66,16 @@ void Eo::Player::addEvents(Eo::Rc<Eo::IScene> game)
 void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 {
 	auto flags = Eo::Player::getFlag();
-	auto dir = Eo::vec3(0);
+	auto newDir = Eo::vec3(0);
 	auto fwd = ((flags & Eo::Player::Motion::Forward) != 0);
 	auto bwd = ((flags & Eo::Player::Motion::Backward) != 0);
 	auto rgt = ((flags & Eo::Player::Motion::Right) != 0);
 	auto lft = ((flags & Eo::Player::Motion::Left) != 0);
-	dir.Z += (fwd ? Eo::ACharacter::getSpeed() : 0);
-	dir.Z += (bwd ? -Eo::ACharacter::getSpeed() : 0);
-	dir.X += (rgt ? Eo::ACharacter::getSpeed() : 0);
-	dir.X += (lft ? -Eo::ACharacter::getSpeed() : 0);
-	if (isValidMove(scene->getMap(), Eo::Player::getPosition() + dir)) {
+	newDir.Z += (fwd ? Eo::ACharacter::getSpeed() : 0);
+	newDir.Z += (bwd ? -Eo::ACharacter::getSpeed() : 0);
+	newDir.X += (rgt ? Eo::ACharacter::getSpeed() : 0);
+	newDir.X += (lft ? -Eo::ACharacter::getSpeed() : 0);
+	if (isValidMove(scene->getMap(), Eo::Player::getPosition(), newDir)) {
 		try {
 			Eo::Player::setRotation(Eo::Player::_dirs.at(
 				static_cast<Eo::Player::Facing>(flags)));
@@ -83,7 +83,7 @@ void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 		catch (std::exception &exception) {
 			static_cast<void>(exception);
 		}
-		Eo::Player::translate(dir);
+		Eo::Player::translate(newDir);
 		Eo::Player::updateInScene();
 	}
 }
