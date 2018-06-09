@@ -28,7 +28,7 @@ namespace Eo {
 		void unsetFlag(Eo::u8 flags) override;
 		Eo::u8 getFlag() const override;
 		Eo::u64 getPlayerID() const override;
-		bool isValidMove(Rc <Eo::Map> map, vec3 newPos);
+		bool isValidMove(Rc <Eo::Map> map, vec3 myPos, vec3 newDir);
 
 	protected:
 		Eo::u32 _availableBombs = 1;

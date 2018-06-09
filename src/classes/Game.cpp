@@ -118,9 +118,6 @@ void Eo::Game::addPlayerEvents(Eo::Rc<Eo::ICharacter> player)
 			auto posX = std::roundf(pos.X) + _map->getWidth() / 2;
 			auto posY = std::roundf(pos.Z) + _map->getHeight() / 2;
 			auto obj = _map->getObject(posX, posY);
-			// auto character =
-			// 	std::static_pointer_cast<Eo::ICharacter>(
-			// 		player);
 			if (obj == nullptr)
 				Eo::Game::placeBomb(player, bombs);
 		});
@@ -228,9 +225,6 @@ Eo::Booster::BoosterType Eo::Game::CollectibleMove(Eo::vec3 Pos, irr::u64 id)
 	if (!object)
 		return Booster::NONE;
 	auto type = static_cast<Booster::BoosterType>(object->getType());
-	// if (type != Booster::SPEED && type != Booster::NBBOMB &&
-	// 	type != Booster::SUPERBOMB)
-	// 	return Booster::NONE;
 	return type;
 }
 

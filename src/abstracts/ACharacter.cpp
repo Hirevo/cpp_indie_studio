@@ -7,6 +7,7 @@
 
 #include "ACharacter.hpp"
 #include <irrlicht.h>
+#include <iostream>
 
 Eo::ACharacter::ACharacter(Eo::u32 playerID)
 	: _playerID(playerID)
@@ -14,7 +15,6 @@ Eo::ACharacter::ACharacter(Eo::u32 playerID)
 }
 
 Eo::ACharacter::~ACharacter() = default;
-
 
 Eo::u32 Eo::ACharacter::getMaxBombs() const
 {
@@ -56,7 +56,6 @@ void Eo::ACharacter::setSpeed(Eo::f32 speed)
 	_speed = speed;
 }
 
-
 void Eo::ACharacter::setFlag(Eo::u8 flags)
 {
 	_flags |= flags;
@@ -77,15 +76,27 @@ Eo::u64 Eo::ACharacter::getPlayerID() const
 	return _playerID;
 }
 
-bool Eo::ACharacter::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 newPos)
+bool Eo::ACharacter::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 myPos,
+	Eo::vec3 newDir
+)
 {
-	auto posX = roundf(newPos.X) + map->getWidth() / 2;
-	auto posY = roundf(newPos.Z) + map->getHeight() / 2;
-	Eo::vec2 pos(posX, posY);
-	auto object = map->getObject(pos.X, pos.Y);
-	if (!object)
+	auto posX = roundf(myPos.X + newDir.X) + map->getWidth() / 2;
+	auto posY = roundf(myPos.Z + newDir.Z) + map->getHeight() / 2;
+	Eo::vec2 newPos(posX, posY);
+
+	auto newObject = map->getObject(newPos.X, newPos.Y);
+	auto currObj = map->getObject(roundf(myPos.X) + map->getWidth() / 2,
+		roundf(myPos.Z) + map->getHeight() / 2);
+	if (!newObject)
 		return true;
-	auto type = object->getType();
-	return !(type == IObject::WALL || type == IObject::DEST_WALL);
+	Eo::IObject::Type currObjType = Eo::IObject::Type::NONE;
+	if (currObj)
+		currObjType = currObj->getType();
+	return ((newObject->getType() != IObject::WALL &&
+		newObject->getType() != IObject::DEST_WALL &&
+		newObject->getType() != IObject::BOMB) ||
+		(currObjType == IObject::BOMB &&
+			newObject->getType() != IObject::WALL &&
+			newObject->getType() != IObject::DEST_WALL));
 }
 
