@@ -15,7 +15,7 @@ namespace Eo {
 	class Map : public IMap {
 	public:
 		Map(Eo::u32 w, Eo::u32 h);
-		Map(Eo::JsonRead &);
+		Map(Eo::JsonRead &, bool randomize = true);
 		~Map() = default;
 		Eo::i32 getWidth() const;
 		Eo::i32 getHeight() const;
