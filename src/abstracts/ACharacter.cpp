@@ -76,3 +76,16 @@ Eo::u64 Eo::ACharacter::getPlayerID() const
 {
 	return _playerID;
 }
+
+bool Eo::ACharacter::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 newPos)
+{
+	auto posX = roundf(newPos.X) + map->getWidth() / 2;
+	auto posY = roundf(newPos.Z) + map->getHeight() / 2;
+	Eo::vec2 pos(posX, posY);
+	auto object = map->getObject(pos.X, pos.Y);
+	if (!object)
+		return true;
+	auto type = object->getType();
+	return !(type == IObject::WALL || type == IObject::DEST_WALL);
+}
+
