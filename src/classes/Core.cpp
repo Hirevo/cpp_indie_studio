@@ -15,13 +15,8 @@
 #include <iostream>
 #include <menu/MainMenu.hpp>
 
-Eo::Core::~Core()
-{
-}
-
-Eo::Core::Core()
-	: _options(Eo::initRc<Eo::Options>()),
-	  _device(Eo::initRc<Eo::Device>(_options)),
+Eo::Core::Core(Eo::Rc<Eo::Options> options, Eo::Rc<Eo::Device> device)
+	: _options(options), _device(device),
 	  _sceneHandler(Eo::initRc<Eo::SceneHandler>(_device)),
 	  _debug(Eo::initRc<Eo::Debug>(_device, _sceneHandler)),
 	  _event(Eo::initRc<Eo::Event>()), _sound(Eo::initRc<Eo::SoundDevice>())
@@ -46,3 +41,5 @@ Eo::Core::Core()
 	}
 	_device->getDevice()->drop();
 }
+
+Eo::Core::~Core() = default;

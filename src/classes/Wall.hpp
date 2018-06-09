@@ -8,11 +8,11 @@
 #pragma once
 
 #include "AMovable.hpp"
-#include "AObject.hpp"
+#include "AModel.hpp"
 #include <unordered_map>
 
 namespace Eo {
-	class Wall : public AObject {
+	class Wall : public AModel {
 	public:
 		enum WallType {
 			DESTRUCTIBLE = Eo::IObject::Type::DEST_WALL,
@@ -27,5 +27,7 @@ namespace Eo {
 		WallType _wallType;
 		static const std::unordered_map<WallType, std::string>
 			_textures;
+		static const std::unordered_map<WallType, std::string>
+			_models;
 	};
 }
