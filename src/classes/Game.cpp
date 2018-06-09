@@ -26,10 +26,6 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	_sound->play(Eo::SoundDevice::PLAY);
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
-	if (Eo::SoundDevice::_soundPath.count(Eo::SoundDevice::PLAY) > 0) {
-		sound->play(Eo::SoundDevice::
-		_soundPath.at(Eo::SoundDevice::PLAY));
-	}
 	_playersPos = _json.readPlayersPos("player_pos");
 	_sceneHandler = sceneHandler;
 	_players.fill(Eo::Rc<Eo::Player>(nullptr));
