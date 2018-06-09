@@ -9,7 +9,7 @@
 
 const std::unordered_map<Eo::SoundDevice::SoundPath, std::string> Eo::SoundDevice::_soundPath = {
 	{MENUBGM, "../assets/sounds/BGM/main_theme.mp3"},
-	{GAMEBGM, "../assets/sounds/BGM/main_theme.mp3"},
+	{GAMEBGM, "../assets/sounds/BGM/game_theme.mp3"},
 	{PAUSE, "../assets/sounds/effects/buttons/PAUSE.wav"},
 	{CONFIRM, "../assets/sounds/effects/buttons/confirm.wav"},
 	{RESET, "../assets/sounds/effects/buttons/reset.wav"},
