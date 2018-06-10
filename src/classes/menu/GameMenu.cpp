@@ -18,16 +18,16 @@ Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 {
 	_event->clearEventHandlers(Eo::Event::eventKey(
 		Eo::eventType::EGET_BUTTON_CLICKED,
-		Eo::GameMenu::ButtonType::Quit));
+		Eo::GameMenu::EventType::Quit));
 	// _event->clearEventHandlers(Eo::Event::eventKey(
 	// 	Eo::eventType::EGET_BUTTON_CLICKED,
-	// 	Eo::GameMenu::ButtonType::Save));
+	// 	Eo::GameMenu::EventType::Save));
 	_event->clearEventHandlers(Eo::Event::eventKey(
 		Eo::eventType::EGET_BUTTON_CLICKED,
-		Eo::GameMenu::ButtonType::Resume));
+		Eo::GameMenu::EventType::Resume));
 	_event->clearEventHandlers(Eo::Event::eventKey(
 		Eo::eventType::EGET_BUTTON_CLICKED,
-		Eo::GameMenu::ButtonType::Settings));
+		Eo::GameMenu::EventType::Settings));
 	this->addEvents(event);
 	this->draw();
 	_sound->play(Eo::SoundDevice::PAUSE);
@@ -74,7 +74,7 @@ void Eo::GameMenu::putResumeButton()
 			(int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)},
 		nullptr,
-		Eo::GameMenu::ButtonType::Resume, L"Resume",
+		Eo::GameMenu::EventType::Resume, L"Resume",
 		L"Return to game");
 }
 
@@ -91,7 +91,7 @@ void Eo::GameMenu::putQuitButton()
 			(int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)},
 		nullptr,
-		Eo::GameMenu::ButtonType::Quit, L"Quit to main menu",
+		Eo::GameMenu::EventType::Quit, L"Return to main menu",
 		L"Return to main menu");
 }
 
@@ -108,7 +108,7 @@ void Eo::GameMenu::putSettingsMenu()
 			(int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)},
 		nullptr,
-		Eo::GameMenu::ButtonType::Settings, L"Settings",
+		Eo::GameMenu::EventType::Settings, L"Settings",
 		L"Open the Settings");
 }
 
@@ -116,7 +116,7 @@ void Eo::GameMenu::addEvents(Eo::Rc<Eo::Event> event)
 {
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-			Eo::GameMenu::ButtonType::Quit),
+			Eo::GameMenu::EventType::Quit),
 		[this](bool &toRemove, const Eo::event &event) {
 			_sound->stopMusic();
 			_sound->play(Eo::SoundDevice::MENUBGM, true);
@@ -126,13 +126,13 @@ void Eo::GameMenu::addEvents(Eo::Rc<Eo::Event> event)
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-			Eo::GameMenu::ButtonType::Resume),
+			Eo::GameMenu::EventType::Resume),
 		[this](bool &toRemove, const Eo::event &event) {
 			this->_sceneHandler->unloadCurrentScene();
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-			Eo::GameMenu::ButtonType::Settings),
+			Eo::GameMenu::EventType::Settings),
 		[this](bool &toRemove, const Eo::event &event) {
 			this->_sceneHandler->loadScene(
 				Eo::initRc<Eo::SettingsMenu>(_event, _device,

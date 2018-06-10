@@ -184,44 +184,6 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-		                    Eo::SettingsMenu::ButtonType::SoundMore),
-		[this](bool &toRemove, const Eo::event &event) {
-			_sound->setGeneralVolume(_sound->getGeneralVolume() + 0.1f);
-		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-		                    Eo::SettingsMenu::ButtonType::SoundLess),
-		[this](bool &toRemove, const Eo::event &event) {
-			_sound->setGeneralVolume(_sound->getGeneralVolume() - 0.1f);
-		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-		                    Eo::SettingsMenu::ButtonType::SoundMoreMus),
-		[this](bool &toRemove, const Eo::event &event) {
-			_sound->setMusicVolume(_sound->getMusicVolume() + 0.1f);
-		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-		                    Eo::SettingsMenu::ButtonType::SoundLessMus),
-		[this](bool &toRemove, const Eo::event &event) {
-			_sound->setMusicVolume(_sound->getMusicVolume() - 0.1f);
-		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-		                    Eo::SettingsMenu::ButtonType::SoundMoreEffect),
-		[this](bool &toRemove, const Eo::event &event) {
-			_sound->setEffectsVolume(_sound->getEffectsVolume() + 0.1f);
-			_sound->play(Eo::SoundDevice::SELECT);
-		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-		                    Eo::SettingsMenu::ButtonType::SoundLessEffect),
-		[this](bool &toRemove, const Eo::event &event) {
-			_sound->setEffectsVolume(_sound->getEffectsVolume() - 0.1f);
-			_sound->play(Eo::SoundDevice::SELECT);
-		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::Credits),
 		[this](bool &toRemove, const Eo::event &event) {
 			playButtonClickedSound(_sound);
@@ -236,4 +198,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			playButtonClickedSound(_sound);
 			this->_sceneHandler->unloadCurrentScene();
 		});
+
+
+
 }

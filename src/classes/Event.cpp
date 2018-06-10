@@ -17,7 +17,7 @@
 
 // static const std::map<std::pair<Eo::eventType, irr::s32>, Eo::eventHandler>
 // 	events = {{{Eo::eventType::EGET_BUTTON_CLICKED,
-// 			Eo::MainMenu::ButtonType::Play},
+// 			Eo::MainMenu::EventType::Play},
 			//   [](Eo::Device &device, Eo::Options &options,
 			// 	  Eo::SceneHandler &sceneHandler) {
 			// 	  std::cout << sceneHandler.getSceneCount();
@@ -28,13 +28,13 @@
 			// 		  << std::endl;
 			//   }},
 // 		  {{Eo::eventType::EGET_BUTTON_CLICKED,
-// 			Eo::MainMenu::ButtonType::Exit},
+// 			Eo::MainMenu::EventType::Exit},
 // 			  [](Eo::Device &device, Eo::Options &options,
 // 				  Eo::SceneHandler &sceneHandler) {
 // 				  options.setExit(true);
 // 			  }},
 // 		  {{Eo::eventType::EGET_BUTTON_CLICKED,
-// 			Eo::MainMenu::ButtonType::Credits},
+// 			Eo::MainMenu::EventType::Credits},
 			//   [](Eo::Device &device, Eo::Options &options,
 			// 	  Eo::SceneHandler &sceneHandler) {
 			// 	  sceneHandler.loadScene(
@@ -47,13 +47,13 @@
 			// 		   new Eo::SettingsMenu(device));
 			//   }},
 // 		  {{Eo::eventType::EGET_BUTTON_CLICKED,
-// 			   Eo::SettingsMenu::ButtonType::Return},
+// 			   Eo::SettingsMenu::EventType::Return},
 			//   [](Eo::Device &device, Eo::Options &options,
 			// 	  Eo::SceneHandler &sceneHandler) {
 			// 	  sceneHandler.unloadCurrentScene();
 			//   }},
 // 		  {{Eo::eventType::EGET_BUTTON_CLICKED,
-// 			   Eo::CreditsMenu::ButtonType::Return},
+// 			   Eo::CreditsMenu::EventType::Return},
 // 			  [](Eo::Device &device, Eo::Options &options,
 // 				  Eo::SceneHandler &sceneHandler) {
 // 				  sceneHandler.unloadCurrentScene();

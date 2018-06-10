@@ -5,6 +5,7 @@
 ** SettingsMenu.cpp
 */
 
+#include <iostream>
 #include "SettingsMenu.hpp"
 #include "SceneHandler.hpp"
 
@@ -33,22 +34,21 @@ bool Eo::SettingsMenu::draw()
 		skin->setFont(font);
 	this->putBackgroundImage();
 	this->putReturnButton();
-	this->putSetVolumeSound();
-	this->putSetVolumeSoundMus();
-	this->putSetVolumeSoundEffect();
+	this->putSetGeneralVolume();
+	this->putSetVolumeMusic();
+	this->putSetVolumeFX();
 	skin->setFont(env->getBuiltInFont(), irr::gui::EGDF_TOOLTIP);
 	return true;
 }
 
 void Eo::SettingsMenu::putBackgroundImage()
 {
-	irr::gui::IGUIEnvironment *env =
-		this->_device->getDevice()->getGUIEnvironment();
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
 	env->addImage(this->_device->getDriver()->getTexture(
 		"../assets/img/menu-background.jpg"), {0, 0});
 }
 
-void Eo::SettingsMenu::putSetVolumeSound()
+void Eo::SettingsMenu::putSetGeneralVolume()
 {
 	auto *env = this->_device->getDevice()->getGUIEnvironment();
 	auto windowSize = this->_device->getOptions()->getWindowSize();
@@ -56,59 +56,47 @@ void Eo::SettingsMenu::putSetVolumeSound()
 	auto h = windowSize.Height;
 	auto pos = 4;
 
-	env->addButton(
-		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
-		 (int)(((h / 8) * pos + h / 8) / 2)},
-		nullptr, Eo::SettingsMenu::ButtonType::SoundMore, L"Sound +",
-		L"Sound +");
-	pos = 5;
-	env->addButton(
-		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
-		 (int)(((h / 8) * pos + h / 8) / 2)},
-		nullptr, Eo::SettingsMenu::ButtonType::SoundLess, L"Sound -",
-		L"Sound -");
+	env->addStaticText(L"General Volume",
+			{(int)(w / 6), (int)(((h / 8) * pos) / 2),
+				(int)(w / 6 + 2 * w / 3),
+				(int)(((h / 8) * pos + h / 8) / 2)})
+		->setTextAlignment(irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
+			irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER);
+	env->addScrollBar(true, {(int)(w / 6), (int)(((h / 8) * pos) / 2),
+			(int)(w / 6 + 2 * w / 3),
+			(int)(((h / 8) * pos + h / 8) / 2)}, nullptr,
+		Eo::SettingsMenu::ButtonType::SoundGeneral)->setPos(
+		static_cast<irr::s32>(_sound->getGeneralVolume() * 100));
 }
 
-void Eo::SettingsMenu::putSetVolumeSoundMus()
+void Eo::SettingsMenu::putSetVolumeMusic()
 {
 	auto *env = this->_device->getDevice()->getGUIEnvironment();
 	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
-	auto pos = 7;
+	auto pos = 6;
 
-	env->addButton(
-		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
-		 (int)(((h / 8) * pos + h / 8) / 2)},
-		nullptr, Eo::SettingsMenu::ButtonType::SoundMoreMus, L"Sound Musique +",
-		L"Sound +");
-	pos = 8;
-	env->addButton(
-		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
-		 (int)(((h / 8) * pos + h / 8) / 2)},
-		nullptr, Eo::SettingsMenu::ButtonType::SoundLessMus, L"Sound Musique -",
-		L"Sound -");
+	env->addScrollBar(true, {(int)(w / 6), (int)(((h / 8) * pos) / 2),
+			(int)(w / 6 + 2 * w / 3),
+			(int)(((h / 8) * pos + h / 8) / 2)}, nullptr,
+		Eo::SettingsMenu::ButtonType::SoundMusic)->setPos(
+		static_cast<irr::s32>(_sound->getMusicVolume() * 100));
 }
 
-void Eo::SettingsMenu::putSetVolumeSoundEffect()
+void Eo::SettingsMenu::putSetVolumeFX()
 {
 	auto *env = this->_device->getDevice()->getGUIEnvironment();
 	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
-	auto pos = 10;
+	auto pos = 8;
 
-	env->addButton(
-		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
-		 (int)(((h / 8) * pos + h / 8) / 2)},
-		nullptr, Eo::SettingsMenu::ButtonType::SoundMoreEffect, L"Sound Effect +",
-		L"Sound +");
-	pos = 11;
-	env->addButton(
-		{(int)(w / 6), (int)(((h / 8) * pos) / 2), (int)(w / 6 + 2 * w / 3),
-		 (int)(((h / 8) * pos + h / 8) / 2)},
-		nullptr, Eo::SettingsMenu::ButtonType::SoundLessEffect, L"Sound Effect -",
-		L"Sound -");
+	env->addScrollBar(true, {(int)(w / 6), (int)(((h / 8) * pos) / 2),
+			(int)(w / 6 + 2 * w / 3),
+			(int)(((h / 8) * pos + h / 8) / 2)}, nullptr,
+		Eo::SettingsMenu::ButtonType::SoundFX)->setPos(
+		static_cast<irr::s32>(_sound->getEffectsVolume() * 100));
 }
 
 void Eo::SettingsMenu::putReturnButton()
@@ -129,4 +117,34 @@ void Eo::SettingsMenu::putReturnButton()
 
 void Eo::SettingsMenu::addEvents(Eo::Rc<Eo::Event> event)
 {
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+			Eo::SettingsMenu::ButtonType::SoundGeneral),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto bar = ((irr::gui::IGUIScrollBar *)event.
+				GUIEvent.Caller);
+			auto val = (float)bar->getPos() / (float)bar->getMax();
+			_sound->setGeneralVolume(val);
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+			Eo::SettingsMenu::ButtonType::SoundMusic),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto bar = ((irr::gui::IGUIScrollBar *)event.
+				GUIEvent.Caller);
+			auto val = (float)bar->getPos() / (float)bar->getMax();
+			_sound->setMusicVolume(val);
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+			Eo::SettingsMenu::ButtonType::SoundFX),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto bar = ((irr::gui::IGUIScrollBar *)event.
+				GUIEvent.Caller);
+			auto val = (float)bar->getPos() / (float)bar->getMax();
+			_sound->setEffectsVolume(val);
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
 }

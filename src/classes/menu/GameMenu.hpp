@@ -15,7 +15,7 @@ namespace Eo {
 		GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound);
 		~GameMenu() override;
 		bool draw() override;
-		enum ButtonType { Resume = 167, Settings, Quit, Save };
+		enum EventType { Resume = 167, Settings, Quit, Save };
 
 	private:
 		void putBackgroundImage();
