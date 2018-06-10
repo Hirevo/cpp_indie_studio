@@ -213,11 +213,9 @@ void Eo::Game::addEvents()
 		[this](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
-			std::cout << this->_sceneHandler->getSceneCount() << std::endl;
 			_sceneHandler->loadScene(
 				Eo::initRc<Eo::GameMenu>(_event, _device,
 					_sceneHandler, _sound));
-			std::cout << this->_sceneHandler->getSceneCount() << std::endl;
 		});
 }
 
@@ -259,7 +257,8 @@ void Eo::Game::update()
 		computer->updatePosition(_map);
 		if (computer->checkPoseBomb(_map)) {
 			auto bombs = computer->getAvailableBombs();
-			placeBomb(computer, bombs);
+			if (bombs > 0)
+				placeBomb(computer, bombs);
 		}
 		computer->updateInScene();
 	});
