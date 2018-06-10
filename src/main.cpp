@@ -33,8 +33,6 @@
 
 std::string Eo::currPath;
 
-#include <iostream>
-
 int getCurrPath()
 {
 	char str[FILENAME_MAX];
@@ -43,7 +41,6 @@ int getCurrPath()
 	}
 	Eo::currPath = std::string(str);
 	Eo::currPath += "/";
-	std::cout << "voici path :" << Eo::currPath << std::endl;
 	return 0;
 }
 
