@@ -19,7 +19,7 @@ Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 {
 	this->addEvents(event);
 	this->draw();
-//	_sound->play(Eo::SoundDevice::PAUSE);
+	_sound->play(Eo::SoundDevice::PAUSE);
 }
 
 Eo::GameMenu::~GameMenu()

@@ -213,11 +213,9 @@ void Eo::Game::addEvents()
 		[this](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
-			std::cout << this->_sceneHandler->getSceneCount() << std::endl;
 			_sceneHandler->loadScene(
 				Eo::initRc<Eo::GameMenu>(_event, _device,
 					_sceneHandler, _sound));
-			std::cout << this->_sceneHandler->getSceneCount() << std::endl;
 		});
 }
 
