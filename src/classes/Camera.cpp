@@ -8,7 +8,8 @@
 #include "Camera.hpp"
 #include <iostream>
 
-Eo::Camera::Camera(vec3 pos) : AObject(Eo::IObject::Type::CAMERA, nullptr, pos)
+Eo::Camera::Camera(int mapSize, vec3 pos) :
+	AObject(Eo::IObject::Type::CAMERA, nullptr, pos), mapSize(mapSize)
 {
 }
 
@@ -47,8 +48,9 @@ void Eo::Camera::insertFPSInScene(Eo::Rc<Eo::IScene> scene)
 
 void Eo::Camera::insertStaticInScene(Eo::Rc<Eo::IScene> scene)
 {
-	irr::core::vector3df position(0, 42, -25);
-	irr::core::vector3df lookat = irr::core::vector3df(0, 0, 0);
+	irr::core::vector3df position(0, this->mapSize * 4, -25);
+	irr::core::vector3df lookat = irr::core::vector3df(0,
+		this->mapSize / 10 * -1, 0);
 	_camType = STATIC;
 	_camera = scene->getSceneManager()->addCameraSceneNode(
 		nullptr, position, lookat, -1, true);

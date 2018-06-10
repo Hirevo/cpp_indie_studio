@@ -234,24 +234,39 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::SettingsMenu::ButtonType::MuteGeneral),
 		[this](bool &toRemove, const Eo::event &event) {
-			_sound->generalIsMute() ? _sound->unMute()
-				: _sound->mute();
+			if (_sound->generalIsMute()) {
+				_sound->unMute();
+				event.GUIEvent.Caller->setText(L"Mute");
+			} else {
+				_sound->mute();
+				event.GUIEvent.Caller->setText(L"Unmute");
+			}
 			_sound->play(Eo::SoundDevice::SELECT);
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::SettingsMenu::ButtonType::MuteMusic),
 		[this](bool &toRemove, const Eo::event &event) {
-			_sound->musicIsMute() ? _sound->unMuteMusic()
-				: _sound->muteMusic();
+			if (_sound->musicIsMute()) {
+				_sound->unMuteMusic();
+				event.GUIEvent.Caller->setText(L"Mute");
+			} else {
+				_sound->muteMusic();
+				event.GUIEvent.Caller->setText(L"Unmute");
+			}
 			_sound->play(Eo::SoundDevice::SELECT);
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::SettingsMenu::ButtonType::MuteFX),
 		[this](bool &toRemove, const Eo::event &event) {
-			_sound->effectsIsMute() ? _sound->unMuteEffects()
-				: _sound->muteEffects();
+			if (_sound->effectsIsMute()) {
+				_sound->unMuteEffects();
+				event.GUIEvent.Caller->setText(L"Mute");
+			} else {
+				_sound->muteEffects();
+				event.GUIEvent.Caller->setText(L"Unmute");
+			}
 			_sound->play(Eo::SoundDevice::SELECT);
 		});
 }

@@ -19,7 +19,8 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	const std::string &mapPath, Eo::Rc<Eo::Options> options,
 	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
 	: AScene(event, device, sceneHandler, sound), _json(mapPath),
-	  _map(Eo::initRc<Eo::Map>(_json)), _camera(), _options(options)
+	  _map(Eo::initRc<Eo::Map>(_json)), _camera(_map->getWidth()),
+	_options(options)
 {
 	_sound->stopMusic();
 	_sound->play(Eo::SoundDevice::GAMEBGM, true);

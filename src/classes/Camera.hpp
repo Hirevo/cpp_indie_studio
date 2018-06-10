@@ -19,7 +19,7 @@ namespace Eo {
 	class Camera : public AObject {
 	public:
 		enum cameraType { NONE, FPS, STATIC };
-		Camera(Eo::vec3 pos = Eo::vec3(0, 0, 0));
+		Camera(int mapSize, Eo::vec3 pos = Eo::vec3(0, 0, 0));
 		~Camera();
 		void insertFPSInScene(Eo::Rc<Eo::IScene> scene);
 		void insertStaticInScene(Eo::Rc<Eo::IScene> scene);
@@ -33,6 +33,7 @@ namespace Eo {
 		irr::SKeyMap _keyMap[5];
 		irr::scene::ICameraSceneNode *_camera;
 		cameraType _camType = NONE;
+		int mapSize;
 	};
 }
 #endif
