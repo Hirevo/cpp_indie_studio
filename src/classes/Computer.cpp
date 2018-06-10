@@ -110,9 +110,11 @@ Eo::IObject::Type Eo::Computer::getObjectType(Eo::vec3 pos, Eo::Rc<Eo::Map> map)
 
 void Eo::Computer::die()
 {
-	this->_dead = true;
-	this->removeFromScene();
-	this->_sound->play(Eo::SoundDevice::SoundPath::DEATH);
+	if (!this->_dead) {
+		this->_dead = true;
+		this->removeFromScene();
+		this->_sound->play(Eo::SoundDevice::SoundPath::DEATH);
+	}
 }
 
 bool Eo::Computer::isDead()

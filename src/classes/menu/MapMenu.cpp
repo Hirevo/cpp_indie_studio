@@ -54,10 +54,10 @@ void Eo::MapMenu::putLoadButton()
 	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
-	auto pos = 5;
+	auto pos = 3;
 	auto listbox = env->addListBox(
-		{(int)(w / 6), (int)((h / 8) * pos), (int)(w / 6 + 2 * w / 3),
-			(int)((h / 8) * pos + h / 8)});
+		{(int)(w / 6), (int)((h / 8) * (pos + 1)), (int)(w / 6 + 2 * w / 3),
+			(int)((h / 8) * (pos + 1) + h / 8 * 2)}, 0, 1337);
 	listbox->setDrawBackground(true);
 	std::string path = currPath + "../assets/maps/";
 	for (auto &p : std::filesystem::directory_iterator(path)) {
@@ -65,7 +65,6 @@ void Eo::MapMenu::putLoadButton()
 		tmp = tmp.substr(0, tmp.size() - 5);
 		listbox->addItem(tmp.c_str());
 	}
-	pos = 4;
 	env->addButton(
 		{(int)(w / 6), (int)((h / 8) * pos), (int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * pos + h / 8)}, nullptr,

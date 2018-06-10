@@ -32,7 +32,7 @@
 #endif
 
 std::string Eo::currPath;
-std::string Eo::map = "../map4.json";
+std::string Eo::map = "../assets/maps/map4.json";
 
 int getCurrPath()
 {

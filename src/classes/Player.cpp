@@ -80,9 +80,11 @@ void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 
 void Eo::Player::die()
 {
-	this->_dead = true;
-	this->removeFromScene();
-	this->_sound->play(Eo::SoundDevice::SoundPath::DEATH);
+	if (!this->_dead) {
+		this->_dead = true;
+		this->removeFromScene();
+		this->_sound->play(Eo::SoundDevice::SoundPath::DEATH);
+	}
 }
 
 bool Eo::Player::isDead()

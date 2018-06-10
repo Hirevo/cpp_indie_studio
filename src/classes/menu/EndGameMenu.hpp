@@ -15,13 +15,17 @@ namespace Eo {
 	public:
 		EndGameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 			Eo::Rc<Eo::SceneHandler> sceneHandler,
-			Eo::Rc<Eo::SoundDevice> sound);
+			Eo::Rc<Eo::SoundDevice> sound,
+			std::vector<std::string> deathOrder);
 		~EndGameMenu();
 		bool draw() override;
-		enum EventType { OK = 185 };
+		enum EventType { OK = 1249 };
 
 	private:
 		void putBackgroundImage();
+		void putOkButton();
+		void putTitle();
+		std::vector<std::string> _deathOrder;
 	};
 }
 

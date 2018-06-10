@@ -17,6 +17,7 @@
 #include <iostream>
 #include <menu/SettingsMenu.hpp>
 #include <cstring>
+#include <menu/EndGameMenu.hpp>
 
 const float Eo::Game::_maxSpeed = 0.2f;
 const float Eo::Game::_speedBonus = 0.02f;
@@ -38,7 +39,7 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	_sceneHandler = sceneHandler;
 	_players.fill(Eo::Rc<Eo::Player>(nullptr));
 	_computers.fill(Eo::Rc<Eo::Computer>(nullptr));
-	for (Eo::u32 i = 0; i < _options->getNbPlayer(); i++)
+	for (Eo::u32 i = 0 ; i < _options->getNbPlayer() ; i++)
 		_players.at(i) = Eo::initRc<Eo::Player>(ref, _event, _options,
 			_sound,
 			vec3(getPlayerPos(i).X, -0.5f, getPlayerPos(i).Y), i,
@@ -47,7 +48,6 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 		_computers.at(i - 1) = Eo::initRc<Eo::Computer>(_sound,
 			ref, vec3(getPlayerPos(i).X, 0, getPlayerPos(i).Y), i,
 			getPlayerPos(i).Z != 1);
-		std::cout << _computers.at(i - 1)->isDead() << std::endl;
 	}
 	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0.0f, -0.5f, 0.0f));
 	Eo::Game::addEvents();
@@ -144,7 +144,9 @@ irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
 bool Eo::Game::draw()
 {
 	_device->getDevice()->getSceneManager()->addSkyDomeSceneNode(
-		_device->getDriver()->getTexture((currPath + "../assets/img/background.jpg").c_str()), 16, 8, 2, 5, 800);
+		_device->getDriver()->getTexture(
+			(currPath + "../assets/img/background.jpg").c_str()),
+		16, 8, 2, 5, 800);
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
 	_camera.insertStaticInScene(ref);
@@ -165,8 +167,8 @@ bool Eo::Game::draw()
 
 void Eo::Game::insertMap(Eo::vec2i v)
 {
-	for (Eo::f32 i = 0; i < v.Y; i++)
-		for (Eo::f32 j = 0; j < v.X; j++)
+	for (Eo::f32 i = 0 ; i < v.Y ; i++)
+		for (Eo::f32 j = 0 ; j < v.X ; j++)
 			Eo::Game::placeObject(v, Eo::vec2i(j, i));
 }
 
@@ -186,11 +188,11 @@ void Eo::Game::placeObject(Eo::vec2i size, Eo::vec2i cur)
 Eo::keyHandler Eo::Game::getPlayerEventFunc(
 	Eo::Rc<Eo::ICharacter> &player, Eo::Player::Motion flag)
 {
-	#pragma warning(disable : 4834)
+#pragma warning(disable : 4834)
 	return [this, player, flag](bool &toRemove, const Eo::event &ev) {
 		auto state = ev.KeyInput.PressedDown;
 		auto func = (state ? &Eo::ICharacter::setFlag :
-				     &Eo::ICharacter::unsetFlag);
+			&Eo::ICharacter::unsetFlag);
 		((player.get())->*func)(flag);
 	};
 }
@@ -267,27 +269,23 @@ void Eo::Game::addEvents()
 bool Eo::Game::gameOver()
 {
 	std::for_each(_players.begin(), _players.end(),
-		[this](Eo::Rc<Eo::Player> &player) {
-			if (player) {
-				if (player->isDead() &&
-					std::find(this->_deathOrder.begin(),
-					this->_deathOrder.end(),
-						player->getPlayerID()) ==
-					this->_deathOrder.end())
-					this->_deathOrder.push_back(
-						player->getPlayerID());
+		[this](Eo::Rc<Eo::Player> &p) {
+			if (p) {
+				std::stringstream tmp;
+				tmp << "Player ";
+				tmp << p->getPlayerID() + 1;
+				if (p->isDead() && std::find(this->_deathOrder.begin(), this->_deathOrder.end(), tmp.str()) == this->_deathOrder.end())
+					this->_deathOrder.push_back(tmp.str());
 			}
-	});
+		});
 	std::for_each(_computers.begin(), _computers.end(),
-		[this](Eo::Rc<Eo::Computer> &computer) {
-			if (computer) {
-				if (computer->isDead() &&
-					std::find(this->_deathOrder.begin(),
-						this->_deathOrder.end(),
-						computer->getPlayerID()) ==
-						this->_deathOrder.end())
-					this->_deathOrder.push_back(
-						computer->getPlayerID());
+		[this](Eo::Rc<Eo::Computer> &cpt) {
+			if (cpt) {
+				std::stringstream tmp;
+				tmp << "Computer ";
+				tmp << cpt->getPlayerID() + 1;
+				if (cpt->isDead() && std::find(this->_deathOrder.begin(), this->_deathOrder.end(), tmp.str()) == this->_deathOrder.end())
+					this->_deathOrder.push_back(tmp.str());
 			}
 		});
 	return _deathOrder.size() >= 3;
@@ -295,6 +293,19 @@ bool Eo::Game::gameOver()
 
 void Eo::Game::update()
 {
+	if (this->gameOver()) {
+		for (auto &n : _players) {
+			if (n)
+				n->die();
+		}
+		for (auto &n : _computers) {
+			if (n)
+				n->die();
+		}
+		this->gameOver();
+		this->_sceneHandler->loadScene(Eo::initRc<Eo::EndGameMenu>(
+			_event, _device, _sceneHandler, _sound, _deathOrder));
+	}
 	_map->update(Eo::Rc<Eo::IScene>(this, [](Eo::IScene *_) {}));
 	std::for_each(_players.begin(), _players.end(),
 		[this](Eo::Rc<Eo::Player> &player) {
@@ -314,7 +325,7 @@ void Eo::Game::update()
 			if (type != Eo::IObject::NONE)
 				useCollectible(type, player);
 		});
-	std::for_each(_computers.begin(), _computers.end(), 
+	std::for_each(_computers.begin(), _computers.end(),
 		[this](Eo::Rc<Eo::Computer> &computer) {
 		if (computer.get() == nullptr || computer->isDead())
 			return;
@@ -352,25 +363,23 @@ void Eo::Game::useCollectible(Eo::IObject::Type type,
 
 	if (boosterType == Booster::SPEED) {
 		auto speed = player->getSpeed();
-		player->setSpeed(speed < _maxSpeed ? speed + _speedBonus : speed);
+		player->setSpeed(
+			speed < _maxSpeed ? speed + _speedBonus : speed);
 		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
-	}
-	else if (boosterType == Booster::SUPERBOMB) {
+	} else if (boosterType == Booster::SUPERBOMB) {
 		auto sbomb = player->getBombRadius();
 		player->setBombRadius(sbomb < 100 ? sbomb + 1 : sbomb);
 		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
-	}
-	else if (boosterType == Booster::NBBOMB) {
+	} else if (boosterType == Booster::NBBOMB) {
 		auto nbomb = player->getBombRadius();
 		auto abomb = player->getAvailableBombs();
 		player->setBombRadius(nbomb < 100 ? nbomb + 1 : nbomb);
 		player->setAvailableBombs(nbomb < 100 ? abomb + 1 : abomb);
 		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
-	}
-	else if (boosterType == Booster::WALLPASS) {
+	} else if (boosterType == Booster::WALLPASS) {
 		player->setWallPass(true);
 		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);

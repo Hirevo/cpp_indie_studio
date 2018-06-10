@@ -65,7 +65,7 @@ namespace Eo {
 		std::string _mapName = "map4.json";
 		std::vector<std::vector<float>> _playersPos;
 		Eo::vec3 getPlayerPos(size_t playerId);
-		std::vector<Eo::u64> _deathOrder;
+		std::vector<std::string> _deathOrder;
 		static const float _maxSpeed;
 		static const float _speedBonus;
 	};
