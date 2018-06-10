@@ -11,9 +11,10 @@
 
 const std::vector<std::vector<Eo::f32>> Eo::JsonRead::_defaultPlayerPos = {
 	{1, 1, 1},
-	{Eo::Map::_defaultSize.first - 2, Eo::Map::_defaultSize.second - 2, 1},
-	{1, Eo::Map::_defaultSize.second - 2, 1},
-	{Eo::Map::_defaultSize.first - 2, 1, 1}
+	{static_cast<Eo::f32>(Eo::Map::_defaultSize.first) - 2,
+		static_cast<Eo::f32>(Eo::Map::_defaultSize.second) - 2, 1},
+	{1, static_cast<Eo::f32>(Eo::Map::_defaultSize.second) - 2, 1},
+	{static_cast<Eo::f32>(Eo::Map::_defaultSize.first) - 2, 1, 1}
 };
 
 Eo::JsonRead::JsonRead(std::string const &filename)
