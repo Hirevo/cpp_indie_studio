@@ -41,6 +41,8 @@ namespace Eo {
 		const std::string &getMapName() const;
 		bool clear() override;
 		bool gameOver();
+		void saveGame();
+		void updatePlayerPos();
 
 	private:
 		void insertMap(Eo::vec2i v);

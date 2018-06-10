@@ -13,6 +13,7 @@
 #include "SceneHandler.hpp"
 #include "menu/GameMenu.hpp"
 #include "JsonRead.hpp"
+#include "JsonWrite.hpp"
 #include <iostream>
 #include <menu/SettingsMenu.hpp>
 #include <cstring>
@@ -40,11 +41,11 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 		_players.at(i) = Eo::initRc<Eo::Player>(ref, _event, _options,
 			_sound,
 			vec3(getPlayerPos(i).X, -0.5f, getPlayerPos(i).Y), i,
-			getPlayerPos(i).Z == 1);
+			getPlayerPos(i).Z != 1);
 	for (Eo::u32 i = 3; i >= _options->getNbPlayer(); i--)
 		_computers.at(i - 1) = Eo::initRc<Eo::Computer>(_sound,
 			ref, vec3(getPlayerPos(i).X, 0, getPlayerPos(i).Y), i,
-			getPlayerPos(i).Z == 1);
+			getPlayerPos(i).Z != 1);
 	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0.0f, -0.5f, 0.0f));
 	Eo::Game::addEvents();
 }
@@ -54,6 +55,7 @@ Eo::Game::~Game()
 	auto p1 = _options->getPlayerKeys().at(0);
 	auto p2 = _options->getPlayerKeys().at(1);
 
+	this->saveGame();
 	_event->clearKeyHandlers(p1._up);
 	_event->clearKeyHandlers(p2._up);
 	_event->clearKeyHandlers(p1._down);
@@ -66,6 +68,39 @@ Eo::Game::~Game()
 	_event->clearKeyHandlers(p2._bomb);
 	_event->clearKeyHandlers(Eo::keyCode::KEY_ESCAPE);
 	_event->clearKeyHandlers(_options->getKeyExit());
+}
+
+void Eo::Game::saveGame()
+{
+	Eo::JsonWrite save;
+	updatePlayerPos();
+	save.writePlayersPos("player_pos", _playersPos);
+	save.writeMatrix("map", _map->generateMatrix());
+	save.generateJson(currPath + "save.json");
+}
+
+void Eo::Game::updatePlayerPos()
+{
+	std::for_each(_players.begin(), _players.end(),
+		[this](Eo::Rc<Eo::Player> &player) {
+			if (player) {
+				auto &it = _playersPos[player->getPlayerID()];
+				auto pos = player->getPosition();
+				it[0] = pos.X;
+				it[1] = pos.Z;
+				it[2] = !player->isDead();
+			}
+		});
+	std::for_each(_computers.begin(), _computers.end(),
+		[this](Eo::Rc<Eo::Computer> &computer) {
+			if (computer) {
+				auto &it = _playersPos[computer->getPlayerID()];
+				auto pos = computer->getPosition();
+				it[0] = pos.X;
+				it[1] = pos.Z;
+				it[2] = !computer->isDead();
+			}
+		});
 }
 
 bool Eo::Game::clear()

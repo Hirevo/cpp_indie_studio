@@ -27,6 +27,7 @@ namespace Eo {
 			Eo::IObject *object, Eo::u32 x, Eo::u32 y);
 		std::vector<Eo::Rc<Eo::IObject>> &getObjects() override;
 		void generateMap(const std::string &mapPath);
+		std::vector<std::vector<Eo::i32>> generateMatrix();
 		bool update(Eo::Rc<Eo::IScene> scene) override;
 		Eo::vec2 translate2D(Eo::vec3);
 

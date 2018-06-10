@@ -29,7 +29,8 @@ namespace Eo {
 			SETBOMB,
 			DEATH,
 			GETITEM,
-			HURRY
+			HURRY,
+			VICTORY
 		};
 		enum SoundType {
 			EFFECT,
