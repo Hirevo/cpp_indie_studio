@@ -75,7 +75,6 @@ void Eo::MapMenu::putLoadButton()
 	auto w = windowSize.Width;
 	auto h = windowSize.Height;
 	auto pos = 5;
-	struct dirent **fileListTemp;
 	auto listbox = env->addListBox({(int)(w / 6),
 		(int)((h / 8) * pos), (int)(w / 6 + 2 * w / 3),
 	        (int)((h / 8) * pos + h / 8)});
@@ -94,6 +93,7 @@ void Eo::MapMenu::putLoadButton()
 	} while (FindNextFile(handle, &data));
 	FindClose(handle);
 #elif __linux__
+	struct dirent **fileListTemp;
 	int nb = scandir(path.c_str(), &fileListTemp, mapfilter, alphasort);
 	for(int i = 0; i < nb; i++) {
 		if (fileListTemp[i]->d_type != DT_REG)
