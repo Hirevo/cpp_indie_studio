@@ -54,6 +54,7 @@ void Eo::MapMenu::putBackgroundImage()
 	              {0, 0});
 }
 
+#ifdef __linux__
 static int mapfilter(const struct dirent *dir)
 {
 	const char *s = dir->d_name;
@@ -67,6 +68,7 @@ static int mapfilter(const struct dirent *dir)
 	}
 	return 0;
 }
+#endif
 
 void Eo::MapMenu::putLoadButton()
 {
