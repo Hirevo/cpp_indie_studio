@@ -9,7 +9,9 @@
 #include "SettingsMenu.hpp"
 #include "SceneHandler.hpp"
 
-Eo::CreditsMenu::CreditsMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
+Eo::CreditsMenu::CreditsMenu(Eo::Rc<Eo::Event> event,
+	Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler,
+	Eo::Rc<Eo::SoundDevice> sound)
 	: AScene(event, device, sceneHandler, sound)
 {
 	this->addEvents(event);
@@ -41,7 +43,7 @@ void Eo::CreditsMenu::putBackgroundImage()
 	irr::gui::IGUIEnvironment *env =
 		this->_device->getDevice()->getGUIEnvironment();
 	env->addImage(this->_device->getDriver()->getTexture(
-			      "../assets/img/menu-background.jpg"),
+		"../assets/img/menu-background.jpg"),
 		{0, 0});
 }
 
@@ -53,7 +55,7 @@ void Eo::CreditsMenu::putReturnButton()
 	auto h = windowSize.Height;
 
 	env->addButton({(int)(w / 24), (int)((h / 24)), (int)(3 * w / 24),
-			       (int)((h / 24) + h / 12)},
+			(int)((h / 24) + h / 12)},
 		nullptr, Eo::CreditsMenu::ButtonType::Return, L"Return",
 		L"Return to main menu");
 }
@@ -68,7 +70,15 @@ void Eo::CreditsMenu::putCredits()
 	auto windowSize = this->_device->getOptions()->getWindowSize();
 	irr::s32 w = windowSize.Width;
 	irr::s32 h = windowSize.Height;
-	env->addImage(this->_device->getDriver()->getTexture(
+	auto image = env->addImage(this->_device->getDriver()->getTexture(
 		"../assets/img/credits.png"),
-		{w / 2 - 512, h / 2 - 512});
+		{0, 0});
+
+	image->setMaxSize({static_cast<const u32 &>(w),
+		static_cast<const u32 &>(h)});
+	image->setAlignment(irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
+		irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
+		irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
+		irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER);
+	image->setScaleImage(true);
 }

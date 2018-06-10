@@ -124,7 +124,8 @@ void Eo::MainMenu::putTitle()
 	auto w = windowSize.Width;
 	auto *image = this->_device->getDriver()->getTexture(
 		"../assets/img/bomberman-title.png");
-	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
+	env->addImage(image, {(int)(w / 2 - 400), 0}, true)
+		->setScaleImage(true);
 }
 
 static void playButtonClickedSound(Eo::Rc<Eo::SoundDevice> sound)
@@ -142,7 +143,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			auto options = this->_device->getOptions();
 			options->setNbPlayer(1);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
-				_event, _device, "../map2.json", options,
+				_event, _device, "../map3.json", options,
 				_sceneHandler, _sound));
 		});
 	event->addGUIHandler(
@@ -153,7 +154,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			auto options = this->_device->getOptions();
 			options->setNbPlayer(2);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
-				_event, _device, "../map2.json", options,
+				_event, _device, "../map3.json", options,
 				_sceneHandler, _sound));
 		});
 	event->addGUIHandler(
