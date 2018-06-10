@@ -98,11 +98,11 @@ void Eo::SettingsMenu::putSetVolumeFX()
 	auto h = windowSize.Height;
 	auto pos = 8;
 
-	env->addStaticText(L"Effects Volume",
-			{(int)(w / 6), (int)(((h / 8) * pos) / 2),
-				(int)(w / 6 + 2 * w / 3),
-				(int)(((h / 8) * pos + h / 8) / 2)})
-		->setTextAlignment(irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
+	auto text = env->addStaticText(L"Effects Volume",
+		{(int)(w / 6), (int)(((h / 8) * pos) / 2),
+			(int)(w / 6 + 2 * w / 3),
+			(int)(((h / 8) * pos + h / 8) / 2)});
+	text->setTextAlignment(irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
 			irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER);
 	env->addScrollBar(true, {(int)(w / 6), (int)(((h / 8) * pos) / 2),
 			(int)(w / 6 + 2 * w / 3),
