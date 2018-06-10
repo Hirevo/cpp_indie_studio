@@ -10,7 +10,7 @@
 #include <iostream>
 
 Eo::ACharacter::ACharacter(Eo::u32 playerID)
-	: _playerID(playerID), dead(false)
+	: _playerID(playerID), _dead(false)
 {
 }
 

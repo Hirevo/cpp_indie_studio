@@ -61,7 +61,7 @@ namespace Eo {
 		Eo::Rc<Eo::SceneHandler> _sceneHandler;
 		std::string _mapName = "map4.json";
 		std::vector<std::vector<float>> _playersPos;
-		Eo::vec2 getPlayerPos(size_t playerId);
+		Eo::vec3 getPlayerPos(size_t playerId);
 		std::vector<Eo::u64> _deathOrder;
 		static const float _maxSpeed;
 		static const float _speedBonus;

@@ -43,7 +43,7 @@ namespace Eo {
 		Player(Eo::Rc<Eo::IScene>, Eo::Rc<Eo::Event>,
 			Eo::Rc<Eo::Options>, Eo::Rc<Eo::SoundDevice> sound,
 			const vec3 &pos = vec3(0),
-			Eo::u64 id = 0);
+			Eo::u64 id = 0, bool isDead = false);
 		~Player() override;
 		void move(Eo::Rc<Eo::Game> scene);
 		void draw(Eo::Rc<Eo::IScene> scene) override;

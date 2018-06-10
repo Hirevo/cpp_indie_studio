@@ -20,7 +20,7 @@ namespace Eo {
 	public:
 		Computer(Eo::Rc<Eo::SoundDevice> sound,
 			Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos,
-			Eo::u32 playerID);
+			Eo::u32 playerID, bool isDead = false);
 
 		~Computer();
 		Eo::vec3 getDirection() const;

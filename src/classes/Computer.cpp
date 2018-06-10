@@ -10,10 +10,11 @@
 
 Eo::Computer::Computer(Eo::Rc<Eo::SoundDevice> sound,
 	Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos,
-	Eo::u32 playerID)
+	Eo::u32 playerID, bool isDead)
 	: AModel(Eo::IObject::Type::CHARACTER, pos), ACharacter(playerID),
 	_sound(sound)
 {
+	this->_dead = isDead;
 	std::stringstream path;
 	path << (currPath + "../assets/img/bomberboy_");
 	path << playerID + 1;
@@ -27,6 +28,8 @@ Eo::Computer::~Computer() = default;
 
 void Eo::Computer::draw(Eo::Rc<Eo::IScene> game)
 {
+	if (isDead())
+		return;
 	this->loadModel(game, currPath + "../assets/Bomberman/Character.x",
 		_path.c_str());
 	this->getAnimatedNode()->setScale(_scale);
@@ -107,12 +110,12 @@ Eo::IObject::Type Eo::Computer::getObjectType(Eo::vec3 pos, Eo::Rc<Eo::Map> map)
 
 void Eo::Computer::die()
 {
-	this->dead = true;
+	this->_dead = true;
 	this->removeFromScene();
 	this->_sound->play(Eo::SoundDevice::SoundPath::DEATH);
 }
 
 bool Eo::Computer::isDead()
 {
-	return this->dead;
+	return this->_dead;
 }

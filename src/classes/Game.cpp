@@ -39,10 +39,12 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	for (Eo::u32 i = 0; i < _options->getNbPlayer(); i++)
 		_players.at(i) = Eo::initRc<Eo::Player>(ref, _event, _options,
 			_sound,
-			vec3(getPlayerPos(i).X, -0.5f, getPlayerPos(i).Y), i);
+			vec3(getPlayerPos(i).X, -0.5f, getPlayerPos(i).Y), i,
+			getPlayerPos(i).Z == 1);
 	for (Eo::u32 i = 3; i >= _options->getNbPlayer(); i--)
 		_computers.at(i - 1) = Eo::initRc<Eo::Computer>(_sound,
-			ref, vec3(getPlayerPos(i).X, 0, getPlayerPos(i).Y), i);
+			ref, vec3(getPlayerPos(i).X, 0, getPlayerPos(i).Y), i,
+			getPlayerPos(i).Z == 1);
 	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0.0f, -0.5f, 0.0f));
 	Eo::Game::addEvents();
 }
@@ -173,6 +175,8 @@ void Eo::Game::addPlayerEvents(Eo::Rc<Eo::ICharacter> player)
 			player, Eo::Player::Motion::Right));
 	_event->addKeyHandler(id._bomb,
 		[this, player](bool &toRemove, const Eo::event &ev) {
+			if (player->isDead())
+				return;
 			auto bombs = player->getAvailableBombs();
 			if (!ev.KeyInput.PressedDown || bombs == 0)
 				return;
@@ -338,11 +342,12 @@ const std::string &Eo::Game::getMapName() const
 	return _mapName;
 }
 
-Eo::vec2 Eo::Game::getPlayerPos(size_t playerId)
+Eo::vec3 Eo::Game::getPlayerPos(size_t playerId)
 {
-	Eo::vec2 player;
+	Eo::vec3 player;
 
 	player.X = _playersPos.at(playerId).at(0) - _map->getWidth() / 2;
 	player.Y = _playersPos.at(playerId).at(1) - _map->getHeight() / 2;
+	player.Z = _playersPos.at(playerId).at(1);
 	return player;
 }
