@@ -79,7 +79,7 @@ void Eo::Game::saveGame()
 	updatePlayerPos();
 	save.writePlayersPos("player_pos", _playersPos);
 	save.writeMatrix("map", _map->generateMatrix());
-	save.generateJson(currPath + "save.json");
+	save.generateJson(currPath + "../assets/save.json");
 }
 
 void Eo::Game::updatePlayerPos()
