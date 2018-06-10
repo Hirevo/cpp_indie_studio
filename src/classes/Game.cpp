@@ -244,28 +244,28 @@ void Eo::Game::useCollectible(Eo::IObject::Type type,
 	auto boosterType = static_cast<Eo::Booster::BoosterType>(type);
 
 	if (type == Booster::SPEED) {
-		std::cout << "Speed\n";
 		auto speed = player->getSpeed();
 		player->setSpeed(speed < 0.1f ? speed + 0.01f : speed);
+		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
 	else if (type == Booster::SUPERBOMB) {
-		std::cout << "Supbomb\n";
 		auto sbomb = player->getBombRadius();
 		player->setBombRadius(sbomb < 100 ? sbomb + 1 : sbomb);
+		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
 	else if (type == Booster::NBBOMB) {
-		std::cout << "NBbomb\n";
 		auto nbomb = player->getBombRadius();
 		auto abomb = player->getAvailableBombs();
 		player->setBombRadius(nbomb < 100 ? nbomb + 1 : nbomb);
 		player->setAvailableBombs(nbomb < 100 ? abomb + 1 : abomb);
+		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
 	else if (type == Booster::WALLPASS) {
-		std::cout << "Bonus\n";
 		player->setWallPass(true);
+		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
 }
