@@ -28,7 +28,7 @@ namespace Eo {
 		void unsetFlag(Eo::u8 flags) override;
 		Eo::u8 getFlag() const override;
 		Eo::u64 getPlayerID() const override;
-		bool isValidMove(Rc <Eo::Map> map, vec3 myPos, vec3 newDir);
+		bool isValidMove(Eo::Rc<Eo::Map> map, vec3 myPos, vec3 newDir);
 		bool isWallPass() const;
 		void setWallPass(bool _wallPass);
 
@@ -40,7 +40,8 @@ namespace Eo {
 		Eo::u8 _flags = 0;
 		bool _wallPass = false;
 		Eo::u64 _playerID;
-		bool isBlocked(Eo::IObject::Type currObjType, Eo::Rc<Eo::IObject> newObject);
+		bool isBlocked(Eo::IObject::Type currObjType,
+			Eo::Rc<Eo::IObject> newObject);
 		bool _dead;
 	};
 };

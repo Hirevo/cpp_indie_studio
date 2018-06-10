@@ -297,6 +297,13 @@ void Eo::Game::update()
 		[this](Eo::Rc<Eo::Player> &player) {
 			if (player.get() == nullptr || player->isDead())
 				return;
+			auto v = _map->translate2D(player->getPosition());
+			auto obj = _map->getObject(v.X, v.Y);
+			if (obj.get() && obj->getType()
+				== Eo::IObject::Type::FLAME) {
+					player->die();
+					return;
+				}
 			auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *_) {});
 			player->move(ref);
 			Eo::IObject::Type type = CollectibleMove(
@@ -308,6 +315,13 @@ void Eo::Game::update()
 		[this](Eo::Rc<Eo::Computer> &computer) {
 		if (computer.get() == nullptr || computer->isDead())
 			return;
+		auto v = _map->translate2D(computer->getPosition());
+		auto obj = _map->getObject(v.X, v.Y);
+		if (obj.get() && obj->getType()
+			== Eo::IObject::Type::FLAME) {
+				computer->die();
+				return;
+			}
 		computer->updatePosition(_map);
 		if (computer->checkPoseBomb(_map)) {
 			auto bombs = computer->getAvailableBombs();
