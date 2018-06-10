@@ -38,8 +38,7 @@ void Eo::Camera::insertFPSInScene(Eo::Rc<Eo::IScene> scene)
 		_camera = scene->getSceneManager()->addCameraSceneNodeFPS(
 			nullptr, 200.0f, 0.1f, -1, _keyMap, 5);
 		_node = _camera;
-	}
-	else
+	} else
 		scene->getSceneManager()->addCameraSceneNodeFPS(_node);
 	Eo::Camera::updateInScene();
 	_hasNode = true;

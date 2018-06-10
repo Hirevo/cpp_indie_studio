@@ -124,34 +124,3 @@ void Eo::Event::execTasks()
 		f();
 	}
 }
-
-// Todo not working currently
-// void Eo::Event::removeKeyHandler(
-// 	const Eo::keyCode &code, const Eo::Event::keyHandle &handle)
-// {
-// 	auto it = _keyMap.begin();
-// 	while (it != _keyMap.end())
-// 		if (it->first == code && it->second == handle)
-// 			it = _keyMap.erase(it);
-// 		else
-// 			++it;
-// }
-
-// void Eo::Event::keyExit(const Eo::event &event)
-// {
-// 	static_cast<void>(event);
-// 	_options.setExit(true);
-// }
-
-// void Eo::Event::keyDebugToggle(const Eo::event &event)
-// {
-// 	if (event.KeyInput.PressedDown) {
-// 		_options.isDebugMode() ?
-// 			_options.setDebugMode(false) :
-// 			_options.setDebugMode(true);
-// 		if (!_options.isDebugMode()) {
-// 			_device.setDeviceTitle(L"Eo Bombermanz");
-// 			_debug.clearDebugList(_device.getDevice()->getSceneManager());
-// 		}
-// 	}
-// }

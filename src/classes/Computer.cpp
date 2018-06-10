@@ -68,8 +68,10 @@ void Eo::Computer::updatePosition(Eo::Rc<Eo::Map> map)
 	if (_counter == 0)
 		searchDirection(map);
 	Eo::vec3 v(0);
-	v.X = (_dir.X != 0) ? ((_dir.X > 0) ? _dir.X + 0.4 : _dir.X - 0.4) : v.X;
-	v.Z = (_dir.Z != 0) ? ((_dir.Z > 0) ? _dir.Z + 0.4 : _dir.Z - 0.4) : v.Z;
+	v.X = (_dir.X != 0) ? ((_dir.X > 0) ? _dir.X + 0.4 : _dir.X - 0.4)
+		: v.X;
+	v.Z = (_dir.Z != 0) ? ((_dir.Z > 0) ? _dir.Z + 0.4 : _dir.Z - 0.4)
+		: v.Z;
 	if (this->isValidMove(map, this->getPosition(), v)) {
 		this->translate(_dir);
 		_counter--;
@@ -84,19 +86,26 @@ bool Eo::Computer::checkPoseBomb(Eo::Rc<Eo::Map> map)
 	auto type = getObjectType(this->getPosition(), map);
 
 	if (type != IObject::BOMB) {
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, 0.8f)), map));
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, -0.8f)), map));
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0.8f, 0, 0)), map));
-		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(-0.8f, 0, 0)), map));
-		if (std::find(outline.begin(), outline.end(), Eo::IObject::DEST_WALL) != outline.end() ||
-		    std::find(outline.begin(), outline.end(), Eo::IObject::CHARACTER) != outline.end()) {
+		outline.push_back(getObjectType(
+			vec3(this->getPosition() + vec3(0, 0, 0.8f)), map));
+		outline.push_back(getObjectType(
+			vec3(this->getPosition() + vec3(0, 0, -0.8f)), map));
+		outline.push_back(getObjectType(
+			vec3(this->getPosition() + vec3(0.8f, 0, 0)), map));
+		outline.push_back(getObjectType(
+			vec3(this->getPosition() + vec3(-0.8f, 0, 0)), map));
+		if (std::find(outline.begin(), outline.end(),
+			Eo::IObject::DEST_WALL) != outline.end() ||
+			std::find(outline.begin(), outline.end(),
+				Eo::IObject::CHARACTER) != outline.end()) {
 			ret = true;
 		}
 	}
 	return ret;
 }
 
-Eo::IObject::Type Eo::Computer::getObjectType(Eo::vec3 pos, Eo::Rc<Eo::Map> map)
+Eo::IObject::Type
+Eo::Computer::getObjectType(Eo::vec3 pos, Eo::Rc<Eo::Map> map)
 {
 	IObject::Type type = NONE;
 
@@ -104,7 +113,7 @@ Eo::IObject::Type Eo::Computer::getObjectType(Eo::vec3 pos, Eo::Rc<Eo::Map> map)
 	auto posY = roundf(pos.Z) + map->getHeight() / 2;
 	auto object = map->getObject(posX, posY);
 	if (object)
-		type = object->getType();	
+		type = object->getType();
 	return type;
 }
 

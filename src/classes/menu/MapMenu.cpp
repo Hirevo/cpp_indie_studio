@@ -41,7 +41,8 @@ bool Eo::MapMenu::draw()
 
 void Eo::MapMenu::putBackgroundImage()
 {
-	irr::gui::IGUIEnvironment *env = this->_device->getDevice()->getGUIEnvironment();
+	irr::gui::IGUIEnvironment *env = this->_device->getDevice()
+		->getGUIEnvironment();
 	env->addImage(this->_device->getDriver()->getTexture(
 		(currPath + "../assets/img/menu-background.jpg").c_str()),
 		{0, 0});
@@ -55,7 +56,8 @@ void Eo::MapMenu::putLoadButton()
 	auto h = windowSize.Height;
 	auto pos = 3;
 	auto listbox = env->addListBox(
-		{(int)(w / 6), (int)((h / 8) * (pos + 1)), (int)(w / 6 + 2 * w / 3),
+		{(int)(w / 6), (int)((h / 8) * (pos + 1)),
+			(int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * (pos + 1) + h / 8 * 2)}, 0, 1337);
 	listbox->setDrawBackground(true);
 	std::string path = currPath + "../assets/maps/";

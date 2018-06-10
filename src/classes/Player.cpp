@@ -9,15 +9,20 @@
 #include "Game.hpp"
 #include <iostream>
 
-const Eo::Player::Directions Eo::Player::_dirs = {{North, 180.0f},
-	{South, 0.0f}, {East, 270.0f}, {West, 90.0f}, {NorthWest, 135.0f},
-	{NorthEast, 225.0f}, {SouthWest, 45.0f}, {SouthEast, 315.0f}};
+const Eo::Player::Directions Eo::Player::_dirs = {{North,     180.0f},
+						  {South,     0.0f},
+						  {East,      270.0f},
+						  {West,      90.0f},
+						  {NorthWest, 135.0f},
+						  {NorthEast, 225.0f},
+						  {SouthWest, 45.0f},
+						  {SouthEast, 315.0f}};
 
 Eo::Player::Player(Eo::Rc<Eo::IScene> game, Eo::Rc<Eo::Event> event,
 	Eo::Rc<Eo::Options> options, Eo::Rc<Eo::SoundDevice> sound,
 	const vec3 &pos, Eo::u64 id, bool isDead)
 	: AModel(Eo::IObject::Type::CHARACTER, pos), ACharacter(id),
-	  _event(event), _options(options), _sound(sound)
+	_event(event), _options(options), _sound(sound)
 {
 	this->_dead = isDead;
 	std::stringstream path;

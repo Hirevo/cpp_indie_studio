@@ -11,50 +11,52 @@
 #include "JsonWrite.hpp"
 #include "JsonRead.hpp"
 
-const std::unordered_map<Eo::SoundDevice::SoundPath, std::string> Eo::SoundDevice::_soundPath = {
+const std::unordered_map<Eo::SoundDevice::SoundPath, std::string>
+        Eo::SoundDevice::_soundPath = {
 	{MENUBGM, currPath + "../assets/sounds/BGM/main_theme.mp3"},
 	{GAMEBGM, currPath + "../assets/sounds/BGM/game_theme.mp3"},
-	{PAUSE, currPath + "../assets/sounds/effects/buttons/PAUSE.wav"},
+	{PAUSE,   currPath + "../assets/sounds/effects/buttons/PAUSE.wav"},
 	{CONFIRM, currPath + "../assets/sounds/effects/buttons/confirm.wav"},
-	{RESET, currPath + "../assets/sounds/effects/buttons/reset.wav"},
-	{SELECT, currPath + "../assets/sounds/effects/buttons/select.wav"},
-	{BOMBS, currPath + "../assets/sounds/effects/inGame/bombS.wav"},
-	{BOMBM, currPath + "../assets/sounds/effects/inGame/bombL.wav"},
-	{BOMBL, currPath + "../assets/sounds/effects/inGame/bombL.wav"},
-	{PLAY, currPath + "../assets/sounds/effects/inGame/play.wav"},
+	{RESET,   currPath + "../assets/sounds/effects/buttons/reset.wav"},
+	{SELECT,  currPath + "../assets/sounds/effects/buttons/select.wav"},
+	{BOMBS,   currPath + "../assets/sounds/effects/inGame/bombS.wav"},
+	{BOMBM,   currPath + "../assets/sounds/effects/inGame/bombL.wav"},
+	{BOMBL,   currPath + "../assets/sounds/effects/inGame/bombL.wav"},
+	{PLAY,    currPath + "../assets/sounds/effects/inGame/play.wav"},
 	{SETBOMB, currPath + "../assets/sounds/effects/inGame/setBomb.wav"},
-	{DEATH, currPath + "../assets/sounds/effects/inGame/death.wav"},
+	{DEATH,   currPath + "../assets/sounds/effects/inGame/death.wav"},
 	{GETITEM, currPath + "../assets/sounds/effects/inGame/getItem.wav"},
-	{HURRY, currPath + "../assets/sounds/effects/inGame/hurry.wav"},
+	{HURRY,   currPath + "../assets/sounds/effects/inGame/hurry.wav"},
 	{VICTORY, currPath + "../assets/sounds/BGM/victory.mp3"}
 };
 
-const std::unordered_map<Eo::SoundDevice::SoundPath, Eo::SoundDevice::SoundType> Eo::SoundDevice::_soundType = {
+const std::unordered_map<Eo::SoundDevice::SoundPath, Eo::SoundDevice::SoundType>
+        Eo::SoundDevice::_soundType = {
 	{MENUBGM, MUSIC},
 	{GAMEBGM, MUSIC},
-	{PAUSE, EFFECT},
+	{PAUSE,   EFFECT},
 	{CONFIRM, EFFECT},
-	{RESET, EFFECT},
-	{SELECT, EFFECT},
-	{BOMBS, EFFECT},
-	{BOMBM, EFFECT},
-	{BOMBL, EFFECT},
-	{PLAY, EFFECT},
+	{RESET,   EFFECT},
+	{SELECT,  EFFECT},
+	{BOMBS,   EFFECT},
+	{BOMBM,   EFFECT},
+	{BOMBL,   EFFECT},
+	{PLAY,    EFFECT},
 	{SETBOMB, EFFECT},
-	{DEATH, EFFECT},
+	{DEATH,   EFFECT},
 	{GETITEM, EFFECT},
-	{HURRY, EFFECT},
+	{HURRY,   EFFECT},
 	{VICTORY, EFFECT}
 };
 
 Eo::SoundDevice::SoundDevice()
 	: _music(irrklang::createIrrKlangDevice(irrklang::ESOD_AUTO_DETECT,
 	irrklang::ESEO_DEFAULT_OPTIONS /*- irrklang::ESEO_PRINT_DEBUG_INFO_TO_STDOUT*/)),
-	  _effects(irrklang::createIrrKlangDevice(irrklang::ESOD_AUTO_DETECT,
-		  irrklang::ESEO_DEFAULT_OPTIONS /*- irrklang::ESEO_PRINT_DEBUG_INFO_TO_STDOUT*/)),
-	  _gVolume(1.0f), _eVolume(_effects->getSoundVolume()),
-	  _mVolume(_music->getSoundVolume()),
-	  _gIsMute(false), _eIsMute(false), _mIsMute(false)
+	_effects(irrklang::createIrrKlangDevice(irrklang::ESOD_AUTO_DETECT,
+		irrklang::ESEO_DEFAULT_OPTIONS /*- irrklang::ESEO_PRINT_DEBUG_INFO_TO_STDOUT*/)),
+	_gVolume(1.0f), _eVolume(_effects->getSoundVolume()),
+	_mVolume(_music->getSoundVolume()),
+	_gIsMute(false), _eIsMute(false), _mIsMute(false)
 {
 	Eo::JsonRead file(".soundSettings");
 	if (file.good()) {

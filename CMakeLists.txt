@@ -16,9 +16,6 @@ include_directories(
 
 set(HEADER_FILES
         src/abstracts/ACharacter.hpp
-        src/abstracts/ACollectible.hpp
-        src/abstracts/AMonster.hpp
-        src/abstracts/APlayer.hpp
         src/abstracts/AScene.hpp
         src/classes/Bomb.hpp
         src/classes/Booster.hpp
@@ -50,12 +47,9 @@ set(HEADER_FILES
         src/classes/menu/MapMenu.cpp)
 
 add_executable(bomberman
-        src/abstracts/ACollectible.cpp
         src/abstracts/AModel.cpp
-        src/abstracts/AMonster.cpp
         src/abstracts/AMovable.cpp
         src/abstracts/AObject.cpp
-        src/abstracts/APlayer.cpp
         src/abstracts/AScene.cpp
         src/abstracts/ACharacter.cpp
         src/classes/Bomb.cpp
@@ -72,7 +66,6 @@ add_executable(bomberman
         src/classes/Game.cpp
         src/classes/JsonRead.cpp
         src/classes/JsonWrite.cpp
-        src/classes/Keymap.cpp
         src/classes/Map.cpp
         src/classes/menu/CreditsMenu.cpp
         src/classes/menu/GameMenu.cpp

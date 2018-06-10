@@ -9,21 +9,31 @@
 #include "AObject.hpp"
 #include "Booster.hpp"
 
-const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_mesh{
-	{Eo::Booster::BoosterType::SPEED, currPath + "../assets/Bomberman/PowerUp.x"},
-	{Eo::Booster::BoosterType::SUPERBOMB, currPath + "../assets/Bomberman/PowerUp.x"},
-	{Eo::Booster::BoosterType::NBBOMB, currPath + "../assets/Bomberman/PowerUp.x"},
-	{Eo::Booster::BoosterType::WALLPASS, currPath + "../assets/Bomberman/PowerUp.x"}};
+const std::unordered_map<Eo::Booster::BoosterType, std::string>
+        Eo::Booster::_mesh{
+	{Eo::Booster::BoosterType::SPEED,
+		currPath + "../assets/Bomberman/PowerUp.x"},
+	{Eo::Booster::BoosterType::SUPERBOMB,
+		currPath + "../assets/Bomberman/PowerUp.x"},
+	{Eo::Booster::BoosterType::NBBOMB,
+		currPath + "../assets/Bomberman/PowerUp.x"},
+	{Eo::Booster::BoosterType::WALLPASS,
+		currPath + "../assets/Bomberman/PowerUp.x"}};
 
-const std::unordered_map<Eo::Booster::BoosterType, std::string> Eo::Booster::_textures{
-	{Eo::Booster::BoosterType::SPEED, currPath + "../assets/img/roller.png"},
-	{Eo::Booster::BoosterType::SUPERBOMB, currPath + "../assets/img/superbomb.png"},
-	{Eo::Booster::BoosterType::NBBOMB, currPath + "../assets/img/bomb.png"},
-	{Eo::Booster::BoosterType::WALLPASS, currPath + "../assets/img/wall_pass.png"}};
+const std::unordered_map<Eo::Booster::BoosterType, std::string>
+        Eo::Booster::_textures{
+	{Eo::Booster::BoosterType::SPEED,
+		currPath + "../assets/img/roller.png"},
+	{Eo::Booster::BoosterType::SUPERBOMB,
+		currPath + "../assets/img/superbomb.png"},
+	{Eo::Booster::BoosterType::NBBOMB,
+		currPath + "../assets/img/bomb.png"},
+	{Eo::Booster::BoosterType::WALLPASS,
+		currPath + "../assets/img/wall_pass.png"}};
 
 Eo::Booster::Booster(Eo::Booster::BoosterType boosterType, Eo::vec3 pos)
 	: AObject(static_cast<Eo::IObject::Type>(boosterType), nullptr, pos),
-	  _boosterType(boosterType)
+	_boosterType(boosterType)
 {
 }
 
@@ -33,7 +43,7 @@ void Eo::Booster::insertInScene(const Eo::Rc<Eo::IScene> scene)
 	irr::f32 unitSize = 1.0f;
 	irr::core::vector3df rotation(0.0f, 0.0f, 0.0f);
 	irr::core::vector3df scale(0.2f, 0.2f, 0.2f);
-	_node =	manager->addAnimatedMeshSceneNode(manager->getMesh(
+	_node = manager->addAnimatedMeshSceneNode(manager->getMesh(
 		_mesh.at(_boosterType).c_str()), nullptr, -1, _pos,
 		rotation, scale);
 	_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);

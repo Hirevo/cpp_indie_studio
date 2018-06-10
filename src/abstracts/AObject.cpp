@@ -11,11 +11,12 @@
 Eo::AObject::AObject(
 	Eo::IObject::Type type, Eo::node *node, Eo::vec3 pos)
 	: AMovable(pos), _type(type), _node(node), _placedInScene(false),
-	  _hasNode(node != nullptr)
+	_hasNode(node != nullptr)
 {
 }
 
-Eo::AObject::~AObject() {
+Eo::AObject::~AObject()
+{
 	this->removeFromScene();
 }
 

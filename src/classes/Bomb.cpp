@@ -11,7 +11,8 @@
 #include <iostream>
 #include <exception>
 
-const std::unordered_map<Eo::Bomb::BombSize, Eo::SoundDevice::SoundPath> Eo::Bomb::_soundPath = {
+const std::unordered_map<Eo::Bomb::BombSize, Eo::SoundDevice::SoundPath>
+        Eo::Bomb::_soundPath = {
 	{SMALL,  Eo::SoundDevice::BOMBS},
 	{MEDIUM, Eo::SoundDevice::BOMBM},
 	{LARGE,  Eo::SoundDevice::BOMBL},

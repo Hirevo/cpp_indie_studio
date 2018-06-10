@@ -61,7 +61,8 @@ std::vector<std::vector<Eo::i32>> Eo::JsonRead::readMatrix(
 
 
 
-std::vector<std::vector<Eo::f32>> Eo::JsonRead::readPlayersPos(std::string const &name)
+std::vector<std::vector<Eo::f32>> Eo::JsonRead::readPlayersPos(std::string
+const &name)
 {
 	std::vector<std::vector<Eo::f32>> matrix;
 	int x = 0;

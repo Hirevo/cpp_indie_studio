@@ -27,7 +27,7 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound,
 	bool randomize)
 	: AScene(event, device, sceneHandler, sound), _json(mapPath),
-	  _map(Eo::initRc<Eo::Map>(_json, randomize)), _camera(_map->getWidth()),
+	_map(Eo::initRc<Eo::Map>(_json, randomize)), _camera(_map->getWidth()),
 	_options(options), _deathOrder()
 {
 	_sound->stopMusic();
@@ -44,7 +44,7 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 			_sound,
 			vec3(getPlayerPos(i).X, -0.5f, getPlayerPos(i).Y), i,
 			getPlayerPos(i).Z != 1);
-	for (Eo::u32 i = 3; i >= _options->getNbPlayer(); i--) {
+	for (Eo::u32 i = 3 ; i >= _options->getNbPlayer() ; i--) {
 		_computers.at(i - 1) = Eo::initRc<Eo::Computer>(_sound,
 			ref, vec3(getPlayerPos(i).X, 0, getPlayerPos(i).Y), i,
 			getPlayerPos(i).Z != 1);
@@ -274,7 +274,11 @@ bool Eo::Game::gameOver()
 				std::stringstream tmp;
 				tmp << "Player ";
 				tmp << p->getPlayerID() + 1;
-				if (p->isDead() && std::find(this->_deathOrder.begin(), this->_deathOrder.end(), tmp.str()) == this->_deathOrder.end())
+				if (p->isDead() &&
+					std::find(this->_deathOrder.begin(),
+						this->_deathOrder.end(),
+						tmp.str()) ==
+						this->_deathOrder.end())
 					this->_deathOrder.push_back(tmp.str());
 			}
 		});
@@ -284,7 +288,11 @@ bool Eo::Game::gameOver()
 				std::stringstream tmp;
 				tmp << "Computer ";
 				tmp << cpt->getPlayerID() + 1;
-				if (cpt->isDead() && std::find(this->_deathOrder.begin(), this->_deathOrder.end(), tmp.str()) == this->_deathOrder.end())
+				if (cpt->isDead() &&
+					std::find(this->_deathOrder.begin(),
+						this->_deathOrder.end(),
+						tmp.str()) ==
+						this->_deathOrder.end())
 					this->_deathOrder.push_back(tmp.str());
 			}
 		});
@@ -315,9 +323,9 @@ void Eo::Game::update()
 			auto obj = _map->getObject(v.X, v.Y);
 			if (obj.get() && obj->getType()
 				== Eo::IObject::Type::FLAME) {
-					player->die();
-					return;
-				}
+				player->die();
+				return;
+			}
 			auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *_) {});
 			player->move(ref);
 			Eo::IObject::Type type = CollectibleMove(
@@ -327,23 +335,23 @@ void Eo::Game::update()
 		});
 	std::for_each(_computers.begin(), _computers.end(),
 		[this](Eo::Rc<Eo::Computer> &computer) {
-		if (computer.get() == nullptr || computer->isDead())
-			return;
-		auto v = _map->translate2D(computer->getPosition());
-		auto obj = _map->getObject(v.X, v.Y);
-		if (obj.get() && obj->getType()
-			== Eo::IObject::Type::FLAME) {
+			if (computer.get() == nullptr || computer->isDead())
+				return;
+			auto v = _map->translate2D(computer->getPosition());
+			auto obj = _map->getObject(v.X, v.Y);
+			if (obj.get() && obj->getType()
+				== Eo::IObject::Type::FLAME) {
 				computer->die();
 				return;
 			}
-		computer->updatePosition(_map);
-		if (computer->checkPoseBomb(_map)) {
-			auto bombs = computer->getAvailableBombs();
-			if (bombs > 0)
-				placeBomb(computer, bombs);
-		}
-		computer->updateInScene();
-	});
+			computer->updatePosition(_map);
+			if (computer->checkPoseBomb(_map)) {
+				auto bombs = computer->getAvailableBombs();
+				if (bombs > 0)
+					placeBomb(computer, bombs);
+			}
+			computer->updateInScene();
+		});
 }
 
 Eo::Rc<Eo::Map> Eo::Game::getMap()

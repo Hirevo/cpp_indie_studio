@@ -10,7 +10,7 @@
 
 Eo::Flame::Flame(Eo::Rc<Eo::IScene> scene, Eo::vec3 pos)
 	: AModel(Eo::IObject::Type::FLAME, pos),
-	  _clock(std::chrono::high_resolution_clock::now())
+	_clock(std::chrono::high_resolution_clock::now())
 {
 	Eo::Flame::insertInScene(scene);
 }

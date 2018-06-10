@@ -27,7 +27,8 @@ bool Eo::SettingsMenu::draw()
 		this->_device->getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font = env->getFont(
-		(currPath + "../assets/font/fonthaettenschweiler.bmp").c_str());
+		(currPath +
+			"../assets/font/fonthaettenschweiler.bmp").c_str());
 	if (font)
 		skin->setFont(font);
 	this->putBackgroundImage();
@@ -43,8 +44,8 @@ void Eo::SettingsMenu::putBackgroundImage()
 {
 	auto *env = this->_device->getDevice()->getGUIEnvironment();
 	env->addImage(this->_device->getDriver()->getTexture(
-		(currPath + "../assets/img/menu-background.jpg").c_str())
-		, {0, 0});
+		(currPath + "../assets/img/menu-background.jpg").c_str()),
+		{0, 0});
 }
 
 void Eo::SettingsMenu::putSetGeneralVolume()

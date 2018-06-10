@@ -17,21 +17,21 @@ Eo::JsonWrite::~JsonWrite()
 }
 
 void Eo::JsonWrite::writeSingleValue(std::string const &name,
-				     std::string const &value)
+	std::string const &value)
 {
 	this->_root.put(name, value);
 }
 
 void Eo::JsonWrite::writeMatrix(std::string const &name,
-				std::vector<std::vector<Eo::i32>>
-				const &value)
+	std::vector<std::vector<Eo::i32>>
+	const &value)
 {
 	boost::property_tree::ptree matrix_node;
 
-	for (int i = 0; i < value.size(); i++) {
+	for (int i = 0 ; i < value.size() ; i++) {
 		boost::property_tree::ptree row;
 
-		for (int j = 0; j < value.at(i).size(); j++) {
+		for (int j = 0 ; j < value.at(i).size() ; j++) {
 			boost::property_tree::ptree cell;
 
 			cell.put_value(value.at(i).at(j));
@@ -43,15 +43,15 @@ void Eo::JsonWrite::writeMatrix(std::string const &name,
 }
 
 void Eo::JsonWrite::writePlayersPos(std::string const &name,
-				    std::vector<std::vector<Eo::f32>>
-				    const &value)
+	std::vector<std::vector<Eo::f32>>
+	const &value)
 {
 	boost::property_tree::ptree matrix_node;
 
-	for (int i = 0; i < value.size(); i++) {
+	for (int i = 0 ; i < value.size() ; i++) {
 		boost::property_tree::ptree row;
 
-		for (int j = 0; j < value.at(i).size(); j++) {
+		for (int j = 0 ; j < value.at(i).size() ; j++) {
 			boost::property_tree::ptree cell;
 
 			cell.put_value(value.at(i).at(j));

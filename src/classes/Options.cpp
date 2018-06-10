@@ -11,8 +11,8 @@
 
 Eo::Options::Options()
 	: _windowSize(1920, 1010), _exit(false), _debugMode(false),
-	  _keyExit(irr::EKEY_CODE::KEY_F4),
-	  _keyDebugMode(irr::EKEY_CODE::KEY_F2), _nbPlayer(1)
+	_keyExit(irr::EKEY_CODE::KEY_F4),
+	_keyDebugMode(irr::EKEY_CODE::KEY_F2), _nbPlayer(1)
 {
 	_playerKeys.at(0)._bomb = Eo::keyCode::KEY_KEY_A;
 	_playerKeys.at(0)._up = Eo::keyCode::KEY_KEY_Z;

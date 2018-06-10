@@ -18,18 +18,22 @@ const std::pair<Eo::u32, Eo::u32> Eo::Map::_defaultSize = {21, 21};
 Eo::Map::Map(Eo::u32 w, Eo::u32 h) : _w(w), _h(h)
 {
 	_map.reserve(_w * _h);
-	// std::fill(_map.begin(), _map.end(), Eo::Rc<Eo::IObject>(nullptr));
-	for (Eo::u32 i = 0; i < _h; i++)
-		for (Eo::u32 j = 0; j < _w; j++) {
+	for (Eo::u32 i = 0 ; i < _h ; i++)
+		for (Eo::u32 j = 0 ; j < _w ; j++) {
 			auto isWall = i == 0 || j == 0 || i == (_h - 1) ||
 				j == (_w - 1) || (i % 2 == 0 && j % 2 == 0);
-			auto empty = !(((i > 0 && i <= 2) && (j > 0 && j <= 2)) ||
-				((j < _w - 1 && j >= _w - 3) && (i < _h - 1 && i >= _h - 3)) ||
-				((j < _w - 1 && j >= _w - 3) && (i > 0 && i <= 2)) ||
-				((j > 0 && j <= 2) && (i < _h - 1 && i >= _h - 3)));
+			auto empty = !(
+				((i > 0 && i <= 2) && (j > 0 && j <= 2)) ||
+					((j < _w - 1 && j >= _w - 3) &&
+						(i < _h - 1 && i >= _h - 3)) ||
+					((j < _w - 1 && j >= _w - 3) &&
+						(i > 0 && i <= 2)) ||
+					((j > 0 && j <= 2) &&
+						(i < _h - 1 && i >= _h - 3)));
 			_map.emplace_back(isWall ?
-					new Wall(Eo::Wall::INDESTRUCTIBLE) :
-				(empty && rand() % 5 != 1? new Wall(Eo::Wall::DESTRUCTIBLE) :
+				new Wall(Eo::Wall::INDESTRUCTIBLE) :
+				(empty && rand() % 5 != 1 ? new Wall(
+					Eo::Wall::DESTRUCTIBLE) :
 					nullptr));
 		}
 }
@@ -67,13 +71,18 @@ Eo::Map::Map(Eo::JsonRead &json, bool randomize) : _w(0), _h(0)
 	_h = matrix.at(0).size();
 	_map.reserve(_w * _h);
 	// std::fill(_map.begin(), _map.end(), Eo::Rc<Eo::IObject>(nullptr));
-	for (Eo::u32 i = 0; i < _h; i++)
-		for (Eo::u32 j = 0; j < _w; j++) {
-			auto empty = !(((i > 0 && i <= 2) && (j > 0 && j <= 2)) ||
-				((j < _w - 1 && j >= _w - 3) && (i < _h - 1 && i >= _h - 3)) ||
-				((j < _w - 1 && j >= _w - 3) && (i > 0 && i <= 2)) ||
-				((j > 0 && j <= 2) && (i < _h - 1 && i >= _h - 3)));
-			if ((i == 0 || j == 0 || i == (_w - 1) || j == (_h - 1))
+	for (Eo::u32 i = 0 ; i < _h ; i++)
+		for (Eo::u32 j = 0 ; j < _w ; j++) {
+			auto empty = !(
+				((i > 0 && i <= 2) && (j > 0 && j <= 2)) ||
+					((j < _w - 1 && j >= _w - 3) &&
+						(i < _h - 1 && i >= _h - 3)) ||
+					((j < _w - 1 && j >= _w - 3) &&
+						(i > 0 && i <= 2)) ||
+					((j > 0 && j <= 2) &&
+						(i < _h - 1 && i >= _h - 3)));
+			if ((i == 0 || j == 0 || i == (_w - 1) ||
+				j == (_h - 1))
 				&& matrix.at(i).at(j) == 1)
 				_map.emplace_back(v.at(7)());
 			else if (randomize && !(matrix.at(i).at(j)))
@@ -125,9 +134,9 @@ std::vector<std::vector<Eo::i32>> Eo::Map::generateMatrix()
 {
 	std::vector<std::vector<Eo::i32>> ret;
 
-	for (int i = 0; i < _h; i++) {
+	for (int i = 0 ; i < _h ; i++) {
 		ret.emplace_back();
-		for (int j = 0; j < _w; j++) {
+		for (int j = 0 ; j < _w ; j++) {
 			auto &obj = _map[i * _w + j];
 			if (obj && obj->getType() < 7)
 				ret[i].emplace_back(obj->getType());
@@ -144,11 +153,11 @@ void Eo::Map::generateMap(const std::string &mapPath)
 	_w = json.readMatrix("map").size();
 	_h = json.readMatrix("map").at(0).size();
 
-	for (Eo::u32 l = 0; l < _h; ++l) {
+	for (Eo::u32 l = 0 ; l < _h ; ++l) {
 		putObject(new Eo::Wall(Eo::Wall::INDESTRUCTIBLE), 0, l);
 		putObject(new Eo::Wall(Eo::Wall::INDESTRUCTIBLE), _h, l);
 	}
-	for (Eo::u32 l = 1; l < _w - 1; ++l) {
+	for (Eo::u32 l = 1 ; l < _w - 1 ; ++l) {
 		putObject(new Eo::Wall(Eo::Wall::INDESTRUCTIBLE), 0, 1);
 		putObject(new Eo::Wall(Eo::Wall::INDESTRUCTIBLE), l, _h - 1);
 	}
@@ -158,15 +167,16 @@ bool Eo::Map::update(Eo::Rc<Eo::IScene> scene)
 {
 	std::for_each(_map.begin(), _map.end(),
 		[scene](Eo::Rc<Eo::IObject> &obj) {
-		if (obj.get() != nullptr && !obj->update()) {
-			auto isBomb = obj->getType() == Eo::IObject::Type::BOMB;
-			if (isBomb)
-				obj = Eo::initRc<Eo::Flame>(scene,
-					obj->getPosition());
-			else
-				obj = nullptr;
-		}
-	});
+			if (obj.get() != nullptr && !obj->update()) {
+				auto isBomb = obj->getType() ==
+					Eo::IObject::Type::BOMB;
+				if (isBomb)
+					obj = Eo::initRc<Eo::Flame>(scene,
+						obj->getPosition());
+				else
+					obj = nullptr;
+			}
+		});
 	return true;
 }
 

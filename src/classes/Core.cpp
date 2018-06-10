@@ -17,13 +17,15 @@
 
 Eo::Core::Core(Eo::Rc<Eo::Options> options, Eo::Rc<Eo::Device> device)
 	: _options(options), _device(device),
-	  _sceneHandler(Eo::initRc<Eo::SceneHandler>(_device)),
-	  _debug(Eo::initRc<Eo::Debug>(_device, _sceneHandler)),
-	  _event(Eo::initRc<Eo::Event>()), _sound(Eo::initRc<Eo::SoundDevice>())
+	_sceneHandler(Eo::initRc<Eo::SceneHandler>(_device)),
+	_debug(Eo::initRc<Eo::Debug>(_device, _sceneHandler)),
+	_event(Eo::initRc<Eo::Event>()), _sound(Eo::initRc<Eo::SoundDevice>())
 {
 	_device->getDevice()->setResizable(false);
 	_device->getDevice()->setEventReceiver(_event.get());
-	_sceneHandler->loadScene(Eo::initRc<Eo::MainMenu>(_event, _device, _sceneHandler, _sound));
+	_sceneHandler->loadScene(
+		Eo::initRc<Eo::MainMenu>(_event, _device, _sceneHandler,
+			_sound));
 
 	while (_device->getDevice()->run() && !_options->isExit()) {
 		Eo::Debug debug(_device, _sceneHandler);

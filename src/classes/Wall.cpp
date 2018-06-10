@@ -8,18 +8,24 @@
 #include "Wall.hpp"
 
 const std::unordered_map<Eo::Wall::WallType, std::string> Eo::Wall::_models{
-	{Eo::Wall::WallType::DESTRUCTIBLE, currPath + "../assets/Bomberman/Brick.x"},
-	{Eo::Wall::WallType::INDESTRUCTIBLE, currPath + "../assets/Bomberman/Block.x"},
-	{Eo::Wall::WallType::BOUNDS, currPath + "../assets/Bomberman/Bound.x"}};
+	{Eo::Wall::WallType::DESTRUCTIBLE,
+		currPath + "../assets/Bomberman/Brick.x"},
+	{Eo::Wall::WallType::INDESTRUCTIBLE,
+		currPath + "../assets/Bomberman/Block.x"},
+	{Eo::Wall::WallType::BOUNDS,
+		currPath + "../assets/Bomberman/Bound.x"}};
 
 const std::unordered_map<Eo::Wall::WallType, std::string> Eo::Wall::_textures{
-	{Eo::Wall::WallType::DESTRUCTIBLE, currPath + "../assets/img/brick.png"},
-	{Eo::Wall::WallType::INDESTRUCTIBLE, currPath + "../assets/img/pylone.png"},
-	{Eo::Wall::WallType::BOUNDS, currPath + "../assets/img/block.png"}};
+	{Eo::Wall::WallType::DESTRUCTIBLE,
+		currPath + "../assets/img/brick.png"},
+	{Eo::Wall::WallType::INDESTRUCTIBLE,
+		currPath + "../assets/img/pylone.png"},
+	{Eo::Wall::WallType::BOUNDS,
+		currPath + "../assets/img/block.png"}};
 
 Eo::Wall::Wall(Eo::Wall::WallType wallType, Eo::vec3 pos)
 	: AModel(static_cast<Eo::IObject::Type>((wallType == BOUNDS)
-		? INDESTRUCTIBLE : wallType), pos), _wallType(wallType)
+	? INDESTRUCTIBLE : wallType), pos), _wallType(wallType)
 {
 }
 
