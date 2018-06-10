@@ -177,3 +177,11 @@ Eo::vec2 Eo::Map::translate2D(Eo::vec3 vec)
 	vec2.Y += this->getHeight() / 2;
 	return vec2;
 }
+
+Eo::vec3 Eo::Map::translate3D(Eo::vec2 vec)
+{
+	Eo::vec3 vec3(vec.X, 0, vec.Y);
+	vec3.X -= this->getWidth() / 2;
+	vec3.Z -= this->getHeight() / 2;
+	return vec3;
+}

@@ -112,6 +112,7 @@ endif()
 
 set(IRRKLANG_DIR ./libs/irrklang)
 if(UNIX)
+    target_link_libraries(bomberman stdc++fs)
     set(IRRKLANG_LIBRARY ${PROJECT_SOURCE_DIR}/libs/irrklang/bin/Linux64/libIrrKlang.so)
     add_custom_command(TARGET bomberman PRE_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy

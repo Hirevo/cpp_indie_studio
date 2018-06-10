@@ -30,8 +30,9 @@ namespace Eo {
 		std::vector<std::vector<Eo::i32>> generateMatrix();
 		bool update(Eo::Rc<Eo::IScene> scene) override;
 		Eo::vec2 translate2D(Eo::vec3);
-
+		Eo::vec3 translate3D(Eo::vec2);
 		static const std::pair<Eo::u32, Eo::u32> _defaultSize;
+
 	private:
 		Eo::i32 _w;
 		Eo::i32 _h;

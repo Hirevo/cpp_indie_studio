@@ -300,6 +300,13 @@ void Eo::Game::update()
 		[this](Eo::Rc<Eo::Player> &player) {
 			if (player.get() == nullptr || player->isDead())
 				return;
+			auto v = _map->translate2D(player->getPosition());
+			auto obj = _map->getObject(v.X, v.Y);
+			if (obj.get() && obj->getType()
+				== Eo::IObject::Type::FLAME) {
+					player->die();
+					return;
+				}
 			auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *_) {});
 			player->move(ref);
 			Eo::IObject::Type type = CollectibleMove(
@@ -311,6 +318,13 @@ void Eo::Game::update()
 		[this](Eo::Rc<Eo::Computer> &computer) {
 		if (computer.get() == nullptr || computer->isDead())
 			return;
+		auto v = _map->translate2D(computer->getPosition());
+		auto obj = _map->getObject(v.X, v.Y);
+		if (obj.get() && obj->getType()
+			== Eo::IObject::Type::FLAME) {
+				computer->die();
+				return;
+			}
 		computer->updatePosition(_map);
 		if (computer->checkPoseBomb(_map)) {
 			auto bombs = computer->getAvailableBombs();
@@ -336,19 +350,19 @@ void Eo::Game::useCollectible(Eo::IObject::Type type,
 	auto object = _map->getObject(posf.X, posf.Y);
 	auto boosterType = static_cast<Eo::Booster::BoosterType>(type);
 
-	if (type == Booster::SPEED) {
+	if (boosterType == Booster::SPEED) {
 		auto speed = player->getSpeed();
 		player->setSpeed(speed < _maxSpeed ? speed + _speedBonus : speed);
 		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
-	else if (type == Booster::SUPERBOMB) {
+	else if (boosterType == Booster::SUPERBOMB) {
 		auto sbomb = player->getBombRadius();
 		player->setBombRadius(sbomb < 100 ? sbomb + 1 : sbomb);
 		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
-	else if (type == Booster::NBBOMB) {
+	else if (boosterType == Booster::NBBOMB) {
 		auto nbomb = player->getBombRadius();
 		auto abomb = player->getAvailableBombs();
 		player->setBombRadius(nbomb < 100 ? nbomb + 1 : nbomb);
@@ -356,7 +370,7 @@ void Eo::Game::useCollectible(Eo::IObject::Type type,
 		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}
-	else if (type == Booster::WALLPASS) {
+	else if (boosterType == Booster::WALLPASS) {
 		player->setWallPass(true);
 		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
