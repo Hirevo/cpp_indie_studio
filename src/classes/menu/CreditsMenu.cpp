@@ -66,8 +66,8 @@ void Eo::CreditsMenu::putCredits()
 {
 	auto *env = this->_device->getDevice()->getGUIEnvironment();
 	auto windowSize = this->_device->getOptions()->getWindowSize();
-	auto w = windowSize.Width;
-	auto h = windowSize.Height;
+	irr::s32 w = windowSize.Width;
+	irr::s32 h = windowSize.Height;
 	env->addImage(this->_device->getDriver()->getTexture(
 		"../assets/img/credits.png"),
 		{w / 2 - 512, h / 2 - 512});
