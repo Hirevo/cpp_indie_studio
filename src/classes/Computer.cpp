@@ -62,7 +62,10 @@ void Eo::Computer::updatePosition(Eo::Rc<Eo::Map> map)
 {
 	if (_counter == 0)
 		searchDirection(map);
-	if (isValidDirection(this->getPosition() + _dir, map)) {
+	Eo::vec3 v(0);
+	v.X = (_dir.X != 0) ? ((_dir.X > 0) ? _dir.X + 0.4 : _dir.X - 0.4) : v.X;
+	v.Z = (_dir.Z != 0) ? ((_dir.Z > 0) ? _dir.Z + 0.4 : _dir.Z - 0.4) : v.Z;
+	if (this->isValidMove(map, this->getPosition(), v)) {
 		this->translate(_dir);
 		_counter--;
 	} else
@@ -80,7 +83,8 @@ bool Eo::Computer::checkPoseBomb(Eo::Rc<Eo::Map> map)
 		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0, 0, -0.8f)), map));
 		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(0.8, 0, 0)), map));
 		outline.push_back(getObjectType(vec3(this->getPosition() + vec3(-0.8f, 0, 0)), map));
-		if (std::find(outline.begin(), outline.end(), Eo::IObject::DEST_WALL) != outline.end()) {
+		if (std::find(outline.begin(), outline.end(), Eo::IObject::DEST_WALL) != outline.end() ||
+		    std::find(outline.begin(), outline.end(), Eo::IObject::CHARACTER) != outline.end()) {
 			ret = true;
 		}
 	}
@@ -97,11 +101,4 @@ Eo::IObject::Type Eo::Computer::getObjectType(Eo::vec3 pos, Eo::Rc<Eo::Map> map)
 	if (object)
 		type = object->getType();
 	return type;
-}
-
-bool Eo::Computer::isValidDirection(Eo::vec3 pos, Eo::Rc<Eo::Map> map)
-{
-	auto type = getObjectType(pos, map);
-
-	return !(type == IObject::WALL || type == IObject::DEST_WALL);
 }
