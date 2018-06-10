@@ -269,12 +269,14 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::GameMenu::EventType::Resume),
 		[this](bool &toRemove, const Eo::event &event) {
+			this->_sound->play(Eo::SoundDevice::CONFIRM);
 			this->_sceneHandler->unloadCurrentScene();
 		});
 	_event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::GameMenu::EventType::Settings),
 		[this](bool &toRemove, const Eo::event &event) {
+			this->_sound->play(Eo::SoundDevice::CONFIRM);
 			this->_sceneHandler->loadScene(
 				Eo::initRc<Eo::SettingsMenu>(_event, _device,
 					_sceneHandler, _sound));

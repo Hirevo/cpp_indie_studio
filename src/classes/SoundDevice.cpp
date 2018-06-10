@@ -44,7 +44,7 @@ const std::unordered_map<Eo::SoundDevice::SoundPath, Eo::SoundDevice::SoundType>
 	{DEATH, EFFECT},
 	{GETITEM, EFFECT},
 	{HURRY, EFFECT},
-	{VICTORY, MUSIC}
+	{VICTORY, EFFECT}
 };
 
 Eo::SoundDevice::SoundDevice()
