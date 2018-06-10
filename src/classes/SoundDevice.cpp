@@ -224,7 +224,7 @@ void Eo::SoundDevice::unMuteMusic()
 {
 	_mIsMute = false;
 	_gIsMute = false;
-	_effects->setSoundVolume(_mVolume * _gVolume);
+	_music->setSoundVolume(_mVolume * _gVolume);
 }
 
 bool Eo::SoundDevice::generalIsMute() const
