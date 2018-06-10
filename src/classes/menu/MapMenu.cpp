@@ -8,17 +8,7 @@
 #include <algorithm>
 #include "MapMenu.hpp"
 #include <iostream>
-
-#ifdef _WIN32
-
-	#include <windows.h>
-	#include <tchar.h>
-	#include <filesystem>
-
-#elif __linux__
-	#include <dirent.h>
-#endif
-
+#include <filesystem>
 #include "menu/MainMenu.hpp"
 
 Eo::MapMenu::MapMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
@@ -58,22 +48,6 @@ void Eo::MapMenu::putBackgroundImage()
 		{0, 0});
 }
 
-#ifdef __linux__
-static int mapfilter(const struct dirent *dir)
-{
-	const char *s = dir->d_name;
-	int len = strlen(s);
-	if(len >= 0)
-	{
-		if (strncmp(s, "map", 3) == 0)
-			return 1;
-		else if (strcmp(s, "save.json") == 0)
-			return 1;
-	}
-	return 0;
-}
-#endif
-
 void Eo::MapMenu::putLoadButton()
 {
 	auto *env = this->_device->getDevice()->getGUIEnvironment();
@@ -86,36 +60,11 @@ void Eo::MapMenu::putLoadButton()
 			(int)((h / 8) * pos + h / 8)});
 	listbox->setDrawBackground(true);
 	std::string path = currPath + "../assets/maps/";
-	#ifdef _WIN32
 	for (auto &p : std::filesystem::directory_iterator(path)) {
 		std::wstring tmp = p.path().filename().wstring();
 		tmp = tmp.substr(0, tmp.size() - 5);
 		listbox->addItem(tmp.c_str());
 	}
-	//	WIN32_FIND_DATAA data;
-	//	HANDLE handle = FindFirstFileA(path.c_str(), &data);
-	//	do {
-	//		std::string name = std::string(data.cFileName);
-	//		std::cout << name << std::endl;
-	//		std::string tmp = name;
-	//		tmp = tmp.substr(0, tmp.size() - 5);
-	//		std::wstring text(tmp.begin(), tmp.end());
-	//		listbox->addItem(text.c_str());
-	//	} while (FindNextFile(handle, &data));
-	//	FindClose(handle);
-	#elif __linux__
-	struct dirent **fileListTemp;
-	int nb = scandir(path.c_str(), &fileListTemp, mapfilter, alphasort);
-	for(int i = 0; i < nb; i++) {
-		if (fileListTemp[i]->d_type != DT_REG)
-			continue;
-		std::cout << fileListTemp[i]->d_name << std::endl;
-		std::string tmp = fileListTemp[i]->d_name;
-		tmp = tmp.substr(0, tmp.size() - 5);
-		std::wstring text(tmp.begin(), tmp.end());
-		listbox->addItem(text.c_str());
-	}
-	#endif
 	pos = 4;
 	env->addButton(
 		{(int)(w / 6), (int)((h / 8) * pos), (int)(w / 6 + 2 * w / 3),
