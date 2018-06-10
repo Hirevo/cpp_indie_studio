@@ -62,5 +62,6 @@ namespace Eo {
 		std::string _mapName = "map4.json";
 		std::vector<std::vector<float>> _playersPos;
 		Eo::vec2 getPlayerPos(size_t playerId);
+		std::vector<Eo::u64> _deathOrder;
 	};
 }

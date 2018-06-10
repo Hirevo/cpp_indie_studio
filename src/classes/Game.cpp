@@ -22,7 +22,7 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
 	: AScene(event, device, sceneHandler, sound), _json(mapPath),
 	  _map(Eo::initRc<Eo::Map>(_json)), _camera(_map->getWidth()),
-	_options(options)
+	_options(options), _deathOrder()
 {
 	_sound->stopMusic();
 	_sound->play(Eo::SoundDevice::GAMEBGM, true);
@@ -221,19 +221,31 @@ void Eo::Game::addEvents()
 
 bool Eo::Game::gameOver()
 {
-	int count(0);
-
 	std::for_each(_players.begin(), _players.end(),
-		[this, &count](Eo::Rc<Eo::Player> &player) {
-			if (player && player->isDead())
-				count++;
+		[this](Eo::Rc<Eo::Player> &player) {
+			if (player) {
+				if (player->isDead() &&
+					std::find(this->_deathOrder.begin(),
+					this->_deathOrder.end(),
+						player->getPlayerID()) ==
+					this->_deathOrder.end())
+					this->_deathOrder.push_back(
+						player->getPlayerID());
+			}
 	});
 	std::for_each(_computers.begin(), _computers.end(),
-		[this, &count](Eo::Rc<Eo::Computer> &computer) {
-			if (computer && computer->isDead())
-				count++;
+		[this](Eo::Rc<Eo::Computer> &computer) {
+			if (computer) {
+				if (computer->isDead() &&
+					std::find(this->_deathOrder.begin(),
+						this->_deathOrder.end(),
+						computer->getPlayerID()) ==
+						this->_deathOrder.end())
+					this->_deathOrder.push_back(
+						computer->getPlayerID());
+			}
 		});
-	return count >= 3;
+	return _deathOrder.size() >= 3;
 }
 
 void Eo::Game::update()
