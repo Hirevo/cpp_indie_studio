@@ -58,7 +58,11 @@ void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 		this->getAnimatedNode()->setAnimationSpeed(0.00001f);
 		this->getAnimatedNode()->setCurrentFrame(16);
 	}
-	if (isValidMove(scene->getMap(), Eo::Player::getPosition(), newDir)) {
+	if (isValidMove(scene->getMap(), Eo::Player::getPosition(), newDir) &&
+		isValidMove(scene->getMap(), Eo::Player::getPosition(),
+			Eo::vec3(newDir.X, 0, 0)) &&
+		isValidMove(scene->getMap(), Eo::Player::getPosition(),
+			Eo::vec3(0, 0, newDir.Z))) {
 		try {
 			Eo::Player::setRotation(Eo::Player::_dirs.at(
 				static_cast<Eo::Player::Facing>(flags)));

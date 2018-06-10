@@ -15,61 +15,13 @@
 #include <menu/SettingsMenu.hpp>
 #include <menu/CreditsMenu.hpp>
 
-// static const std::map<std::pair<Eo::eventType, irr::s32>, Eo::eventHandler>
-// 	events = {{{Eo::eventType::EGET_BUTTON_CLICKED,
-// 			Eo::MainMenu::EventType::Play},
-			//   [](Eo::Device &device, Eo::Options &options,
-			// 	  Eo::SceneHandler &sceneHandler) {
-			// 	  std::cout << sceneHandler.getSceneCount();
-			// 	  std::cout << std::endl;
-			// 	  sceneHandler.loadScene(new Eo::Game(
-			// 		  device, "../map4.json"));
-			// 	  std::cout << sceneHandler.getSceneCount()
-			// 		  << std::endl;
-			//   }},
-// 		  {{Eo::eventType::EGET_BUTTON_CLICKED,
-// 			Eo::MainMenu::EventType::Exit},
-// 			  [](Eo::Device &device, Eo::Options &options,
-// 				  Eo::SceneHandler &sceneHandler) {
-// 				  options.setExit(true);
-// 			  }},
-// 		  {{Eo::eventType::EGET_BUTTON_CLICKED,
-// 			Eo::MainMenu::EventType::Credits},
-			//   [](Eo::Device &device, Eo::Options &options,
-			// 	  Eo::SceneHandler &sceneHandler) {
-			// 	  sceneHandler.loadScene(
-			// 		  new Eo::CreditsMenu(device));
-			//   }},
-// 		  {{Eo::eventType::EGET_BUTTON_CLICKED, Eo::MainMenu::Settings},
-			//   [](Eo::Device &device, Eo::Options &options,
-			// 	  Eo::SceneHandler &sceneHandler) {
-			// 	  sceneHandler.loadScene(
-			// 		   new Eo::SettingsMenu(device));
-			//   }},
-// 		  {{Eo::eventType::EGET_BUTTON_CLICKED,
-// 			   Eo::SettingsMenu::EventType::Return},
-			//   [](Eo::Device &device, Eo::Options &options,
-			// 	  Eo::SceneHandler &sceneHandler) {
-			// 	  sceneHandler.unloadCurrentScene();
-			//   }},
-// 		  {{Eo::eventType::EGET_BUTTON_CLICKED,
-// 			   Eo::CreditsMenu::EventType::Return},
-// 			  [](Eo::Device &device, Eo::Options &options,
-// 				  Eo::SceneHandler &sceneHandler) {
-// 				  sceneHandler.unloadCurrentScene();
-// 			  }}};
-
 Eo::Event::Event()
 {
 }
 
 bool Eo::Event::OnEvent(const Eo::event &event)
 {
-	// Todo For polo memories
-	// std::map<Eo::keyCode, void (*)(const Eo::event &)> keyHandler{
-	// 	{_options.getKeyExit(), &Eo::Event::keyExit},
-	// 	{_options.getKeyDebugMode(), &Eo::Event::keyDebugToggle}};
-
+	Eo::Event::execTasks();
 	try {
 		if (event.EventType == irr::EET_KEY_INPUT_EVENT)
 			Eo::Event::handleKeyEvent(event);
@@ -151,6 +103,26 @@ void Eo::Event::clearEventHandlers(const Eo::Event::eventKey &key)
 			it = _eventMap.erase(it);
 		else
 			++it;
+}
+
+void Eo::Event::scheduleTask(Eo::task task)
+{
+	_tasks.push(task);
+}
+
+void Eo::Event::clearTasks()
+{
+	while (_tasks.size())
+		_tasks.pop();
+}
+
+void Eo::Event::execTasks()
+{
+	while (_tasks.size()) {
+		auto f = _tasks.front();
+		_tasks.pop();
+		f();
+	}
 }
 
 // Todo not working currently

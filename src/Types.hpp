@@ -31,6 +31,7 @@ namespace Eo {
 	using eventHandler = std::function<void(bool &, const Eo::event &)>;
 	using keyCode = irr::EKEY_CODE;
 	using keyHandler = std::function<void(bool &, const Eo::event &)>;
+	using task = std::function<void(void)>;
 	using animType = irr::scene::E_BONE_ANIMATION_MODE;
 	using node = irr::scene::ISceneNode;
 	using cameraNode = irr::scene::ICameraSceneNode;

@@ -11,6 +11,7 @@
 #include <functional>
 #include <irrlicht.h>
 #include <unordered_map>
+#include <queue>
 
 namespace Eo {
 	class Event : public irr::IEventReceiver {
@@ -38,17 +39,16 @@ namespace Eo {
 			Eo::eventHandler handle);
 		void clearKeyHandlers(const Eo::keyCode &code);
 		void clearEventHandlers(const Eo::Event::eventKey &key);
-		//TODO: OUech polo doit travailler dessus
-		// void removeKeyHandler();
-		// void removeEventHandler();
+		void scheduleTask(Eo::task task);
+		void clearTasks();
 
 	private:
 
 		void handleKeyEvent(const Eo::event &event);
 		void handleEvent(const Eo::event &event);
-		// void keyExit(const Eo::event &event);
-		// void keyDebugToggle(const Eo::event &event);
+		void execTasks();
 		Eo::Event::keyMap _keyMap;
 		Eo::Event::eventMap _eventMap;
+		std::queue<Eo::task> _tasks;
 	};
 }
