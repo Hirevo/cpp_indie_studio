@@ -8,7 +8,7 @@
 #include <algorithm>
 #include "MapMenu.hpp"
 #include <iostream>
-#include <dirent.h>
+#include <filesystem>
 #include "menu/MainMenu.hpp"
 
 Eo::MapMenu::MapMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
@@ -19,20 +19,6 @@ Eo::MapMenu::MapMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<
 
 Eo::MapMenu::~MapMenu()
 {
-}
-
-static int mapfilter(const struct dirent *dir)
-{
-	const char *s = dir->d_name;
-	int len = strlen(s);
-	if(len >= 0)
-	{
-		if (strncmp(s, "map", 3) == 0)
-			return 1;
-		else if (strcmp(s, "save.json") == 0)
-			return 1;
-	}
-	return 0;
 }
 
 bool Eo::MapMenu::draw()
@@ -70,18 +56,14 @@ void Eo::MapMenu::putLoadButton()
 	auto h = windowSize.Height;
 	struct dirent **fileListTemp;
 	auto pos = 5;
-
 	auto listbox = env->addListBox({(int)(w / 6), (int)((h / 8) * pos), (int)(w / 6 + 2 * w / 3),
 	                (int)((h / 8) * pos + h / 8)});
 	listbox->setDrawBackground(true);
-	auto path = currPath + "../assets/maps/";
-	int nb = scandir(path.c_str(), &fileListTemp, mapfilter, alphasort);
-	for(int i = 0; i < nb; i++) {
-		std::cout << fileListTemp[i]->d_name << std::endl;
-		std::string tmp = fileListTemp[i]->d_name;
+	std::string path = currPath + "../assets/maps/";
+	for (auto & p : std::filesystem::directory_iterator(path)){
+		std::wstring tmp = p.path().filename().wstring();
 		tmp = tmp.substr(0, tmp.size() - 5);
-		std::wstring text(tmp.begin(), tmp.end());
-		listbox->addItem(text.c_str());
+		listbox->addItem(tmp.c_str());
 	}
 	pos = 4;
 	env->addButton(
