@@ -17,18 +17,18 @@ namespace Eo {
 	public:
 		enum Type {
 			NONE,
+			WALL,
+			DEST_WALL,
+			BOOSTER_SPEED,
+			BOOSTER_SUPERBOMB,
+			BOOSTER_NBBOMB,
+			BOOSTER_WALLPASS,
 			CHARACTER,
 			CAMERA,
 			FLOOR,
 			FLAME,
-			WALL,
-			DEST_WALL,
 			BOMB,
-			BOOSTER_NONE,
-			BOOSTER_SPEED,
-			BOOSTER_SUPERBOMB,
-			BOOSTER_NBBOMB,
-			BOOSTER_WALLPASS
+			BOOSTER_NONE
 		};
 		virtual ~IObject() = default;
 		virtual Eo::IObject::Type getType() const = 0;

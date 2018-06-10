@@ -23,9 +23,10 @@ const float Eo::Game::_speedBonus = 0.02f;
 
 Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	const std::string &mapPath, Eo::Rc<Eo::Options> options,
-	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
+	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound,
+	bool randomize)
 	: AScene(event, device, sceneHandler, sound), _json(mapPath),
-	  _map(Eo::initRc<Eo::Map>(_json)), _camera(_map->getWidth()),
+	  _map(Eo::initRc<Eo::Map>(_json, randomize)), _camera(_map->getWidth()),
 	_options(options), _deathOrder()
 {
 	_sound->stopMusic();
@@ -42,10 +43,12 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 			_sound,
 			vec3(getPlayerPos(i).X, -0.5f, getPlayerPos(i).Y), i,
 			getPlayerPos(i).Z != 1);
-	for (Eo::u32 i = 3; i >= _options->getNbPlayer(); i--)
+	for (Eo::u32 i = 3; i >= _options->getNbPlayer(); i--) {
 		_computers.at(i - 1) = Eo::initRc<Eo::Computer>(_sound,
 			ref, vec3(getPlayerPos(i).X, 0, getPlayerPos(i).Y), i,
 			getPlayerPos(i).Z != 1);
+		std::cout << _computers.at(i - 1)->isDead() << std::endl;
+	}
 	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0.0f, -0.5f, 0.0f));
 	Eo::Game::addEvents();
 }
@@ -86,8 +89,8 @@ void Eo::Game::updatePlayerPos()
 			if (player) {
 				auto &it = _playersPos[player->getPlayerID()];
 				auto pos = player->getPosition();
-				it[0] = pos.X;
-				it[1] = pos.Z;
+				it[0] = pos.X + _map->getWidth() / 2;
+				it[1] = pos.Z + _map->getHeight() / 2;
 				it[2] = !player->isDead();
 			}
 		});
@@ -96,8 +99,8 @@ void Eo::Game::updatePlayerPos()
 			if (computer) {
 				auto &it = _playersPos[computer->getPlayerID()];
 				auto pos = computer->getPosition();
-				it[0] = pos.X;
-				it[1] = pos.Z;
+				it[0] = pos.X + _map->getWidth() / 2;
+				it[1] = pos.Z + _map->getHeight() / 2;
 				it[2] = !computer->isDead();
 			}
 		});
@@ -383,6 +386,6 @@ Eo::vec3 Eo::Game::getPlayerPos(size_t playerId)
 
 	player.X = _playersPos.at(playerId).at(0) - _map->getWidth() / 2;
 	player.Y = _playersPos.at(playerId).at(1) - _map->getHeight() / 2;
-	player.Z = _playersPos.at(playerId).at(1);
+	player.Z = _playersPos.at(playerId).at(2);
 	return player;
 }

@@ -57,6 +57,10 @@ Eo::Map::Map(Eo::JsonRead &json, bool randomize) : _w(0), _h(0)
 			return new Eo::Booster(
 				Eo::Booster::BoosterType::NBBOMB);
 		},
+		[] {
+			return new Eo::Booster(
+				Eo::Booster::BoosterType::WALLPASS);
+		},
 		[] { return new Wall(Eo::Wall::WallType::BOUNDS); }};
 
 	_w = matrix.size();
@@ -71,7 +75,7 @@ Eo::Map::Map(Eo::JsonRead &json, bool randomize) : _w(0), _h(0)
 				((j > 0 && j <= 2) && (i < _h - 1 && i >= _h - 3)));
 			if ((i == 0 || j == 0 || i == (_w - 1) || j == (_h - 1))
 				&& matrix.at(i).at(j) == 1)
-				_map.emplace_back(v.at(6)());
+				_map.emplace_back(v.at(7)());
 			else if (randomize && !(matrix.at(i).at(j)))
 				if (empty && rand() % 5 != 1)
 					_map.emplace_back(v.at(2)());
@@ -120,6 +124,17 @@ std::vector<Eo::Rc<Eo::IObject>> &Eo::Map::getObjects()
 std::vector<std::vector<Eo::i32>> Eo::Map::generateMatrix()
 {
 	std::vector<std::vector<Eo::i32>> ret;
+
+	for (int i = 0; i < _h; i++) {
+		ret.emplace_back();
+		for (int j = 0; j < _w; j++) {
+			auto &obj = _map[i * _w + j];
+			if (obj && obj->getType() < 7)
+				ret[i].emplace_back(obj->getType());
+			else
+				ret[i].emplace_back(0);
+		}
+	}
 	return ret;
 }
 
