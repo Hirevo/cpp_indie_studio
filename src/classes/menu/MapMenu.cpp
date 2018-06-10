@@ -49,8 +49,8 @@ void Eo::MapMenu::putBackgroundImage()
 {
 	irr::gui::IGUIEnvironment *env =
 		this->_device->getDevice()->getGUIEnvironment();
-	env->addImage(this->_device->getDriver()->getTexture(
-		"../assets/img/menu-background.jpg"),
+	env->addImage(this->_device->getDriver()->getTexture((currPath +
+		"../assets/img/menu-background.jpg").c_str()),
 	              {0, 0});
 }
 
