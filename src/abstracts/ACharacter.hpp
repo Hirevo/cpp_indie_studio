@@ -36,7 +36,7 @@ namespace Eo {
 		Eo::u32 _availableBombs = 1;
 		Eo::u32 _maxBombs = 3;
 		Eo::u32 _bombRadius = 2;
-		Eo::f32 _speed = 0.03f;
+		Eo::f32 _speed = 0.06f;
 		Eo::u8 _flags = 0;
 		bool _wallPass = false;
 		Eo::u64 _playerID;

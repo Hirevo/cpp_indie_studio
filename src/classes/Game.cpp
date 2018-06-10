@@ -17,6 +17,9 @@
 #include <menu/SettingsMenu.hpp>
 #include <cstring>
 
+const float Eo::Game::_maxSpeed = 0.2f;
+const float Eo::Game::_speedBonus = 0.02f;
+
 Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	const std::string &mapPath, Eo::Rc<Eo::Options> options,
 	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
@@ -293,7 +296,7 @@ void Eo::Game::useCollectible(Eo::IObject::Type type,
 
 	if (type == Booster::SPEED) {
 		auto speed = player->getSpeed();
-		player->setSpeed(speed < 0.1f ? speed + 0.01f : speed);
+		player->setSpeed(speed < _maxSpeed ? speed + _speedBonus : speed);
 		_sound->play(Eo::SoundDevice::GETITEM);
 		_map->putObject(Eo::Rc<Eo::IObject>(nullptr), posf.X, posf.Y);
 	}

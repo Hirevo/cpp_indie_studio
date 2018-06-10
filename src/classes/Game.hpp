@@ -63,5 +63,7 @@ namespace Eo {
 		std::vector<std::vector<float>> _playersPos;
 		Eo::vec2 getPlayerPos(size_t playerId);
 		std::vector<Eo::u64> _deathOrder;
+		static const float _maxSpeed;
+		static const float _speedBonus;
 	};
 }
