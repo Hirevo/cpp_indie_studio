@@ -29,6 +29,8 @@ namespace Eo {
 		virtual Eo::u8 getFlag() const = 0;
 		virtual Eo::u64 getPlayerID() const = 0;
 		virtual void draw(Eo::Rc<Eo::IScene> game) = 0;
+		virtual void die() = 0;
+		virtual bool isDead() = 0;
 
 	private:
 	};

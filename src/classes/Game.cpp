@@ -34,9 +34,10 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	_computers.fill(Eo::Rc<Eo::Computer>(nullptr));
 	for (Eo::u32 i = 0; i < _options->getNbPlayer(); i++)
 		_players.at(i) = Eo::initRc<Eo::Player>(ref, _event, _options,
+			_sound,
 			vec3(getPlayerPos(i).X, -0.5f, getPlayerPos(i).Y), i);
 	for (Eo::u32 i = 3; i >= _options->getNbPlayer(); i--)
-		_computers.at(i - 1) = Eo::initRc<Eo::Computer>(
+		_computers.at(i - 1) = Eo::initRc<Eo::Computer>(_sound,
 			ref, vec3(getPlayerPos(i).X, 0, getPlayerPos(i).Y), i);
 	_floor = Eo::initRc<Eo::Floor>((v.X - 1), Eo::vec3(0.0f, -0.5f, 0.0f));
 	Eo::Game::addEvents();
@@ -225,7 +226,7 @@ void Eo::Game::update()
 	_map->update(Eo::Rc<Eo::IScene>(this, [](Eo::IScene *_) {}));
 	std::for_each(_players.begin(), _players.end(),
 		[this](Eo::Rc<Eo::Player> &player) {
-			if (player.get() == nullptr)
+			if (player.get() == nullptr || player->isDead())
 				return;
 			auto ref = Eo::Rc<Eo::Game>(this, [](Eo::Game *_) {});
 			player->move(ref);
@@ -236,7 +237,7 @@ void Eo::Game::update()
 		});
 	std::for_each(_computers.begin(), _computers.end(), 
 		[this](Eo::Rc<Eo::Computer> &computer) {
-		if (computer.get() == nullptr)
+		if (computer.get() == nullptr || computer->isDead())
 			return;
 		computer->updatePosition(_map);
 		if (computer->checkPoseBomb(_map)) {

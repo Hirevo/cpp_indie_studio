@@ -39,8 +39,8 @@ namespace Eo {
 		Eo::f32 _speed = 0.03f;
 		Eo::u8 _flags = 0;
 		bool _wallPass = false;
-	protected:
 		Eo::u64 _playerID;
 		bool isBlocked(Eo::IObject::Type currObjType, Eo::Rc<Eo::IObject> newObject);
+		bool dead;
 	};
 };

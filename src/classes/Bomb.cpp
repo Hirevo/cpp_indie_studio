@@ -12,17 +12,18 @@
 #include <exception>
 
 const std::unordered_map<Eo::Bomb::BombSize, Eo::SoundDevice::SoundPath> Eo::Bomb::_soundPath = {
-	{SMALL, Eo::SoundDevice::BOMBS},
+	{SMALL,  Eo::SoundDevice::BOMBS},
 	{MEDIUM, Eo::SoundDevice::BOMBM},
-	{LARGE, Eo::SoundDevice::BOMBL},
+	{LARGE,  Eo::SoundDevice::BOMBL},
 };
 
 Eo::Bomb::Bomb(
 	Eo::Rc<Eo::Game> scene, Eo::Rc<Eo::ICharacter> player,
-		const Eo::vec2i &mapPos, const Eo::vec3 &pos, Eo::Rc<Eo::SoundDevice> sound)
+	const Eo::vec2i &mapPos, const Eo::vec3 &pos,
+	Eo::Rc<Eo::SoundDevice> sound)
 	: AModel(Eo::IObject::Type::BOMB, pos),
-	  _clock(std::chrono::high_resolution_clock::now()), _scene(scene),
-	  _map(scene->getMap()), _player(player), _sound(sound)
+	_clock(std::chrono::high_resolution_clock::now()), _scene(scene),
+	_map(scene->getMap()), _player(player), _sound(sound)
 {
 	prepareExplosion(mapPos, scene);
 	_sound->play(Eo::SoundDevice::SETBOMB);
@@ -55,6 +56,7 @@ Eo::Bomb::BombSize Eo::Bomb::getBombSize() const
 	else
 		return Eo::Bomb::LARGE;
 }
+
 void Eo::Bomb::propagateExplosion(
 	Eo::vec2i pos, Eo::vec2i sizes, Eo::vec2i dir)
 {
@@ -65,8 +67,9 @@ void Eo::Bomb::propagateExplosion(
 	auto inScene = Eo::vec3(posX - _map->getWidth() / 2, 0,
 		posY - _map->getHeight() / 2);
 	auto obj = _map->getObject(posX, posY);
-	if (_map->translate2D(_player->getPosition()).X == posX && _map->translate2D(_player->getPosition()).Y == posY)
-		std::cout << "je suis touché" << std::endl;
+	if (_map->translate2D(_player->getPosition()).X == posX &&
+		_map->translate2D(_player->getPosition()).Y == posY)
+		_player->die();
 	if (!obj.get() || obj->getType() != Eo::IObject::WALL) {
 		if (!obj.get() || obj->getType() != Eo::IObject::DEST_WALL)
 			Eo::Bomb::propagateExplosion(

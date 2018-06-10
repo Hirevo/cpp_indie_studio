@@ -7,9 +7,11 @@
 
 #include "Computer.hpp"
 
-Eo::Computer::Computer(Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos,
+Eo::Computer::Computer(Eo::Rc<Eo::SoundDevice> sound,
+	Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos,
 	Eo::u32 playerID)
-	: AModel(Eo::IObject::Type::CHARACTER, pos), ACharacter(playerID)
+	: AModel(Eo::IObject::Type::CHARACTER, pos), ACharacter(playerID),
+	_sound(sound)
 {
 	std::stringstream path;
 	path << "../assets/img/bomberboy_";
@@ -100,4 +102,16 @@ Eo::IObject::Type Eo::Computer::getObjectType(Eo::vec3 pos, Eo::Rc<Eo::Map> map)
 	if (object)
 		type = object->getType();
 	return type;
+}
+
+void Eo::Computer::die()
+{
+	this->dead = true;
+	this->removeFromScene();
+	this->_sound->play(Eo::SoundDevice::SoundPath::DEATH);
+}
+
+bool Eo::Computer::isDead()
+{
+	return this->dead;
 }
