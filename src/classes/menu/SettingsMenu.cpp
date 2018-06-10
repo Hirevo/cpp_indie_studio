@@ -56,14 +56,21 @@ void Eo::SettingsMenu::putSetGeneralVolume()
 	auto h = windowSize.Height;
 	auto pos = 4;
 
+	env->addButton({(int)(w / 6 + w / 2),
+			(int)(((h / 8) * pos) / 2),
+			(int)(w / 6 + 2 * w / 3),
+			(int)(((h / 8) * pos + h / 8) / 2)},
+		nullptr, Eo::SettingsMenu::ButtonType::MuteGeneral,
+		L"Mute", L"Mute");
 	env->addStaticText(L"General Volume",
-			{(int)(w / 6), (int)(((h / 8) * pos) / 2),
-				(int)(w / 6 + 2 * w / 3),
+			{(int)(w / 6),
+				(int)(((h / 8) * pos) / 2),
+				(int)(w / 6 + 2 * w / 4),
 				(int)(((h / 8) * pos + h / 8) / 2)})
 		->setTextAlignment(irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
 			irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER);
 	env->addScrollBar(true, {(int)(w / 6), (int)(((h / 8) * pos) / 2),
-			(int)(w / 6 + 2 * w / 3),
+			(int)(w / 6 + 2 * w / 4),
 			(int)(((h / 8) * pos + h / 8) / 2)}, nullptr,
 		Eo::SettingsMenu::ButtonType::SoundGeneral)->setPos(
 		static_cast<irr::s32>(_sound->getGeneralVolume() * 100));
@@ -77,14 +84,22 @@ void Eo::SettingsMenu::putSetVolumeMusic()
 	auto h = windowSize.Height;
 	auto pos = 6;
 
+	env->addButton({
+			(int)(w / 6 + w / 2),
+			(int)(((h / 8) * pos) / 2),
+			(int)(w / 6 + 2 * w / 3),
+			(int)(((h / 8) * pos + h / 8) / 2)
+		},
+		nullptr, Eo::SettingsMenu::ButtonType::MuteMusic,
+		L"Mute", L"Mute");
 	env->addStaticText(L"Music Volume",
 			{(int)(w / 6), (int)(((h / 8) * pos) / 2),
-				(int)(w / 6 + 2 * w / 3),
+				(int)(w / 6 + 2 * w / 4),
 				(int)(((h / 8) * pos + h / 8) / 2)})
 		->setTextAlignment(irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
 			irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER);
 	env->addScrollBar(true, {(int)(w / 6), (int)(((h / 8) * pos) / 2),
-			(int)(w / 6 + 2 * w / 3),
+			(int)(w / 6 + 2 * w / 4),
 			(int)(((h / 8) * pos + h / 8) / 2)}, nullptr,
 		Eo::SettingsMenu::ButtonType::SoundMusic)->setPos(
 		static_cast<irr::s32>(_sound->getMusicVolume() * 100));
@@ -98,14 +113,23 @@ void Eo::SettingsMenu::putSetVolumeFX()
 	auto h = windowSize.Height;
 	auto pos = 8;
 
-	auto text = env->addStaticText(L"Effects Volume",
-		{(int)(w / 6), (int)(((h / 8) * pos) / 2),
+	env->addButton({
+			(int)(w / 6 + w / 2),
+			(int)(((h / 8) * pos) / 2),
 			(int)(w / 6 + 2 * w / 3),
+			(int)(((h / 8) * pos + h / 8) / 2)
+		},
+		nullptr, Eo::SettingsMenu::ButtonType::MuteFX,
+		L"Mute", L"Mute");
+	auto text = env->addStaticText(L"Effects Volume",
+		{(int)(w / 6),
+			(int)(((h / 8) * pos) / 2),
+			(int)(w / 6 + 2 * w / 4),
 			(int)(((h / 8) * pos + h / 8) / 2)});
 	text->setTextAlignment(irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
-			irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER);
+		irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER);
 	env->addScrollBar(true, {(int)(w / 6), (int)(((h / 8) * pos) / 2),
-			(int)(w / 6 + 2 * w / 3),
+			(int)(w / 6 + 2 * w / 4),
 			(int)(((h / 8) * pos + h / 8) / 2)}, nullptr,
 		Eo::SettingsMenu::ButtonType::SoundFX)->setPos(
 		static_cast<irr::s32>(_sound->getEffectsVolume() * 100));

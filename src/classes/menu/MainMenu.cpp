@@ -229,4 +229,29 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			_sound->setEffectsVolume(val);
 			_sound->play(Eo::SoundDevice::SELECT);
 		});
+
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::SettingsMenu::ButtonType::MuteGeneral),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->generalIsMute() ? _sound->unMute()
+				: _sound->mute();
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::SettingsMenu::ButtonType::MuteMusic),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->musicIsMute() ? _sound->unMuteMusic()
+				: _sound->muteMusic();
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::SettingsMenu::ButtonType::MuteFX),
+		[this](bool &toRemove, const Eo::event &event) {
+			_sound->effectsIsMute() ? _sound->unMuteEffects()
+				: _sound->muteEffects();
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
 }
