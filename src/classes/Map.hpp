@@ -29,6 +29,7 @@ namespace Eo {
 		void generateMap(const std::string &mapPath);
 		bool update(Eo::Rc<Eo::IScene> scene) override;
 
+		static const std::pair<Eo::u32, Eo::u32> _defaultSize;
 	private:
 		Eo::i32 _w;
 		Eo::i32 _h;

@@ -13,6 +13,8 @@
 #include "Wall.hpp"
 #include <iostream>
 
+const std::pair<Eo::u32, Eo::u32> Eo::Map::_defaultSize = {21, 21};
+
 Eo::Map::Map(Eo::u32 w, Eo::u32 h) : _w(w), _h(h)
 {
 	_map.reserve(_w * _h);
@@ -34,6 +36,10 @@ Eo::Map::Map(Eo::u32 w, Eo::u32 h) : _w(w), _h(h)
 
 Eo::Map::Map(Eo::JsonRead &json, bool randomize) : _w(0), _h(0)
 {
+	if (!json.good()) {
+		*this = Eo::Map(_defaultSize.first, _defaultSize.second);
+		return;
+	}
 	auto matrix = json.readMatrix("map");
 	const std::vector<std::function<IObject *(void)>> v = {
 		[] { return nullptr; },
