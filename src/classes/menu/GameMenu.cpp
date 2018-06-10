@@ -18,7 +18,6 @@ Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	: AScene(event, device, sceneHandler, sound)
 {
 	this->addEvents(event);
-	this->draw();
 	_sound->play(Eo::SoundDevice::PAUSE);
 }
 

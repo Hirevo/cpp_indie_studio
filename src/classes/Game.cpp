@@ -295,11 +295,11 @@ void Eo::Game::update()
 {
 	if (this->gameOver()) {
 		for (auto &n : _players) {
-			if (n)
+			if (n && n->isDead() == false)
 				n->die();
 		}
 		for (auto &n : _computers) {
-			if (n)
+			if (n && n->isDead() == false)
 				n->die();
 		}
 		this->gameOver();

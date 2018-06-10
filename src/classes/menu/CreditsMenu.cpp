@@ -15,7 +15,6 @@ Eo::CreditsMenu::CreditsMenu(Eo::Rc<Eo::Event> event,
 	: AScene(event, device, sceneHandler, sound)
 {
 	this->addEvents(event);
-	this->draw();
 }
 
 Eo::CreditsMenu::~CreditsMenu()

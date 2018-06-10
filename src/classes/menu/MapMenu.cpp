@@ -16,7 +16,6 @@ Eo::MapMenu::MapMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 )
 	: AScene(event, device, sceneHandler, sound)
 {
-	this->draw();
 }
 
 Eo::MapMenu::~MapMenu()

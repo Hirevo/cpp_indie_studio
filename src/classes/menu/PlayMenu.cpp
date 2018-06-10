@@ -12,7 +12,6 @@
 Eo::PlayMenu::PlayMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
 	: AScene(event, device, sceneHandler, sound)
 {
-	this->draw();
 }
 
 Eo::PlayMenu::~PlayMenu()

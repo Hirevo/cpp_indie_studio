@@ -25,7 +25,6 @@ Eo::MainMenu::MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	_sound->stopMusic();
 	_sound->play(Eo::SoundDevice::MENUBGM, true);
 	this->addEvents(event);
-	this->draw();
 }
 
 Eo::MainMenu::~MainMenu()

@@ -18,7 +18,9 @@ Eo::EndGameMenu::EndGameMenu(Eo::Rc<Eo::Event> event,
 	Eo::Rc<Eo::SoundDevice> sound, std::vector<std::string> deathOrder) :
 	AScene(event, device, sceneHandler, sound), _deathOrder(deathOrder)
 {
-	this->draw();
+	std::reverse(this->_deathOrder.begin(), this->_deathOrder.end());
+	this->_sound->stopMusic();
+	this->_sound->play(Eo::SoundDevice::VICTORY);
 }
 
 Eo::EndGameMenu::~EndGameMenu()
@@ -47,7 +49,6 @@ bool Eo::EndGameMenu::draw()
 	this->putBackgroundImage();
 	this->putOkButton();
 	this->putTitle();
-	std::reverse(this->_deathOrder.begin(), this->_deathOrder.end());
 	for (int i = 0 ; i < 4 ; ++i) {
 		auto player = std::wstring(this->_deathOrder.at(i).begin(),
 			this->_deathOrder.at(i).end());
