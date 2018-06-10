@@ -77,6 +77,12 @@ void Eo::SettingsMenu::putSetVolumeMusic()
 	auto h = windowSize.Height;
 	auto pos = 6;
 
+	env->addStaticText(L"Music Volume",
+			{(int)(w / 6), (int)(((h / 8) * pos) / 2),
+				(int)(w / 6 + 2 * w / 3),
+				(int)(((h / 8) * pos + h / 8) / 2)})
+		->setTextAlignment(irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
+			irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER);
 	env->addScrollBar(true, {(int)(w / 6), (int)(((h / 8) * pos) / 2),
 			(int)(w / 6 + 2 * w / 3),
 			(int)(((h / 8) * pos + h / 8) / 2)}, nullptr,
@@ -92,6 +98,12 @@ void Eo::SettingsMenu::putSetVolumeFX()
 	auto h = windowSize.Height;
 	auto pos = 8;
 
+	env->addStaticText(L"Effects Volume",
+			{(int)(w / 6), (int)(((h / 8) * pos) / 2),
+				(int)(w / 6 + 2 * w / 3),
+				(int)(((h / 8) * pos + h / 8) / 2)})
+		->setTextAlignment(irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER,
+			irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER);
 	env->addScrollBar(true, {(int)(w / 6), (int)(((h / 8) * pos) / 2),
 			(int)(w / 6 + 2 * w / 3),
 			(int)(((h / 8) * pos + h / 8) / 2)}, nullptr,
@@ -117,34 +129,4 @@ void Eo::SettingsMenu::putReturnButton()
 
 void Eo::SettingsMenu::addEvents(Eo::Rc<Eo::Event> event)
 {
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
-			Eo::SettingsMenu::ButtonType::SoundGeneral),
-		[this](bool &toRemove, const Eo::event &event) {
-			auto bar = ((irr::gui::IGUIScrollBar *)event.
-				GUIEvent.Caller);
-			auto val = (float)bar->getPos() / (float)bar->getMax();
-			_sound->setGeneralVolume(val);
-			_sound->play(Eo::SoundDevice::SELECT);
-		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
-			Eo::SettingsMenu::ButtonType::SoundMusic),
-		[this](bool &toRemove, const Eo::event &event) {
-			auto bar = ((irr::gui::IGUIScrollBar *)event.
-				GUIEvent.Caller);
-			auto val = (float)bar->getPos() / (float)bar->getMax();
-			_sound->setMusicVolume(val);
-			_sound->play(Eo::SoundDevice::SELECT);
-		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
-			Eo::SettingsMenu::ButtonType::SoundFX),
-		[this](bool &toRemove, const Eo::event &event) {
-			auto bar = ((irr::gui::IGUIScrollBar *)event.
-				GUIEvent.Caller);
-			auto val = (float)bar->getPos() / (float)bar->getMax();
-			_sound->setEffectsVolume(val);
-			_sound->play(Eo::SoundDevice::SELECT);
-		});
 }

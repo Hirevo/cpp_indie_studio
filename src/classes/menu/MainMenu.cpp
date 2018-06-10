@@ -200,5 +200,34 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		});
 
 
-
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+			Eo::SettingsMenu::ButtonType::SoundGeneral),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto bar = ((irr::gui::IGUIScrollBar *)event.
+				GUIEvent.Caller);
+			auto val = (float)bar->getPos() / (float)bar->getMax();
+			_sound->setGeneralVolume(val);
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+			Eo::SettingsMenu::ButtonType::SoundMusic),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto bar = ((irr::gui::IGUIScrollBar *)event.
+				GUIEvent.Caller);
+			auto val = (float)bar->getPos() / (float)bar->getMax();
+			_sound->setMusicVolume(val);
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+			Eo::SettingsMenu::ButtonType::SoundFX),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto bar = ((irr::gui::IGUIScrollBar *)event.
+				GUIEvent.Caller);
+			auto val = (float)bar->getPos() / (float)bar->getMax();
+			_sound->setEffectsVolume(val);
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
 }
