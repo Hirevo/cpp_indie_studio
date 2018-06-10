@@ -84,9 +84,9 @@ void Eo::MapMenu::putLoadButton()
 	std::string path = currPath + "../assets/maps/";
 #ifdef _WIN32
 	WIN32_FIND_DATA data;
-	HANDLE handle = FindFirstFile(LPCWSTR(path.c_str()), &data);
+	HANDLE handle = FindFirstFile(LPCSTR(path.c_str()), &data);
 	do {
-		auto name = data.cFileName;
+		std::string name = data.cFileName;
 		std::cout << name << std::endl;
 		std::string tmp = name;
 		tmp = tmp.substr(0, tmp.size() - 5);
