@@ -240,7 +240,8 @@ void Eo::Game::update()
 		computer->updatePosition(_map);
 		if (computer->checkPoseBomb(_map)) {
 			auto bombs = computer->getAvailableBombs();
-			placeBomb(computer, bombs);
+			if (bombs > 0)
+				placeBomb(computer, bombs);
 		}
 		computer->updateInScene();
 	});
