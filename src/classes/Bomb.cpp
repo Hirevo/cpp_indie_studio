@@ -65,6 +65,8 @@ void Eo::Bomb::propagateExplosion(
 	auto inScene = Eo::vec3(posX - _map->getWidth() / 2, 0,
 		posY - _map->getHeight() / 2);
 	auto obj = _map->getObject(posX, posY);
+	if (_map->translate2D(_player->getPosition()).X == posX && _map->translate2D(_player->getPosition()).Y == posY)
+		std::cout << "je suis touché" << std::endl;
 	if (!obj.get() || obj->getType() != Eo::IObject::WALL) {
 		if (!obj.get() || obj->getType() != Eo::IObject::DEST_WALL)
 			Eo::Bomb::propagateExplosion(
