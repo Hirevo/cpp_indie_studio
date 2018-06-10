@@ -274,6 +274,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			this->_sceneHandler->unloadCurrentScene();
 			this->_sceneHandler->unloadCurrentScene();
 			this->_sceneHandler->unloadCurrentScene();
+			this->_sceneHandler->unloadCurrentScene();
 		});
 	_event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,

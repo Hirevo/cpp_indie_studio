@@ -45,7 +45,9 @@ set(HEADER_FILES
         src/interfaces/IObject.hpp
         src/interfaces/IScene.hpp
         src/Types.hpp
-        src/classes/menu/MapMenu.cpp src/classes/menu/MapMenu.hpp)
+        src/classes/menu/EndGameMenu.cpp
+        src/classes/menu/EndGameMenu.hpp
+        src/classes/menu/MapMenu.cpp)
 
 add_executable(bomberman
         src/abstracts/ACollectible.cpp
