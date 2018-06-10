@@ -48,6 +48,7 @@ namespace Eo {
 	using f32 = float;
 	using f64 = double;
 	extern std::string currPath;
+	extern std::string map;
 	template<typename T, typename... Args>
 	Eo::Rc<T> initRc(Args&&... args) {
 		return std::make_shared<T>(std::forward<Args>(args)...);

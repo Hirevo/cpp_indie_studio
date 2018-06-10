@@ -5,6 +5,7 @@
 ** Created by Benjamin
 */
 
+#include "SoundDevice.hpp"
 #include "Computer.hpp"
 
 Eo::Computer::Computer(Eo::Rc<Eo::SoundDevice> sound,

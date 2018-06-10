@@ -5,6 +5,7 @@
 ** MainMenu.cpp
 */
 
+#include "MapMenu.hpp"
 #include "MainMenu.hpp"
 #include "Event.hpp"
 #include "PlayMenu.hpp"
@@ -49,7 +50,6 @@ Eo::MainMenu::~MainMenu()
 	_event->clearEventHandlers(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::ButtonType::Return));
-
 	_event->clearEventHandlers(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::GameMenu::EventType::Quit));
@@ -72,6 +72,10 @@ Eo::MainMenu::~MainMenu()
 		Eo::SettingsMenu::ButtonType::MuteMusic));
 	_event->clearEventHandlers(Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 		Eo::SettingsMenu::ButtonType::MuteFX));
+
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::MapMenu::ButtonType::Load));
 }
 
 void Eo::MainMenu::putPlayButton()
@@ -182,14 +186,27 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 {
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		                    Eo::MapMenu::ButtonType::Load),
+		[this](bool &toRemove, const Eo::event &event) {
+			playButtonClickedSound(_sound);
+			auto options = this->_device->getOptions();
+			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
+				_event, _device, currPath + map,
+				options, _sceneHandler, _sound));
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
 			Eo::MainMenu::ButtonType::PlayGamePlayer),
 		[this](bool &toRemove, const Eo::event &event) {
 			playButtonClickedSound(_sound);
 			auto options = this->_device->getOptions();
 			options->setNbPlayer(1);
-			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
-				_event, _device, currPath + "../map4.json",
-				options, _sceneHandler, _sound));
+			_sceneHandler->loadScene(
+				Eo::initRc<Eo::MapMenu>(_event, _device,
+				                         _sceneHandler, _sound));
+			//_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
+			//	_event, _device, currPath + "../map4.json",
+			//	options, _sceneHandler, _sound));
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
@@ -198,9 +215,12 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			playButtonClickedSound(_sound);
 			auto options = this->_device->getOptions();
 			options->setNbPlayer(2);
-			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
-				_event, _device, currPath + "../map4.json",
-				options, _sceneHandler, _sound));
+			_sceneHandler->loadScene(
+				Eo::initRc<Eo::MapMenu>(_event, _device,
+				                         _sceneHandler, _sound));
+			//_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
+			//	_event, _device, currPath + "../map4.json",
+			//	options, _sceneHandler, _sound));
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
