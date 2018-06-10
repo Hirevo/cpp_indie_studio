@@ -28,11 +28,12 @@
 
 	#define GetCurrentDir _getcwd
 #elif __linux__
-	#include <unistd.h>
 	#define GetCurrentDir getcwd
 #endif
 
 std::string Eo::currPath;
+
+#include <iostream>
 
 int getCurrPath()
 {
@@ -41,7 +42,8 @@ int getCurrPath()
 		return errno;
 	}
 	Eo::currPath = std::string(str);
-	Eo::currPath += "\\";
+	Eo::currPath += "/";
+	std::cout << "voici path :" << Eo::currPath << std::endl;
 	return 0;
 }
 
