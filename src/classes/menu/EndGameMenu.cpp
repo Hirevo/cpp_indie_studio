@@ -11,7 +11,7 @@
 #include "MapMenu.hpp"
 
 static const irr::io::path FONT_PATH =
-	(Eo::currPath + "../assets/font/fonthaettenschweiler.bmp").c_str();
+	(Eo::currPath + "assets/font/fonthaettenschweiler.bmp").c_str();
 
 Eo::EndGameMenu::EndGameMenu(Eo::Rc<Eo::Event> event,
 	Eo::Rc<Eo::Device> device, Eo::Rc<Eo::SceneHandler> sceneHandler,
@@ -69,7 +69,7 @@ void Eo::EndGameMenu::putBackgroundImage()
 {
 	auto *env = _device->getDevice()->getGUIEnvironment();
 	env->addImage(_device->getDriver()->getTexture(
-		(currPath + "../assets/img/menu-background.jpg").c_str()),
+		(currPath + "assets/img/menu-background.jpg").c_str()),
 		{0, 0});
 }
 
@@ -79,7 +79,7 @@ void Eo::EndGameMenu::putTitle()
 	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto *image = this->_device->getDriver()->getTexture(
-		(currPath + "../assets/img/endgame-title.png").c_str());
+		(currPath + "assets/img/endgame-title.png").c_str());
 	env->addImage(image, {(int)(w / 2 - 512), 0}, true)
 		->setScaleImage(true);
 }

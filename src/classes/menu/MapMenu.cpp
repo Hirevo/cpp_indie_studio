@@ -27,7 +27,7 @@ bool Eo::MapMenu::draw()
 	irr::gui::IGUIEnvironment *env = _device->getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font = env->getFont((currPath +
-		"../assets/font/fonthaettenschweiler.bmp").c_str());
+		"assets/font/fonthaettenschweiler.bmp").c_str());
 	if (font) {
 		skin->setFont(font);
 	}
@@ -44,7 +44,7 @@ void Eo::MapMenu::putBackgroundImage()
 	irr::gui::IGUIEnvironment *env = this->_device->getDevice()
 		->getGUIEnvironment();
 	env->addImage(this->_device->getDriver()->getTexture(
-		(currPath + "../assets/img/menu-background.jpg").c_str()),
+		(currPath + "assets/img/menu-background.jpg").c_str()),
 		{0, 0});
 }
 
@@ -60,7 +60,7 @@ void Eo::MapMenu::putLoadButton()
 			(int)(w / 6 + 2 * w / 3),
 			(int)((h / 8) * (pos + 1) + h / 8 * 2)}, 0, 1337);
 	listbox->setDrawBackground(true);
-	std::string path = currPath + "../assets/maps/";
+	std::string path = currPath + "assets/maps/";
 	for (auto &p : std::filesystem::directory_iterator(path)) {
 		std::wstring tmp = p.path().filename().wstring();
 		tmp = tmp.substr(0, tmp.size() - 5);
@@ -90,6 +90,6 @@ void Eo::MapMenu::putTitle()
 	auto windowSize = _device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto *image = _device->getDriver()->getTexture(
-		"../assets/img/bomberman-title.png");
+		"assets/img/bomberman-title.png");
 	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
 }

@@ -11,25 +11,6 @@
 #include "JsonWrite.hpp"
 #include "JsonRead.hpp"
 
-const std::unordered_map<Eo::SoundDevice::SoundPath, std::string>
-        Eo::SoundDevice::_soundPath = {
-	{MENUBGM, currPath + "../assets/sounds/BGM/main_theme.mp3"},
-	{GAMEBGM, currPath + "../assets/sounds/BGM/game_theme.mp3"},
-	{PAUSE,   currPath + "../assets/sounds/effects/buttons/PAUSE.wav"},
-	{CONFIRM, currPath + "../assets/sounds/effects/buttons/confirm.wav"},
-	{RESET,   currPath + "../assets/sounds/effects/buttons/reset.wav"},
-	{SELECT,  currPath + "../assets/sounds/effects/buttons/select.wav"},
-	{BOMBS,   currPath + "../assets/sounds/effects/inGame/bombS.wav"},
-	{BOMBM,   currPath + "../assets/sounds/effects/inGame/bombL.wav"},
-	{BOMBL,   currPath + "../assets/sounds/effects/inGame/bombL.wav"},
-	{PLAY,    currPath + "../assets/sounds/effects/inGame/play.wav"},
-	{SETBOMB, currPath + "../assets/sounds/effects/inGame/setBomb.wav"},
-	{DEATH,   currPath + "../assets/sounds/effects/inGame/death.wav"},
-	{GETITEM, currPath + "../assets/sounds/effects/inGame/getItem.wav"},
-	{HURRY,   currPath + "../assets/sounds/effects/inGame/hurry.wav"},
-	{VICTORY, currPath + "../assets/sounds/BGM/victory.mp3"}
-};
-
 const std::unordered_map<Eo::SoundDevice::SoundPath, Eo::SoundDevice::SoundType>
         Eo::SoundDevice::_soundType = {
 	{MENUBGM, MUSIC},
@@ -58,6 +39,23 @@ Eo::SoundDevice::SoundDevice()
 	_mVolume(_music->getSoundVolume()),
 	_gIsMute(false), _eIsMute(false), _mIsMute(false)
 {
+	_soundPath = {
+	{MENUBGM, currPath + "assets/sounds/BGM/main_theme.mp3"},
+	{GAMEBGM, currPath + "assets/sounds/BGM/game_theme.mp3"},
+	{PAUSE,   currPath + "assets/sounds/effects/buttons/PAUSE.wav"},
+	{CONFIRM, currPath + "assets/sounds/effects/buttons/confirm.wav"},
+	{RESET,   currPath + "assets/sounds/effects/buttons/reset.wav"},
+	{SELECT,  currPath + "assets/sounds/effects/buttons/select.wav"},
+	{BOMBS,   currPath + "assets/sounds/effects/inGame/bombS.wav"},
+	{BOMBM,   currPath + "assets/sounds/effects/inGame/bombL.wav"},
+	{BOMBL,   currPath + "assets/sounds/effects/inGame/bombL.wav"},
+	{PLAY,    currPath + "assets/sounds/effects/inGame/play.wav"},
+	{SETBOMB, currPath + "assets/sounds/effects/inGame/setBomb.wav"},
+	{DEATH,   currPath + "assets/sounds/effects/inGame/death.wav"},
+	{GETITEM, currPath + "assets/sounds/effects/inGame/getItem.wav"},
+	{HURRY,   currPath + "assets/sounds/effects/inGame/hurry.wav"},
+	{VICTORY, currPath + "assets/sounds/BGM/victory.mp3"}
+	};
 	Eo::JsonRead file(".soundSettings");
 	if (file.good()) {
 		auto mat = file.readMatrix("sound_settings");

@@ -70,7 +70,7 @@ namespace Eo {
 		bool generalIsMute() const;
 		bool musicIsMute() const;
 		bool effectsIsMute() const;
-		static const std::unordered_map<SoundPath, std::string> _soundPath;
+		std::unordered_map<SoundPath, std::string> _soundPath;
 		static const std::unordered_map<SoundPath, SoundType> _soundType;
 	private:
 		irrklang::ISoundEngine *_music;

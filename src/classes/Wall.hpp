@@ -27,9 +27,9 @@ namespace Eo {
 
 	private:
 		WallType _wallType;
-		static const std::unordered_map<WallType, std::string>
+		std::unordered_map<WallType, std::string>
 			_textures;
-		static const std::unordered_map<WallType, std::string>
+		std::unordered_map<WallType, std::string>
 			_models;
 	};
 }

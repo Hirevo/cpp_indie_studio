@@ -11,7 +11,7 @@
 #include "SettingsMenu.hpp"
 
 static const irr::io::path FONT_PATH =
-	(Eo::currPath + "../assets/font/fonthaettenschweiler.bmp").c_str();
+	(Eo::currPath + "assets/font/fonthaettenschweiler.bmp").c_str();
 
 Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
@@ -46,7 +46,7 @@ void Eo::GameMenu::putBackgroundImage()
 {
 	auto *env = _device->getDevice()->getGUIEnvironment();
 	env->addImage(_device->getDriver()->getTexture(
-		(currPath + "../assets/img/menu-background.jpg").c_str()),
+		(currPath + "assets/img/menu-background.jpg").c_str()),
 		{0, 0});
 }
 
@@ -111,7 +111,7 @@ void Eo::GameMenu::putTitle()
 	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto *image = this->_device->getDriver()->getTexture(
-		"../assets/img/bomberman-title.png");
+		(Eo::currPath + "assets/img/bomberman-title.png").c_str());
 	env->addImage(image, {(int)(w / 2 - 400), 0}, true)
 		->setScaleImage(true);
 }

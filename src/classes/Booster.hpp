@@ -27,9 +27,9 @@ namespace Eo {
 		BoosterType getBoosterType() const;
 	private:
 		BoosterType _boosterType;
-		static const std::unordered_map<BoosterType, std::string>
+		std::unordered_map<BoosterType, std::string>
 			_textures;
-		static const std::unordered_map<BoosterType, std::string>
+		std::unordered_map<BoosterType, std::string>
 			_mesh;
 	};
 }

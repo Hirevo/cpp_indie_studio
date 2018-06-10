@@ -26,7 +26,7 @@ Eo::Player::Player(Eo::Rc<Eo::IScene> game, Eo::Rc<Eo::Event> event,
 {
 	this->_dead = isDead;
 	std::stringstream path;
-	path << (currPath + "../assets/img/bomberboy_");
+	path << (currPath + "assets/img/bomberboy_");
 	path << id + 1;
 	path << ".png";
 	_path = path.str();
@@ -39,7 +39,7 @@ void Eo::Player::draw(Eo::Rc<Eo::IScene> game)
 {
 	if (isDead())
 		return;
-	this->loadModel(game, currPath + "../assets/Bomberman/Character.x",
+	this->loadModel(game, currPath + "assets/Bomberman/Character.x",
 		_path.c_str());
 	this->getAnimatedNode()->setScale(_scale);
 }

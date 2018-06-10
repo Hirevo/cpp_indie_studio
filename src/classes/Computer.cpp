@@ -16,7 +16,7 @@ Eo::Computer::Computer(Eo::Rc<Eo::SoundDevice> sound,
 {
 	this->_dead = isDead;
 	std::stringstream path;
-	path << (currPath + "../assets/img/bomberboy_");
+	path << (currPath + "assets/img/bomberboy_");
 	path << playerID + 1;
 	path << ".png";
 	_path = path.str();
@@ -30,7 +30,7 @@ void Eo::Computer::draw(Eo::Rc<Eo::IScene> game)
 {
 	if (isDead())
 		return;
-	this->loadModel(game, currPath + "../assets/Bomberman/Character.x",
+	this->loadModel(game, currPath + "assets/Bomberman/Character.x",
 		_path.c_str());
 	this->getAnimatedNode()->setScale(_scale);
 }

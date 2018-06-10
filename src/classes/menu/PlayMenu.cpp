@@ -26,7 +26,7 @@ bool Eo::PlayMenu::draw()
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font =
 		env->getFont((currPath +
-			"../assets/font/fonthaettenschweiler.bmp").c_str());
+			"assets/font/fonthaettenschweiler.bmp").c_str());
 	if (font)
 		skin->setFont(font);
 	this->putBackgroundImage();
@@ -43,7 +43,7 @@ void Eo::PlayMenu::putBackgroundImage()
 	irr::gui::IGUIEnvironment *env =
 		this->_device->getDevice()->getGUIEnvironment();
 	env->addImage(this->_device->getDriver()->getTexture(
-		"../assets/img/menu-background.jpg"),
+		(Eo::currPath + "assets/img/menu-background.jpg").c_str()),
 		{0, 0});
 }
 
@@ -97,6 +97,6 @@ void Eo::PlayMenu::putTitle()
 	auto windowSize = _device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto *image = _device->getDriver()->getTexture(
-		"../assets/img/bomberman-title.png");
+		(Eo::currPath + "assets/img/bomberman-title.png").c_str());
 	env->addImage(image, {(int)(w / 2 - 400), 0}, true);
 }

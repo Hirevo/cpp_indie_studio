@@ -79,7 +79,7 @@ void Eo::Game::saveGame()
 	updatePlayerPos();
 	save.writePlayersPos("player_pos", _playersPos);
 	save.writeMatrix("map", _map->generateMatrix());
-	save.generateJson(currPath + "../assets/maps/save.json");
+	save.generateJson(currPath + "assets/maps/save.json");
 }
 
 void Eo::Game::updatePlayerPos()
@@ -145,7 +145,7 @@ bool Eo::Game::draw()
 {
 	_device->getDevice()->getSceneManager()->addSkyDomeSceneNode(
 		_device->getDriver()->getTexture(
-			(currPath + "../assets/img/background.jpg").c_str()),
+			(currPath + "assets/img/background.jpg").c_str()),
 		16, 8, 2, 5, 800);
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});

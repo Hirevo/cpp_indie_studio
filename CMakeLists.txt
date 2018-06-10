@@ -105,41 +105,44 @@ endif()
 
 set(IRRKLANG_DIR ./libs/irrklang)
 if(UNIX)
+    install(TARGETS bomberman DESTINATION bin)
+    install(DIRECTORY assets DESTINATION bin)
+    install(FILES ./libs/irrklang/bin/Linux64/libIrrKlang.so ./libs/irrklang/bin/Linux64/ikpMP3.so ./libs/irrklang/bin/Linux64/ikpFlac.so DESTINATION lib)
     target_link_libraries(bomberman stdc++fs)
     set(IRRKLANG_LIBRARY ${PROJECT_SOURCE_DIR}/libs/irrklang/bin/Linux64/libIrrKlang.so)
     add_custom_command(TARGET bomberman PRE_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy
             ${PROJECT_SOURCE_DIR}/libs/irrklang/bin/Linux64/ikpMP3.so
-            ${PROJECT_SOURCE_DIR}/bin/ikpMP3.so)
+            ${PROJECT_SOURCE_DIR}/ikpMP3.so)
 endif(UNIX)
 if(WIN32)
     if (CMAKE_CL_64)
         add_custom_command(TARGET bomberman PRE_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
                 ${PROJECT_SOURCE_DIR}/libs/irrlicht/bin/Win64-VisualStudio/Irrlicht.dll
-                ${PROJECT_SOURCE_DIR}/bin/Irrlicht.dll)
+                ${PROJECT_SOURCE_DIR}/Irrlicht.dll)
         add_custom_command(TARGET bomberman PRE_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
                 ${PROJECT_SOURCE_DIR}/libs/irrklang/bin/Winx64/irrKlang.dll
-                ${PROJECT_SOURCE_DIR}/bin/irrKlang.dll)
+                ${PROJECT_SOURCE_DIR}/irrKlang.dll)
         add_custom_command(TARGET bomberman PRE_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
                 ${PROJECT_SOURCE_DIR}/libs/irrklang/bin/Winx64/ikpMP3.dll
-                ${PROJECT_SOURCE_DIR}/bin/ikpMP3.dll)
+                ${PROJECT_SOURCE_DIR}/ikpMP3.dll)
         set(IRRKLANG_LIBRARY ${PROJECT_SOURCE_DIR}/libs/irrklang/lib/Winx64-visualStudio/irrKlang.lib)
     else ()
         add_custom_command(TARGET bomberman PRE_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
                 ${PROJECT_SOURCE_DIR}/libs/irrlicht/bin/Win32-VisualStudio/Irrlicht.dll
-                ${PROJECT_SOURCE_DIR}/bin/Irrlicht.dll)
+                ${PROJECT_SOURCE_DIR}/Irrlicht.dll)
         add_custom_command(TARGET bomberman PRE_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
                 ${PROJECT_SOURCE_DIR}/libs/irrklang/bin/Winx32/irrKlang.dll
-                ${PROJECT_SOURCE_DIR}/bin/irrKlang.dll)
+                ${PROJECT_SOURCE_DIR}/irrKlang.dll)
         add_custom_command(TARGET bomberman PRE_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy
                 ${PROJECT_SOURCE_DIR}/libs/irrklang/bin/Winx32/ikpMP3.dll
-                ${PROJECT_SOURCE_DIR}/bin/ikpMP3.dll)
+                ${PROJECT_SOURCE_DIR}/ikpMP3.dll)
         set(IRRKLANG_LIBRARY ${PROJECT_SOURCE_DIR}/libs/irrklang/lib/Winx32-visualStudio/irrKlang.lib)
     endif ()
 endif()

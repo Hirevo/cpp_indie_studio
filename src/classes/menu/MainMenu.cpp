@@ -149,7 +149,7 @@ void Eo::MainMenu::putExitButton()
 
 static const irr::io::path FONT_PATH =
 	std::string(Eo::currPath +
-		"../assets/font/fonthaettenschweiler.bmp").c_str();
+		"assets/font/fonthaettenschweiler.bmp").c_str();
 
 bool Eo::MainMenu::draw()
 {
@@ -172,7 +172,7 @@ void Eo::MainMenu::putBackgroundImage()
 {
 	auto *env = this->_device->getDevice()->getGUIEnvironment();
 	env->addImage(this->_device->getDriver()->getTexture(
-		(currPath + "../assets/img/menu-background.jpg").c_str()),
+		(currPath + "assets/img/menu-background.jpg").c_str()),
 		{0, 0});
 }
 
@@ -182,7 +182,7 @@ void Eo::MainMenu::putTitle()
 	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto *image = this->_device->getDriver()->getTexture(
-		(currPath + "../assets/img/bomberman-title.png").c_str());
+		(currPath + "assets/img/bomberman-title.png").c_str());
 	env->addImage(image, {(int)(w / 2 - 400), 0}, true)
 		->setScaleImage(true);
 }
@@ -368,7 +368,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 				std::string text(elementText.begin(),
 					elementText.end());
 				std::string mapPath(
-					currPath + "../assets/maps/" + text +
+					currPath + "assets/maps/" + text +
 						".json");
 				_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
 					_event, _device, mapPath,
