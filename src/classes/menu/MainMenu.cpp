@@ -90,7 +90,7 @@ void Eo::MainMenu::putExitButton()
 }
 
 static const irr::io::path FONT_PATH =
-	"../assets/font/fonthaettenschweiler.bmp";
+	std::string(Eo::currPath + "../assets/font/fonthaettenschweiler.bmp").c_str();
 
 bool Eo::MainMenu::draw()
 {
@@ -113,7 +113,7 @@ void Eo::MainMenu::putBackgroundImage()
 {
 	auto *env = this->_device->getDevice()->getGUIEnvironment();
 	env->addImage(this->_device->getDriver()->getTexture(
-		"../assets/img/menu-background.jpg"),
+		(currPath + "../assets/img/menu-background.jpg").c_str()),
 		{0, 0});
 }
 
@@ -123,7 +123,7 @@ void Eo::MainMenu::putTitle()
 	auto windowSize = this->_device->getOptions()->getWindowSize();
 	auto w = windowSize.Width;
 	auto *image = this->_device->getDriver()->getTexture(
-		"../assets/img/bomberman-title.png");
+		(currPath + "../assets/img/bomberman-title.png").c_str());
 	env->addImage(image, {(int)(w / 2 - 400), 0}, true)
 		->setScaleImage(true);
 }
@@ -143,8 +143,8 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			auto options = this->_device->getOptions();
 			options->setNbPlayer(1);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
-				_event, _device, "../map3.json", options,
-				_sceneHandler, _sound));
+				_event, _device, currPath + "../map3.json",
+				options, _sceneHandler, _sound));
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
@@ -154,8 +154,8 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			auto options = this->_device->getOptions();
 			options->setNbPlayer(2);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
-				_event, _device, "../map3.json", options,
-				_sceneHandler, _sound));
+				_event, _device, currPath + "../map3.json",
+				options, _sceneHandler, _sound));
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,

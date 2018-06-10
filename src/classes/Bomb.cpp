@@ -40,8 +40,8 @@ Eo::Bomb::~Bomb()
 
 void Eo::Bomb::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
-	Eo::AModel::loadModel(scene, "../assets/Bomberman/Bomb.x",
-		"../assets/img/bomb_border.png");
+	Eo::AModel::loadModel(scene, currPath + "../assets/Bomberman/Bomb.x",
+		currPath + "../assets/img/bomb_border.png");
 	_node->setScale(Eo::vec3(0.25, 0.25, 0.25));
 }
 

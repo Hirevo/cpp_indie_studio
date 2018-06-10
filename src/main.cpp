@@ -11,6 +11,9 @@
 #include "Options.hpp"
 #include "Core.hpp"
 #include <ctime>
+#include <cstdlib>
+#include <cstdio>
+
 #ifdef _WIN32
 	#include <process.h>
 	#define GETPID _getpid
@@ -18,9 +21,33 @@
 	#include <unistd.h>
 	#define GETPID getpid
 #endif
-#include <cstdlib>
+
+#ifdef WIN32
+	#include <direct.h>
+	#include <iostream>
+
+	#define GetCurrentDir _getcwd
+#elif __linux__
+	#include <unistd.h>
+	#define GetCurrentDir getcwd
+#endif
+
+std::string Eo::currPath;
+
+int getCurrPath()
+{
+	char str[FILENAME_MAX];
+	if (!GetCurrentDir(str, sizeof(str))) {
+		return errno;
+	}
+	Eo::currPath = std::string(str);
+	Eo::currPath += "\\";
+	return 0;
+}
 
 int main() {
+	if (getCurrPath())
+		return 84;
 	srand(GETPID() * time(0));
 	Eo::Rc<Eo::Options> options = Eo::initRc<Eo::Options>();
 	Eo::Rc<Eo::Device> device = Eo::initRc<Eo::Device>(options);

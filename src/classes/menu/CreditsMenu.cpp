@@ -28,7 +28,7 @@ bool Eo::CreditsMenu::draw()
 		this->_device->getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font =
-		env->getFont("../assets/font/fonthaettenschweiler.bmp");
+		env->getFont((currPath + "../assets/font/fonthaettenschweiler.bmp").c_str());
 	if (font)
 		skin->setFont(font);
 	this->putBackgroundImage();
@@ -43,7 +43,7 @@ void Eo::CreditsMenu::putBackgroundImage()
 	irr::gui::IGUIEnvironment *env =
 		this->_device->getDevice()->getGUIEnvironment();
 	env->addImage(this->_device->getDriver()->getTexture(
-		"../assets/img/menu-background.jpg"),
+		(currPath + "../assets/img/menu-background.jpg").c_str()),
 		{0, 0});
 }
 
@@ -71,7 +71,7 @@ void Eo::CreditsMenu::putCredits()
 	irr::s32 w = windowSize.Width;
 	irr::s32 h = windowSize.Height;
 	auto image = env->addImage(this->_device->getDriver()->getTexture(
-		"../assets/img/credits.png"),
+		(currPath + "../assets/img/credits.png").c_str()),
 		{0, 0});
 
 	image->setMaxSize({static_cast<const u32 &>(w),

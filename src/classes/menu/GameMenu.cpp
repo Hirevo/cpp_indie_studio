@@ -10,7 +10,7 @@
 #include "SettingsMenu.hpp"
 
 static const irr::io::path FONT_PATH =
-	"../assets/font/fonthaettenschweiler.bmp";
+	(Eo::currPath + "../assets/font/fonthaettenschweiler.bmp").c_str();
 
 Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
@@ -57,7 +57,7 @@ void Eo::GameMenu::putBackgroundImage()
 {
 	auto *env = _device->getDevice()->getGUIEnvironment();
 	env->addImage(_device->getDriver()->getTexture(
-		"../assets/img/menu-background.jpg"),
+		(currPath + "../assets/img/menu-background.jpg").c_str()),
 		{0, 0});
 }
 

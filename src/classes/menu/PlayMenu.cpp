@@ -25,7 +25,7 @@ bool Eo::PlayMenu::draw()
 		_device->getDevice()->getGUIEnvironment();
 	irr::gui::IGUISkin *skin = env->getSkin();
 	irr::gui::IGUIFont *font =
-		env->getFont("../assets/font/fonthaettenschweiler.bmp");
+		env->getFont((currPath + "../assets/font/fonthaettenschweiler.bmp").c_str());
 	if (font)
 		skin->setFont(font);
 	this->putBackgroundImage();

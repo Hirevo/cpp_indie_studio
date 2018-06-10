@@ -14,6 +14,7 @@
 #include "menu/GameMenu.hpp"
 #include "JsonRead.hpp"
 #include <iostream>
+#include <cstring>
 
 Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	const std::string &mapPath, Eo::Rc<Eo::Options> options,
@@ -82,8 +83,7 @@ irr::scene::ICameraSceneNode *Eo::Game::getCamera() const
 bool Eo::Game::draw()
 {
 	_device->getDevice()->getSceneManager()->addSkyDomeSceneNode(
-		_device->getDriver()->getTexture(
-			"../assets/img/background.jpg"), 16, 8, 2, 5, 800);
+		_device->getDriver()->getTexture((currPath + "../assets/img/background.jpg").c_str()), 16, 8, 2, 5, 800);
 	Eo::vec2i v(_map->getWidth(), _map->getHeight());
 	auto ref = Eo::Rc<Eo::IScene>(this, [](Eo::IScene *ptr) {});
 	_camera.insertStaticInScene(ref);

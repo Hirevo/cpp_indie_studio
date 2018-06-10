@@ -19,7 +19,7 @@ Eo::Player::Player(Eo::Rc<Eo::IScene> game, Eo::Rc<Eo::Event> event,
 	  _event(event), _options(options)
 {
 	std::stringstream path;
-	path << "../assets/img/bomberboy_";
+	path << (currPath + "../assets/img/bomberboy_");
 	path << id + 1;
 	path << ".png";
 	_path = path.str();
@@ -30,7 +30,7 @@ Eo::Player::~Player() = default;
 
 void Eo::Player::draw(Eo::Rc<Eo::IScene> game)
 {
-	this->loadModel(game, "../assets/Bomberman/Character.x",
+	this->loadModel(game, currPath + "../assets/Bomberman/Character.x",
 		_path.c_str());
 	this->getAnimatedNode()->setScale(_scale);
 }

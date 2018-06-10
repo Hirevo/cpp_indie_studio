@@ -12,7 +12,7 @@ Eo::Computer::Computer(Eo::Rc<Eo::IScene> game, const Eo::vec3 &pos,
 	: AModel(Eo::IObject::Type::CHARACTER, pos), ACharacter(playerID)
 {
 	std::stringstream path;
-	path << "../assets/img/bomberboy_";
+	path << (currPath + "../assets/img/bomberboy_");
 	path << playerID + 1;
 	path << ".png";
 	_path = path.str();
@@ -24,7 +24,7 @@ Eo::Computer::~Computer() = default;
 
 void Eo::Computer::draw(Eo::Rc<Eo::IScene> game)
 {
-	this->loadModel(game, "../assets/Bomberman/Character.x",
+	this->loadModel(game, currPath + "../assets/Bomberman/Character.x",
 		_path.c_str());
 	this->getAnimatedNode()->setScale(_scale);
 }

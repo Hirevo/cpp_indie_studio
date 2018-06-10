@@ -10,6 +10,8 @@
 #include <functional>
 #include <irrlicht.h>
 #include <memory>
+#include <utility>
+#include <string>
 
 namespace Eo {
 	class Device;
@@ -44,6 +46,7 @@ namespace Eo {
 	using i64 = std::int64_t;
 	using f32 = float;
 	using f64 = double;
+	extern std::string currPath;
 	template<typename T, typename... Args>
 	Eo::Rc<T> initRc(Args&&... args) {
 		return std::make_shared<T>(std::forward<Args>(args)...);

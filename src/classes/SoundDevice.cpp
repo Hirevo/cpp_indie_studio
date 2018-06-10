@@ -12,20 +12,20 @@
 #include "JsonRead.hpp"
 
 const std::unordered_map<Eo::SoundDevice::SoundPath, std::string> Eo::SoundDevice::_soundPath = {
-	{MENUBGM, "../assets/sounds/BGM/main_theme.mp3"},
-	{GAMEBGM, "../assets/sounds/BGM/game_theme.mp3"},
-	{PAUSE, "../assets/sounds/effects/buttons/PAUSE.wav"},
-	{CONFIRM, "../assets/sounds/effects/buttons/confirm.wav"},
-	{RESET, "../assets/sounds/effects/buttons/reset.wav"},
-	{SELECT, "../assets/sounds/effects/buttons/select.wav"},
-	{BOMBS, "../assets/sounds/effects/inGame/bombS.wav"},
-	{BOMBM, "../assets/sounds/effects/inGame/bombL.wav"},
-	{BOMBL, "../assets/sounds/effects/inGame/bombL.wav"},
-	{PLAY, "../assets/sounds/effects/inGame/play.wav"},
-	{SETBOMB, "../assets/sounds/effects/inGame/setBomb.wav"},
-	{DEATH, "../assets/sounds/effects/inGame/death.wav"},
-	{GETITEM, "../assets/sounds/effects/inGame/getItem.wav"},
-	{HURRY, "../assets/sounds/effects/inGame/hurry.wav"}
+	{MENUBGM, currPath + "../assets/sounds/BGM/main_theme.mp3"},
+	{GAMEBGM, currPath + "../assets/sounds/BGM/game_theme.mp3"},
+	{PAUSE, currPath + "../assets/sounds/effects/buttons/PAUSE.wav"},
+	{CONFIRM, currPath + "../assets/sounds/effects/buttons/confirm.wav"},
+	{RESET, currPath + "../assets/sounds/effects/buttons/reset.wav"},
+	{SELECT, currPath + "../assets/sounds/effects/buttons/select.wav"},
+	{BOMBS, currPath + "../assets/sounds/effects/inGame/bombS.wav"},
+	{BOMBM, currPath + "../assets/sounds/effects/inGame/bombL.wav"},
+	{BOMBL, currPath + "../assets/sounds/effects/inGame/bombL.wav"},
+	{PLAY, currPath + "../assets/sounds/effects/inGame/play.wav"},
+	{SETBOMB, currPath + "../assets/sounds/effects/inGame/setBomb.wav"},
+	{DEATH, currPath + "../assets/sounds/effects/inGame/death.wav"},
+	{GETITEM, currPath + "../assets/sounds/effects/inGame/getItem.wav"},
+	{HURRY, currPath + "../assets/sounds/effects/inGame/hurry.wav"}
 };
 
 const std::unordered_map<Eo::SoundDevice::SoundPath, Eo::SoundDevice::SoundType> Eo::SoundDevice::_soundType = {

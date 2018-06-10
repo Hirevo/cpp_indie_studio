@@ -17,7 +17,7 @@ Eo::Flame::Flame(Eo::Rc<Eo::IScene> scene, Eo::vec3 pos)
 
 void Eo::Flame::insertInScene(const Eo::Rc<Eo::IScene> scene)
 {
-	Eo::AModel::loadModel(scene, "../assets/Bomberman/Flame.x");
+	Eo::AModel::loadModel(scene, currPath + "../assets/Bomberman/Flame.x");
 	_node->setScale(Eo::vec3(0.25, 0.25, 0.25));
 }
 

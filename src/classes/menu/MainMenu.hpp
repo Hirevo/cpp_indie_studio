@@ -9,6 +9,7 @@
 
 #include "SoundDevice.hpp"
 #include "AScene.hpp"
+#include "Types.hpp"
 
 namespace Eo {
 	class MainMenu : public AScene {
