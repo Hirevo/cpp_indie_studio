@@ -10,6 +10,7 @@
 #include "PlayMenu.hpp"
 #include "SettingsMenu.hpp"
 #include "CreditsMenu.hpp"
+#include "GameMenu.hpp"
 #include <Device.hpp>
 #include <iostream>
 #include <Game.hpp>
@@ -27,6 +28,37 @@ Eo::MainMenu::MainMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 
 Eo::MainMenu::~MainMenu()
 {
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::PlayGamePlayer));
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::PlayGamePlayers));
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Play));
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Exit));
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Settings));
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::MainMenu::ButtonType::Credits));
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::ButtonType::Return));
+
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::GameMenu::EventType::Quit));
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::GameMenu::EventType::Settings));
+	_event->clearEventHandlers(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::GameMenu::EventType::Resume));
 }
 
 void Eo::MainMenu::putPlayButton()
@@ -143,7 +175,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			auto options = this->_device->getOptions();
 			options->setNbPlayer(1);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
-				_event, _device, currPath + "../map3.json",
+				_event, _device, currPath + "../map4.json",
 				options, _sceneHandler, _sound));
 		});
 	event->addGUIHandler(
@@ -154,7 +186,7 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 			auto options = this->_device->getOptions();
 			options->setNbPlayer(2);
 			_sceneHandler->loadScene(Eo::initRc<Eo::Game>(
-				_event, _device, currPath + "../map3.json",
+				_event, _device, currPath + "../map4.json",
 				options, _sceneHandler, _sound));
 		});
 	event->addGUIHandler(
@@ -201,34 +233,32 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 		});
 
 
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
-			Eo::SettingsMenu::ButtonType::SoundGeneral),
+	_event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::GameMenu::EventType::Quit),
 		[this](bool &toRemove, const Eo::event &event) {
-			auto bar = ((irr::gui::IGUIScrollBar *)event.
-				GUIEvent.Caller);
-			auto val = (float)bar->getPos() / (float)bar->getMax();
-			_sound->setGeneralVolume(val);
-			_sound->play(Eo::SoundDevice::SELECT);
+			_sound->stopMusic();
+			_sound->play(Eo::SoundDevice::MENUBGM, true);
+			std::cout << this->_sceneHandler->getSceneCount() << std::endl;
+			this->_sceneHandler->unloadCurrentScene();
+			std::cout << this->_sceneHandler->getSceneCount() << std::endl;
+			this->_sceneHandler->unloadCurrentScene();
+			std::cout << this->_sceneHandler->getSceneCount() << std::endl;
+			this->_sceneHandler->unloadCurrentScene();
+			std::cout << this->_sceneHandler->getSceneCount() << std::endl << std::endl;
 		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
-			Eo::SettingsMenu::ButtonType::SoundMusic),
+	_event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::GameMenu::EventType::Resume),
 		[this](bool &toRemove, const Eo::event &event) {
-			auto bar = ((irr::gui::IGUIScrollBar *)event.
-				GUIEvent.Caller);
-			auto val = (float)bar->getPos() / (float)bar->getMax();
-			_sound->setMusicVolume(val);
-			_sound->play(Eo::SoundDevice::SELECT);
+			this->_sceneHandler->unloadCurrentScene();
 		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
-			Eo::SettingsMenu::ButtonType::SoundFX),
+	_event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::GameMenu::EventType::Settings),
 		[this](bool &toRemove, const Eo::event &event) {
-			auto bar = ((irr::gui::IGUIScrollBar *)event.
-				GUIEvent.Caller);
-			auto val = (float)bar->getPos() / (float)bar->getMax();
-			_sound->setEffectsVolume(val);
-			_sound->play(Eo::SoundDevice::SELECT);
+			this->_sceneHandler->loadScene(
+				Eo::initRc<Eo::SettingsMenu>(_event, _device,
+					_sceneHandler, _sound));
 		});
 }

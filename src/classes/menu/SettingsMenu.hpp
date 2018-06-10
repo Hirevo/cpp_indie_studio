@@ -20,8 +20,11 @@ namespace Eo {
 		enum ButtonType {
 			Return = 120,
 			SoundGeneral,
+			MuteGeneral,
 			SoundMusic,
-			SoundFX
+			MuteMusic,
+			SoundFX,
+			MuteFX
 		};
 	private:
 		void putSetGeneralVolume();

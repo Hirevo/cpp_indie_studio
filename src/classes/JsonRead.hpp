@@ -27,6 +27,7 @@ namespace Eo {
 	private:
 		boost::property_tree::ptree _root;
 		bool _good;
+		static const std::vector<std::vector<Eo::f32>> _defaultPlayerPos;
 	};
 }
 

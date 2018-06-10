@@ -23,7 +23,7 @@
 			// 	  std::cout << sceneHandler.getSceneCount();
 			// 	  std::cout << std::endl;
 			// 	  sceneHandler.loadScene(new Eo::Game(
-			// 		  device, "../map3.json"));
+			// 		  device, "../map4.json"));
 			// 	  std::cout << sceneHandler.getSceneCount()
 			// 		  << std::endl;
 			//   }},
