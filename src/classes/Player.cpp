@@ -32,7 +32,6 @@ void Eo::Player::draw(Eo::Rc<Eo::IScene> game)
 {
 	this->loadModel(game, "../assets/Bomberman/Character.x",
 		_path.c_str());
-	_scale = vec3(0.28f);
 	this->getAnimatedNode()->setScale(_scale);
 }
 

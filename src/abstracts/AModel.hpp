@@ -37,7 +37,7 @@ namespace Eo {
 		Eo::animatedMesh *_mesh;
 		Eo::animatedNode *_animatedNode;
 		bool _hasMesh;
-		Eo::vec3 _scale = vec3(0.15f);
+		Eo::vec3 _scale = vec3(0.28f);
 	public:
 	};
 };
