@@ -46,13 +46,13 @@ int getCurrPath()
 	readlink("/proc/self/exe", buffer, BUFSIZ);
 	Eo::currPath = std::string(buffer);
 	std::filesystem::path p = Eo::currPath;
-	Eo::currPath = std::string(p.parent_path().c_str());
+	Eo::currPath = p.parent_path().string();
 #elif _WIN32
-	LPWSTR buffer[2048];
-	GetModuleFileName(NULL, buffer, 2048);
+	char buffer[2048];
+	GetModuleFileNameA(NULL, buffer, 2048);
 	Eo::currPath = std::string(buffer);
 	std::filesystem::path p = Eo::currPath;
-	Eo::currPath = std::string(p.parent_path().c_str());
+	Eo::currPath = p.parent_path().string();
 #endif
 	if (Eo::currPath.at(Eo::currPath.size() - 1) != '/')
 		Eo::currPath += "/";
