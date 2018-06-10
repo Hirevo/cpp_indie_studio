@@ -209,7 +209,6 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 				GUIEvent.Caller);
 			auto val = (float)bar->getPos() / (float)bar->getMax();
 			_sound->setGeneralVolume(val);
-			_sound->play(Eo::SoundDevice::SELECT);
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
@@ -219,7 +218,6 @@ void Eo::MainMenu::addEvents(Eo::Rc<Eo::Event> event)
 				GUIEvent.Caller);
 			auto val = (float)bar->getPos() / (float)bar->getMax();
 			_sound->setMusicVolume(val);
-			_sound->play(Eo::SoundDevice::SELECT);
 		});
 	event->addGUIHandler(
 		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,

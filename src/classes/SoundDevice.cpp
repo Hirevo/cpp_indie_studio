@@ -163,8 +163,8 @@ void Eo::SoundDevice::setMusicVolume(const float volume)
 		newVol = 0.0f;
 	else if (newVol > 1.0f)
 		newVol = 1.0f;
-	_mVolume = newVol * _gVolume;
-	_music->setSoundVolume(_mVolume);
+	_mVolume = newVol;
+	_music->setSoundVolume(_mVolume * _gVolume);
 }
 
 float Eo::SoundDevice::getEffectsVolume() const
@@ -181,8 +181,8 @@ void Eo::SoundDevice::setEffectsVolume(const float volume)
 		newVol = 0.0f;
 	else if (newVol > 1.0f)
 		newVol = 1.0f;
-	_eVolume = newVol * _gVolume;
-	_effects->setSoundVolume(_eVolume);
+	_eVolume = newVol;
+	_effects->setSoundVolume(_eVolume * _gVolume);
 }
 
 void Eo::SoundDevice::muteEffects()
