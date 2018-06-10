@@ -142,3 +142,11 @@ bool Eo::Map::update(Eo::Rc<Eo::IScene> scene)
 	});
 	return true;
 }
+
+Eo::vec2 Eo::Map::translate2D(Eo::vec3 vec)
+{
+	Eo::vec2 vec2(std::roundf(vec.X), roundf(vec.Z));
+	vec2.X += this->getWidth() / 2;
+	vec2.Y += this->getHeight() / 2;
+	return vec2;
+}
