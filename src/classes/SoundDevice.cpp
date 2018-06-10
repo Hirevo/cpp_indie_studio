@@ -25,7 +25,8 @@ const std::unordered_map<Eo::SoundDevice::SoundPath, std::string> Eo::SoundDevic
 	{SETBOMB, currPath + "../assets/sounds/effects/inGame/setBomb.wav"},
 	{DEATH, currPath + "../assets/sounds/effects/inGame/death.wav"},
 	{GETITEM, currPath + "../assets/sounds/effects/inGame/getItem.wav"},
-	{HURRY, currPath + "../assets/sounds/effects/inGame/hurry.wav"}
+	{HURRY, currPath + "../assets/sounds/effects/inGame/hurry.wav"},
+	{VICTORY, currPath + "../assets/sounds/BGM/victory.mp3"}
 };
 
 const std::unordered_map<Eo::SoundDevice::SoundPath, Eo::SoundDevice::SoundType> Eo::SoundDevice::_soundType = {
@@ -42,7 +43,8 @@ const std::unordered_map<Eo::SoundDevice::SoundPath, Eo::SoundDevice::SoundType>
 	{SETBOMB, EFFECT},
 	{DEATH, EFFECT},
 	{GETITEM, EFFECT},
-	{HURRY, EFFECT}
+	{HURRY, EFFECT},
+	{VICTORY, MUSIC}
 };
 
 Eo::SoundDevice::SoundDevice()

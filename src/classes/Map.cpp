@@ -117,6 +117,12 @@ std::vector<Eo::Rc<Eo::IObject>> &Eo::Map::getObjects()
 	return _map;
 }
 
+std::vector<std::vector<Eo::i32>> Eo::Map::generateMatrix()
+{
+	std::vector<std::vector<Eo::i32>> ret;
+	return ret;
+}
+
 void Eo::Map::generateMap(const std::string &mapPath)
 {
 	auto json = Eo::JsonRead(mapPath);
