@@ -28,6 +28,7 @@ namespace Eo {
 		std::vector<Eo::Rc<Eo::IObject>> &getObjects() override;
 		void generateMap(const std::string &mapPath);
 		bool update(Eo::Rc<Eo::IScene> scene) override;
+		Eo::vec2 translate2D(Eo::vec3);
 
 		static const std::pair<Eo::u32, Eo::u32> _defaultSize;
 	private:
