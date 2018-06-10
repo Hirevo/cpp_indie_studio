@@ -73,7 +73,7 @@ void Eo::SettingsMenu::putSetGeneralVolume()
 			(int)(w / 6 + 2 * w / 3),
 			(int)(((h / 8) * pos + h / 8) / 2)},
 		nullptr, Eo::SettingsMenu::ButtonType::MuteGeneral,
-		L"Mute", L"Mute");
+		this->_sound->generalIsMute() ? L"Mute" : L"Unmute", L"Mute");
 	env->addStaticText(L"General Volume",
 			{(int)(w / 6),
 				(int)(((h / 8) * pos) / 2),
@@ -103,7 +103,7 @@ void Eo::SettingsMenu::putSetVolumeMusic()
 			(int)(((h / 8) * pos + h / 8) / 2)
 		},
 		nullptr, Eo::SettingsMenu::ButtonType::MuteMusic,
-		L"Mute", L"Mute");
+		this->_sound->musicIsMute() ? L"Mute" : L"Unmute", L"Mute");
 	env->addStaticText(L"Music Volume",
 			{(int)(w / 6), (int)(((h / 8) * pos) / 2),
 				(int)(w / 6 + 2 * w / 4),
@@ -132,7 +132,7 @@ void Eo::SettingsMenu::putSetVolumeFX()
 			(int)(((h / 8) * pos + h / 8) / 2)
 		},
 		nullptr, Eo::SettingsMenu::ButtonType::MuteFX,
-		L"Mute", L"Mute");
+		this->_sound->effectsIsMute() ? L"Mute" : L"Unmute", L"Mute");
 	auto text = env->addStaticText(L"Effects Volume",
 		{(int)(w / 6),
 			(int)(((h / 8) * pos) / 2),

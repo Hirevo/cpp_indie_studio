@@ -14,9 +14,10 @@ const Eo::Player::Directions Eo::Player::_dirs = {{North, 180.0f},
 	{NorthEast, 225.0f}, {SouthWest, 45.0f}, {SouthEast, 315.0f}};
 
 Eo::Player::Player(Eo::Rc<Eo::IScene> game, Eo::Rc<Eo::Event> event,
-	Eo::Rc<Eo::Options> options, const vec3 &pos, Eo::u64 id)
+	Eo::Rc<Eo::Options> options, Eo::Rc<Eo::SoundDevice> sound,
+	const vec3 &pos, Eo::u64 id)
 	: AModel(Eo::IObject::Type::CHARACTER, pos), ACharacter(id),
-	  _event(event), _options(options)
+	  _event(event), _options(options), _sound(sound)
 {
 	std::stringstream path;
 	path << (currPath + "../assets/img/bomberboy_");
@@ -37,34 +38,6 @@ void Eo::Player::draw(Eo::Rc<Eo::IScene> game)
 
 void Eo::Player::addEvents(Eo::Rc<Eo::IScene> game)
 {
-	// _event.addKeyHandler(Eo::keyCode::KEY_KEY_Z,
-	// 	[this, &game](bool &toRemove, const Eo::event &ev) {
-	// 		if (!ev.KeyInput.PressedDown)
-	// 			return;
-	// 		this->translateZ(0.2);
-	// 		this->updateInScene(&game);
-	// 	});
-	// _event.addKeyHandler(Eo::keyCode::KEY_KEY_S,
-	// 	[this, &game](bool &toRemove, const Eo::event &ev) {
-	// 		if (!ev.KeyInput.PressedDown)
-	// 			return;
-	// 		this->translateZ(-0.2);
-	// 		this->updateInScene(&game);
-	// 	});
-	// _event.addKeyHandler(Eo::keyCode::KEY_KEY_D,
-	// 	[this, &game](bool &toRemove, const Eo::event &ev) {
-	// 		if (!ev.KeyInput.PressedDown)
-	// 			return;
-	// 		this->translateX(0.2);
-	// 		this->updateInScene(&game);
-	// 	});
-	// _event.addKeyHandler(Eo::keyCode::KEY_KEY_Q,
-	// 	[this, &game](bool &toRemove, const Eo::event &ev) {
-	// 		if (!ev.KeyInput.PressedDown)
-	// 			return;
-	// 		this->translateX(-0.2);
-	// 		this->updateInScene(&game);
-	// 	});
 }
 
 void Eo::Player::move(Eo::Rc<Eo::Game> scene)
@@ -96,4 +69,16 @@ void Eo::Player::move(Eo::Rc<Eo::Game> scene)
 		Eo::Player::translate(newDir);
 		Eo::Player::updateInScene();
 	}
+}
+
+void Eo::Player::die()
+{
+	this->dead = true;
+	this->removeFromScene();
+	this->_sound->play(Eo::SoundDevice::SoundPath::DEATH);
+}
+
+bool Eo::Player::isDead()
+{
+	return this->dead;
 }

@@ -14,6 +14,7 @@
 #include "IScene.hpp"
 #include "irrlicht.h"
 #include "Map.hpp"
+#include "SoundDevice.hpp"
 
 namespace Eo {
 #pragma warning(disable : 4250)
@@ -39,12 +40,15 @@ namespace Eo {
 		using Directions =
 			std::unordered_map<Eo::Player::Facing, Eo::f32>;
 		static const Eo::Player::Directions _dirs;
-		explicit Player(Eo::Rc<Eo::IScene>, Eo::Rc<Eo::Event>,
-			Eo::Rc<Eo::Options>, const vec3 &pos = vec3(0),
+		Player(Eo::Rc<Eo::IScene>, Eo::Rc<Eo::Event>,
+			Eo::Rc<Eo::Options>, Eo::Rc<Eo::SoundDevice> sound,
+			const vec3 &pos = vec3(0),
 			Eo::u64 id = 0);
 		~Player() override;
 		void move(Eo::Rc<Eo::Game> scene);
 		void draw(Eo::Rc<Eo::IScene> scene) override;
+		void die() override;
+		bool isDead() override;
 
 	private:
 		void addEvents(Eo::Rc<Eo::IScene> game);
@@ -52,5 +56,6 @@ namespace Eo {
 		std::string _path;
 		Eo::Rc<Eo::Event> _event;
 		Eo::Rc<Eo::Options> _options;
+		Eo::Rc<Eo::SoundDevice> _sound;
 	};
 }
