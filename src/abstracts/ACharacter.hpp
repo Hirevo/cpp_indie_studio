@@ -41,5 +41,6 @@ namespace Eo {
 		bool _wallPass = false;
 	protected:
 		Eo::u64 _playerID;
+		bool isBlocked(Eo::IObject::Type currObjType, Eo::Rc<Eo::IObject> newObject);
 	};
 };

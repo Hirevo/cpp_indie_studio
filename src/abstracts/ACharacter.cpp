@@ -91,12 +91,7 @@ bool Eo::ACharacter::isValidMove(Eo::Rc<Eo::Map> map, Eo::vec3 myPos,
 	Eo::IObject::Type currObjType = Eo::IObject::Type::NONE;
 	if (currObj)
 		currObjType = currObj->getType();
-	return ((newObject->getType() != IObject::WALL &&
-		newObject->getType() != IObject::DEST_WALL &&
-		newObject->getType() != IObject::BOMB) ||
-		(currObjType == IObject::BOMB &&
-			newObject->getType() != IObject::WALL &&
-			newObject->getType() != IObject::DEST_WALL));
+	return !this->isBlocked(currObjType, newObject);
 }
 
 bool Eo::ACharacter::isWallPass() const
@@ -107,5 +102,18 @@ bool Eo::ACharacter::isWallPass() const
 void Eo::ACharacter::setWallPass(bool _wallPass)
 {
 	ACharacter::_wallPass = _wallPass;
+}
+
+bool Eo::ACharacter::isBlocked(Eo::IObject::Type currObjType,
+	Eo::Rc<Eo::IObject> newObject)
+{
+	if (newObject->getType() == IObject::DEST_WALL && this->isWallPass())
+		return false;
+	return !((newObject->getType() != IObject::WALL &&
+		newObject->getType() != IObject::DEST_WALL &&
+		newObject->getType() != IObject::BOMB) ||
+		(currObjType == IObject::BOMB &&
+			newObject->getType() != IObject::WALL &&
+			newObject->getType() != IObject::DEST_WALL));
 }
 

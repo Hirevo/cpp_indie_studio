@@ -10,7 +10,8 @@
 #include <iostream>
 
 Eo::Options::Options()
-	: _windowSize(1920, 1010), _exit(false), _debugMode(false),
+//	: _windowSize(1920, 1010), _exit(false), _debugMode(false),
+	: _windowSize(1280, 720), _exit(false), _debugMode(false),
 	  _keyExit(irr::EKEY_CODE::KEY_F4),
 	  _keyDebugMode(irr::EKEY_CODE::KEY_F2), _nbPlayer(1)
 {

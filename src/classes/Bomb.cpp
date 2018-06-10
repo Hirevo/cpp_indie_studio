@@ -70,9 +70,8 @@ void Eo::Bomb::propagateExplosion(
 			Eo::Bomb::propagateExplosion(
 				pos, sizes + Eo::vec2i(0, 1), dir);
 		if (obj.get() && obj->getType() == Eo::IObject::DEST_WALL &&
-			rand() % 3 == 0) {
-			auto val = (rand() % NB_BOOSTERS) + 1
-				+ Eo::Booster::BoosterType::NONE;
+			rand() % 4 == 0) {
+			auto val = this->boosterDrop();
 			auto en = static_cast<Eo::Booster::BoosterType>(val);
 			auto obj = _map->putObject(
 				Eo::initRc<Eo::Booster>(en, inScene), posX,
@@ -112,4 +111,27 @@ bool Eo::Bomb::update()
 			std::chrono::high_resolution_clock::now() - _clock);
 	using namespace std::chrono_literals;
 	return (diff <= EXPLODE_DELAY);
+}
+
+/*
+** More you have a booster in the Array, more is the drop value of this booster.
+*/
+static const std::vector<Eo::Booster::BoosterType> BOOSTER_DROP_RATE = {
+	Eo::Booster::BoosterType::SPEED,
+	Eo::Booster::BoosterType::SPEED,
+	Eo::Booster::BoosterType::SPEED,
+	Eo::Booster::BoosterType::SUPERBOMB,
+	Eo::Booster::BoosterType::SUPERBOMB,
+	Eo::Booster::BoosterType::SUPERBOMB,
+	Eo::Booster::BoosterType::NBBOMB,
+	Eo::Booster::BoosterType::NBBOMB,
+	Eo::Booster::BoosterType::NBBOMB,
+	Eo::Booster::BoosterType::NBBOMB,
+	Eo::Booster::BoosterType::NBBOMB,
+	Eo::Booster::BoosterType::WALLPASS
+};
+
+int Eo::Bomb::boosterDrop()
+{
+	return BOOSTER_DROP_RATE[(rand() % BOOSTER_DROP_RATE.size())];
 }

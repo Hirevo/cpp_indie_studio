@@ -43,5 +43,6 @@ namespace Eo {
 		Eo::Rc<Eo::SoundDevice> _sound;
 		static const std::unordered_map<BombSize,
 			Eo::SoundDevice::SoundPath> _soundPath;
+		int boosterDrop();
 	};
 }
