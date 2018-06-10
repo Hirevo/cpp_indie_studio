@@ -221,6 +221,23 @@ void Eo::Game::addEvents()
 		});
 }
 
+bool Eo::Game::gameOver()
+{
+	int count(0);
+
+	std::for_each(_players.begin(), _players.end(),
+		[this, &count](Eo::Rc<Eo::Player> &player) {
+			if (player && player->isDead())
+				count++;
+	});
+	std::for_each(_computers.begin(), _computers.end(),
+		[this, &count](Eo::Rc<Eo::Computer> &computer) {
+			if (computer && computer->isDead())
+				count++;
+		});
+	return count >= 3;
+}
+
 void Eo::Game::update()
 {
 	_map->update(Eo::Rc<Eo::IScene>(this, [](Eo::IScene *_) {}));
