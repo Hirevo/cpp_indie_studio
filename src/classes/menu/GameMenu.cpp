@@ -5,6 +5,7 @@
 ** GameMenu.cpp
 */
 
+#include <iostream>
 #include "GameMenu.hpp"
 #include "SceneHandler.hpp"
 #include "SettingsMenu.hpp"
@@ -16,21 +17,9 @@ Eo::GameMenu::GameMenu(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	Eo::Rc<Eo::SceneHandler> sceneHandler, Eo::Rc<Eo::SoundDevice> sound)
 	: AScene(event, device, sceneHandler, sound)
 {
-	_event->clearEventHandlers(Eo::Event::eventKey(
-		Eo::eventType::EGET_BUTTON_CLICKED,
-		Eo::GameMenu::EventType::Quit));
-	// _event->clearEventHandlers(Eo::Event::eventKey(
-	// 	Eo::eventType::EGET_BUTTON_CLICKED,
-	// 	Eo::GameMenu::EventType::Save));
-	_event->clearEventHandlers(Eo::Event::eventKey(
-		Eo::eventType::EGET_BUTTON_CLICKED,
-		Eo::GameMenu::EventType::Resume));
-	_event->clearEventHandlers(Eo::Event::eventKey(
-		Eo::eventType::EGET_BUTTON_CLICKED,
-		Eo::GameMenu::EventType::Settings));
 	this->addEvents(event);
 	this->draw();
-	_sound->play(Eo::SoundDevice::PAUSE);
+//	_sound->play(Eo::SoundDevice::PAUSE);
 }
 
 Eo::GameMenu::~GameMenu()
@@ -46,6 +35,7 @@ bool Eo::GameMenu::draw()
 	if (font)
 		skin->setFont(font);
 	this->putBackgroundImage();
+	this->putTitle();
 	this->putSettingsMenu();
 	this->putResumeButton();
 	this->putQuitButton();
@@ -114,28 +104,15 @@ void Eo::GameMenu::putSettingsMenu()
 
 void Eo::GameMenu::addEvents(Eo::Rc<Eo::Event> event)
 {
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-			Eo::GameMenu::EventType::Quit),
-		[this](bool &toRemove, const Eo::event &event) {
-			_sound->stopMusic();
-			_sound->play(Eo::SoundDevice::MENUBGM, true);
-			this->_sceneHandler->unloadCurrentScene();
-			this->_sceneHandler->unloadCurrentScene();
-			this->_sceneHandler->unloadCurrentScene();
-		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-			Eo::GameMenu::EventType::Resume),
-		[this](bool &toRemove, const Eo::event &event) {
-			this->_sceneHandler->unloadCurrentScene();
-		});
-	event->addGUIHandler(
-		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
-			Eo::GameMenu::EventType::Settings),
-		[this](bool &toRemove, const Eo::event &event) {
-			this->_sceneHandler->loadScene(
-				Eo::initRc<Eo::SettingsMenu>(_event, _device,
-					_sceneHandler, _sound));
-		});
+}
+
+void Eo::GameMenu::putTitle()
+{
+	auto *env = this->_device->getDevice()->getGUIEnvironment();
+	auto windowSize = this->_device->getOptions()->getWindowSize();
+	auto w = windowSize.Width;
+	auto *image = this->_device->getDriver()->getTexture(
+		"../assets/img/bomberman-title.png");
+	env->addImage(image, {(int)(w / 2 - 400), 0}, true)
+		->setScaleImage(true);
 }

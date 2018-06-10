@@ -22,6 +22,7 @@ namespace Eo {
 		void putResumeButton();
 		void putQuitButton();
 		void putSettingsMenu();
+		void putTitle();
 		void addEvents(Eo::Rc<Eo::Event> event);
 	};
 }

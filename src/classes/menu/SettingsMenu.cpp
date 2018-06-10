@@ -20,7 +20,18 @@ Eo::SettingsMenu::SettingsMenu(Eo::Rc<Eo::Event> event,
 
 Eo::SettingsMenu::~SettingsMenu()
 {
-
+	_event->clearEventHandlers(Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+		Eo::SettingsMenu::ButtonType::SoundGeneral));
+	_event->clearEventHandlers(Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+		Eo::SettingsMenu::ButtonType::SoundMusic));
+	_event->clearEventHandlers(Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+		Eo::SettingsMenu::ButtonType::SoundFX));
+	_event->clearEventHandlers(Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		Eo::SettingsMenu::ButtonType::MuteGeneral));
+	_event->clearEventHandlers(Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		Eo::SettingsMenu::ButtonType::MuteMusic));
+	_event->clearEventHandlers(Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+		Eo::SettingsMenu::ButtonType::MuteFX));
 }
 
 bool Eo::SettingsMenu::draw()
@@ -153,4 +164,72 @@ void Eo::SettingsMenu::putReturnButton()
 
 void Eo::SettingsMenu::addEvents(Eo::Rc<Eo::Event> event)
 {
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+			Eo::SettingsMenu::ButtonType::SoundGeneral),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto bar = ((irr::gui::IGUIScrollBar *)event.
+				GUIEvent.Caller);
+			auto val = (float)bar->getPos() / (float)bar->getMax();
+			_sound->setGeneralVolume(val);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+			Eo::SettingsMenu::ButtonType::SoundMusic),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto bar = ((irr::gui::IGUIScrollBar *)event.
+				GUIEvent.Caller);
+			auto val = (float)bar->getPos() / (float)bar->getMax();
+			_sound->setMusicVolume(val);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_SCROLL_BAR_CHANGED,
+			Eo::SettingsMenu::ButtonType::SoundFX),
+		[this](bool &toRemove, const Eo::event &event) {
+			auto bar = ((irr::gui::IGUIScrollBar *)event.
+				GUIEvent.Caller);
+			auto val = (float)bar->getPos() / (float)bar->getMax();
+			_sound->setEffectsVolume(val);
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::SettingsMenu::ButtonType::MuteGeneral),
+		[this](bool &toRemove, const Eo::event &event) {
+			if (_sound->generalIsMute()) {
+				_sound->unMute();
+				event.GUIEvent.Caller->setText(L"Mute");
+			} else {
+				_sound->mute();
+				event.GUIEvent.Caller->setText(L"Unmute");
+			}
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::SettingsMenu::ButtonType::MuteMusic),
+		[this](bool &toRemove, const Eo::event &event) {
+			if (_sound->musicIsMute()) {
+				_sound->unMuteMusic();
+				event.GUIEvent.Caller->setText(L"Mute");
+			} else {
+				_sound->muteMusic();
+				event.GUIEvent.Caller->setText(L"Unmute");
+			}
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
+	event->addGUIHandler(
+		Eo::Event::eventKey(Eo::eventType::EGET_BUTTON_CLICKED,
+			Eo::SettingsMenu::ButtonType::MuteFX),
+		[this](bool &toRemove, const Eo::event &event) {
+			if (_sound->effectsIsMute()) {
+				_sound->unMuteEffects();
+				event.GUIEvent.Caller->setText(L"Mute");
+			} else {
+				_sound->muteEffects();
+				event.GUIEvent.Caller->setText(L"Unmute");
+			}
+			_sound->play(Eo::SoundDevice::SELECT);
+		});
 }

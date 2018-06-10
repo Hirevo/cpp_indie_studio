@@ -58,7 +58,7 @@ namespace Eo {
 		Eo::Camera _camera;
 		Eo::Rc<Eo::Options> _options;
 		Eo::Rc<Eo::SceneHandler> _sceneHandler;
-		std::string _mapName = "map3.json";
+		std::string _mapName = "map4.json";
 		std::vector<std::vector<float>> _playersPos;
 		Eo::vec2 getPlayerPos(size_t playerId);
 	};

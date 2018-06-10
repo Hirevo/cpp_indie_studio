@@ -14,6 +14,7 @@
 #include "menu/GameMenu.hpp"
 #include "JsonRead.hpp"
 #include <iostream>
+#include <menu/SettingsMenu.hpp>
 
 Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 	const std::string &mapPath, Eo::Rc<Eo::Options> options,
@@ -43,6 +44,21 @@ Eo::Game::Game(Eo::Rc<Eo::Event> event, Eo::Rc<Eo::Device> device,
 
 Eo::Game::~Game()
 {
+	auto p1 = _options->getPlayerKeys().at(0);
+	auto p2 = _options->getPlayerKeys().at(1);
+
+	_event->clearKeyHandlers(p1._up);
+	_event->clearKeyHandlers(p2._up);
+	_event->clearKeyHandlers(p1._down);
+	_event->clearKeyHandlers(p2._down);
+	_event->clearKeyHandlers(p1._left);
+	_event->clearKeyHandlers(p2._left);
+	_event->clearKeyHandlers(p1._right);
+	_event->clearKeyHandlers(p2._right);
+	_event->clearKeyHandlers(p1._bomb);
+	_event->clearKeyHandlers(p2._bomb);
+	_event->clearKeyHandlers(Eo::keyCode::KEY_ESCAPE);
+	_event->clearKeyHandlers(_options->getKeyExit());
 }
 
 bool Eo::Game::clear()
@@ -196,9 +212,11 @@ void Eo::Game::addEvents()
 		[this](bool &toRemove, const Eo::event &ev) {
 			if (!ev.KeyInput.PressedDown)
 				return;
+			std::cout << this->_sceneHandler->getSceneCount() << std::endl;
 			_sceneHandler->loadScene(
 				Eo::initRc<Eo::GameMenu>(_event, _device,
 					_sceneHandler, _sound));
+			std::cout << this->_sceneHandler->getSceneCount() << std::endl;
 		});
 }
 
